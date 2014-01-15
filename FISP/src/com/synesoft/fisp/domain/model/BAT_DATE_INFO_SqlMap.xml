@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BAT_DATE_INFO">
+  <resultMap class="com.synesoft.fisp.app.sm.model.Sm_Date_QryForm" id="smDateFormResult">
+    <result column="modYear" jdbcType="VARCHAR" property="modYear" />
+    <result column="holidays" jdbcType="VARCHAR" property="holidays" />
+    <result column="workdays" jdbcType="VARCHAR" property="workdays" />
+  </resultMap>  
+
+  <select id="selectList" parameterClass="com.synesoft.fisp.app.sm.model.Sm_Date_QryForm" resultMap="smDateFormResult" >
+  	select substr(bat_date,0,4) as modYear, sum(decode(workday,'N',1,0)) as holidays, sum(decode(workday,'Y',1,0)) as workdays 
+  	from bat_date_info group by substr(bat_date,0,4) having 1=1
+  	<dynamic>
+       <isNotEmpty prepend="and" property="floorYear" >
+        substr(bat_date,0,4) >= #floorYear:VARCHAR#
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="upperYear" >
+         <![CDATA[ substr(bat_date,0,4) <= #upperYear:VARCHAR# ]]>         
+       </isNotEmpty>    
+    </dynamic>
+  
+   </select>
+  
+  <select id="selectCounts" parameterClass="com.synesoft.fisp.app.sm.model.Sm_Date_QryForm" resultClass="java.lang.Integer" >
+  	select count(DISTINCT  substr(bat_date,0,4)) from bat_date_info where 1=1
+   <dynamic>
+       <isNotEmpty prepend="and" property="floorYear" >
+        substr(bat_date,0,4) >= #floorYear:VARCHAR#
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="upperYear" >
+         <![CDATA[ substr(bat_date,0,4) <= #upperYear:VARCHAR# ]]>         
+       </isNotEmpty>    
+    </dynamic>
+   </select>
+</sqlMap>

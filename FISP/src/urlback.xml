@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	
+	<url-list>
+		<url id="001" value="/tr03/01/init"/>
+		<url id="002" value="/tr03/02/search"/>
+		<url id="003" value="/tr03/03/detail"/>
+		<url id="004" value="/tr03/04/init"/>
+		<url id="005" value="/tr03/05/search"/>
+		<url id="006" value="/tr03/06/detail"/>
+		<url id="007" value="/tr03/14/detail"/>
+		<url id="008" value="/tr03/13/search"/>
+		<url id="009" value="/tr03/12/reference"/>
+		<url id="0010" value="/tr03/03/detail"/>
+	</url-list>
+	
+	<url-cfgs>
+		<url-cfg id="003">
+			<url id="001"/>
+			<url id="002"/>
+		</url-cfg>
+		
+		<url-cfg id="006">
+			<url id="003"/>
+			<url id="004"/>
+			<url id="005"/>
+		</url-cfg>
+		
+		<url-cfg id="007">
+			<url id="008"/>
+			<url id="009"/>
+			<url id="0010"/>
+		</url-cfg>
+	</url-cfgs>
+	
+</configuration>

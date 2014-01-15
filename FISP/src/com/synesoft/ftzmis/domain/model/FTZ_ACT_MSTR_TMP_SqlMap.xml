@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FTZ_ACT_MSTR_TMP" >
+  <resultMap id="FtzActMstrTmpResult" class="com.synesoft.ftzmis.domain.model.FtzActMstrTmp" >
+    <result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
+    <result column="SUB_ACCOUNT_NO" property="subAccountNo" jdbcType="VARCHAR" />
+    <result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+    <result column="CURRENCY" property="currency" jdbcType="CHAR" />
+    <result column="DEPT_TYPE" property="deptType" jdbcType="CHAR" />
+    <result column="BALANCE_CODE" property="balanceCode" jdbcType="CHAR" />
+    <result column="ACC_ORG_CODE" property="accOrgCode" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR" />
+    <result column="ACC_TYPE" property="accType" jdbcType="CHAR" />
+    <result column="DEPOSIT_RATE" property="depositRate" jdbcType="DECIMAL" />
+    <result column="CUSTOM_TYPE" property="customType" jdbcType="CHAR" />
+    <result column="DOCUMENT_TYPE" property="documentType" jdbcType="CHAR" />
+    <result column="DOCUMENT_NO" property="documentNo" jdbcType="VARCHAR" />
+    <result column="ACC_STATUS" property="accStatus" jdbcType="CHAR" />
+    <result column="LAST_BALANCE" property="lastBalance" jdbcType="DECIMAL" />
+    <result column="DEBIT_COUNT" property="debitCount" jdbcType="DECIMAL" />
+    <result column="DEBIT_AMOUNT" property="debitAmount" jdbcType="DECIMAL" />
+    <result column="CREDIT_COUNT" property="creditCount" jdbcType="DECIMAL" />
+    <result column="CREDIT_AMOUNT" property="creditAmount" jdbcType="DECIMAL" />
+    <result column="BALANCE" property="balance" jdbcType="DECIMAL" />
+    <result column="MAK_USER_ID" property="makUserId" jdbcType="VARCHAR" />
+    <result column="MAK_DATETIME" property="makDatetime" jdbcType="VARCHAR" />
+    <result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
+    <result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
+    <result column="CHK_ADD_WORD" property="chkAddWord" jdbcType="VARCHAR" />
+    <result column="OP_TYPE" property="opType" jdbcType="CHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="FtzActMstrTmpResult" parameterClass="com.synesoft.ftzmis.domain.model.FtzActMstrTmpKey" >
+    select ACCOUNT_NO, SUB_ACCOUNT_NO, BRANCH_ID, CURRENCY, DEPT_TYPE, BALANCE_CODE, ACC_ORG_CODE,
+      ACCOUNT_NAME, ACC_TYPE, DEPOSIT_RATE, CUSTOM_TYPE, DOCUMENT_TYPE, DOCUMENT_NO, ACC_STATUS,
+      LAST_BALANCE, DEBIT_COUNT, DEBIT_AMOUNT, CREDIT_COUNT, CREDIT_AMOUNT, BALANCE, MAK_USER_ID,
+      MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD, OP_TYPE, RSV1, RSV2, RSV3
+    from FTZ_ACT_MSTR_TMP
+    where ACCOUNT_NO = #accountNo:VARCHAR#
+      and SUB_ACCOUNT_NO = #subAccountNo:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzActMstrTmpKey" >
+    delete from FTZ_ACT_MSTR_TMP
+    where ACCOUNT_NO = #accountNo:VARCHAR#
+      and SUB_ACCOUNT_NO = #subAccountNo:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.ftzmis.domain.model.FtzActMstrTmp" >
+    insert into FTZ_ACT_MSTR_TMP (ACCOUNT_NO, SUB_ACCOUNT_NO, BRANCH_ID, CURRENCY, DEPT_TYPE,
+      BALANCE_CODE, ACC_ORG_CODE, ACCOUNT_NAME, ACC_TYPE, DEPOSIT_RATE, CUSTOM_TYPE, DOCUMENT_TYPE,
+      DOCUMENT_NO, ACC_STATUS, LAST_BALANCE, DEBIT_COUNT, DEBIT_AMOUNT, CREDIT_COUNT, CREDIT_AMOUNT,
+      BALANCE, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD, OP_TYPE, RSV1,
+      RSV2, RSV3)
+    values (#accountNo:VARCHAR#, #subAccountNo:VARCHAR#, #branchId:VARCHAR#, #currency:CHAR#,
+      #deptType:CHAR#, #balanceCode:CHAR#, #accOrgCode:VARCHAR#, #accountName:VARCHAR#,
+      #accType:CHAR#, #depositRate:DECIMAL#, #customType:CHAR#, #documentType:CHAR#,
+      #documentNo:VARCHAR#, #accStatus:CHAR#, #lastBalance:DECIMAL#, #debitCount:DECIMAL#,
+      #debitAmount:DECIMAL#, #creditCount:DECIMAL#, #creditAmount:DECIMAL#, #balance:DECIMAL#,
+      #makUserId:VARCHAR#, #makDatetime:VARCHAR#, #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#,
+      #chkAddWord:VARCHAR#, #opType:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzActMstrTmp" >
+    update FTZ_ACT_MSTR_TMP
+    set BRANCH_ID = #branchId:VARCHAR#,
+      CURRENCY = #currency:CHAR#,
+      DEPT_TYPE = #deptType:CHAR#,
+      BALANCE_CODE = #balanceCode:CHAR#,
+      ACC_ORG_CODE = #accOrgCode:VARCHAR#,
+      ACCOUNT_NAME = #accountName:VARCHAR#,
+      ACC_TYPE = #accType:CHAR#,
+      DEPOSIT_RATE = #depositRate:DECIMAL#,
+      CUSTOM_TYPE = #customType:CHAR#,
+      DOCUMENT_TYPE = #documentType:CHAR#,
+      DOCUMENT_NO = #documentNo:VARCHAR#,
+      ACC_STATUS = #accStatus:CHAR#,
+      LAST_BALANCE = #lastBalance:DECIMAL#,
+      DEBIT_COUNT = #debitCount:DECIMAL#,
+      DEBIT_AMOUNT = #debitAmount:DECIMAL#,
+      CREDIT_COUNT = #creditCount:DECIMAL#,
+      CREDIT_AMOUNT = #creditAmount:DECIMAL#,
+      BALANCE = #balance:DECIMAL#,
+      MAK_USER_ID = #makUserId:VARCHAR#,
+      MAK_DATETIME = #makDatetime:VARCHAR#,
+      CHK_USER_ID = #chkUserId:VARCHAR#,
+      CHK_DATETIME = #chkDatetime:VARCHAR#,
+      CHK_ADD_WORD = #chkAddWord:VARCHAR#,
+      OP_TYPE = #opType:CHAR#,
+      RSV1 = #rsv1:VARCHAR#,
+      RSV2 = #rsv2:VARCHAR#,
+      RSV3 = #rsv3:VARCHAR#
+    where ACCOUNT_NO = #accountNo:VARCHAR#
+      and SUB_ACCOUNT_NO = #subAccountNo:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.ftzmis.domain.model.FtzActMstrTmp" >
+    update FTZ_ACT_MSTR_TMP
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="accStatus" >
+        ACC_STATUS = #accStatus:CHAR#
+      </isNotNull>
+    </dynamic>
+    where ACCOUNT_NO = #accountNo:VARCHAR#
+      and SUB_ACCOUNT_NO = #subAccountNo:VARCHAR#
+  </update>
+  
+  <!-- common query condition -->
+  <sql id="queryCondition">
+  	where 1=1
+  	<isNotEmpty property="branchId">
+			and BRANCH_ID = #branchId#
+	</isNotEmpty>
+	<isNotEmpty property="accountName">
+			and ACCOUNT_NAME like
+			'%$accountName$%'
+	</isNotEmpty>
+	<isNotEmpty property="accountNo">
+			and ACCOUNT_NO = #accountNo#
+	</isNotEmpty>
+	<isNotEmpty property="subAccountNo">
+			and SUB_ACCOUNT_NO = #subAccountNo#
+	</isNotEmpty>
+	<isNotEmpty property="currency">
+			and CURRENCY = #currency#
+	</isNotEmpty>
+	<isNotEmpty property="accType">
+			and ACC_TYPE = #accType#
+	</isNotEmpty>
+	<isNotEmpty property="accStatus">
+			and ACC_STATUS = #accStatus#
+	</isNotEmpty>
+	order by ACCOUNT_NO, SUB_ACCOUNT_NO
+  </sql>
+  
+  <select id="selectCounts" parameterClass="com.synesoft.ftzmis.domain.model.FtzActMstrTmp" resultClass="java.lang.Integer">
+  		select count(*) from FTZ_ACT_MSTR_TMP
+  		<include refid="queryCondition" />
+  </select>
+  
+  <select id="selectList" parameterClass="com.synesoft.ftzmis.domain.model.FtzActMstrTmp" resultMap="FtzActMstrTmpResult">
+		select * from FTZ_ACT_MSTR_TMP
+		<include refid="queryCondition" />
+	</select>
+</sqlMap>

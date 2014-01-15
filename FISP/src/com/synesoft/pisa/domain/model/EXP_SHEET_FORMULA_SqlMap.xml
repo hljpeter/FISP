@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="EXP_SHEET_FORMULA" >
+  <resultMap id="ExpSheetFormulaResult" class="com.synesoft.pisa.domain.model.ExpSheetFormula" >
+    <result column="FORMULA_ID" property="formulaId" jdbcType="VARCHAR" />
+    <result column="SHEET_NO" property="sheetNo" jdbcType="VARCHAR" />
+    <result column="FORMULA_NAME" property="formulaName" jdbcType="VARCHAR" />
+    <result column="FORMULA_DESC" property="formulaDesc" jdbcType="VARCHAR" />
+    <result column="ITEM_NO" property="itemNo" jdbcType="CHAR" />
+    <result column="DIM_NO" property="dimNo" jdbcType="CHAR" />
+    <result column="DIM_NAME" property="dimName" jdbcType="VARCHAR" />
+    <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR" />
+    <result column="FORMULA" property="formula" jdbcType="VARCHAR" />
+    <result column="FORMULA_AREA" property="formulaArea" jdbcType="VARCHAR" />
+    <result column="CREATER" property="creater" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+     <result column="UPDATER" property="updater" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="ExpSheetFormulaResult" parameterClass="com.synesoft.pisa.domain.model.ExpSheetFormula" >
+    select *
+    from EXP_SHEET_FORMULA
+    where FORMULA_ID = #formulaId:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.pisa.domain.model.ExpSheetFormula" >
+    delete from EXP_SHEET_FORMULA
+    where FORMULA_ID = #formulaId:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.pisa.domain.model.ExpSheetFormula" >
+    insert into EXP_SHEET_FORMULA (FORMULA_ID, SHEET_NO, FORMULA_NAME, FORMULA_DESC, ITEM_NO,
+      DIM_NO, DIM_NAME, ITEM_NAME, FORMULA, FORMULA_AREA, CREATER, CREATE_TIME, UPDATER, UPDATE_TIME, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#formulaId:VARCHAR#, #sheetNo:VARCHAR#, #formulaName:VARCHAR#, #formulaDesc:VARCHAR#,
+      #itemNo:CHAR#, #dimNo:CHAR#, #dimName:VARCHAR#, #itemName:VARCHAR#, #formula:VARCHAR#, #formulaArea:VARCHAR#, #creater:VARCHAR#, #createTime:VARCHAR#,#updater:VARCHAR#, #updateTime:VARCHAR#,
+      #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.pisa.domain.model.ExpSheetFormula" >
+    update EXP_SHEET_FORMULA set
+    	FORMULA_DESC = #formulaDesc:VARCHAR#,
+    	ITEM_NO = #itemNo:CHAR#,
+    	DIM_NO = #dimNo:CHAR#,
+    	DIM_NAME = #dimName:VARCHAR#,
+    	ITEM_NAME = #itemName:VARCHAR#
+    <dynamic>
+      <isNotNull prepend="," property="sheetNo" >
+        SHEET_NO = #sheetNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="formulaName" >
+        FORMULA_NAME = #formulaName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="formula" >
+        FORMULA = #formula:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="formulaArea" >
+        FORMULA_AREA = #formulaArea:VARCHAR#
+      </isNotNull>
+       <isNotNull prepend="," property="creater" >
+        CREATER = #creater:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        CREATE_TIME = #createTime:VARCHAR#
+      </isNotNull>
+       <isNotNull prepend="," property="updater" >
+        UPDATER = #updater:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        UPDATE_TIME = #updateTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where FORMULA_ID = #formulaId:VARCHAR#
+  </update>
+  
+  <select id="selectByKey" resultMap="ExpSheetFormulaResult" parameterClass="com.synesoft.pisa.domain.model.ExpSheetFormula" >
+    select FORMULA_ID, SHEET_NO, FORMULA_NAME, FORMULA_DESC, ITEM_NO, DIM_NO, DIM_NAME, ITEM_NAME,
+      FORMULA, FORMULA_AREA, CREATER, CREATE_TIME, UPDATER, UPDATE_TIME, RSV1, RSV2, RSV3, RSV4, RSV5
+    from EXP_SHEET_FORMULA
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="sheetNo" >
+        SHEET_NO = #sheetNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="itemNo" >
+        ITEM_NO = #itemNo:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="dimNo" >
+        DIM_NO = #dimNo:CHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="formulaArea" >
+        FORMULA_AREA = #formulaArea:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="formulaId" >
+        FORMULA_ID = #formulaId:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="updater" >
+        UPDATER = #updater:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="updateTime" >
+        UPDATE_TIME = #updateTime:VARCHAR#
+      </isNotEmpty>
+    </dynamic>
+  </select>
+  
+  <select id="selectCounts" parameterClass="com.synesoft.pisa.domain.model.ExpSheetFormula" resultClass="java.lang.Integer">
+  	select count(*) from EXP_SHEET_FORMULA
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="sheetNo" >
+        SHEET_NO = #sheetNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="itemNo" >
+        ITEM_NO = #itemNo:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="dimNo" >
+        DIM_NO = #dimNo:CHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="," property="formulaName" >
+        FORMULA_NAME like '%$formulaName$%' 
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="itemName" >
+        ITEM_NAME like '%$itemName$%'
+      </isNotEmpty>
+    </dynamic>
+    order by SHEET_NO,ITEM_NO,DIM_NO
+   </select>
+   <select id="selectList" parameterClass="com.synesoft.pisa.domain.model.ExpSheetFormula" resultMap="ExpSheetFormulaResult">
+  	select * from EXP_SHEET_FORMULA 
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="sheetNo" >
+        SHEET_NO = #sheetNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="itemNo" >
+        ITEM_NO = #itemNo:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="dimNo" >
+        DIM_NO = #dimNo:CHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="," property="formulaName" >
+        FORMULA_NAME like '%$formulaName$%' 
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="itemName" >
+        ITEM_NAME like '%$itemName$%'
+      </isNotEmpty>
+    </dynamic>
+     order by  SHEET_NO,ITEM_NO,DIM_NO
+   </select>
+   
+    <select id="selectFormulaCheck" resultMap="ExpSheetFormulaResult" >
+	    select *
+		  from exp_sheet_formula F
+		 WHERE NOT EXISTS (SELECT 1
+		          FROM exp_sheet_formula_result FR
+		         WHERE F.FORMULA_ID = FR.FORMULA_ID
+		           AND F.SHEET_NO = FR.SHEET_NO)
+	</select>
+  
+	<select id="checkWhere" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+	    select count(1) from dual where $where$
+	</select>
+  
+</sqlMap>

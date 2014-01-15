@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="EXP_SHEET_INFO">
+	<resultMap class="com.synesoft.pisa.domain.model.ExpSheetInfo" id="SheetDrafListRequest">
+		<result column="SHEET_NO" jdbcType="VARCHAR" property="sheetNo"/>
+		<result column="SHEET_NAME" jdbcType="VARCHAR" property="sheetName"/>
+		<result column="RSV1" jdbcType="VARCHAR" property="rsv1"/>
+		<result column="RSV2" jdbcType="VARCHAR" property="rsv2"/>
+		<result column="RSV3" jdbcType="VARCHAR" property="rsv3"/>
+		<result column="RSV4" jdbcType="VARCHAR" property="rsv4"/>
+		<result column="RSV5" jdbcType="VARCHAR" property="rsv5"/>
+</resultMap>
+  <select id="selectSheetList" parameterClass="com.synesoft.pisa.domain.model.ExpSheetInfo" resultMap="SheetDrafListRequest">
+ 	 select SHEET_NO,SHEET_NAME,RSV1, RSV2, RSV3, RSV4,RSV5
+   		 from EXP_SHEET_INFO
+     <dynamic prepend="where">
+    	 <isNotEmpty prepend="and" property="sheetNo">
+      		  SHEET_NO  = #sheetNo:VARCHAR#
+     	 </isNotEmpty>
+     </dynamic>
+  </select>
+  
+  <select id="selectSheetCounts" parameterClass="com.synesoft.pisa.domain.model.ExpSheetInfo" resultClass="java.lang.Integer">
+ 		 select count(*) from EXP_SHEET_INFO
+ 	 <dynamic prepend="where">	
+  		<isNotEmpty prepend="and" property="sheetNo"> 
+  			 SHEET_NO  = #sheetNo:VARCHAR#
+  		</isNotEmpty>
+  	</dynamic>
+  </select>
+
+</sqlMap>

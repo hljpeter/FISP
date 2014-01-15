@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Jsynframe 1.0
+	
+	Copyright (c) 2007-2013 Shanghai NTT DATA Synergy Software Co., Ltd.
+		All Rights Reserved
+	
+	FILE NAME    : log4j2-text.xml
+	DESCRIPTIONS : Sample configuration file for log4j2.
+	CREATE DATE  : 2013-10-25
+	REVISION     : $Id: log4j2-test.xml,v 1.2 2013/10/29 07:39:05 derek Exp $
+-->
+<configuration status="OFF">
+	<appenders>
+		<!-- <Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</Console> -->
+		<File name="Jsynframe_core" fileName="D:\Temp\jsynframe_core.log">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</File>
+		<File name="Jsynframe_dbs" fileName="D:\Temp\jsynframe_dbs.log">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</File>
+		<File name="Jsynframe_batch" fileName="D:\Temp\jsynframe_batch.log">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+		</File>
+	</appenders>
+	<loggers>
+		<Logger name="cn.com.synesoft.jsynframe.core" level="debug">
+			<appender-ref ref="Jsynframe_core"/>
+		</Logger>
+		<Logger name="cn.com.synesoft.jsynframe.dbs" level="info">
+			<appender-ref ref="Jsynframe_dbs"/>
+		</Logger>
+		<Logger name="cn.com.synesoft.jsynframe.batch" level="debug">
+			<appender-ref ref="Jsynframe_batch"/>
+		</Logger>
+	</loggers>
+</configuration>

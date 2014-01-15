@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_ROLE_FUNC_TMP" >
+  <resultMap id="SysRoleFuncTmpResult" class="com.synesoft.fisp.domain.model.SysRoleFuncTmp" >
+    <result column="ID" property="id" jdbcType="CHAR" />
+    <result column="ROLEID" property="roleid" jdbcType="CHAR" />
+    <result column="FUNC_ID" property="funcId" jdbcType="VARCHAR" />
+    <result column="CREATEORG" property="createorg" jdbcType="CHAR" />
+    <result column="CREATER" property="creater" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="CHAR" />
+    <result column="CHECKER" property="checker" jdbcType="VARCHAR" />
+    <result column="CHECKTIME" property="checktime" jdbcType="CHAR" />
+    <result column="OPTTYPE" property="opttype" jdbcType="CHAR" />
+    <result column="OPTSTATUS" property="optstatus" jdbcType="CHAR" />
+    <result column="INFRUSEFLAG" property="infruseflag" jdbcType="CHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectList" resultMap="SysRoleFuncTmpResult" parameterClass="com.synesoft.fisp.domain.model.SysRoleFuncTmp" >
+    select ID, ROLEID, FUNC_ID, CREATEORG, CREATER, CREATETIME, CHECKER, CHECKTIME, OPTTYPE,
+      OPTSTATUS, INFRUSEFLAG, RSV1, RSV2, RSV3, RSV4, RSV5
+    from SYS_ROLE_FUNC_TMP
+    where trim(ROLEID) = #roleid:CHAR#
+    and trim(OPTSTATUS) = #optstatus:CHAR#
+  </select>
+  <!-- 插入角色功能表 -->
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.SysRoleFuncTmp" >
+    insert into SYS_ROLE_FUNC_TMP (ID, ROLEID, FUNC_ID, CREATEORG, CREATER, CREATETIME, CHECKER,
+      CHECKTIME, OPTTYPE, OPTSTATUS, INFRUSEFLAG, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#id:CHAR#, #roleid:CHAR#, #funcId:VARCHAR#, #createorg:CHAR#, #creater:VARCHAR#,
+      #createtime:CHAR#, #checker:VARCHAR#, #checktime:CHAR#, #opttype:CHAR#, #optstatus:CHAR#,
+      #infruseflag:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#,
+      #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.SysRoleFuncTmp" >
+    update SYS_ROLE_FUNC_TMP
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="checker" >
+        CHECKER = #checker:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checktime" >
+        CHECKTIME = #checktime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="optstatus" >
+        OPTSTATUS = #optstatus:CHAR#
+      </isNotNull>
+    </dynamic>
+    where trim(ROLEID) = #roleid:CHAR#
+    and OPTSTATUS = '01'
+  </update>
+</sqlMap>

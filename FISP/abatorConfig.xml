@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN" "http://ibatis.apache.org/dtd/abator-config_1_0.dtd" >
+<abatorConfiguration >
+  <abatorContext >
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@10.30.60.222:1521:orcl" userId="fisp" password="fisp" >
+
+      <classPathEntry location="D:/instantclient/ojdbc14.jar" />
+
+    </jdbcConnection>
+    <javaModelGenerator targetPackage="com.synesoft.sysrunner.domain.model" targetProject="FISP" />
+    <sqlMapGenerator targetPackage="com.synesoft.sysrunner.domain.model" targetProject="FISP" />
+    <!-- 
+    
+    <table tableName="DP_EXP_CFG" domainObjectName="DpExpCfg">  </table>
+    <table tableName="DP_EXP_CFG_DTL" domainObjectName="DpExpCfgDtl">  </table>
+    <table tableName="DP_EXP_LOG" domainObjectName="DpExpLog">  </table>
+    <table tableName="DP_MPP_CFG" domainObjectName="DpMppCfg">  </table>
+    <table tableName="DP_MPP_CFG_DTL" domainObjectName="DpMppCfgDtl">  </table>
+     -->
+     <!-- 
+      
+      <table tableName="DP_TABLE" domainObjectName="DpTable">  </table>
+    <table tableName="DP_TABLE_DTL" domainObjectName="DpTableDtl">  </table>
+    <table tableName="DP_FILE" domainObjectName="DpFile">  </table>
+    <table tableName="DP_FILE_DTL" domainObjectName="DpFileDtl">  </table>
+    <table tableName="DP_EXPR_METHOD" domainObjectName="DpExprMethod">  </table>
+    <table tableName="DP_EXPR_METHOD_DTL" domainObjectName="DpExprMethodDtl">  </table>
+    -->
+    <table tableName="DP_IMP_LOG" domainObjectName="DpImpLog">  </table>
+     <table tableName="DP_MPP_LOG" domainObjectName="DpMppLog">  </table>
+      <table tableName="DP_EXP_LOG" domainObjectName="DpExpLog">  </table>
+      
+    
+    
+  </abatorContext>
+</abatorConfiguration>

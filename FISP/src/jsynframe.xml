@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Jsynframe 1.0
+	
+	Copyright (c) 2007-2013 Shanghai NTT DATA Synergy Software Co., Ltd.
+		All Rights Reserved
+	
+	FILE NAME    : jsynframe.xml
+	DESCRIPTIONS : Sample configuration file for jsynframe.
+	CREATE DATE  : 2013-10-25
+	REVISION     : $Id: jsynframe.xml,v 1.2 2013/10/31 08:10:55 derek Exp $
+-->
+<jsynframe xmlns="http://www.synesoft.com.cn/jsynframe">
+	<database>
+		<database_driver>oracle.jdbc.OracleDriver</database_driver>
+		<database_url>jdbc:oracle:thin:@10.30.60.222:1521:orcl</database_url>
+		<database_username>fisp</database_username>
+		<database_password>fisp</database_password>
+	</database>
+	<batmonitor>
+		<batmonitor_machineid>1</batmonitor_machineid>
+		<batmonitor_sleep>60</batmonitor_sleep>
+		<batmonitor_timeout>60</batmonitor_timeout>
+	</batmonitor>
+</jsynframe>

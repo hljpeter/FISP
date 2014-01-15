@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FTZ_IN_MSG_CTL">
+	<resultMap id="FtzInMsgCtlResult" class="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
+
+		<result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+		<result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+		<result column="VER" property="ver" jdbcType="CHAR" />
+		<result column="SRC" property="src" jdbcType="CHAR" />
+		<result column="DES" property="des" jdbcType="CHAR" />
+		<result column="APP" property="app" jdbcType="VARCHAR" />
+		<result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
+		<result column="MSG_REF" property="msgRef" jdbcType="CHAR" />
+		<result column="WORK_DATE" property="workDate" jdbcType="VARCHAR" />
+		<result column="EDIT_FLAG" property="editFlag" jdbcType="CHAR" />
+		<result column="RESERVE" property="reserve" jdbcType="VARCHAR" />
+		<result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
+		<result column="CURRENCY" property="currency" jdbcType="CHAR" />
+		<result column="BALANCE" property="balance" jdbcType="DECIMAL" />
+		<result column="BALANCE_CODE" property="balanceCode" jdbcType="CHAR" />
+		<result column="SUBMIT_DATE" property="submitDate" jdbcType="CHAR" />
+		<result column="TOTAL_COUNT" property="totalCount" jdbcType="DECIMAL" />
+		<result column="ACC_ORG_CODE" property="accOrgCode" jdbcType="VARCHAR" />
+		<result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR" />
+		<result column="ACC_TYPE" property="accType" jdbcType="CHAR" />
+		<result column="SUB_ACCOUNT_NO" property="subAccountNo"
+			jdbcType="VARCHAR" />
+		<result column="DEPOSIT_RATE" property="depositRate" jdbcType="DECIMAL" />
+		<result column="CUSTOM_TYPE" property="customType" jdbcType="CHAR" />
+		<result column="DOCUMENT_TYPE" property="documentType"
+			jdbcType="CHAR" />
+		<result column="DOCUMENT_NO" property="documentNo" jdbcType="VARCHAR" />
+		<result column="RESULT" property="result" jdbcType="CHAR" />
+		<result column="ADD_WORD" property="addWord" jdbcType="VARCHAR" />
+		<result column="MSG_STATUS" property="msgStatus" jdbcType="CHAR" />
+		<result column="MAK_USER_ID" property="makUserId" jdbcType="VARCHAR" />
+		<result column="MAK_DATETIME" property="makDatetime" jdbcType="VARCHAR" />
+		<result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
+		<result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
+		<result column="SND_USER_ID" property="sndUserId" jdbcType="VARCHAR" />
+		<result column="SND_DATETIME" property="sndDatetime" jdbcType="VARCHAR" />
+		<result column="ACK_DATETIME" property="ackDatetime" jdbcType="VARCHAR" />
+		<result column="ERR_DATETIME" property="errDatetime" jdbcType="VARCHAR" />
+		<result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+		<result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+		<result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="FtzInMsgCtlResult"
+		parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
+
+		select MSG_ID, BRANCH_ID, VER, SRC, DES, APP, MSG_NO, MSG_REF, WORK_DATE,
+		EDIT_FLAG, RESERVE,
+		ACCOUNT_NO, CURRENCY, BALANCE, BALANCE_CODE, SUBMIT_DATE, TOTAL_COUNT,
+		ACC_ORG_CODE,
+		ACCOUNT_NAME, ACC_TYPE, SUB_ACCOUNT_NO, DEPOSIT_RATE, CUSTOM_TYPE, DOCUMENT_TYPE,
+		DOCUMENT_NO,
+		RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
+		CHK_DATETIME,
+		SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME, RSV1, RSV2, RSV3
+		from FTZ_IN_MSG_CTL
+		where MSG_ID = #msgId:VARCHAR#
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
+
+		delete from FTZ_IN_MSG_CTL
+		where MSG_ID = #msgId:VARCHAR#
+	</delete>
+
+	<insert id="insert" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
+
+		insert into FTZ_IN_MSG_CTL (MSG_ID, BRANCH_ID, VER, SRC, DES, APP,
+		MSG_NO, MSG_REF, WORK_DATE,
+		EDIT_FLAG, RESERVE, ACCOUNT_NO, CURRENCY, BALANCE, BALANCE_CODE, SUBMIT_DATE,
+		TOTAL_COUNT,
+		ACC_ORG_CODE, ACCOUNT_NAME, ACC_TYPE, SUB_ACCOUNT_NO, DEPOSIT_RATE, CUSTOM_TYPE,
+		DOCUMENT_TYPE, DOCUMENT_NO, RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID,
+		MAK_DATETIME,
+		CHK_USER_ID, CHK_DATETIME, SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME,
+		RSV1, RSV2,
+		RSV3)
+		values (#msgId:VARCHAR#, #branchId:VARCHAR#, #ver:CHAR#, #src:CHAR#,
+		#des:CHAR#, #app:VARCHAR#,
+		#msgNo:CHAR#, #msgRef:CHAR#, #workDate:VARCHAR#, #editFlag:CHAR#,
+		#reserve:VARCHAR#,
+		#accountNo:VARCHAR#, #currency:CHAR#, #balance:DECIMAL#, #balanceCode:CHAR#,
+		#submitDate:CHAR#, #totalCount:DECIMAL#, #accOrgCode:VARCHAR#,
+		#accountName:VARCHAR#,
+		#accType:CHAR#, #subAccountNo:VARCHAR#, #depositRate:DECIMAL#, #customType:CHAR#,
+		#documentType:CHAR#, #documentNo:VARCHAR#, #result:CHAR#,
+		#addWord:VARCHAR#, #msgStatus:CHAR#,
+		#makUserId:VARCHAR#, #makDatetime:VARCHAR#, #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#,
+		#sndUserId:VARCHAR#, #sndDatetime:VARCHAR#, #ackDatetime:VARCHAR#,
+		#errDatetime:VARCHAR#,
+		#rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#)
+	</insert>
+	<update id="updateByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
+
+		update FTZ_IN_MSG_CTL
+		set BRANCH_ID = #branchId:VARCHAR#,
+		VER = #ver:CHAR#,
+		SRC = #src:CHAR#,
+		DES = #des:CHAR#,
+		APP = #app:VARCHAR#,
+		MSG_NO = #msgNo:CHAR#,
+		MSG_REF = #msgRef:CHAR#,
+		WORK_DATE = #workDate:VARCHAR#,
+		EDIT_FLAG = #editFlag:CHAR#,
+		RESERVE = #reserve:VARCHAR#,
+		ACCOUNT_NO = #accountNo:VARCHAR#,
+		CURRENCY = #currency:CHAR#,
+		BALANCE = #balance:DECIMAL#,
+		BALANCE_CODE = #balanceCode:CHAR#,
+		SUBMIT_DATE = #submitDate:CHAR#,
+		TOTAL_COUNT = #totalCount:DECIMAL#,
+		ACC_ORG_CODE = #accOrgCode:VARCHAR#,
+		ACCOUNT_NAME = #accountName:VARCHAR#,
+		ACC_TYPE = #accType:CHAR#,
+		SUB_ACCOUNT_NO = #subAccountNo:VARCHAR#,
+		DEPOSIT_RATE = #depositRate:DECIMAL#,
+		CUSTOM_TYPE = #customType:CHAR#,
+		DOCUMENT_TYPE = #documentType:CHAR#,
+		DOCUMENT_NO = #documentNo:VARCHAR#,
+		RESULT = #result:CHAR#,
+		ADD_WORD = #addWord:VARCHAR#,
+		MSG_STATUS = #msgStatus:CHAR#,
+		MAK_USER_ID = #makUserId:VARCHAR#,
+		MAK_DATETIME = #makDatetime:VARCHAR#,
+		CHK_USER_ID = #chkUserId:VARCHAR#,
+		CHK_DATETIME = #chkDatetime:VARCHAR#,
+		SND_USER_ID = #sndUserId:VARCHAR#,
+		SND_DATETIME = #sndDatetime:VARCHAR#,
+		ACK_DATETIME = #ackDatetime:VARCHAR#,
+		ERR_DATETIME = #errDatetime:VARCHAR#,
+		RSV1 = #rsv1:VARCHAR#,
+		RSV2 = #rsv2:VARCHAR#,
+		RSV3 = #rsv3:VARCHAR#
+		where MSG_ID = #msgId:VARCHAR#
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
+
+		update FTZ_IN_MSG_CTL
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="branchId">
+				BRANCH_ID = #branchId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="ver">
+				VER = #ver:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="src">
+				SRC = #src:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="des">
+				DES = #des:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="app">
+				APP = #app:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgNo">
+				MSG_NO = #msgNo:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgRef">
+				MSG_REF = #msgRef:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="workDate">
+				WORK_DATE = #workDate:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="editFlag">
+				EDIT_FLAG = #editFlag:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="reserve">
+				RESERVE = #reserve:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="accountNo">
+				ACCOUNT_NO = #accountNo:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="currency">
+				CURRENCY = #currency:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="balance">
+				BALANCE = #balance:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="balanceCode">
+				BALANCE_CODE = #balanceCode:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="submitDate">
+				SUBMIT_DATE = #submitDate:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="totalCount">
+				TOTAL_COUNT = #totalCount:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="accOrgCode">
+				ACC_ORG_CODE = #accOrgCode:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="accountName">
+				ACCOUNT_NAME = #accountName:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="accType">
+				ACC_TYPE = #accType:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="subAccountNo">
+				SUB_ACCOUNT_NO = #subAccountNo:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="depositRate">
+				DEPOSIT_RATE = #depositRate:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="customType">
+				CUSTOM_TYPE = #customType:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="documentType">
+				DOCUMENT_TYPE = #documentType:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="documentNo">
+				DOCUMENT_NO = #documentNo:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="result">
+				RESULT = #result:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="addWord">
+				ADD_WORD = #addWord:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgStatus">
+				MSG_STATUS = #msgStatus:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makUserId">
+				MAK_USER_ID = #makUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makDatetime">
+				MAK_DATETIME = #makDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkUserId">
+				CHK_USER_ID = #chkUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkDatetime">
+				CHK_DATETIME = #chkDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="sndUserId">
+				SND_USER_ID = #sndUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="sndDatetime">
+				SND_DATETIME = #sndDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="ackDatetime">
+				ACK_DATETIME = #ackDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="errDatetime">
+				ERR_DATETIME = #errDatetime:VARCHAR#
+			</isNotNull>
+		</dynamic>
+		where MSG_ID = #msgId:VARCHAR#
+		<isNotEmpty property="rsv1">
+			and MAK_DATETIME = #rsv1:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="rsv2">
+			and CHK_DATETIME = #rsv2:VARCHAR#
+		</isNotEmpty>
+
+	</update>
+	<!-- common query condition -->
+	<sql id="queryCondition">
+		where 1=1
+		<isNotEmpty property="branchId">
+			and BRANCH_ID = #branchId:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="msgId">
+			and MSG_ID = #msgId#
+		</isNotEmpty>
+		<isNotEmpty property="msgNo">
+			and MSG_NO = #msgNo#
+		</isNotEmpty>
+		<isNotEmpty property="currency">
+			and CURRENCY = #currency#
+		</isNotEmpty>
+		<isNotEmpty property="accountNo">
+			and ACCOUNT_NO = #accountNo:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="subAccountNo">
+			and SUB_ACCOUNT_NO =
+			#subAccountNo:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="accountName">
+			and ACCOUNT_NAME like
+			'%$accountName$%'
+		</isNotEmpty>
+		<isNotEmpty property="msgStatus">
+			and MSG_STATUS = #msgStatus:CHAR#
+		</isNotEmpty>
+		<isNotEmpty property="msgNos" prepend="AND">
+			<iterate property="msgNos" open="MSG_NO IN (" close=")" conjunction=",">
+	        	#msgNos[]#
+	        </iterate>
+			</isNotEmpty>
+		<isNotEmpty property="msgStatuss" prepend="AND">
+			<iterate property="msgStatuss" open="MSG_STATUS IN (" close=")" conjunction=",">
+	        	#msgStatuss[]#
+	        </iterate>
+			</isNotEmpty>
+		<isNotEmpty property="rsv1">
+			<![CDATA[ and SUBMIT_DATE >= #rsv1# ]]>
+		</isNotEmpty>
+		<isNotEmpty property="rsv2">
+			<![CDATA[ and SUBMIT_DATE <= #rsv2# ]]>
+		</isNotEmpty>
+		order by MSG_ID,SUBMIT_DATE
+	</sql>
+	
+	<sql id="queryConditionInput">
+		where 1=1
+		<isNotEmpty property="branchId">
+			and BRANCH_ID = #branchId:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="msgId">
+			and MSG_ID = #msgId#
+		</isNotEmpty>
+		<isNotEmpty property="msgNo">
+			and MSG_NO = #msgNo#
+		</isNotEmpty>
+		<isNotEmpty property="accountNo">
+			and ACCOUNT_NO = #accountNo:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="subAccountNo">
+			and SUB_ACCOUNT_NO =
+			#subAccountNo:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="accountName">
+			and ACCOUNT_NAME like
+			'%$accountName$%'
+		</isNotEmpty>
+		<isNotEmpty property="msgStatus">
+			and MSG_STATUS = #msgStatus:CHAR#
+		</isNotEmpty>
+		<isEmpty property="msgStatus">
+			and MSG_STATUS in ('01','02','04')
+		</isEmpty>
+		<isNotEmpty property="msgNos" prepend="AND">
+			<iterate property="msgNos" open="msgNo IN (" close=")" conjunction=",">
+	        	#msgNos[]#
+	        </iterate>
+			</isNotEmpty>
+		<isNotEmpty property="rsv1">
+			<![CDATA[ and SUBMIT_DATE >= #rsv1# ]]>
+		</isNotEmpty>
+
+		<isNotEmpty property="rsv2">
+			<![CDATA[ and SUBMIT_DATE <= #rsv2# ]]>
+		</isNotEmpty>
+		order by MSG_ID,SUBMIT_DATE
+	</sql>
+	
+
+	<select id="selectCounts" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl"
+		resultClass="java.lang.Integer">
+		select count(*) from FTZ_IN_MSG_CTL
+		<include refid="FTZ_IN_MSG_CTL.queryCondition" />
+	</select>
+
+	<select id="selectList" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl"
+		resultMap="FtzInMsgCtlResult">
+		select * from FTZ_IN_MSG_CTL
+		<include refid="FTZ_IN_MSG_CTL.queryCondition" />
+	</select>
+	
+	<select id="selectCountsInput" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl"
+		resultClass="java.lang.Integer">
+		select count(*) from FTZ_IN_MSG_CTL
+		<include refid="FTZ_IN_MSG_CTL.queryConditionInput" />
+	</select>
+
+	<select id="selectListInput" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl"
+		resultMap="FtzInMsgCtlResult">
+		select * from FTZ_IN_MSG_CTL
+		<include refid="FTZ_IN_MSG_CTL.queryConditionInput" />
+	</select>
+
+</sqlMap>

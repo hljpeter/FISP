@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_ALERT_RCPT" >
+  <resultMap id="SysAlertRcptResult" class="com.synesoft.fisp.domain.model.SysAlertRcpt" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+    <result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+    <result column="ALERT_TYPE" property="alertType" jdbcType="VARCHAR" />
+    <result column="NOTICE_MTHD" property="noticeMthd" jdbcType="VARCHAR" />
+    <result column="RCPT_ADDR" property="rcptAddr" jdbcType="VARCHAR" />
+    <result column="MAKER" property="maker" jdbcType="VARCHAR" />
+    <result column="MK_TIME" property="mkTime" jdbcType="VARCHAR" />
+    <result column="CHECKER" property="checker" jdbcType="VARCHAR" />
+    <result column="CHK_TIME" property="chkTime" jdbcType="VARCHAR" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="SysAlertRcptResult" parameterClass="java.lang.String" >
+    select ID, PROJ_ID, BRANCH_ID, ALERT_TYPE, NOTICE_MTHD, RCPT_ADDR, MAKER, MK_TIME, CHECKER,
+      CHK_TIME, COMMENTS, RSV1, RSV2, RSV3, RSV4, RSV5
+    from SYS_ALERT_RCPT
+    where ID = #id:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="java.lang.String" >
+    delete from SYS_ALERT_RCPT
+    where ID = #id:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.SysAlertRcpt" >
+    insert into SYS_ALERT_RCPT (ID, PROJ_ID, BRANCH_ID, ALERT_TYPE, NOTICE_MTHD, RCPT_ADDR, MAKER,
+      MK_TIME, CHECKER, CHK_TIME, COMMENTS, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#id:VARCHAR#, #projId:VARCHAR#, #branchId:VARCHAR#, #alertType:VARCHAR#,
+      #noticeMthd:VARCHAR#, #rcptAddr:VARCHAR#, #maker:VARCHAR#, #mkTime:VARCHAR#,
+      #checker:VARCHAR#, #chkTime:VARCHAR#, #comments:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#,
+      #rsv3:VARCHAR#, #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.SysAlertRcpt" >
+    update SYS_ALERT_RCPT
+    set PROJ_ID = #projId:VARCHAR#,
+      BRANCH_ID = #branchId:VARCHAR#,
+      ALERT_TYPE = #alertType:VARCHAR#,
+      NOTICE_MTHD = #noticeMthd:VARCHAR#,
+      RCPT_ADDR = #rcptAddr:VARCHAR#,
+      MAKER = #maker:VARCHAR#,
+      MK_TIME = #mkTime:VARCHAR#,
+      CHECKER = #checker:VARCHAR#,
+      CHK_TIME = #chkTime:VARCHAR#,
+      COMMENTS = #comments:VARCHAR#,
+      RSV1 = #rsv1:VARCHAR#,
+      RSV2 = #rsv2:VARCHAR#,
+      RSV3 = #rsv3:VARCHAR#,
+      RSV4 = #rsv4:VARCHAR#,
+      RSV5 = #rsv5:VARCHAR#
+    where ID = #id:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.SysAlertRcpt" >
+    update SYS_ALERT_RCPT
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="projId" >
+        PROJ_ID = #projId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="branchId" >
+        BRANCH_ID = #branchId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="alertType" >
+        ALERT_TYPE = #alertType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="noticeMthd" >
+        NOTICE_MTHD = #noticeMthd:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rcptAddr" >
+        RCPT_ADDR = #rcptAddr:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="maker" >
+        MAKER = #maker:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="mkTime" >
+        MK_TIME = #mkTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checker" >
+        CHECKER = #checker:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="chkTime" >
+        CHK_TIME = #chkTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="comments" >
+        COMMENTS = #comments:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where ID = #id:VARCHAR#
+  </update>
+ 
+   <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.SysAlertRcpt" resultClass="java.lang.Integer">
+    select count(*) from SYS_ALERT_RCPT
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="branchId" >
+        trim(BRANCH_ID) = #branchId:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="alertType" >
+        trim(ALERT_TYPE) = #alertType:VARCHAR#
+      </isNotEmpty>
+	</dynamic>   
+  </select>
+  
+  <select id="selectList" parameterClass="com.synesoft.fisp.domain.model.SysAlertRcpt" resultMap="SysAlertRcptResult">
+    select * from SYS_ALERT_RCPT
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="branchId" >
+        trim(BRANCH_ID) = #branchId:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="alertType" >
+        trim(ALERT_TYPE) = #alertType:VARCHAR#
+      </isNotEmpty>
+    </dynamic>
+  </select>
+</sqlMap>

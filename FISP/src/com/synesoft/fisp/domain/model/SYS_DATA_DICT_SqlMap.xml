@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_DATA_DICT" >
+  <resultMap id="SysDataDictResult" class="com.synesoft.fisp.domain.model.SysDataDict" >
+    <result column="GROUP_CODE" property="groupCode" jdbcType="VARCHAR" />
+    <result column="META_LAN" property="metaLan" jdbcType="VARCHAR" />
+    <result column="META_VAL" property="metaVal" jdbcType="VARCHAR" />
+    <result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+    <result column="META_NAME" property="metaName" jdbcType="VARCHAR" />
+    <result column="META_DESC" property="metaDesc" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="SysDataDictResult" parameterClass="com.synesoft.fisp.domain.model.SysDataDict" >
+   select *
+    from SYS_DATA_DICT
+    where GROUP_CODE = #groupCode:VARCHAR#
+      and META_LAN = #metaLan:VARCHAR#
+      and META_VAL = #metaVal:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.SysDataDict" >   
+    delete from SYS_DATA_DICT
+    where GROUP_CODE = #groupCode:VARCHAR#
+      and META_LAN = #metaLan:VARCHAR#
+      and META_VAL = #metaVal:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.SysDataDict" > 
+    insert into SYS_DATA_DICT  values (#groupCode:VARCHAR#, #metaVal:VARCHAR#,#metaLan:VARCHAR#, #metaName:VARCHAR#,
+      #metaDesc:VARCHAR#,#createTime:VARCHAR#,#createUser:VARCHAR#,#updateTime:VARCHAR#,#updateUser:VARCHAR#,
+       #groupName:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.SysDataDict" >
+    update SYS_DATA_DICT
+    set META_NAME = #metaName:VARCHAR#,
+      META_DESC = #metaDesc:VARCHAR#,
+      RSV1 = #rsv1:VARCHAR#,
+      RSV2 = #rsv2:VARCHAR#,
+      RSV3 = #rsv3:VARCHAR#
+    where GROUP_CODE = #groupCode:VARCHAR#
+      and META_LAN = #metaLan:VARCHAR#
+      and META_VAL = #metaVal:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.SysDataDict" >
+    update SYS_DATA_DICT
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="metaName" >
+        META_NAME = #metaName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="metaDesc" >
+        META_DESC = #metaDesc:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        UPDATE_TIME = #updateTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updateUser" >
+        UPDATE_USER = #updateUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where GROUP_CODE = #groupCode:VARCHAR#
+      and META_LAN = #metaLan:VARCHAR#
+      and META_VAL = #metaVal:VARCHAR#
+  </update>
+  
+  <select id="selectList" parameterClass="com.synesoft.fisp.app.bm.model.Bm_Data_QryForm" resultMap="SysDataDictResult" >
+  	select * from sys_data_dict where 1=1
+  	 <dynamic>
+       <isNotEmpty prepend="and" property="groupCode" >
+        GROUP_CODE = #groupCode:VARCHAR#
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="groupName" >
+        GROUP_NAME like '%$groupName$%'
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="metaName" >
+        META_NAME like '%$metaName$%'
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="metaLan" >
+        META_LAN = #metaLan:VARCHAR#
+       </isNotEmpty>   
+    </dynamic>
+    order by GROUP_CODE,META_LAN,META_VAL
+  
+   </select>
+  
+  <select id="selectCounts" parameterClass="com.synesoft.fisp.app.bm.model.Bm_Data_QryForm" resultClass="java.lang.Integer" >
+  	select count(*) from sys_data_dict where 1=1
+   <dynamic>
+       <isNotEmpty prepend="and" property="groupCode" >
+        GROUP_CODE = #groupCode:VARCHAR#
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="groupName" >
+        GROUP_NAME like '%$groupName$%'
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="metaName" >
+        META_NAME like '%$metaName$%'
+       </isNotEmpty>
+       <isNotEmpty prepend="and" property="metaLan" >
+        META_LAN = #metaLan:VARCHAR#
+       </isNotEmpty>   
+    </dynamic>
+    order by GROUP_CODE,META_LAN,META_VAL
+   </select>
+  
+  <select id="selectGroupList" resultMap="SysDataDictResult" parameterClass="com.synesoft.fisp.domain.model.SysDataDict">
+    <!--
+      WARNING - This element is automatically generated by Abator for iBATIS, do not modify.
+      This element was generated on Fri Oct 18 14:05:12 CST 2013.
+    -->
+    select GROUP_CODE, META_LAN, META_VAL, META_NAME, META_DESC, RSV1, RSV2, RSV3
+    from SYS_DATA_DICT
+    where GROUP_CODE = #groupCode:VARCHAR#
+    and META_LAN = #metaLan:VARCHAR#
+  </select>
+  
+   <select id="selectMetaList" parameterClass="com.synesoft.fisp.domain.model.SysDataDict" resultMap="SysDataDictResult" >
+  	SELECT * FROM SYS_DATA_DICT where GROUP_CODE = 'FTZ_TRAN_TYPE'
+  	 <dynamic>
+       <isNotEmpty prepend="and" property="metaName" >
+        META_NAME like '%$metaName$%'
+       </isNotEmpty>     
+       <isNotEmpty prepend="and" property="metaVal" >
+        META_VAL like '$metaVal$%'
+       </isNotEmpty>   
+    </dynamic>
+    order by GROUP_CODE,META_LAN,META_VAL
+  
+   </select>
+  
+  <select id="selectMetaCounts" parameterClass="com.synesoft.fisp.domain.model.SysDataDict" resultClass="java.lang.Integer" >
+  	select count(*) from sys_data_dict where GROUP_CODE = 'FTZ_TRAN_TYPE'
+   <dynamic>
+       <isNotEmpty prepend="and" property="metaName" >
+        META_NAME like '%$metaName$%'
+       </isNotEmpty>     
+       <isNotEmpty prepend="and" property="metaVal" >
+        META_VAL like '$metaVal$%'
+       </isNotEmpty>   
+    </dynamic>
+    order by GROUP_CODE,META_LAN,META_VAL
+   </select>
+</sqlMap>

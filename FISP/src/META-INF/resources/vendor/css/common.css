@@ -1,0 +1,244 @@
+/** application css definition
+  * add by Jon 20130424
+  */
+/*main*/
+.footbar {
+	background-color:#efefef;
+    background-repeat: repeat-x;
+    border: 0px
+    cellpadding: 0px
+    cellspacing: 0px
+}
+
+.STYLE2 {
+	color: #EDEFEF;
+	font-size:12px;
+}
+
+.STYLE1 {
+	color: #fff;
+	font-size:12px;
+	font-weight:bold;
+}
+.main_header { 
+	margin-bottom:5px;
+}
+.main_header_tb1 { 
+	background-color:#005D9A;
+}
+.main_header_tb2 { 
+	background-image:url("../img/top_menu_bg.png");
+}
+.main_dropdown {
+	color:#5C9CCB;
+}
+.main_menu_bg {
+	background-color:#F8F8F8;
+}
+.main_menu_bg2 {
+	background-color:#A7D3A2;
+}
+.main_sidebar { 
+	float:left; 
+	width:200px; 
+	height:500px; 
+	background:#fff;
+}
+.main_rightcontent { 
+	margin-left:205px !important; 
+	margin-left:202px; 
+	height:500px; 
+	background:#fff;
+}
+.main_footer { 
+	/**background-color:#239F2B;**/
+	background-color:#2B6FD5;
+}
+
+/* 锟斤拷钮锟斤拷式 */
+.button{
+	background-color: #0085D4;
+	display: inline;
+	padding: 9px 20px 10px;
+	margin-left: -20px;
+	margin-top: 20px;
+	font-size: 13px;
+	font-weight: 200;
+	color: #777777;
+	text-shadow: 0 1px 0 #ffffff;
+	border:	0px;
+	cursor: pointer;
+}
+
+/* 锟斤拷钮锟斤拷式 */
+.button1{
+    background-image: url("../img/but_submit.gif");
+    background-repeat: no-repeat;
+    display: inline;
+    font-size: 15px;
+    font-weight: normal;
+    height: 37px;
+    line-height: 40px;
+    margin-top: 3px;
+    text-align: center;
+    width: 200px;
+	border:	0px;
+	cursor: pointer;
+}
+
+/** for support ie6 **/
+.row {
+	margin-left: 1px;
+	width:98%;
+}
+
+/** page title **/
+.page_title {
+	text-align: left;
+	font-size: 12px;
+	margin-bottom: 10px;
+	font-weight:bold;
+	color:#71B2D3;
+}
+/** table for search area **/
+.tbl_search {
+	width: 100%;
+	border: 1px solid #ddd;
+}
+.tbl_search tr {
+	padding-top: 10px;
+}
+/** head table area **/
+.tbl_head {
+	width: 100%;
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+/** table form area **/
+.tbl_form {
+	width: 100%;
+	border: 1px solid #ddd;
+}
+/** table td label class **/
+.label_td {
+	min-width: 12%;
+	width: 13%;
+	text-align: left;
+	padding-left: 10px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	font-size: 12px;
+}
+/** page list table **/
+.tbl_page {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	word-break:break-all;
+	table-layout:fixed;
+}
+/** page list table head title **/
+.tbl_page thead tr th {
+	/**background-color: #5FB84C;**/
+	background-color: #2B6FD5;
+	color:#fff;
+	text-align: center;
+	font-weight: normal;
+	font-size: 12px;
+}
+/** page list table tbody td **/
+.tbl_page tbody tr td {
+	font-weight: normal;
+	font-size: 12px;
+	text-overflow:ellipsis; /* for IE */   
+    -moz-text-overflow: ellipsis; /* for Firefox,mozilla */   
+    overflow:hidden;  
+    white-space: nowrap;  
+}
+.tbl_page_head {
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.tbl_page_body {
+	overflow-y :auto;
+	overflow-x :hidden ;
+	min-height: 340px;
+	height: 345px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+/** remove the radius of BootStrap bordered table **/
+.tbl_page thead:first-child tr:first-child>th:first-child {
+	border-top-left-radius: 0;
+}
+.tbl_page thead:last-child tr:last-child > th:first-child {
+	border-bottom-left-radius: 0;
+}
+.tbl_page thead:first-child tr:first-child>th:last-child {
+	border-top-right-radius: 0;
+}
+.tbl_page thead:last-child tr:last-child > th:last-child {
+	border-bottom-right-radius: 0;
+}
+.tbl_page tbody:last-child tr:last-child > td:first-child {
+	border-bottom-left-radius: 0;
+}
+.tbl_page tbody:last-child tr:last-child > td:last-child {
+	border-bottom-right-radius: 0;
+}
+.tbl_page tbody:last-child tr:last-child > td {
+	border-bottom-right-radius: 0;
+	border-bottom: 1px solid #ddd;
+}
+/** pagination left links **/
+.pagination .leftPage {
+	float: left;
+}
+/** pagination right button group **/
+.pagination .rightBtn {
+	float: right;
+}
+/** table split line **/
+.hr_td {
+	border-top: 1px solid black;
+	padding-left: 5px;
+}
+/** scroller css **/
+.scrollerCss {
+	border: 1px solid black;
+	width: 98%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 10px;
+	min-height: 420px;
+	height: 420px;
+}
+
+/**table list head**/
+.tbl_page_th{
+	vertical-align: middle;
+	text-align: center;
+}
+.tbl_page_td_left{
+	vertical-align: middle;
+	text-align: left;
+}
+.tbl_page_td_right{
+	vertical-align: middle;
+	text-align: right;
+}
+
+/**cover bootstrap css**/
+form {
+	margin: 0 0 10px;
+}
+
+/** disabled */
+.tb_notselected {
+	background-color:#eeeeee;
+	cursor:not-allowed
+}

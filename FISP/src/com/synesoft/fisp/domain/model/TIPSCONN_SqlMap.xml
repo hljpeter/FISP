@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TIPS_CONN" >
+  <resultMap id="TipsConnResult" class="com.synesoft.fisp.domain.model.TipsConn" >
+    <result column="NODECODE" property="nodecode" jdbcType="CHAR" />
+    <result column="SYSTYPE" property="systype" jdbcType="CHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="LOGINSTATUS" property="loginstatus" jdbcType="CHAR" />
+    <result column="DESNODECODE" property="desnodecode" jdbcType="VARCHAR" />
+    <result column="PRESYSDATE" property="presysdate" jdbcType="CHAR" />
+    <result column="PRESYSSTATUS" property="presysstatus" jdbcType="CHAR" />
+    <result column="CURSYSDATE" property="cursysdate" jdbcType="CHAR" />
+    <result column="CURSYSSTATUS" property="cursysstatus" jdbcType="CHAR" />
+    <result column="NEXTSYSDATE" property="nextsysdate" jdbcType="CHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" resultMap="TipsConnResult" parameterClass="java.lang.String" >
+    select NODECODE, SYSTYPE, STATUS, LOGINSTATUS, DESNODECODE, PRESYSDATE, PRESYSSTATUS,
+      CURSYSDATE, CURSYSSTATUS, NEXTSYSDATE, RSV1, RSV2, RSV3, RSV4, RSV5
+    from TIPS_CONN
+    where trim(NODECODE) = #value:CHAR#
+  </select>
+  
+  <select id="selectList" resultMap="TipsConnResult" parameterClass="com.synesoft.fisp.domain.model.TipsConn" >
+    select * FROM TIPS_CONN
+    <dynamic prepend="where" >
+      <isNotEmpty prepend="and" property="nodecode" >
+         trim(NODECODE) = #nodecode:CHAR#
+     </isNotEmpty>
+    </dynamic>
+  </select>
+    
+  <select id="selectCounts" resultClass="java.lang.Integer" parameterClass="com.synesoft.fisp.domain.model.TipsConn" >
+    select count(*) FROM TIPS_CONN
+    <dynamic prepend="where" >
+      <isNotEmpty prepend="and" property="nodecode" >
+         trim(NODECODE) = #nodecode:CHAR#
+     </isNotEmpty>
+    </dynamic>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.TipsConn" >
+    delete from TIPS_CONN
+    where trim(NODECODE) = #nodecode:CHAR#
+  </delete>
+  
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.TipsConn" >
+    insert into TIPS_CONN (NODECODE, SYSTYPE, STATUS, LOGINSTATUS, DESNODECODE, PRESYSDATE,
+      PRESYSSTATUS, CURSYSDATE, CURSYSSTATUS, NEXTSYSDATE, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#nodecode:CHAR#, #systype:CHAR#, #status:CHAR#, #loginstatus:CHAR#,
+      #desnodecode:VARCHAR#, #presysdate:CHAR#, #presysstatus:CHAR#, #cursysdate:CHAR#,
+      #cursysstatus:CHAR#, #nextsysdate:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#,
+      #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.TipsConn" >
+    update TIPS_CONN
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="systype" >
+        SYSTYPE = #systype:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="status" >
+        STATUS = #status:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loginstatus" >
+        LOGINSTATUS = #loginstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="desnodecode" >
+        DESNODECODE = #desnodecode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="presysdate" >
+        PRESYSDATE = #presysdate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="presysstatus" >
+        PRESYSSTATUS = #presysstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cursysdate" >
+        CURSYSDATE = #cursysdate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cursysstatus" >
+        CURSYSSTATUS = #cursysstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="nextsysdate" >
+        NEXTSYSDATE = #nextsysdate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where trim(NODECODE) = #nodecode:CHAR#
+  </update>
+  
+</sqlMap>

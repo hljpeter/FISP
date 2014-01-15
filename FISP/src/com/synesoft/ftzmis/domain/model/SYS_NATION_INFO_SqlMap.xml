@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SYS_NATION_INFO" >
+  <resultMap id="SysNationInfoResult" class="com.synesoft.ftzmis.domain.model.SysNationInfo" >
+    <result column="NATION_CODE" property="nationCode" jdbcType="VARCHAR" />
+    <result column="NATION_LAN" property="nationLan" jdbcType="VARCHAR" />
+    <result column="NATION_NAME" property="nationName" jdbcType="VARCHAR" />
+    <result column="NATION_SHORT_NAME" property="nationShortName" jdbcType="VARCHAR" />
+    <result column="NATION_NUM_TWO" property="nationNumTwo" jdbcType="VARCHAR" />
+    <result column="NATION_NUM_THREE" property="nationNumThree" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="CHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="CHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectNationList" resultMap="SysNationInfoResult" parameterClass="com.synesoft.ftzmis.domain.model.SysNationInfo" >
+    select NATION_CODE, NATION_LAN, NATION_NAME, NATION_SHORT_NAME, NATION_NUM_TWO,
+      NATION_NUM_THREE, CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER, RSV1, RSV2, RSV3, RSV4,
+      RSV5
+    from SYS_NATION_INFO where 1=1
+     <dynamic>
+       <isNotEmpty prepend="and" property="nationShortName" >
+        NATION_SHORT_NAME like '%$nationShortName$%'
+       </isNotEmpty>      
+       <isNotEmpty prepend="and" property="nationCode" >
+     	 NATION_CODE like '$nationCode$%'
+       </isNotEmpty>
+         <isNotEmpty prepend="and" property="nationNumThree" >
+        NATION_NUM_THREE like '$nationNumThree$%'
+       </isNotEmpty>
+    </dynamic>
+  </select>
+ 
+  <select id="selectNationCounts" parameterClass="com.synesoft.ftzmis.domain.model.SysNationInfo" resultClass="java.lang.Integer" >
+    select count(*) from SYS_NATION_INFO where 1=1
+    <dynamic>
+       <isNotEmpty prepend="and" property="nationShortName" >
+        NATION_SHORT_NAME like '%$nationShortName$%'
+       </isNotEmpty>      
+       <isNotEmpty prepend="and" property="nationCode" >
+   	   NATION_CODE like '$nationCode$%'
+       </isNotEmpty>
+         <isNotEmpty prepend="and" property="nationNumThree" >
+        NATION_NUM_THREE like '$nationNumThree$%'
+       </isNotEmpty>
+    </dynamic>
+  </select>
+  
+</sqlMap>

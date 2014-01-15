@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="USERINFTMP">
+  <resultMap class="com.synesoft.fisp.domain.model.UserInfTmp" id="UserInfTmpResult">
+    <result column="ID" jdbcType="CHAR" property="id" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="CREATEORG" jdbcType="VACHAR" property="createorg" />
+    <result column="LOGINORG" jdbcType="VARCHAR" property="loginorg" />
+    <result column="USERSTATUS" jdbcType="CHAR" property="userstatus" />
+    <result column="OPTSTATUS" jdbcType="CHAR" property="optstatus" />
+    <result column="OPTTYPE" jdbcType="CHAR" property="opttype" />
+    <result column="AUTHAMT" jdbcType="DECIMAL" property="authamt" />
+    <result column="STAFFID" jdbcType="CHAR" property="staffid" />
+    <result column="STAFFNAME" jdbcType="VARCHAR" property="staffname" />
+    <result column="DEPARTMENT" jdbcType="VARCHAR" property="department" />
+    <result column="GENDER" jdbcType="CHAR" property="gender" />
+    <result column="MAIL" jdbcType="VARCHAR" property="mail" />
+    <result column="TELNO" jdbcType="VARCHAR" property="telno" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="CREATETIME" jdbcType="CHAR" property="createtime" />
+    <result column="CHECKER" jdbcType="VARCHAR" property="checker" />
+    <result column="CHECKTIME" jdbcType="CHAR" property="checktime" />
+    <result column="RSV1" jdbcType="VARCHAR" property="rsv1" />
+    <result column="RSV2" jdbcType="VARCHAR" property="rsv2" />
+    <result column="RSV3" jdbcType="VARCHAR" property="rsv3" />
+    <result column="RSV4" jdbcType="VARCHAR" property="rsv4" />
+    <result column="RSV5" jdbcType="VARCHAR" property="rsv5" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.UserInfTmp" resultMap="UserInfTmpResult">
+    select ID, USERID, USERNAME, CREATEORG, LOGINORG, USERSTATUS, OPTSTATUS, OPTTYPE, AUTHAMT, STAFFID,
+      STAFFNAME, DEPARTMENT, GENDER, MAIL, TELNO, CREATER, CREATETIME, CHECKER, CHECKTIME, RSV1,
+      RSV2, RSV3, RSV4, RSV5
+    from SYS_USER_INF_TMP
+    where ID = #id:CHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.UserInfTmp">
+    delete from SYS_USER_INF_TMP
+    where ID = #id:CHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.UserInfTmp">
+    insert into SYS_USER_INF_TMP (ID, USERID, USERNAME, CREATEORG, LOGINORG, USERSTATUS, OPTSTATUS, OPTTYPE,
+      AUTHAMT, STAFFID, STAFFNAME, DEPARTMENT, GENDER, MAIL, TELNO, CREATER, CREATETIME, CHECKER,
+      CHECKTIME, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#id:CHAR#, #userid:CHAR#, #username:VARCHAR#, #createorg:VARCHAR#, #loginorg:VARCHAR#,
+      #userstatus:CHAR#, #optstatus:CHAR#, #opttype:CHAR#, #authamt:DECIMAL#, #staffid:CHAR#,
+      #staffname:VARCHAR#, #department:VARCHAR#, #gender:CHAR#, #mail:VARCHAR#, #telno:VARCHAR#,
+      #creater:VARCHAR#, #createtime:CHAR#, #checker:VARCHAR#, #checktime:CHAR#, #rsv1:VARCHAR#,
+      #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.UserInfTmp">
+    update SYS_USER_INF_TMP
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="userid">
+        USERID = #userid:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="username">
+        USERNAME = #username:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createorg">
+        CREATEORG = #createorg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loginorg">
+        LOGINORG = #loginorg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userstatus">
+        USERSTATUS = #userstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="optstatus">
+        OPTSTATUS = #optstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="opttype">
+        OPTTYPE = #opttype:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="authamt">
+        AUTHAMT = #authamt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="staffid">
+        STAFFID = #staffid:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="staffname">
+        STAFFNAME = #staffname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="department">
+        DEPARTMENT = #department:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="gender">
+        GENDER = #gender:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="mail">
+        MAIL = #mail:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="telno">
+        TELNO = #telno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="creater">
+        CREATER = #creater:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createtime">
+        CREATETIME = #createtime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checker">
+        CHECKER = #checker:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checktime">
+        CHECKTIME = #checktime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1">
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2">
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3">
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4">
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5">
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where ID = #id:CHAR#
+  </update>
+  <select id="selectCounts" resultClass="java.lang.Integer" parameterClass="com.synesoft.fisp.domain.model.UserInfTmp" >
+    select count(*) from SYS_USER_INF_TMP where 1=1
+      <isNotEmpty prepend="and" property="userid">
+      	trim(USERID) = #userid:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="username">
+         trim(USERNAME) like '%$username$%'
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="opttype" >
+         OPTTYPE = #opttype:CHAR#
+     </isNotEmpty>
+     and OPTSTATUS='01'
+  </select>
+  <select id="selectList" resultMap="UserInfTmpResult" parameterClass="com.synesoft.fisp.domain.model.UserInfTmp" >
+   select * from SYS_USER_INF_TMP where 1=1
+     <isNotEmpty prepend="and" property="userid">
+      	trim(USERID) = #userid:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="username">
+         trim(USERNAME) like '%$username$%'
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="opttype" >
+         OPTTYPE = #opttype:CHAR#
+     </isNotEmpty>
+     and OPTSTATUS='01'
+  </select>
+</sqlMap>

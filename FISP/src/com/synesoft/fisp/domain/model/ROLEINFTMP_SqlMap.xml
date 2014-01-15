@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ROLEINFTMP" >
+  <resultMap id="RoleInfTmpResult" class="com.synesoft.fisp.domain.model.RoleInfTmp" >
+    <result column="ID" property="id" jdbcType="CHAR" />
+    <result column="ROLEID" property="roleid" jdbcType="CHAR" />
+    <result column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
+    <result column="ROLEDESC" property="roledesc" jdbcType="VARCHAR" />
+    <result column="MENULIST" property="menulist" jdbcType="VARCHAR" />
+    <result column="CREATEORG" property="createorg" jdbcType="VARCHAR" />
+    <result column="CREATER" property="creater" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="CHAR" />
+    <result column="CHECKER" property="checker" jdbcType="VARCHAR" />
+    <result column="CHECKTIME" property="checktime" jdbcType="CHAR" />
+    <result column="OPTTYPE" property="opttype" jdbcType="CHAR" />
+    <result column="OPTSTATUS" property="optstatus" jdbcType="CHAR" />
+    <result column="INFRUSEFLAG" property="infruseflag" jdbcType="CHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="RoleInfTmpResult" parameterClass="com.synesoft.fisp.domain.model.RoleInfTmp" >
+    select ID, ROLEID, ROLENAME, ROLEDESC, MENULIST, CREATEORG, CREATER, CREATETIME, CHECKER,
+      CHECKTIME, OPTTYPE, OPTSTATUS, INFRUSEFLAG, RSV1, RSV2, RSV3, RSV4, RSV5
+    from SYS_ROLE_INF_TMP
+    where ID = #id:CHAR#
+    and OPTSTATUS='01'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.RoleInfTmp" >
+    delete from SYS_ROLE_INF_TMP
+    where ID = #id:CHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.RoleInfTmp" >
+    insert into SYS_ROLE_INF_TMP (ID, ROLEID, ROLENAME, ROLEDESC, MENULIST, CREATEORG, CREATER,
+      CREATETIME, CHECKER, CHECKTIME, OPTTYPE, OPTSTATUS, INFRUSEFLAG, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#id:CHAR#, #roleid:CHAR#, #rolename:VARCHAR#, #roledesc:VARCHAR#, #menulist:VARCHAR#,
+      #createorg:VARCHAR#, #creater:VARCHAR#, #createtime:CHAR#, #checker:VARCHAR#, #checktime:CHAR#,
+      #opttype:CHAR#, #optstatus:CHAR#, #infruseflag:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#,
+      #rsv3:VARCHAR#, #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.RoleInfTmp" >
+    update SYS_ROLE_INF_TMP
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="roleid" >
+        ROLEID = #roleid:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rolename" >
+        ROLENAME = #rolename:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="roledesc" >
+        ROLEDESC = #roledesc:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="menulist" >
+        MENULIST = #menulist:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createorg" >
+        CREATEORG = #createorg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="creater" >
+        CREATER = #creater:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createtime" >
+        CREATETIME = #createtime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checker" >
+        CHECKER = #checker:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checktime" >
+        CHECKTIME = #checktime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="opttype" >
+        OPTTYPE = #opttype:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="optstatus" >
+        OPTSTATUS = #optstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="infruseflag" >
+        INFRUSEFLAG = #infruseflag:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where ID = #id:CHAR#
+  </update>
+  <select id="selectCounts" resultClass="java.lang.Integer" parameterClass="com.synesoft.fisp.domain.model.RoleInfTmp" >
+    select count(*) from SYS_ROLE_INF_TMP  where 1=1
+      <isNotEmpty prepend="and" property="roleid" >
+         trim(ROLEID)  = #roleid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="rolename" >
+         trim(ROLENAME) like '%$rolename$%'
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="opttype" >
+         OPTTYPE = #opttype:CHAR#
+     </isNotEmpty>
+     and OPTSTATUS='01'
+  </select>
+  <select id="selectList" resultMap="RoleInfTmpResult" parameterClass="com.synesoft.fisp.domain.model.RoleInfTmp" >
+   select * from SYS_ROLE_INF_TMP  where 1=1
+     <isNotEmpty prepend="and" property="roleid" >
+         trim(ROLEID)  = #roleid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="rolename" >
+         trim(ROLENAME) like '%$rolename$%'
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="opttype" >
+         OPTTYPE = #opttype:CHAR#
+     </isNotEmpty>
+     and OPTSTATUS='01'
+  </select>
+</sqlMap>

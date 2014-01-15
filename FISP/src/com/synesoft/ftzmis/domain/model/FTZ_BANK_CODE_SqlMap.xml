@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FTZ_BANK_CODE">
+	<resultMap id="FtzBankCodeResult" class="com.synesoft.ftzmis.domain.model.FtzBankCode">
+		<result column="BANK_CODE" property="bankCode" jdbcType="VARCHAR" />
+		<result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+		<result column="CLEAR_BANK_CODE" property="clearBankCode"
+			jdbcType="VARCHAR" />
+		<result column="CLEAR_BANK_NAME" property="clearBankName"
+			jdbcType="VARCHAR" />
+		<result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+		<result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+		<result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<select id="selectByPrimaryKey" resultMap="FtzBankCodeResult"
+		parameterClass="com.synesoft.ftzmis.domain.model.FtzBankCode">
+
+		select BANK_CODE, BANK_NAME, CLEAR_BANK_CODE,
+		CLEAR_BANK_NAME, RSV1, RSV2, RSV3
+		from FTZ_BANK_CODE
+		where BANK_CODE =
+		#bankCode:VARCHAR#
+	</select>
+
+	<select id="selectBankList" resultMap="FtzBankCodeResult"
+		parameterClass="com.synesoft.ftzmis.domain.model.FtzBankCode">
+		select BANK_CODE, BANK_NAME, CLEAR_BANK_CODE, CLEAR_BANK_NAME, RSV1,
+		RSV2, RSV3
+		from FTZ_BANK_CODE
+		where 1=1
+		<dynamic>
+			<isNotEmpty prepend="and" property="bankCode">
+				BANK_CODE like '$bankCode$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="bankName">
+				BANK_NAME like '%$bankName$%'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="selectBankCounts" resultClass="java.lang.Integer"
+		parameterClass="com.synesoft.ftzmis.domain.model.FtzBankCode">
+		select count(*)from FTZ_BANK_CODE where 1=1
+		<dynamic>
+			<isNotEmpty prepend="and" property="bankCode">
+				BANK_CODE like '$bankCode$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="bankName">
+				BANK_NAME like '%$bankName$%'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+
+	<delete id="deleteByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzBankCode">
+
+		delete from FTZ_BANK_CODE
+		where BANK_CODE = #bankCode:VARCHAR#
+	</delete>
+
+	<insert id="insert" parameterClass="com.synesoft.ftzmis.domain.model.FtzBankCode">
+
+		insert into FTZ_BANK_CODE (BANK_CODE, BANK_NAME, CLEAR_BANK_CODE,
+		CLEAR_BANK_NAME, RSV1, RSV2,
+		RSV3)
+		values (#bankCode:VARCHAR#, #bankName:VARCHAR#, #clearBankCode:VARCHAR#,
+		#clearBankName:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#,
+		#rsv3:VARCHAR#)
+	</insert>
+	<update id="updateByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzBankCode">
+
+		update FTZ_BANK_CODE
+		set BANK_NAME = #bankName:VARCHAR#,
+		CLEAR_BANK_CODE = #clearBankCode:VARCHAR#,
+		CLEAR_BANK_NAME = #clearBankName:VARCHAR#,
+		RSV1 = #rsv1:VARCHAR#,
+		RSV2 = #rsv2:VARCHAR#,
+		RSV3 = #rsv3:VARCHAR#
+		where BANK_CODE = #bankCode:VARCHAR#
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.ftzmis.domain.model.FtzBankCode">
+
+		update FTZ_BANK_CODE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="bankName">
+				BANK_NAME = #bankName:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="clearBankCode">
+				CLEAR_BANK_CODE = #clearBankCode:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="clearBankName">
+				CLEAR_BANK_NAME = #clearBankName:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="rsv1">
+				RSV1 = #rsv1:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="rsv2">
+				RSV2 = #rsv2:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="rsv3">
+				RSV3 = #rsv3:VARCHAR#
+			</isNotNull>
+		</dynamic>
+		where BANK_CODE = #bankCode:VARCHAR#
+	</update>
+
+</sqlMap>

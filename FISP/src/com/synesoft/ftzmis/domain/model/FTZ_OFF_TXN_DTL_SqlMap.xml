@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FTZ_OFF_TXN_DTL" >
+	<!-- ========================== 通用SQL，由FtzOffTxnDtlRepository的实现类调用 ========================== -->
+	<resultMap id="abatorgenerated_FtzOffTxnDtlResult" class="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" >
+	    <result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+	    <result column="SEQ_NO" property="seqNo" jdbcType="VARCHAR" />
+	    <result column="REPORT_CODE" property="reportCode" jdbcType="CHAR" />
+	    <result column="SUBMIT_DATE" property="submitDate" jdbcType="VARCHAR" />
+	    <result column="ACC_ORG_CODE" property="accOrgCode" jdbcType="VARCHAR" />
+	    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+	    <result column="CURRENCY" property="currency" jdbcType="CHAR" />
+	    <result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
+	    <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR" />
+	    <result column="INSTITUTION_CODE" property="institutionCode" jdbcType="VARCHAR" />
+	    <result column="SWIFT_CODE" property="swiftCode" jdbcType="CHAR" />
+	    <result column="COUNTRY_CODE" property="countryCode" jdbcType="CHAR" />
+	    <result column="DISTRICT_CODE" property="districtCode" jdbcType="CHAR" />
+	    <result column="TRAN_TYPE" property="tranType" jdbcType="CHAR" />
+	    <result column="TERM_LENGTH" property="termLength" jdbcType="DECIMAL" />
+	    <result column="TERM_UNIT" property="termUnit" jdbcType="CHAR" />
+	    <result column="TRAN_DATE" property="tranDate" jdbcType="VARCHAR" />
+	    <result column="EXPIRATION_DATE" property="expirationDate" jdbcType="VARCHAR" />
+	    <result column="INTEREST_RATE" property="interestRate" jdbcType="DECIMAL" />
+	    <result column="EXCHANGE_TYPE" property="exchangeType" jdbcType="CHAR" />
+	    <result column="BUY_CURR" property="buyCurr" jdbcType="CHAR" />
+	    <result column="BUY_AMT" property="buyAmt" jdbcType="DECIMAL" />
+	    <result column="BUY_RATE" property="buyRate" jdbcType="DECIMAL" />
+	    <result column="SELL_CURR" property="sellCurr" jdbcType="CHAR" />
+	    <result column="SELL_AMT" property="sellAmt" jdbcType="DECIMAL" />
+	    <result column="SELL_RATE" property="sellRate" jdbcType="DECIMAL" />
+	    <result column="BONDS_CODE" property="bondsCode" jdbcType="VARCHAR" />
+	    <result column="BONDS_NAME" property="bondsName" jdbcType="VARCHAR" />
+	    <result column="INTEREST_TYPE" property="interestType" jdbcType="CHAR" />
+	    <result column="BENCHMARK" property="benchmark" jdbcType="CHAR" />
+	    <result column="FLOAT_RATE" property="floatRate" jdbcType="DECIMAL" />
+	    <result column="TERM_CONDITION" property="termCondition" jdbcType="CHAR" />
+	    <result column="LG_TYPE" property="lgType" jdbcType="CHAR" />
+	    <result column="TRAN_GENRE" property="tranGenre" jdbcType="CHAR" />
+	    <result column="CHK_STATUS" property="chkStatus" jdbcType="CHAR" />
+	    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+	    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+	    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+	    <result column="MAK_USER_ID" property="makUserId" jdbcType="VARCHAR" />
+	    <result column="MAK_DATETIME" property="makDatetime" jdbcType="VARCHAR" />
+	    <result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
+	    <result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
+	    <result column="CHK_ADD_WORD" property="chkAddWord" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="WHERE_CONDITION">
+		<dynamic prepend="WHERE">
+			<isNotEmpty property="msgId" prepend="AND">
+			MSG_ID = #msgId:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty property="chkStatus" prepend="AND">
+			<![CDATA[CHK_STATUS = #chkStatus:VARCHAR#]]>
+			</isNotEmpty>
+			<isNotEmpty property="chkStatuss" prepend="AND">
+			<iterate property="chkStatuss" open="CHK_STATUS IN (" close=")" conjunction=",">
+	        	#chkStatuss[]#
+	        </iterate>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+  	<!-- 根据条件查询数据，返回多条记录，用于查询列表 -->
+	<select id="selectCounts" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" 
+			resultClass="java.lang.Integer">
+	    SELECT
+	    	COUNT(*)
+	    FROM 
+	    	FTZ_OFF_TXN_DTL
+		<include refid="FTZ_OFF_TXN_DTL.WHERE_CONDITION"/>			
+	</select>
+  
+  	<!-- 根据条件查询数据，返回多条记录，用于查询列表 -->
+	<select id="selectList" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" 
+			resultMap="abatorgenerated_FtzOffTxnDtlResult">
+	    SELECT
+			MSG_ID, SEQ_NO, REPORT_CODE, SUBMIT_DATE, ACC_ORG_CODE, AMOUNT, CURRENCY, ACCOUNT_NO, 
+			ACCOUNT_NAME, INSTITUTION_CODE, SWIFT_CODE, COUNTRY_CODE, DISTRICT_CODE, TRAN_TYPE, 
+			TERM_LENGTH, TERM_UNIT, TRAN_DATE, EXPIRATION_DATE, INTEREST_RATE, EXCHANGE_TYPE, BUY_CURR, 
+			BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE, BONDS_CODE, BONDS_NAME, INTEREST_TYPE, 
+			BENCHMARK, FLOAT_RATE, TERM_CONDITION, LG_TYPE, TRAN_GENRE, CHK_STATUS, RSV1, RSV2, RSV3, 
+			MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD
+    	FROM
+    		FTZ_OFF_TXN_DTL
+		<include refid="FTZ_OFF_TXN_DTL.WHERE_CONDITION"/>
+	    ORDER BY
+	    	SEQ_NO
+	</select>
+  
+  	<!-- 根据MSG_ID和CHK_STATUS查询数据，返回多条记录 -->
+	<select id="selectListSelective" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" 
+			resultMap="abatorgenerated_FtzOffTxnDtlResult">
+	    SELECT
+			MSG_ID, SEQ_NO, REPORT_CODE, SUBMIT_DATE, ACC_ORG_CODE, AMOUNT, CURRENCY, ACCOUNT_NO, 
+			ACCOUNT_NAME, INSTITUTION_CODE, SWIFT_CODE, COUNTRY_CODE, DISTRICT_CODE, TRAN_TYPE, 
+			TERM_LENGTH, TERM_UNIT, TRAN_DATE, EXPIRATION_DATE, INTEREST_RATE, EXCHANGE_TYPE, BUY_CURR, 
+			BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE, BONDS_CODE, BONDS_NAME, INTEREST_TYPE, 
+			BENCHMARK, FLOAT_RATE, TERM_CONDITION, LG_TYPE, TRAN_GENRE, CHK_STATUS, RSV1, RSV2, RSV3, 
+			MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD
+    	FROM
+    		FTZ_OFF_TXN_DTL
+		WHERE
+			MSG_ID = #msgId:VARCHAR# 
+			<isNotEmpty property="chkStatuss" prepend="AND">
+			<iterate property="chkStatuss" open="CHK_STATUS IN (" close=")" conjunction=",">
+	        	#chkStatuss[]#
+	        </iterate>
+			</isNotEmpty>
+	    ORDER BY
+	    	SEQ_NO
+	</select>
+  
+  	<!-- 根据主键查询数据，返回最多一条记录 -->
+	<select id="selectByPrimaryKey" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" 
+			resultMap="abatorgenerated_FtzOffTxnDtlResult">
+		SELECT
+			MSG_ID, SEQ_NO, REPORT_CODE, SUBMIT_DATE, ACC_ORG_CODE, AMOUNT, CURRENCY, ACCOUNT_NO, 
+			ACCOUNT_NAME, INSTITUTION_CODE, SWIFT_CODE, COUNTRY_CODE, DISTRICT_CODE, TRAN_TYPE, 
+			TERM_LENGTH, TERM_UNIT, TRAN_DATE, EXPIRATION_DATE, INTEREST_RATE, EXCHANGE_TYPE, BUY_CURR, 
+			BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE, BONDS_CODE, BONDS_NAME, INTEREST_TYPE, 
+			BENCHMARK, FLOAT_RATE, TERM_CONDITION, LG_TYPE, TRAN_GENRE, CHK_STATUS, RSV1, RSV2, RSV3, 
+			MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD
+    	FROM
+    		FTZ_OFF_TXN_DTL
+		WHERE
+			MSG_ID = #msgId:VARCHAR# AND
+			SEQ_NO = #seqNo:VARCHAR#
+	</select>
+	
+  	<!-- 查询比给出的SEQ_NO大的第一条需要审核的数据 -->
+	<select id="selectNext" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" 
+			resultMap="abatorgenerated_FtzOffTxnDtlResult">
+		SELECT
+			MSG_ID, SEQ_NO, REPORT_CODE, SUBMIT_DATE, ACC_ORG_CODE, AMOUNT, CURRENCY, ACCOUNT_NO, 
+			ACCOUNT_NAME, INSTITUTION_CODE, SWIFT_CODE, COUNTRY_CODE, DISTRICT_CODE, TRAN_TYPE, 
+			TERM_LENGTH, TERM_UNIT, TRAN_DATE, EXPIRATION_DATE, INTEREST_RATE, EXCHANGE_TYPE, BUY_CURR, 
+			BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE, BONDS_CODE, BONDS_NAME, INTEREST_TYPE, 
+			BENCHMARK, FLOAT_RATE, TERM_CONDITION, LG_TYPE, TRAN_GENRE, CHK_STATUS, RSV1, RSV2, RSV3, 
+			MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD
+    	FROM
+    		FTZ_OFF_TXN_DTL
+		WHERE
+			MSG_ID = #msgId:VARCHAR# AND
+			<![CDATA[SEQ_NO > #seqNo:VARCHAR# AND]]>
+			CHK_STATUS = '02' AND
+			ROWNUM = 1
+	</select>
+	
+  	<!-- 插入，MAK_DATETIME使用当前时间TO_CHAR(SYSDATE,'yyyymmddhh24miss') -->
+	<insert id="insert" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" >
+		INSERT INTO 
+			FTZ_OFF_TXN_DTL 
+		(
+			MSG_ID, SEQ_NO, REPORT_CODE, SUBMIT_DATE, ACC_ORG_CODE, AMOUNT, CURRENCY, ACCOUNT_NO, 
+			ACCOUNT_NAME, INSTITUTION_CODE, SWIFT_CODE, COUNTRY_CODE, DISTRICT_CODE, TRAN_TYPE, 
+			TERM_LENGTH, TERM_UNIT, TRAN_DATE, EXPIRATION_DATE, INTEREST_RATE, EXCHANGE_TYPE, BUY_CURR, 
+			BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE, BONDS_CODE, BONDS_NAME, INTEREST_TYPE, 
+			BENCHMARK, FLOAT_RATE, TERM_CONDITION, LG_TYPE, TRAN_GENRE, CHK_STATUS, RSV1, RSV2, RSV3, 
+			MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD
+		) VALUES (
+			#msgId:VARCHAR#, #seqNo:VARCHAR#, #reportCode:CHAR#, #submitDate:VARCHAR#,
+      		#accOrgCode:VARCHAR#, #amount:DECIMAL#, #currency:CHAR#, #accountNo:VARCHAR#,
+	      	#accountName:VARCHAR#, #institutionCode:VARCHAR#, #swiftCode:CHAR#, #countryCode:CHAR#,
+	      	#districtCode:CHAR#, #tranType:CHAR#, #termLength:DECIMAL#, #termUnit:CHAR#,
+	      	#tranDate:VARCHAR#, #expirationDate:VARCHAR#, #interestRate:DECIMAL#, #exchangeType:CHAR#,
+	      	#buyCurr:CHAR#, #buyAmt:DECIMAL#, #buyRate:DECIMAL#, #sellCurr:CHAR#, #sellAmt:DECIMAL#,
+	      	#sellRate:DECIMAL#, #bondsCode:VARCHAR#, #bondsName:VARCHAR#, #interestType:CHAR#,
+	      	#benchmark:CHAR#, #floatRate:DECIMAL#, #termCondition:CHAR#, #lgType:CHAR#, #tranGenre:CHAR#,
+	      	#chkStatus:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #makUserId:VARCHAR#, 
+	      	TO_CHAR(SYSDATE,'yyyymmddhh24miss'), #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#, #chkAddWord:VARCHAR#
+		)
+	</insert>
+  
+  	<!-- 更新业务字段 -->
+	<update id="updateByPrimaryKey" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" >
+	    UPDATE 
+	    	FTZ_OFF_TXN_DTL
+	    SET
+	    	MAK_USER_ID = #makUserId:VARCHAR#,
+	    	MAK_DATETIME = TO_CHAR(SYSDATE,'yyyymmddhh24miss')
+	    	<isNotEmpty property="chkStatus" prepend=",">
+	    	CHK_STATUS = #chkStatus:CHAR#
+	    	</isNotEmpty>
+	    	<isNotEmpty property="submitDate" prepend=",">
+      		SUBMIT_DATE = #submitDate:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="amount" prepend=",">
+      		AMOUNT = #amount:DECIMAL#
+	    	</isNotEmpty>
+      		<isNotEmpty property="currency" prepend=",">
+      		CURRENCY = #currency:CHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="accountNo" prepend=",">
+      		ACCOUNT_NO = #accountNo:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="institutionCode" prepend=",">
+      		INSTITUTION_CODE = #institutionCode:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="countryCode" prepend=",">
+      		COUNTRY_CODE = #countryCode:CHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="districtCode" prepend=",">
+      		DISTRICT_CODE = #districtCode:CHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="tranType" prepend=",">
+      		TRAN_TYPE = #tranType:CHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="termLength" prepend=",">
+      		TERM_LENGTH = #termLength:DECIMAL#
+	    	</isNotEmpty>
+      		<isNotEmpty property="termUnit" prepend=",">
+      		TERM_UNIT = #termUnit:CHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="tranDate" prepend=",">
+      		TRAN_DATE = #tranDate:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="expirationDate" prepend=",">
+      		EXPIRATION_DATE = #expirationDate:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="interestRate" prepend=",">
+      		INTEREST_RATE = #interestRate:DECIMAL#
+      		</isNotEmpty>
+      		<isNotEmpty property="interestRate" prepend=",">
+	    	INTEREST_RATE = #interestRate:DECIMAL#
+	    	</isNotEmpty>
+      		<isNotEmpty property="bondsCode" prepend=",">
+	    	BONDS_CODE = #bondsCode:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="bondsName" prepend=",">
+	    	BONDS_NAME = #bondsName:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="interestType" prepend=",">
+	    	INTEREST_TYPE = #interestType:CHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="benchmark" prepend=",">
+	    	BENCHMARK = #benchmark:CHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="floatRate" prepend=",">
+	    	FLOAT_RATE = #floatRate:DECIMAL#
+	    	</isNotEmpty>
+      		<isNotEmpty property="termCondition" prepend=",">
+	    	TERM_CONDITION = #termCondition:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="accOrgCode" prepend=",">
+	    	ACC_ORG_CODE = #accOrgCode:VARCHAR#
+	    	</isNotEmpty>
+      		<isNotEmpty property="accountName" prepend=",">
+	    	ACCOUNT_NAME = #accountName:VARCHAR#
+	    	</isNotEmpty> 
+	    	<isNotEmpty property="swiftCode" prepend=",">
+	    	SWIFT_CODE = #swiftCode:VARCHAR#
+	    	</isNotEmpty>  
+	    	<isNotEmpty property="lgType" prepend=",">
+	    	LG_TYPE = #lgType:CHAR#
+	    	</isNotEmpty> 
+			<isNotEmpty prepend="," property="exchangeType">
+			EXCHANGE_TYPE = #exchangeType:CHAR#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="buyCurr">
+			BUY_CURR = #buyCurr:CHAR#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="buyAmt">
+			BUY_AMT = #buyAmt:DECIMAL#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="buyRate">
+			BUY_RATE = #buyRate:DECIMAL#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sellCurr">
+			SELL_CURR = #sellCurr:CHAR#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sellAmt">
+			SELL_AMT = #sellAmt:DECIMAL#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="sellRate">
+			SELL_RATE = #sellRate:DECIMAL#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="tranGenre">
+			TRAN_GENRE = #tranGenre:CHAR#
+			</isNotEmpty>
+		WHERE 
+			MSG_ID = #msgId:VARCHAR# AND 
+	    	SEQ_NO = #seqNo:VARCHAR# AND
+	    	(MAK_DATETIME = #makDatetime:CHAR# OR MAK_DATETIME IS NULL) AND
+			(CHK_DATETIME = #chkDatetime:CHAR# OR CHK_DATETIME IS NULL)
+	</update>
+	
+  	<!-- 更新状态，内控字段 -->
+	<update id="updateByPrimaryKeySelective" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" >
+	    UPDATE 
+	    	FTZ_OFF_TXN_DTL
+	    SET 
+	    	CHK_STATUS = #chkStatus:CHAR#
+	    	<isNotEmpty property="chkUserId" prepend=",">
+	    	CHK_USER_ID = #chkUserId:VARCHAR#,
+	    	CHK_DATETIME = TO_CHAR(SYSDATE,'yyyymmddhh24miss')
+	    	</isNotEmpty> 
+	    	<isNotEmpty property="chkAddWord" prepend=",">
+	    	CHK_ADD_WORD = #chkAddWord:VARCHAR#
+	    	</isNotEmpty> 
+		WHERE 
+			MSG_ID = #msgId:VARCHAR# AND
+			<![CDATA[CHK_STATUS = '02']]>
+			<isNotEmpty property="seqNo" prepend="AND">
+			SEQ_NO = #seqNo:VARCHAR# AND
+	    	(MAK_DATETIME = #makDatetime:CHAR# OR MAK_DATETIME IS NULL) AND
+			(CHK_DATETIME = #chkDatetime:CHAR# OR CHK_DATETIME IS NULL)
+			</isNotEmpty>
+			
+	</update>
+	
+  	<!-- 查询需要新增交易时的SEQ_NO -->
+	<select id="selectSeqNO" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" 
+			resultClass="java.lang.String">
+		SELECT 
+			LPAD(NVL(MAX(SEQ_NO), 0) + 1, 6, '0')  
+		FROM 
+			FTZ_OFF_TXN_DTL 
+		WHERE 
+			MSG_ID = #msgId:VARCHAR#
+	</select>
+	
+  	<!-- 根据主键删除交易信息，删除一条 -->
+	<delete id="deleteByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl">
+		DELETE FROM 
+			FTZ_OFF_TXN_DTL
+		WHERE 
+			MSG_ID = #msgId:VARCHAR# AND
+			SEQ_NO = #seqNo:VARCHAR# AND
+			MAK_DATETIME = #makDatetime:CHAR# AND
+			(CHK_DATETIME = #chkDatetime:VARCHAR# OR CHK_DATETIME IS NULL)
+	</delete>
+	
+  	<!-- 根据MSG_ID删除交易信息，删除多条 -->
+	<delete id="deleteByMsgId2" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl">
+		DELETE FROM 
+			FTZ_OFF_TXN_DTL
+		WHERE 
+			MSG_ID = #msgId:VARCHAR#
+	</delete>
+	<!-- ========================== 通用SQL，由FtzOffTxnDtlRepository的实现类调用 ========================== -->
+	
+	<delete id="deleteByMsgId" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl">
+		delete from FTZ_OFF_TXN_DTL
+		where MSG_ID = #msgId:VARCHAR#
+	</delete>
+	
+	<!-- 远期结售汇 -->
+	<insert id="insertInput" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" >
+		INSERT INTO 
+			FTZ_OFF_TXN_DTL 
+		(
+			MSG_ID, SEQ_NO, REPORT_CODE, SUBMIT_DATE, ACC_ORG_CODE, AMOUNT, CURRENCY, ACCOUNT_NO, 
+			ACCOUNT_NAME, INSTITUTION_CODE, SWIFT_CODE, COUNTRY_CODE, DISTRICT_CODE, TRAN_TYPE, 
+			TERM_LENGTH, TERM_UNIT, TRAN_DATE, EXPIRATION_DATE, INTEREST_RATE, EXCHANGE_TYPE, BUY_CURR, 
+			BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE, BONDS_CODE, BONDS_NAME, INTEREST_TYPE, 
+			BENCHMARK, FLOAT_RATE, TERM_CONDITION, LG_TYPE, TRAN_GENRE, CHK_STATUS, RSV1, RSV2, RSV3, 
+			MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME, CHK_ADD_WORD
+		) VALUES (
+			#msgId:VARCHAR#, #seqNo:VARCHAR#, #reportCode:CHAR#, #submitDate:VARCHAR#,
+      		#accOrgCode:VARCHAR#, #amount:DECIMAL#, #currency:CHAR#, #accountNo:VARCHAR#,
+	      	#accountName:VARCHAR#, #institutionCode:VARCHAR#, #swiftCode:CHAR#, #countryCode:CHAR#,
+	      	#districtCode:CHAR#, #tranType:CHAR#, #termLength:DECIMAL#, #termUnit:CHAR#,
+	      	#tranDate:VARCHAR#, #expirationDate:VARCHAR#, #interestRate:DECIMAL#, #exchangeType:CHAR#,
+	      	#buyCurr:CHAR#, #buyAmt:DECIMAL#, #buyRate:DECIMAL#, #sellCurr:CHAR#, #sellAmt:DECIMAL#,
+	      	#sellRate:DECIMAL#, #bondsCode:VARCHAR#, #bondsName:VARCHAR#, #interestType:CHAR#,
+	      	#benchmark:CHAR#, #floatRate:DECIMAL#, #termCondition:CHAR#, #lgType:CHAR#, #tranGenre:CHAR#,
+	      	#chkStatus:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #makUserId:VARCHAR#, 
+	      	#makDatetime:VARCHAR#, #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#, #chkAddWord:VARCHAR#
+		)
+	</insert>
+	<update id="updateByPrimaryKeyInput" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl">
+		update FTZ_OFF_TXN_DTL
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="reportCode">
+				REPORT_CODE = #reportCode:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="submitDate">
+				SUBMIT_DATE = #submitDate:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="accOrgCode">
+				ACC_ORG_CODE = #accOrgCode:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="amount">
+				AMOUNT = #amount:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="currency">
+				CURRENCY = #currency:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="accountNo">
+				ACCOUNT_NO = #accountNo:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="accountName">
+				ACCOUNT_NAME = #accountName:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="institutionCode">
+				INSTITUTION_CODE = #institutionCode:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="swiftCode">
+				SWIFT_CODE = #swiftCode:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="countryCode">
+				COUNTRY_CODE = #countryCode:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="districtCode">
+				DISTRICT_CODE = #districtCode:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="tranType">
+				TRAN_TYPE = #tranType:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="termLength">
+				TERM_LENGTH = #termLength:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="termUnit">
+				TERM_UNIT = #termUnit:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="tranDate">
+				TRAN_DATE = #tranDate:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="expirationDate">
+				EXPIRATION_DATE = #expirationDate:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="interestRate">
+				INTEREST_RATE = #interestRate:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="exchangeType">
+				EXCHANGE_TYPE = #exchangeType:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="buyCurr">
+				BUY_CURR = #buyCurr:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="buyAmt">
+				BUY_AMT = #buyAmt:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="buyRate">
+				BUY_RATE = #buyRate:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="sellCurr">
+				SELL_CURR = #sellCurr:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="sellAmt">
+				SELL_AMT = #sellAmt:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="sellRate">
+				SELL_RATE = #sellRate:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="bondsCode">
+				BONDS_CODE = #bondsCode:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="bondsName">
+				BONDS_NAME = #bondsName:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="interestType">
+				INTEREST_TYPE = #interestType:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="benchmark">
+				BENCHMARK = #benchmark:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="floatRate">
+				FLOAT_RATE = #floatRate:DECIMAL#
+			</isNotNull>
+			<isNotNull prepend="," property="termCondition">
+				TERM_CONDITION = #termCondition:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="lgType">
+				LG_TYPE = #lgType:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="tranGenre">
+				TRAN_GENRE = #tranGenre:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkStatus">
+				CHK_STATUS = #chkStatus:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makUserId">
+				MAK_USER_ID = #makUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makDatetime">
+				MAK_DATETIME = #makDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkUserId">
+				CHK_USER_ID = #chkUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkDatetime">
+				CHK_DATETIME = #chkDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkAddWord">
+				CHK_ADD_WORD = #chkAddWord:VARCHAR#
+			</isNotNull>
+		</dynamic>
+		where MSG_ID = #msgId:VARCHAR#
+		and SEQ_NO = #seqNo:VARCHAR#
+		<isNotEmpty property="rsv1">
+			and MAK_DATETIME = #rsv1:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="rsv2">
+			and CHK_DATETIME = #rsv2:VARCHAR#
+		</isNotEmpty>
+	</update>
+	
+	<delete id="deleteByPmKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl">
+		delete from FTZ_OFF_TXN_DTL
+		where MSG_ID = #msgId:VARCHAR#
+		and SEQ_NO = #seqNo:VARCHAR#
+	</delete>
+</sqlMap>

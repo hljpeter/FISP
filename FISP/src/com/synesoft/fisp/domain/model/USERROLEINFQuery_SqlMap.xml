@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="USERROLEINFQUERY">
+  <resultMap class="com.synesoft.fisp.domain.model.UserRoleInf" id="UserRoleInfResult">
+    <result column="ORGID" jdbcType="CHAR" property="orgid" />
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="ORGNAME" jdbcType="VARCHAR" property="orgname" />
+    <result column="OPTSTATUS" jdbcType="CHAR" property="optstatus" />
+  </resultMap>
+  
+  <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.UserRoleInf" resultClass="java.lang.Integer">
+    select count(count(*)) from SYS_USER_ROLE_INF
+    <dynamic prepend="where">
+    	<isNotEmpty prepend="and" property="orgid">
+      	  trim(ORGID) = #orgid:CHAR#
+      	</isNotEmpty>
+	    <isNotEmpty prepend="and" property="userid">
+         trim(USERID) = #userid:CHAR#
+	    </isNotEmpty>
+	    <isNotEmpty prepend="and" property="username">
+       	 USERNAME  like '%$username$%'
+      	</isNotEmpty>
+	</dynamic> 
+	group by USERID,ORGID,ORGNAME,USERNAME,OPTSTATUS
+  </select>
+  <select id="selectUserRoleList" parameterClass="com.synesoft.fisp.domain.model.UserRoleInf" resultMap="UserRoleInfResult">
+    select  ORGID,ORGNAME,USERID, USERNAME,OPTSTATUS from SYS_USER_ROLE_INF
+    <dynamic prepend="where">
+   	 <isNotEmpty prepend="and" property="orgid">
+      	 trim(ORGID) = #orgid:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="userid">
+         trim(USERID) = #userid:CHAR#
+	  </isNotEmpty>
+	  <isNotEmpty prepend="and" property="username">
+       	 trim(USERNAME)  like '%$username$%'
+      </isNotEmpty>
+    </dynamic>
+    group by USERID,ORGID,ORGNAME,USERNAME,OPTSTATUS
+  </select>
+</sqlMap>

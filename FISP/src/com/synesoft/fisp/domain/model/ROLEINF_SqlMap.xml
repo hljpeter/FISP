@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ROLEINF" >
+  <resultMap id="roleInfResult" class="com.synesoft.fisp.domain.model.RoleInf" >
+    <result column="ROLEID" property="roleid" jdbcType="CHAR" />
+    <result column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
+    <result column="ROLEDESC" property="roledesc" jdbcType="VARCHAR" />
+    <result column="MENULIST" property="menulist" jdbcType="VARCHAR" />
+    <result column="CREATEORG" property="createorg" jdbcType="VARCHAR" />
+    <result column="CREATER" property="creater" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="CHAR" />
+    <result column="LASTOPERATOR" property="lastoperator" jdbcType="VARCHAR" />
+    <result column="LASTOPTTIME" property="lastopttime" jdbcType="CHAR" />
+    <result column="CHECKER" property="checker" jdbcType="VARCHAR" />
+    <result column="CHECKTIME" property="checktime" jdbcType="CHAR" />
+    <result column="OPTSTATUS" property="optstatus" jdbcType="CHAR" />
+    <result column="INFRUSEFLAG" property="infruseflag" jdbcType="CHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="CHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="roleInfResult" parameterClass="java.lang.String" >
+    select ROLEID, ROLENAME, ROLEDESC, MENULIST, CREATEORG, CREATER, CREATETIME, LASTOPERATOR,
+      LASTOPTTIME, CHECKER, CHECKTIME, OPTSTATUS, INFRUSEFLAG, RSV1, RSV2, RSV3, RSV4, RSV5
+    from SYS_ROLE_INF
+    where trim(ROLEID) = #value:CHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.RoleInf" >
+    delete from SYS_ROLE_INF
+   	where trim(ROLEID) = #roleid:CHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.RoleInf" >
+    insert into SYS_ROLE_INF (ROLEID, ROLENAME, ROLEDESC, MENULIST, CREATEORG, CREATER, CREATETIME,
+      LASTOPERATOR, LASTOPTTIME, CHECKER, CHECKTIME, OPTSTATUS, INFRUSEFLAG, RSV1, RSV2, RSV3, RSV4,
+      RSV5)
+    values (#roleid:CHAR#, #rolename:VARCHAR#, #roledesc:VARCHAR#, #menulist:VARCHAR#,
+      #createorg:VARCHAR#, #creater:VARCHAR#, #createtime:CHAR#, #lastoperator:VARCHAR#,
+      #lastopttime:CHAR#, #checker:VARCHAR#, #checktime:CHAR#, #optstatus:CHAR#, #infruseflag:CHAR#,
+      #rsv1:CHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.RoleInf" >
+    update SYS_ROLE_INF
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="rolename" >
+        ROLENAME = #rolename:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="roledesc" >
+        ROLEDESC = #roledesc:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="menulist" >
+        MENULIST = #menulist:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createorg" >
+        CREATEORG = #createorg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="creater" >
+        CREATER = #creater:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createtime" >
+        CREATETIME = #createtime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="lastoperator" >
+        LASTOPERATOR = #lastoperator:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="lastopttime" >
+        LASTOPTTIME = #lastopttime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checker" >
+        CHECKER = #checker:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checktime" >
+        CHECKTIME = #checktime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="optstatus" >
+        OPTSTATUS = #optstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="infruseflag" >
+        INFRUSEFLAG = #infruseflag:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where trim(ROLEID) = #roleid:CHAR#
+  </update>
+  <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.RoleInf" resultClass="java.lang.Integer" >
+    select count(*) from SYS_ROLE_INF
+    <dynamic prepend="where" >
+	    <isNotEmpty prepend="and" property="roleid" >
+	         trim(ROLEID) = #roleid:CHAR#
+	     </isNotEmpty>
+	      <isNotEmpty prepend="and" property="rolename" >
+	         trim(ROLENAME) like '%$rolename$%'
+	     </isNotEmpty>
+	</dynamic>   
+  </select>
+   <select id="selectCountsByOrgId" parameterClass="java.lang.String" resultClass="java.lang.Integer" >
+    select count(*) from SYS_ROLE_INF 
+    	where trim(CREATEORG) = #value:VARCHAR#
+  </select>
+  <select id="selectList" resultMap="roleInfResult" parameterClass="com.synesoft.fisp.domain.model.RoleInf" >
+    select * from SYS_ROLE_INF
+    <dynamic prepend="where" >
+      <isNotEmpty prepend="and" property="roleid" >
+         trim(ROLEID) = #roleid:CHAR#
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="rolename" >
+         trim(ROLENAME) like '%$rolename$%'
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="createorg" >
+        trim(CREATEORG) = #createorg:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="infruseflag" >
+        INFRUSEFLAG = #infruseflag:CHAR#
+      </isNotEmpty>
+    </dynamic>
+  </select>
+</sqlMap>

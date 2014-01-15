@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="EXP_SHEET_DTL">
+  <resultMap class="com.synesoft.pisa.domain.model.ExpSheetDtl" id="ExpSheetDtlResult">
+    <result column="SEQ_NO" jdbcType="DECIMAL" property="seqNo" />
+    <result column="SHEET_NO" jdbcType="VARCHAR" property="sheetNo" />
+    <result column="SUB_CODE" jdbcType="VARCHAR" property="subCode" />
+    <result column="FREQ_FLAG" jdbcType="CHAR" property="freqFlag" />
+    <result column="SUB_NO" jdbcType="VARCHAR" property="subNo" />
+    <result column="BAT_NO" jdbcType="DECIMAL" property="batNo" />
+    <result column="MSG_TYPE" jdbcType="CHAR" property="msgType" />
+    <result column="BANK_CODE" jdbcType="CHAR" property="bankCode" />
+    <result column="AREA_CODE" jdbcType="CHAR" property="areaCode" />
+    <result column="AREA_TYPE" jdbcType="CHAR" property="areaType" />
+    <result column="ITEM_NO" jdbcType="CHAR" property="itemNo" />
+    <result column="DIM_NO" jdbcType="CHAR" property="dimNo" />
+    <result column="DIM_NAME" jdbcType="VARCHAR" property="dimName" />
+    <result column="ITEM_NAME" jdbcType="VARCHAR" property="itemName" />
+    <result column="DATA_TYPE1" jdbcType="VARCHAR" property="dataType1" />
+    <result column="DATA_TYPE2" jdbcType="VARCHAR" property="dataType2" />
+    <result column="DATA_VALUE1" jdbcType="VARCHAR" property="dataValue1" />
+    <result column="DATA_VALUE2" jdbcType="VARCHAR" property="dataValue2" />
+    <result column="RSV1" jdbcType="VARCHAR" property="rsv1" />
+    <result column="RSV2" jdbcType="VARCHAR" property="rsv2" />
+    <result column="RSV3" jdbcType="VARCHAR" property="rsv3" />
+    <result column="RSV4" jdbcType="VARCHAR" property="rsv4" />
+    <result column="RSV5" jdbcType="VARCHAR" property="rsv5" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="MAK_USER_ID" property="makUserId" jdbcType="VARCHAR" />
+    <result column="MAK_DATETIME" property="makDatetime" jdbcType="VARCHAR" />
+    <result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
+    <result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
+  </resultMap>
+	<select id="selectSheetDetilList" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultMap="ExpSheetDtlResult">
+ 	 select SEQ_NO, SHEET_NO, SUB_CODE, FREQ_FLAG, SUB_NO, BAT_NO, MSG_TYPE, BANK_CODE, AREA_CODE,
+      AREA_TYPE, ITEM_NO, DIM_NO, DIM_NAME, ITEM_NAME, DATA_TYPE1, DATA_TYPE2, DATA_VALUE1,
+      DATA_VALUE2, RSV1, RSV2, RSV3, RSV4, RSV5, STATUS, MAK_USER_ID, MAK_DATETIME,CHK_USER_ID, CHK_DATETIME
+    from EXP_SHEET_DTL
+     <dynamic prepend="where">
+    	 <isNotEmpty prepend="and" property="sheetNo">
+      		  SHEET_NO  = #sheetNo:VARCHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="subNo">
+      		  SUB_NO  = #subNo:VARCHAR#
+     	 </isNotEmpty>
+     	  <isNotEmpty prepend="and" property="areaType">
+      		  AREA_TYPE  = #areaType:CHAR#
+     	 </isNotEmpty>
+     	  <isNotEmpty prepend="and" property="batNo">
+      		  BAT_NO  = #batNo:DECIMAL#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="areaCode">
+      		  AREA_CODE = #areaCode:CHAR#
+     	 </isNotEmpty>
+     </dynamic>
+  </select>
+  
+  <select id="selectSheetDetilCounts" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultClass="java.lang.Integer">
+ 		 select count(*) from EXP_SHEET_DTL
+     <dynamic prepend="where">
+    	 <isNotEmpty prepend="and" property="sheetNo">
+      		  SHEET_NO  = #sheetNo:VARCHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="subNo">
+      		  SUB_NO  = #subNo:VARCHAR#
+     	 </isNotEmpty>
+     	  <isNotEmpty prepend="and" property="areaType">
+      		  AREA_TYPE  = #areaType:CHAR#
+     	 </isNotEmpty>
+     	  <isNotEmpty prepend="and" property="batNo">
+      		  BAT_NO  = #batNo:DECIMAL#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="areaCode">
+      		  AREA_CODE = #areaCode:CHAR#
+     	 </isNotEmpty>
+     </dynamic>
+  </select>
+ 
+ <select id="selectItemList" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultMap="ExpSheetDtlResult">
+ 	 select SEQ_NO, SHEET_NO, SUB_CODE, FREQ_FLAG, SUB_NO, BAT_NO, MSG_TYPE, BANK_CODE, AREA_CODE,
+      AREA_TYPE, ITEM_NO, DIM_NO, DIM_NAME, ITEM_NAME, DATA_TYPE1, DATA_TYPE2, DATA_VALUE1,
+      DATA_VALUE2, RSV1, RSV2, RSV3, RSV4, RSV5, STATUS, MAK_USER_ID, MAK_DATETIME,CHK_USER_ID, CHK_DATETIME
+    from EXP_SHEET_DTL
+     <dynamic prepend="where">
+    	 <isNotEmpty prepend="and" property="itemNo">
+      		  ITEM_NO  = #itemNo:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="itemName">
+      		  ITEM_NAME  like'%$itemName$%'
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="subNo">
+      		  SUB_NO  = #subNo:VARCHAR#
+     	 </isNotEmpty>
+     	  <isNotEmpty prepend="and" property="areaType">
+      		  AREA_TYPE  = #areaType:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="areaCode">
+      		  AREA_CODE = #areaCode:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="dimNo">
+      		  DIM_NO = #dimNo:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="status">
+      		  STATUS = #status:CHAR#
+     	 </isNotEmpty>
+     </dynamic>
+     order  by SUB_NO,AREA_CODE,SHEET_NO,ITEM_NO
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultMap="ExpSheetDtlResult">
+ 	 select SEQ_NO, SHEET_NO, SUB_CODE, FREQ_FLAG, SUB_NO, BAT_NO, MSG_TYPE, BANK_CODE, AREA_CODE,
+      AREA_TYPE, ITEM_NO, DIM_NO, DIM_NAME, ITEM_NAME, DATA_TYPE1, DATA_TYPE2, DATA_VALUE1,
+      DATA_VALUE2, RSV1, RSV2, RSV3, RSV4, RSV5, STATUS, MAK_USER_ID, MAK_DATETIME,CHK_USER_ID, CHK_DATETIME
+    from EXP_SHEET_DTL
+    where SHEET_NO = #sheetNo:CHAR#
+    and SEQ_NO = #seqNo:DECIMAL#
+  </select>
+
+ <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl">
+ 	update EXP_SHEET_DTL set 
+ 	DATA_VALUE1=#dataValue1:CHAR#,
+ 	DATA_VALUE2=#dataValue2:CHAR#,
+ 	STATUS=#status:CHAR#, 
+ 	MAK_USER_ID=#makUserId:CHAR#, 
+ 	MAK_DATETIME=#makDatetime:CHAR#
+ 	 where  SHEET_NO = #sheetNo:CHAR#
+    and SEQ_NO = #seqNo:DECIMAL#
+ </update>
+ 
+  <update id="updateByPrimaryKeySelective1" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl">
+ 	update EXP_SHEET_DTL set 
+ 	STATUS=#status:CHAR#,
+ 	CHK_USER_ID=#chkUserId:CHAR#, 
+ 	CHK_DATETIME=#chkDatetime:CHAR#
+ 	 where  SHEET_NO = #sheetNo:CHAR#
+    and SEQ_NO = #seqNo:DECIMAL#
+ </update>
+ 
+ <select id="selectItemCounts" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultClass="java.lang.Integer">
+ 		 select count(*) from EXP_SHEET_DTL
+     <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="itemNo">
+      		  ITEM_NO  = #itemNo:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="itemName">
+      		  ITEM_NAME  like '%$itemName$%'
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="subNo">
+      		  SUB_NO  = #subNo:VARCHAR#
+     	 </isNotEmpty>
+     	  <isNotEmpty prepend="and" property="areaType">
+      		  AREA_TYPE  = #areaType:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="areaCode">
+      		  AREA_CODE = #areaCode:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="dimNo">
+      		  DIM_NO = #dimNo:CHAR#
+     	 </isNotEmpty>
+     	 <isNotEmpty prepend="and" property="status">
+      		  STATUS = #status:CHAR#
+     	 </isNotEmpty>
+     </dynamic>
+  </select>
+  
+  <select id="selectIitemDetList" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultMap="ExpSheetDtlResult">
+ 	 select SEQ_NO, SHEET_NO, SUB_CODE, FREQ_FLAG, SUB_NO, BAT_NO, MSG_TYPE, BANK_CODE, AREA_CODE,
+      AREA_TYPE, ITEM_NO, DIM_NO, DIM_NAME, ITEM_NAME, DATA_TYPE1, DATA_TYPE2, DATA_VALUE1,
+      DATA_VALUE2, RSV1, RSV2, RSV3, RSV4, RSV5, STATUS, MAK_USER_ID, MAK_DATETIME,CHK_USER_ID, CHK_DATETIME
+    from EXP_SHEET_DTL 
+    where ITEM_NO = #itemNo:CHAR#    
+    order by DIM_NO
+  </select>
+ 
+ <select id="selectItemDetCounts" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultClass="java.lang.Integer">
+ 		 select count(*) from EXP_SHEET_DTL
+      where ITEM_NO = #itemNo:CHAR#
+  </select>
+  
+ <select id="selectByItemDim" parameterClass="com.synesoft.pisa.domain.model.ExpSheetDtl" resultMap="ExpSheetDtlResult">
+ 	 select SEQ_NO, SHEET_NO, SUB_CODE, FREQ_FLAG, SUB_NO, BAT_NO, MSG_TYPE, BANK_CODE, AREA_CODE,
+      AREA_TYPE, ITEM_NO, DIM_NO, DIM_NAME, ITEM_NAME, DATA_TYPE1, DATA_TYPE2, DATA_VALUE1,
+      DATA_VALUE2, RSV1, RSV2, RSV3, RSV4, RSV5, STATUS, MAK_USER_ID, MAK_DATETIME,CHK_USER_ID, CHK_DATETIME
+    from EXP_SHEET_DTL
+    where SHEET_NO  = #sheetNo:VARCHAR#
+     	 and ITEM_NO  = #itemNo:VARCHAR#
+     	 and DIM_NO  = #dimNo:CHAR#
+  </select>
+  
+  <select id="selectRegionCount" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+ 	<![CDATA[ 
+ 	SELECT NVL(SUM(TO_NUMBER(NVL(DATA_VALUE1,0))),0) DATA_VALUE1,NVL(SUM(TO_NUMBER(NVL(DATA_VALUE2,0))),0) DATA_VALUE2
+	  FROM EXP_SHEET_DTL
+	 WHERE SHEET_NO = #sheetNo#
+	   AND ITEM_NO = #itemNo#
+	   AND SEQ_NO >= (SELECT SEQ_NO
+	                    FROM EXP_SHEET_DTL
+	                   WHERE SHEET_NO = #sheetNo#
+	                     AND ITEM_NO = #itemNo#
+	                     AND DIM_NO = #beginDimNo#)
+	   AND SEQ_NO <= (SELECT SEQ_NO
+	                    FROM EXP_SHEET_DTL
+	                   WHERE SHEET_NO = #sheetNo#
+	                     AND ITEM_NO = #itemNo#
+	                     AND DIM_NO = #endDimNo#)
+    ]]>
+  </select>
+  
+  <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.ReportData" resultClass="java.util.HashMap">
+  select sheet_no,(SELECT SHEET_NAME FROM EXP_SHEET_INFO WHERE SHEET_NO=EXP_SHEET_DTL.SHEET_NO) SHEET_NAME,
+       count(*) count1,
+       sum(case
+             when status is null then
+              1
+             else
+              0
+           end) count2,
+       sum(case
+             when status = 1 then
+              1
+             else
+              0
+           end) count3
+  from EXP_SHEET_DTL
+ group by sheet_no
+  </select>
+  
+  <select id="selectCountCount" parameterClass="com.synesoft.fisp.domain.model.ReportData" resultClass="java.lang.Integer">
+ select  count(1) from (
+select count(1)
+  from EXP_SHEET_DTL
+ group by sheet_no)
+  </select>
+  
+</sqlMap>

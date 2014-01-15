@@ -1,0 +1,4178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<bean id="CL_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="发送" />
+						<entry key="2" value="接收" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="发送" />
+						<entry key="2" value="接收" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CL_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="01" value="01-Add" />
+						<entry key="02" value="02-Modify" />
+						<entry key="03" value="03-Delete" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="01" value="01-新增" />
+						<entry key="02" value="02-修改" />
+						<entry key="03" value="03-删除" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CL_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="01" value="01-Pending" />
+						<entry key="02" value="02-Normal" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="01" value="01-待审核" />
+						<entry key="02" value="02-正常" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CL_0004"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="01" value="01-待审核" />
+						<entry key="02" value="02-已审核" />
+						<entry key="03" value="03-已生效" />
+						<entry key="04" value="02-已拒绝" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="01" value="01-待审核" />
+						<entry key="02" value="02-已审核" />
+						<entry key="03" value="03-已生效" />
+						<entry key="04" value="02-已拒绝" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CU_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-零余额" />
+						<entry key="2" value="2-小额现金" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-零余额" />
+						<entry key="2" value="2-小额现金" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CU_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-国税" />
+						<entry key="2" value="2-地税" />
+						<entry key="3" value="3-海关" />
+						<entry key="4" value="4-财政" />
+						<entry key="5" value="5-工商" />
+						<entry key="6" value="6-其他(专指社保)" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-国税" />
+						<entry key="2" value="2-地税" />
+						<entry key="3" value="3-海关" />
+						<entry key="4" value="4-财政" />
+						<entry key="5" value="5-工商" />
+						<entry key="6" value="6-其他(专指社保)" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CU_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-国家" />
+						<entry key="2" value="2-省" />
+						<entry key="3" value="3-市" />
+						<entry key="4" value="4-县" />
+						<entry key="5" value="5-乡" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-国家" />
+						<entry key="2" value="2-省" />
+						<entry key="3" value="3-市" />
+						<entry key="4" value="4-县" />
+						<entry key="5" value="5-乡" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CU_0004"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-数据中心" />
+						<entry key="1" value="1-总库" />
+						<entry key="2" value="2-省库" />
+						<entry key="3" value="3-中心支库" />
+						<entry key="4" value="4-县(区)支库" />
+						<entry key="5" value="5-乡库" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 申报缴税验证结果 -->
+	<bean id="CL_0005"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="0-验证通过，协议已可以使用" />
+						<entry key="1" value="1-验证失败，协议不存在或信息有误" />
+						<entry key="2" value="2-撤销通过，协议已不能使用" />
+						<entry key="3" value="3-撤销失败，协议不存在或信息有误" />
+						<entry key="4" value="4-验证失败，征收机关代码不存在或错误" />
+						<entry key="5" value="5-验证失败，付款行行号不存在或错误" />
+						<entry key="6" value="6-验证失败，三方协议书号不一致" />
+						<entry key="7" value="7-验证失败，清算行行号不一致" />
+						<entry key="8" value="8-验证失败，开户行行号不一致" />
+						<entry key="9" value="9-验证失败，银行账号不一致" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-验证通过，协议已可以使用" />
+						<entry key="1" value="1-验证失败，协议不存在或信息有误" />
+						<entry key="2" value="2-撤销通过，协议已不能使用" />
+						<entry key="3" value="3-撤销失败，协议不存在或信息有误" />
+						<entry key="4" value="4-验证失败，征收机关代码不存在或错误" />
+						<entry key="5" value="5-验证失败，付款行行号不存在或错误" />
+						<entry key="6" value="6-验证失败，三方协议书号不一致" />
+						<entry key="7" value="7-验证失败，清算行行号不一致" />
+						<entry key="8" value="8-验证失败，开户行行号不一致" />
+						<entry key="9" value="9-验证失败，银行账号不一致" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 税种类型 -->
+	<bean id="CL_0006"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-当期收入" />
+						<entry key="2" value="2-补缴税款" />
+						<entry key="3" value="3-三代结缴(委托代征、代扣、代售)" />
+						<entry key="4" value="4-检查补缴" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-当期收入" />
+						<entry key="2" value="2-补缴税款" />
+						<entry key="3" value="3-三代结缴(委托代征、代扣、代售)" />
+						<entry key="4" value="4-检查补缴" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 申报缴税-交易状态 -->
+	<bean id="CL_0007"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="00" value="00-已录入" />
+						<entry key="09" value="09-已发送" />
+						<entry key="10" value="10-发送成功" />
+						<entry key="11" value="11-发送失败" />
+						<entry key="20" value="20-申报成功" />
+						<entry key="21" value="21-申报失败" />
+						<entry key="22" value="22-用户取消" />
+						<entry key="30" value="30-缴税成功" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="00" value="00-已录入" />
+						<entry key="09" value="09-已发送" />
+						<entry key="10" value="10-发送成功" />
+						<entry key="11" value="11-发送失败" />
+						<entry key="20" value="20-申报成功" />
+						<entry key="21" value="21-申报失败" />
+						<entry key="22" value="22-用户取消" />
+						<entry key="30" value="30-缴税成功" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 申报缴税-计账状态 -->
+	<bean id="CL_0008"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未记账" />
+						<entry key="R" value="R-已发送记账请求" />
+						<entry key="S" value="S-记账成功" />
+						<entry key="F" value="F-记账失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未记账" />
+						<entry key="R" value="R-已发送记账请求" />
+						<entry key="S" value="S-记账成功" />
+						<entry key="F" value="F-记账失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 申报缴税-回执状态 -->
+	<bean id="CL_0009"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未记账" />
+						<entry key="R" value="R-已发送记账请求" />
+						<entry key="S" value="S-记账成功" />
+						<entry key="F" value="F-记账失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未发送" />
+						<entry key="R" value="R-已发送" />
+						<entry key="S" value="S-发送成功" />
+						<entry key="F" value="F-发送失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 申报缴税-税票状态 -->
+	<bean id="CL_0013"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="0" value="0-初始状态" />
+						<entry key="1" value="1-已受理" />
+						<entry key="2" value="2-已缴款" />
+						<entry key="3" value="3-缴款失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="0" value="0-初始状态" />
+						<entry key="1" value="1-已受理" />
+						<entry key="2" value="2-已缴款" />
+						<entry key="3" value="3-缴款失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 查询缴税-处理状态 -->
+	<bean id="BH_0300"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="00" value="00-已发送" />
+						<entry key="01" value="01-发送成功" />
+						<entry key="02" value="02-发送失败" />
+						<entry key="03" value="03-已回执" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="00" value="00-已发送" />
+						<entry key="01" value="01-发送成功" />
+						<entry key="02" value="02-发送失败" />
+						<entry key="03" value="03-已回执" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CL_0010"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="01" value="01-可用" />
+						<entry key="02" value="02-不可用" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="01" value="01-可用" />
+						<entry key="02" value="02-不可用" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- TIPS状态 -->
+	<bean id="CL_0011"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="0" value="日切" />
+						<entry key="1" value="日间窗口" />
+						<entry key="2" value="系统维护状态" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="0" value="日切" />
+						<entry key="1" value="日间窗口" />
+						<entry key="2" value="系统维护状态" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="CL_0012"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="01" value="01-Normal" />
+						<entry key="02" value="02-Locking" />
+						<entry key="03" value="03-Freeze" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="01" value="01-正常" />
+						<entry key="02" value="02-锁定" />
+						<entry key="03" value="03-冻结" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 实时缴税-处理结果 -->
+	<bean id="BH_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="90000" value="90000-成功" />
+						<entry key="90001" value="90001-失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="90000" value="90000-成功" />
+						<entry key="90001" value="90001-失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 实时缴税-处理结果 -->
+	<bean id="BH_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-国库" />
+						<entry key="2" value="2-商业银行" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-国库" />
+						<entry key="2" value="2-商业银行" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量扣税- 处理录入 -->
+	<bean id="BH_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="90000" value="90000-成功" />
+						<entry key="90001" value="90001-失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="90000" value="90000-成功" />
+						<entry key="90001" value="90001-失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量扣税- 记账状态 -->
+	<bean id="BH_0004"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未记账" />
+						<entry key="R" value="R-已发送记账请求" />
+						<entry key="S" value="S-记账成功" />
+						<entry key="F" value="F-记账失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未记账" />
+						<entry key="R" value="R-已发送记账请求" />
+						<entry key="S" value="S-记账成功" />
+						<entry key="F" value="F-记账失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量扣税- 回执状态 -->
+	<bean id="BH_0005"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未发送" />
+						<entry key="W" value="W-待发送" />
+						<entry key="R" value="R-已发送" />
+						<entry key="S" value="S-发送成功" />
+						<entry key="F" value="F-发送失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="N" value="N-未发送" />
+						<entry key="W" value="W-待发送" />
+						<entry key="R" value="R-已发送" />
+						<entry key="S" value="S-发送成功" />
+						<entry key="F" value="F-发送失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--止付- 止付类型 -->
+	<bean id="BH_0006"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="0" value="0-单笔" />
+						<entry key="1" value="1-整包" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="0" value="0-单笔" />
+						<entry key="1" value="1-整包" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--止付- 止付应答 -->
+	<bean id="BH_0007"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-止付成功" />
+						<entry key="2" value="2-止付失败，已扣款" />
+						<entry key="3" value="3-止付失败，包或交易在途或不存在" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-止付成功" />
+						<entry key="2" value="2-止付失败，已扣款" />
+						<entry key="3" value="3-止付失败，包或交易在途或不存在" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--止付- 交易状态 -->
+	<bean id="BH_0008"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="50" value="50-已接收" />
+						<entry key="51" value="51-协议校验通过" />
+						<entry key="52" value="52-协议校验失败" />
+						<entry key="53" value="53-扣税成功" />
+						<entry key="54" value="54-扣税失败" />
+						<entry key="61" value="61-已止付" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="50" value="50-已接收" />
+						<entry key="51" value="51-协议校验通过" />
+						<entry key="52" value="52-协议校验失败" />
+						<entry key="53" value="53-扣税成功" />
+						<entry key="54" value="54-扣税失败" />
+						<entry key="61" value="61-已止付" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--止付- 冲正状态 -->
+	<bean id="BH_0009"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-未冲正" />
+						<entry key="2" value="2-待冲正" />
+						<entry key="3" value="3-冲正成功" />
+						<entry key="4" value="4-冲正失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="" value="" />
+						<entry key="1" value="1-未冲正" />
+						<entry key="2" value="2-待冲正" />
+						<entry key="3" value="3-冲正成功" />
+						<entry key="4" value="4-冲正失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--连接测试- 测试结果 -->
+	<bean id="BM_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="90000" value="90000-成功" />
+						<entry key="90001" value="90001-失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="90000" value="90000-成功" />
+						<entry key="90001" value="90001-失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--连接测试- 报文状态 -->
+	<bean id="BM_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="0-接受" />
+						<entry key="1" value="1-发送" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-接受" />
+						<entry key="1" value="1-发送" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-待补录" />
+						<entry key="2" value="2-已补录" />
+						<entry key="3" value="3-审核通过" />
+						<entry key="4" value="4-审核退回" />
+						<entry key="5" value="5-审核取消" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-待补录" />
+						<entry key="2" value="2-已补录" />
+						<entry key="3" value="3-审核通过" />
+						<entry key="4" value="4-审核退回" />
+						<entry key="5" value="5-审核取消" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 贷款主体行业类别 -->
+	<bean id="DP_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-个人" />
+						<entry key="2" value="2-境外" />
+						<entry key="A" value="A-农、林、牧、渔业" />
+						<entry key="B" value="B-采矿业" />
+						<entry key="C" value="C-制造业" />
+						<entry key="D" value="D-电力、热力、燃气及水生产和供应业" />
+						<entry key="E" value="E-建筑业" />
+						<entry key="F" value="F-批发和零售业" />
+						<entry key="G" value="G-交通运输、仓储和邮政业" />
+						<entry key="H" value="H-住宿和餐饮业" />
+						<entry key="I" value="I-信息传输、软件和信息技术服务业" />
+						<entry key="J" value="J-金融业" />
+						<entry key="K" value="K-房地产业" />
+						<entry key="L" value="L-租赁和商务服务业" />
+						<entry key="M" value="M-科学研究和技术服务业" />
+						<entry key="N" value="N-水利、环境和公共设施管理业" />
+						<entry key="O" value="O-居民服务、修理和其他服务业" />
+						<entry key="P" value="p-教育" />
+						<entry key="Q" value="Q-卫生和社会工作" />
+						<entry key="R" value="R-文化、体育和娱乐业" />
+						<entry key="S" value="S-公共管理、社会保障和社会组织" />
+						<entry key="T" value="T-国际组织" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-个人" />
+						<entry key="2" value="2-境外" />
+						<entry key="A" value="A-农、林、牧、渔业" />
+						<entry key="B" value="B-采矿业" />
+						<entry key="C" value="C-制造业" />
+						<entry key="D" value="D-电力、热力、燃气及水生产和供应业" />
+						<entry key="E" value="E-建筑业" />
+						<entry key="F" value="F-批发和零售业" />
+						<entry key="G" value="G-交通运输、仓储和邮政业" />
+						<entry key="H" value="H-住宿和餐饮业" />
+						<entry key="I" value="I-信息传输、软件和信息技术服务业" />
+						<entry key="J" value="J-金融业" />
+						<entry key="K" value="K-房地产业" />
+						<entry key="L" value="L-租赁和商务服务业" />
+						<entry key="M" value="M-科学研究和技术服务业" />
+						<entry key="N" value="N-水利、环境和公共设施管理业" />
+						<entry key="O" value="O-居民服务、修理和其他服务业" />
+						<entry key="P" value="p-教育" />
+						<entry key="Q" value="Q-卫生和社会工作" />
+						<entry key="R" value="R-文化、体育和娱乐业" />
+						<entry key="S" value="S-公共管理、社会保障和社会组织" />
+						<entry key="T" value="T-国际组织" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 企业出资人经济成分 -->
+	<bean id="DP_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="A0101" value="A0101-国有相对控股" />
+						<entry key="A0102" value="A0102-国有绝对控股" />
+						<entry key="A0201" value="A0201-集体相对控股" />
+						<entry key="A0202" value="A0202-集体绝对控股" />
+						<entry key="B0101" value="B0101-私人相对控股" />
+						<entry key="B0102" value="B0102-私人绝对控股" />
+						<entry key="B0201" value="B0201-港澳台相对控股" />
+						<entry key="B0202" value="B0202-港澳台绝对控股" />
+						<entry key="B0301" value="B0301-外商相对控股" />
+						<entry key="B0302" value="B0302-外商绝对控股" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="A0101" value="A0101-国有相对控股" />
+						<entry key="A0102" value="A0102-国有绝对控股" />
+						<entry key="A0201" value="A0201-集体相对控股" />
+						<entry key="A0202" value="A0202-集体绝对控股" />
+						<entry key="B0101" value="B0101-私人相对控股" />
+						<entry key="B0102" value="B0102-私人绝对控股" />
+						<entry key="B0201" value="B0201-港澳台相对控股" />
+						<entry key="B0202" value="B0202-港澳台绝对控股" />
+						<entry key="B0301" value="B0301-外商相对控股" />
+						<entry key="B0302" value="B0302-外商绝对控股" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 企业规模 -->
+	<bean id="DP_0004"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="CS01" value="CS01-小型" />
+						<entry key="CS02" value="CS02-中型" />
+						<entry key="CS03" value="CS03-大型" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="CS01" value="CS01-小型" />
+						<entry key="CS02" value="CS02-中型" />
+						<entry key="CS03" value="CS03-大型" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 产品类别 -->
+	<bean id="DP_0005"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="F01000" value="F01000 -再贷款" />
+						<entry key="F02000" value="F02000 -普通贷款" />
+						<entry key="F02100" value="F02100 -消费贷款" />
+						<entry key="F02110" value="F02110 -个人住房贷款" />
+						<entry key="F02120" value="F02120 -个人汽车消费贷款" />
+						<entry key="F02130" value="F02130 -助学贷款" />
+						<entry key="F02131" value="F02131 -国家助学贷款" />
+						<entry key="F02132" value="F02132 -一般商业性助学贷款" />
+						<entry key="F02190" value="F02190 -其他消费贷款" />
+						<entry key="F02200" value="F02200 -经营贷款" />
+						<entry key="F02300" value="F02300 -固定资产贷款" />
+						<entry key="F03000" value="F03000 -拆解" />
+						<entry key="F04000" value="F04000 -透支" />
+						<entry key="F04100" value="F04100 -账户透支" />
+						<entry key="F04200" value="F04200 -贷记卡透支" />
+						<entry key="F04300" value="F04300 -准贷记卡透支" />
+						<entry key="F05000" value="F05000 -垫款" />
+						<entry key="F05100" value="F05100 -承兑垫款" />
+						<entry key="F05200" value="F05200 -担保垫款" />
+						<entry key="F05300" value="F05300 -信用证垫款" />
+						<entry key="F05400" value="F05400 -其他垫款" />
+						<entry key="F06000" value="F06000 -回购/返售" />
+						<entry key="F06100" value="F06100 -债券回购/返售" />
+						<entry key="F06200" value="F06200 -票据回购/返售" />
+						<entry key="F06300" value="F06300 -贷款回购/返售" />
+						<entry key="F06400" value="F06400 -股票及其他股权回购/返售" />
+						<entry key="F06500" value="F06500 -黄金回购/返售" />
+						<entry key="F07000" value="F07000 -黄金、证券借贷" />
+						<entry key="F07100" value="F07100 -债券借贷" />
+						<entry key="F07200" value="F07200 -票据借贷" />
+						<entry key="F07300" value="F07300 -股票及其他股权借贷" />
+						<entry key="F07400" value="F07400 -黄金借贷" />
+						<entry key="F07500" value="F07500 -其他资产借贷" />
+						<entry key="F08000" value="F08000 -贸易融资" />
+						<entry key="F08100" value="F08100 -国际贸易融资" />
+						<entry key="F08200" value="F06400 -国内贸易融资" />
+						<entry key="F09000" value="F09000 -融资租赁" />
+						<entry key="F10000" value="F10000 -打包信贷受让资产" />
+						<entry key="F11000" value="F11000 -转贷款" />
+						<entry key="F12000" value="F12000 -并购贷款" />
+						<entry key="F99000" value="F99000 -其他贷款" />
+						<entry key="D01000" value="D01000 -普通存款" />
+						<entry key="D01100" value="D01100 -单位活期存款" />
+						<entry key="D01200" value="D01200 -单位定期存款" />
+						<entry key="D01300" value="D01300 -活期储蓄存款" />
+						<entry key="D01400" value="D01400 -定期储蓄存款" />
+						<entry key="D01410" value="D01410 -整存整取储蓄存款" />
+						<entry key="D01420" value="D01420 -零存整取储蓄存款" />
+						<entry key="D01430" value="D01430 -存本取息储蓄存款" />
+						<entry key="D01440" value="D01440 -教育储蓄存款" />
+						<entry key="D01450" value="D01450 -整存零取储蓄存款" />
+						<entry key="D02000" value="D02000 -定活两便存款" />
+						<entry key="D03000" value="D03000 -通知存款" />
+						<entry key="D04000" value="D04000 -协议存款" />
+						<entry key="D05000" value="D05000 -协定存款" />
+						<entry key="D05100" value="D05100 -结算户存款" />
+						<entry key="D05200" value="D05200 -协定户存款" />
+						<entry key="D06000" value="D06000 -保证金存款" />
+						<entry key="D06100" value="D06100 -信用证保证金存款" />
+						<entry key="D06200" value="D06200 -保函保证金存款" />
+						<entry key="D06300" value="D06300 -银行承兑汇票保证金" />
+						<entry key="D06400" value="D06400 -银行本票保证金存款" />
+						<entry key="D06500" value="D06500 -信用卡保证金存款" />
+						<entry key="D06600" value="D06600 -衍生金融产品交易保证金存款" />
+						<entry key="D06700" value="D06700 -黄金交易保证金存款" />
+						<entry key="D06800" value="D06800 -证券交易保证金" />
+						<entry key="D06900" value="D06900 -其他保证金存款" />
+						<entry key="D07000" value="D07000 -应解汇款及临时存款" />
+						<entry key="D08000" value="D08000 -结构性存款" />
+						<entry key="D09000" value="D09000 -信用卡存款" />
+						<entry key="D09100" value="D09100 -贷记卡存款" />
+						<entry key="D09200" value="D09200 -准贷记卡存款" />
+						<entry key="D10000" value="D10000 -财政性存款" />
+						<entry key="D10100" value="D10100 -国库存款" />
+						<entry key="D10110" value="D10110 -财政库款" />
+						<entry key="D10120" value="D10120 -财政过渡存款" />
+						<entry key="D10200" value="D10200 -其他财政存款" />
+						<entry key="D10210" value="D10210 -划缴财政存款" />
+						<entry key="D10220" value="D10220 -待结算财政款项" />
+						<entry key="D10230" value="D10230 -财政专用基金存款" />
+						<entry key="D10240" value="D10240 -国库定期存款" />
+						<entry key="D11000" value="D11000 -第三方存管存款" />
+						<entry key="D12000" value="D12000 -准备金存款" />
+						<entry key="D13000" value="D13000 -存放" />
+						<entry key="D14000" value="D14000 -特种存款" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="F01000" value="F01000 -再贷款" />
+						<entry key="F02000" value="F02000 -普通贷款" />
+						<entry key="F02100" value="F02100 -消费贷款" />
+						<entry key="F02110" value="F02110 -个人住房贷款" />
+						<entry key="F02120" value="F02120 -个人汽车消费贷款" />
+						<entry key="F02130" value="F02130 -助学贷款" />
+						<entry key="F02131" value="F02131 -国家助学贷款" />
+						<entry key="F02132" value="F02132 -一般商业性助学贷款" />
+						<entry key="F02190" value="F02190 -其他消费贷款" />
+						<entry key="F02200" value="F02200 -经营贷款" />
+						<entry key="F02300" value="F02300 -固定资产贷款" />
+						<entry key="F03000" value="F03000 -拆解" />
+						<entry key="F04000" value="F04000 -透支" />
+						<entry key="F04100" value="F04100 -账户透支" />
+						<entry key="F04200" value="F04200 -贷记卡透支" />
+						<entry key="F04300" value="F04300 -准贷记卡透支" />
+						<entry key="F05000" value="F05000 -垫款" />
+						<entry key="F05100" value="F05100 -承兑垫款" />
+						<entry key="F05200" value="F05200 -担保垫款" />
+						<entry key="F05300" value="F05300 -信用证垫款" />
+						<entry key="F05400" value="F05400 -其他垫款" />
+						<entry key="F06000" value="F06000 -回购/返售" />
+						<entry key="F06100" value="F06100 -债券回购/返售" />
+						<entry key="F06200" value="F06200 -票据回购/返售" />
+						<entry key="F06300" value="F06300 -贷款回购/返售" />
+						<entry key="F06400" value="F06400 -股票及其他股权回购/返售" />
+						<entry key="F06500" value="F06500 -黄金回购/返售" />
+						<entry key="F07000" value="F07000 -黄金、证券借贷" />
+						<entry key="F07100" value="F07100 -债券借贷" />
+						<entry key="F07200" value="F07200 -票据借贷" />
+						<entry key="F07300" value="F07300 -股票及其他股权借贷" />
+						<entry key="F07400" value="F07400 -黄金借贷" />
+						<entry key="F07500" value="F07500 -其他资产借贷" />
+						<entry key="F08000" value="F08000 -贸易融资" />
+						<entry key="F08100" value="F08100 -国际贸易融资" />
+						<entry key="F08200" value="F06400 -国内贸易融资" />
+						<entry key="F09000" value="F09000 -融资租赁" />
+						<entry key="F10000" value="F10000 -打包信贷受让资产" />
+						<entry key="F11000" value="F11000 -转贷款" />
+						<entry key="F12000" value="F12000 -并购贷款" />
+						<entry key="F99000" value="F99000 -其他贷款" />
+						<entry key="D01000" value="D01000 -普通存款" />
+						<entry key="D01100" value="D01100 -单位活期存款" />
+						<entry key="D01200" value="D01200 -单位定期存款" />
+						<entry key="D01300" value="D01300 -活期储蓄存款" />
+						<entry key="D01400" value="D01400 -定期储蓄存款" />
+						<entry key="D01410" value="D01410 -整存整取储蓄存款" />
+						<entry key="D01420" value="D01420 -零存整取储蓄存款" />
+						<entry key="D01430" value="D01430 -存本取息储蓄存款" />
+						<entry key="D01440" value="D01440 -教育储蓄存款" />
+						<entry key="D01450" value="D01450 -整存零取储蓄存款" />
+						<entry key="D02000" value="D02000 -定活两便存款" />
+						<entry key="D03000" value="D03000 -通知存款" />
+						<entry key="D04000" value="D04000 -协议存款" />
+						<entry key="D05000" value="D05000 -协定存款" />
+						<entry key="D05100" value="D05100 -结算户存款" />
+						<entry key="D05200" value="D05200 -协定户存款" />
+						<entry key="D06000" value="D06000 -保证金存款" />
+						<entry key="D06100" value="D06100 -信用证保证金存款" />
+						<entry key="D06200" value="D06200 -保函保证金存款" />
+						<entry key="D06300" value="D06300 -银行承兑汇票保证金" />
+						<entry key="D06400" value="D06400 -银行本票保证金存款" />
+						<entry key="D06500" value="D06500 -信用卡保证金存款" />
+						<entry key="D06600" value="D06600 -衍生金融产品交易保证金存款" />
+						<entry key="D06700" value="D06700 -黄金交易保证金存款" />
+						<entry key="D06800" value="D06800 -证券交易保证金" />
+						<entry key="D06900" value="D06900 -其他保证金存款" />
+						<entry key="D07000" value="D07000 -应解汇款及临时存款" />
+						<entry key="D08000" value="D08000 -结构性存款" />
+						<entry key="D09000" value="D09000 -信用卡存款" />
+						<entry key="D09100" value="D09100 -贷记卡存款" />
+						<entry key="D09200" value="D09200 -准贷记卡存款" />
+						<entry key="D10000" value="D10000 -财政性存款" />
+						<entry key="D10100" value="D10100 -国库存款" />
+						<entry key="D10110" value="D10110 -财政库款" />
+						<entry key="D10120" value="D10120 -财政过渡存款" />
+						<entry key="D10200" value="D10200 -其他财政存款" />
+						<entry key="D10210" value="D10210 -划缴财政存款" />
+						<entry key="D10220" value="D10220 -待结算财政款项" />
+						<entry key="D10230" value="D10230 -财政专用基金存款" />
+						<entry key="D10240" value="D10240 -国库定期存款" />
+						<entry key="D11000" value="D11000 -第三方存管存款" />
+						<entry key="D12000" value="D12000 -准备金存款" />
+						<entry key="D13000" value="D13000 -存放" />
+						<entry key="D14000" value="D14000 -特种存款" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 贷款实际投向 -->
+	<bean id="DP_0006"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="A011" value="A011-谷物种植" />
+						<entry key="A012" value="A012-豆类、油料和薯类种植" />
+						<entry key="T960" value="T960-国际组织" />
+						<entry key="1000" value="1000-个人贷款" />
+						<entry key="2000" value="2000-境外贷款" />
+						<entry key="821" value="821-学前教育" />
+						<entry key="100" value="100-境内个人" />
+						<entry key="C01" value="C01-联保贷款" />
+						<entry key="C99" value="C99-其他保证贷款" />
+						<entry key="D" value="D-信用/免担保贷款" />
+						<entry key="E" value="E-组合担保" />
+						<entry key="Z" value="Z-其他" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="A011" value="A011-谷物种植" />
+						<entry key="A012" value="A012-豆类、油料和薯类种植" />
+						<entry key="T960" value="T960-国际组织" />
+						<entry key="1000" value="1000-个人贷款" />
+						<entry key="2000" value="2000-境外贷款" />
+						<entry key="821" value="821-学前教育" />
+						<entry key="100" value="100-境内个人" />
+						<entry key="C01" value="C01-联保贷款" />
+						<entry key="C99" value="C99-其他保证贷款" />
+						<entry key="D" value="D-信用/免担保贷款" />
+						<entry key="E" value="E-组合担保" />
+						<entry key="Z" value="Z-其他" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 贷款担保方式 -->
+	<bean id="DP_0007"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="A" value="A-质押贷款" />
+						<entry key="B" value="B-抵押贷款" />
+						<entry key="B99" value="B99-房地产抵押贷款" />
+						<entry key="CS01" value="CS01-其他抵押贷款" />
+						<entry key="C" value="C-保证贷款" />
+						<entry key="C01" value="C01-联保贷款" />
+						<entry key="C99" value="C99-其他保证贷款" />
+						<entry key="D" value="D-信用/免担保贷款" />
+						<entry key="E" value="E-组合担保" />
+						<entry key="Z" value="Z-其他" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="A" value="A-质押贷款" />
+						<entry key="B" value="B-抵押贷款" />
+						<entry key="B99" value="B99-房地产抵押贷款" />
+						<entry key="CS01" value="CS01-其他抵押贷款" />
+						<entry key="C" value="C-保证贷款" />
+						<entry key="C01" value="C01-联保贷款" />
+						<entry key="C99" value="C99-其他保证贷款" />
+						<entry key="D" value="D-信用/免担保贷款" />
+						<entry key="E" value="E-组合担保" />
+						<entry key="Z" value="Z-其他" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 利率是否固定 -->
+	<bean id="DP_0008"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="RF01" value="RF01-固定利率" />
+						<entry key="RF02" value="RF02-浮动利率" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="RF01" value="RF01-固定利率" />
+						<entry key="RF02" value="RF02-浮动利率" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 贷款质量 -->
+	<bean id="DP_0009"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="QL01" value="QL01-正常类贷款" />
+						<entry key="QL02" value="QL02-关注类贷款" />
+						<entry key="QL03" value="QL03-次级类贷款" />
+						<entry key="QL04" value="QL04-可疑类贷款" />
+						<entry key="QL05" value="QL05-损失类贷款" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="QL01" value="QL01-正常类贷款" />
+						<entry key="QL02" value="QL02-关注类贷款" />
+						<entry key="QL03" value="QL03-次级类贷款" />
+						<entry key="QL04" value="QL04-可疑类贷款" />
+						<entry key="QL05" value="QL05-损失类贷款" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 贷款发放收回标志 -->
+	<bean id="DP_0010"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-发放" />
+						<entry key="0" value="0-回收" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-发放" />
+						<entry key="0" value="0-回收" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 上报数据类型标志 -->
+	<bean id="DP_0011"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-贷款发生额" />
+						<entry key="2" value="2-贷款余额" />
+						<entry key="3" value="3-存款余额" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-贷款发生额" />
+						<entry key="2" value="2-贷款余额" />
+						<entry key="3" value="3-存款余额" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 存款账户类型 -->
+	<bean id="DP_0012"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="A" value="A-个人结算账户" />
+						<entry key="B" value="B-个人储蓄账户" />
+						<entry key="C" value="C-基本存款账户" />
+						<entry key="D" value="D-一般存款账户" />
+						<entry key="E" value="E-专用存款账户" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="A" value="A-个人结算账户" />
+						<entry key="B" value="B-个人储蓄账户" />
+						<entry key="C" value="C-基本存款账户" />
+						<entry key="D" value="D-一般存款账户" />
+						<entry key="E" value="E-专用存款账户" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 个人证件类型 -->
+	<bean id="DP_0013"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-港澳通行证" />
+						<entry key="2" value="2-台胞证" />
+						<entry key="3" value="3-中国居民身份证" />
+						<entry key="4" value="4-护照" />
+						<entry key="5" value="5-其他" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-港澳通行证" />
+						<entry key="2" value="2-台胞证" />
+						<entry key="3" value="3-中国居民身份证" />
+						<entry key="4" value="4-护照" />
+						<entry key="5" value="5-其他" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 币种 -->
+	<bean id="DP_0014"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="CNY" value="CNY-人民币" />
+						<entry key="USD" value="USD-美元" />
+						<entry key="GBP" value="GBP-英镑" />
+						<entry key="HKD" value="HKD-香港元" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="CNY" value="CNY-人民币" />
+						<entry key="USD" value="USD-美元" />
+						<entry key="GBP" value="GBP-英镑" />
+						<entry key="HKD" value="HKD-香港元" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 币种 -->
+	<bean id="SYS_CURRENCY"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="SYS_CURRENCY_EN" />
+				<entry key="zh_CN" value-ref="SYS_CURRENCY_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="SYS_CURRENCY_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select CURR_CODE , CURR_NAME  from SYS_CURRENCY where CURR_LAN='zh_CN'" />
+		<property name="valueColumn" value="CURR_CODE" />
+		<property name="labelColumn" value="CURR_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="SYS_CURRENCY_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select CURR_CODE , CURR_NAME  from SYS_CURRENCY where CURR_LAN='en_US'" />
+		<property name="valueColumn" value="CURR_CODE" />
+		<property name="labelColumn" value="CURR_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!--客户分类 -->
+	<bean id="DP_0015"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-对私" />
+						<entry key="2" value="2-对公" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-对私" />
+						<entry key="2" value="2-对公" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 客户类型 -->
+	<bean id="DP_0016"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="0-单位客户" />
+						<entry key="1" value="1-个人客户" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-单位客户" />
+						<entry key="1" value="1-个人客户" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 贷款状态 -->
+	<bean id="DP_0017"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="FS01" value="FS01-正常" />
+						<entry key="FS04" value="FS04-核销" />
+						<entry key="FS05" value="FS05-剥离" />
+						<entry key="FS06" value="FS06-转让" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="FS01" value="FS01-正常" />
+						<entry key="FS04" value="FS04-核销" />
+						<entry key="FS05" value="FS05-剥离" />
+						<entry key="FS06" value="FS06-转让" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 贷款质量 -->
+	<bean id="DP_0018"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="FQ01" value="FQ01-正常类贷款" />
+						<entry key="FQ02" value="FQ02-关注类贷款" />
+						<entry key="FQ03" value="FQ03-次级类贷款" />
+						<entry key="FQ04" value="FQ04-可疑类贷款" />
+						<entry key="FQ05" value="FQ05-损失类贷款" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="FQ01" value="FQ01-正常类贷款" />
+						<entry key="FQ02" value="FQ02-关注类贷款" />
+						<entry key="FQ03" value="FQ03-次级类贷款" />
+						<entry key="FQ04" value="FQ04-可疑类贷款" />
+						<entry key="FQ05" value="FQ05-损失类贷款" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 数据来源 -->
+	<bean id="DP_0019"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="H" value="H-手工补录" />
+						<entry key="S" value="S-系统导入" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="H" value="H-手工补录" />
+						<entry key="S" value="S-系统导入" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量管理- 启用标志 -->
+	<bean id="BM_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="Y" value="Y-启用" />
+						<entry key="N" value="N-禁用" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="Y" value="Y-启用" />
+						<entry key="N" value="N-禁用" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量管理- 手动标志 -->
+	<bean id="BM_0004"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="Y" value="Y-自动" />
+						<entry key="N" value="N-自动-手动" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="Y" value="Y-自动" />
+						<entry key="N" value="N-自动-手动" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量管理- 跳过标志 -->
+	<bean id="BM_0005"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="Y" value="Y-跳过" />
+						<entry key="N" value="N-不跳过" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="Y" value="Y-跳过" />
+						<entry key="N" value="N-不跳过" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量管理- 任务类型 -->
+	<bean id="BM_0006"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="0-手动" />
+						<entry key="1" value="1-每日" />
+						<entry key="2" value="2-每周" />
+						<entry key="3" value="3-每月" />
+						<entry key="4" value="4-每季" />
+						<entry key="5" value="5-每年" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-手动" />
+						<entry key="1" value="1-每日" />
+						<entry key="2" value="2-每周" />
+						<entry key="3" value="3-每月" />
+						<entry key="4" value="4-每季" />
+						<entry key="5" value="5-每年" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!--批量管理- 任务类型 -->
+	<bean id="BM_0007"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="0-未开始" />
+						<entry key="2" value="2-运行中" />
+						<entry key="3" value="3-已完成" />
+						<entry key="4" value="4-跳过" />
+						<entry key="5" value="5-出错" />
+						<entry key="6" value="6-已修复" />
+						<entry key="7" value="7-已停止" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-未开始" />
+						<entry key="2" value="2-运行中" />
+						<entry key="3" value="3-已完成" />
+						<entry key="4" value="4-跳过" />
+						<entry key="5" value="5-出错" />
+						<entry key="6" value="6-已修复" />
+						<entry key="7" value="7-已停止" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 数据抽取配置-处理类型 -->
+	<bean id="DE_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-SP" />
+						<entry key="2" value="2-SQL" />
+						<entry key="3" value="3-CFG" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-SP" />
+						<entry key="2" value="2-SQL" />
+						<entry key="3" value="3-CFG" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 警报设置-警报类型 -->
+	<bean id="AL_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="01" value="01-文件延迟到达" />
+						<entry key="02" value="02-文件导入出错" />
+						<entry key="03" value="03-数据映射失败" />
+						<entry key="04" value="04-有未补录交易" />
+						<entry key="05" value="05-有未审核交易" />
+						<entry key="06" value="06-报表未按时生成" />
+						<entry key="07" value="07-报表生成失败 " />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="01" value="01-文件延迟到达" />
+						<entry key="02" value="02-文件导入出错" />
+						<entry key="03" value="03-数据映射失败" />
+						<entry key="04" value="04-有未补录交易" />
+						<entry key="05" value="05-有未审核交易" />
+						<entry key="06" value="06-报表未按时生成" />
+						<entry key="07" value="07-报表生成失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 警报设置-通知方式 -->
+	<bean id="AL_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-Email" />
+						<entry key="2" value="2-SMS" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-Email" />
+						<entry key="2" value="2-SMS" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- 导入异常-错误类型 -->
+	<bean id="EP_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-成功" />
+						<entry key="2" value="2-失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-成功" />
+						<entry key="2" value="2-失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="IFC_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="0-非必需" />
+						<entry key="1" value="1-必需" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-非必需" />
+						<entry key="1" value="1-必需" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="IFC_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-TXT固定长度" />
+						<entry key="2" value="2-TXT字符分割" />
+						<entry key="3" value="3-CSV" />
+						<entry key="4" value="4-EXCEL" />
+						<entry key="5" value="5-XML" />
+						<entry key="6" value="6-DBF" />
+						<entry key="7" value="7-DMP" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-TXT固定长度" />
+						<entry key="2" value="2-TXT字符分割" />
+						<entry key="3" value="3-CSV" />
+						<entry key="4" value="4-EXCEL" />
+						<entry key="5" value="5-XML" />
+						<entry key="6" value="6-DBF" />
+						<entry key="7" value="7-DMP" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="IFC_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-存在时更新,不存在时插入" />
+						<entry key="2" value="2-只插入" />
+						<entry key="3" value="3-只更新" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-存在时更新,不存在时插入" />
+						<entry key="2" value="2-只插入" />
+						<entry key="3" value="3-只更新" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="EFC_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-TXT固定长度" />
+						<entry key="2" value="2-TXT字符分割" />
+						<entry key="3" value="3-CSV" />
+						<entry key="4" value="4-EXCEL" />
+						<entry key="5" value="5-XML" />
+						<entry key="6" value="6-DBF" />
+						<entry key="7" value="7-DMP" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-TXT固定长度" />
+						<entry key="2" value="2-TXT字符分割" />
+						<entry key="3" value="3-CSV" />
+						<entry key="4" value="4-EXCEL" />
+						<entry key="5" value="5-XML" />
+						<entry key="6" value="6-DBF" />
+						<entry key="7" value="7-DMP" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="EFC_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="0-无" />
+						<entry key="1" value="1-有" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="0-无" />
+						<entry key="1" value="1-有" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="IFDC_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="1" value="1-数字" />
+						<entry key="2" value="2-字符" />
+						<entry key="3" value="3-金额" />
+						<entry key="4" value="4-日期" />
+						<entry key="5" value="5-时间" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="1" value="1-数字" />
+						<entry key="2" value="2-字符" />
+						<entry key="3" value="3-金额" />
+						<entry key="4" value="4-日期" />
+						<entry key="5" value="5-时间" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="IFDC_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="1" value="1-覆盖" />
+						<entry key="2" value="2-累加" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="1" value="1-覆盖" />
+						<entry key="2" value="2-累加" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="IFDC_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="0" value="0-否" />
+						<entry key="1" value="1-是" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="0" value="0-否" />
+						<entry key="1" value="1-是" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="IFDC_0004"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="0" value="0-否" />
+						<entry key="1" value="1-是" />
+						<entry key="2" value="2-只插入不更新" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="-1" value="" />
+						<entry key="0" value="0-否" />
+						<entry key="1" value="1-是" />
+						<entry key="2" value="2-只插入不更新" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="RP_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-未上报" />
+						<entry key="2" value="2-已上报" />
+						<entry key="3" value="3-已反馈" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-未上报" />
+						<entry key="2" value="2-已上报" />
+						<entry key="3" value="3-已反馈" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="RP_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-全部成功" />
+						<entry key="2" value="2-部分成功" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-全部成功" />
+						<entry key="2" value="2-部分成功" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="RP_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-未纠错" />
+						<entry key="2" value="2-纠错中" />
+						<entry key="3" value="3-已纠错" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-未纠错" />
+						<entry key="2" value="2-纠错中" />
+						<entry key="3" value="3-已纠错" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="RP_0004"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="LOAF" value="LOAF-贷款发生额" />
+						<entry key="LOAB" value="LOAB-贷款余额报文" />
+						<entry key="DEP" value="DEPB-存款余额报文" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="LOAF" value="LOAF-贷款发生额" />
+						<entry key="LOAB" value="LOAB-贷款余额报文" />
+						<entry key="DEPB" value="DEPB-存款余额报文" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="Com_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="N" value="NULL" />
+						<entry key="Y" value="NOT NULL" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="N" value="NULL" />
+						<entry key="Y" value="NOT NULL" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="SM_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-成功" />
+						<entry key="2" value="2-失败" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-成功" />
+						<entry key="2" value="2-失败" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DE_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="1" value="1-SP" />
+						<entry key="2" value="2-SQL" />
+						<entry key="3" value="3-CFG" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="1" value="1-SP" />
+						<entry key="2" value="2-SQL" />
+						<entry key="3" value="3-CFG" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BM_0013"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="BM_0013_EN" />
+				<entry key="zh_CN" value-ref="BM_0013_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BM_0013_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='00001' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="BM_0013_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='00001' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!--数据转换- 处理类型 -->
+	<bean id="DP_0020"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_0020_EN" />
+				<entry key="zh_CN" value-ref="DP_0020_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0020_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0020' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="DP_0020_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0020' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!--数据转换- 工程号 -->
+	<bean id="DP_0021"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_0021_EN" />
+				<entry key="zh_CN" value-ref="DP_0021_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0021_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0021' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="DP_0021_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0021' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!--数据转换- 重复处理类型 -->
+	<bean id="DP_0022"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_0022_EN" />
+				<entry key="zh_CN" value-ref="DP_0022_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0022_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0022' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="DP_0022_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0022' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!--数据转换- 错误处理类型 -->
+	<bean id="DP_0023"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_0023_EN" />
+				<entry key="zh_CN" value-ref="DP_0023_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0023_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0023' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="DP_0023_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0023' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!--数据转换- 目标字段唯一键标志 -->
+	<bean id="DP_0024"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_0024_EN" />
+				<entry key="zh_CN" value-ref="DP_0024_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0024_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0024' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="DP_0024_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0024' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!--数据转换- 字段重复处理类型 -->
+	<bean id="DP_0025"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_0025_EN" />
+				<entry key="zh_CN" value-ref="DP_0025_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0025_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0025' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="DP_0025_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0025' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="BM_1001" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select trim(ORGID) , ORGNAME  from SYS_ORG_INF" />
+		<property name="valueColumn" value="trim(ORGID)" />
+		<property name="labelColumn" value="ORGNAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!--数据字典-数据字典语言 -->
+	<bean id="BM_DICT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="BM_DICT_EN" />
+				<entry key="zh_CN" value-ref="BM_DICT_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BM_1002" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select FUNC_ID , FUNC_DESC  from SYS_FUNC_INFO" />
+		<property name="valueColumn" value="FUNC_ID" />
+		<property name="labelColumn" value="FUNC_DESC" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<bean id="BM_DICT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BM_DICT' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<bean id="BM_1003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="BM_1003_EN" />
+				<entry key="zh_CN" value-ref="BM_1003_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BM_1003_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BM_1003' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<bean id="BM_1003_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BM_1003' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<bean id="BM_DICT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BM_DICT' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!-- ====================== yyw ====================== -->
+	<!-- 文件定义维护 - 文件类型（1-TXT固定长度，2-TXT字符分割，3-CSV，4-EXCEL，5-DBF） -->
+	<bean id="DP_FILE_FILETYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_FILE_FILETYPE_EN" />
+				<entry key="zh_CN" value-ref="DP_FILE_FILETYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="DP_FILE_FILETYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_VAL||'-'||META_NAME META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_FILETYPE' AND META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="DP_FILE_FILETYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_VAL||'-'||META_NAME META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_FILETYPE' AND META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 文件定义维护 - 导入/出标志（1-导入，2-导出） -->
+	<bean id="DP_FILE_IOFLAG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_FILE_IOFLAG_EN" />
+				<entry key="zh_CN" value-ref="DP_FILE_IOFLAG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="DP_FILE_IOFLAG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_VAL||'-'||META_NAME META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_IOFLAG' AND META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="DP_FILE_IOFLAG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_VAL||'-'||META_NAME META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_IOFLAG' AND META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 文件定义维护 - 超长截取标志（0-不截取，1-截取） -->
+	<bean id="DP_FILE_CUTFLAG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_FILE_CUTFLAG_EN" />
+				<entry key="zh_CN" value-ref="DP_FILE_CUTFLAG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="DP_FILE_CUTFLAG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_VAL||'-'||META_NAME META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_CUTFLAG' AND META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="DP_FILE_CUTFLAG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_VAL||'-'||META_NAME META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_CUTFLAG' AND META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 数据导入映射配置 - 文件是否必须（0-非必需，1-必需(文件不存在,不进行导入)） -->
+	<bean id="DP_FILE_MANDFLAG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_FILE_MANDFLAG_EN" />
+				<entry key="zh_CN" value-ref="DP_FILE_MANDFLAG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="DP_FILE_MANDFLAG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_MANDFLAG' AND META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}" />
+	</bean>
+	<bean id="DP_FILE_MANDFLAG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="SELECT META_VAL, META_NAME FROM SYS_DATA_DICT WHERE GROUP_CODE='DP_FILE_MANDFLAG' AND META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}" />
+	</bean>
+
+
+	<!--数据转换- 字段标题标志 -->
+	<bean id="DP_0026"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="DP_0026_EN" />
+				<entry key="zh_CN" value-ref="DP_0026_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="DP_0026_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0026' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="DP_0026_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='DP_0026' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+	<!--机构- 机构id与机构名称 -->
+	<bean id="SM_0002" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select trim(ORGID) , trim(ORGID) ||'-'||ORGNAME as ORGNAME  from SYS_ORG_INF " />
+		<property name="valueColumn" value="trim(ORGID)" />
+		<property name="labelColumn" value="ORGNAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+	<!--语言选择 -->
+	<bean id="LanguageChoose"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="LanguageChoose_EN" />
+				<entry key="zh_CN" value-ref="LanguageChoose_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="LanguageChoose_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='LanguageChoose' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="LanguageChoose_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='LanguageChoose' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<!--批量任务管理-批量任务类型 -->
+	<bean id="BMG_TASK_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="BMG_TASK_TYPE_EN" />
+				<entry key="zh_CN" value-ref="BMG_TASK_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BMG_TASK_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_TASK_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="BMG_TASK_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_TASK_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!--批量任务管理-批量步骤类型 -->
+	<bean id="BMG_STEP_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="BMG_STEP_TYPE_EN" />
+				<entry key="zh_CN" value-ref="BMG_STEP_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BMG_STEP_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_STEP_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="BMG_STEP_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_STEP_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!--批量任务管理-批量标志 -->
+	<bean id="BMG_FLAG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="BMG_FLAG_EN" />
+				<entry key="zh_CN" value-ref="BMG_FLAG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BMG_FLAG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_FLAG' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="BMG_FLAG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_FLAG' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!--批量任务管理-批量标志 -->
+	<bean id="BMG_CFG_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="BMG_CFG_TYPE_EN" />
+				<entry key="zh_CN" value-ref="BMG_CFG_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BMG_CFG_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_CFG_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="BMG_CFG_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='BMG_CFG_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!--批量任务管理-维度类型 -->
+	<bean id="BMG_DIM_Type" class="org.terasoluna.fw.common.codelist.JdbcCodeList">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select DIM_TYPE_ID from BAT_DIM_INFO GROUP BY DIM_TYPE_ID" />
+		<property name="valueColumn" value="DIM_TYPE_ID" />
+		<property name="labelColumn" value="DIM_TYPE_ID" />
+		<property name="cacheMillis" value="#{3600 * 1 * 1000}"></property>
+	</bean>
+	<bean id="BQ_0001" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select trim(SHEET_NO) ,SHEET_NO  from EXP_SHEET_INFO " />
+		<property name="valueColumn" value="trim(SHEET_NO)" />
+		<property name="labelColumn" value="SHEET_NO" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+
+	</bean>
+
+	<bean id="BQ_0002"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="0" value="1-第一批次" />
+						<entry key="1" value="2-第二批次" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="0" value="1-第一批次" />
+						<entry key="1" value="2-第二批次" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<bean id="BQ_0003"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="CITY" value="CITY-市" />
+						<entry key="PROV" value="PROV-省" />
+						<entry key="NATI" value="NATI-全国" />
+						<entry key="OFFS" value="OFFS-境外" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="CITY" value="CITY-市" />
+						<entry key="PROV" value="PROV-省" />
+						<entry key="NATI" value="NATI-全国" />
+						<entry key="OFFS" value="OFFS-境外" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+	<!-- FTZ数据字典begin -->
+
+	<!-- 客户类型 -->
+	<bean id="FTZ_CUSTOM_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_CUSTOM_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_CUSTOM_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_CUSTOM_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_CUSTOM_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_CUSTOM_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_CUSTOM_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 还本付息方式 -->
+	<bean id="FTZ_DEBT_SERVICE_MODE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_DEBT_SERVICE_MODE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_DEBT_SERVICE_MODE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_DEBT_SERVICE_MODE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DEBT_SERVICE_MODE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_DEBT_SERVICE_MODE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DEBT_SERVICE_MODE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 利率类型 -->
+	<bean id="FTZ_INTEREST_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_INTEREST_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_INTEREST_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_INTEREST_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_INTEREST_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_INTEREST_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_INTEREST_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 外向证券投资持仓投资人类型 -->
+	<bean id="FTZ_OUTWARD_INVESTOR_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_OUTWARD_INVESTOR_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_OUTWARD_INVESTOR_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_OUTWARD_INVESTOR_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_OUTWARD_INVESTOR_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_OUTWARD_INVESTOR_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_OUTWARD_INVESTOR_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_BALANCE_INDEX_CODE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_BALANCE_INDEX_CODE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_BALANCE_INDEX_CODE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_BALANCE_INDEX_CODE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BALANCE_INDEX_CODE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_BALANCE_INDEX_CODE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BALANCE_INDEX_CODE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 经济类型 -->
+	<bean id="FTZ_ECONOMIC_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_ECONOMIC_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_ECONOMIC_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_ECONOMIC_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ECONOMIC_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_ECONOMIC_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ECONOMIC_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 融资（贷款）状态 -->
+	<bean id="FTZ_FINACING_LOAN_STATE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_FINACING_LOAN_STATE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_FINACING_LOAN_STATE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_FINACING_LOAN_STATE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FINACING_LOAN_STATE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_FINACING_LOAN_STATE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FINACING_LOAN_STATE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 融资（贷款）担保方式 -->
+	<bean id="FTZ_FINACING_LOAN_GUARANTEE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_FINACING_LOAN_GUARANTEE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_FINACING_LOAN_GUARANTEE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_FINACING_LOAN_GUARANTEE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FINACING_LOAN_GUARANTEE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_FINACING_LOAN_GUARANTEE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FINACING_LOAN_GUARANTEE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 行业属性 -->
+	<bean id="FTZ_INDUSTRY_ATTRIBUTE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_INDUSTRY_ATTRIBUTE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_INDUSTRY_ATTRIBUTE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_INDUSTRY_ATTRIBUTE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_INDUSTRY_ATTRIBUTE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_INDUSTRY_ATTRIBUTE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_INDUSTRY_ATTRIBUTE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 非居民个人国民经济部门分类 -->
+	<bean id="FTZ_RESIDENT_DEPT_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_RESIDENT_DEPT_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_RESIDENT_DEPT_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_RESIDENT_DEPT_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_RESIDENT_DEPT_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_RESIDENT_DEPT_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_RESIDENT_DEPT_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 期限单位 -->
+	<bean id="FTZ_TERM_UNIT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_TERM_UNIT_EN" />
+				<entry key="zh_CN" value-ref="FTZ_TERM_UNIT_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_TERM_UNIT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TERM_UNIT' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_TERM_UNIT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TERM_UNIT' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 贷款类别 -->
+	<bean id="FTZ_LOAN_TYP"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_LOAN_TYP_EN" />
+				<entry key="zh_CN" value-ref="FTZ_LOAN_TYP_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_LOAN_TYP_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_LOAN_TYP' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_LOAN_TYP_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_LOAN_TYP' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 交易市场 -->
+	<bean id="FTZ_MARKET"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_MARKET_EN" />
+				<entry key="zh_CN" value-ref="FTZ_MARKET_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_MARKET_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MARKET' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_MARKET_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MARKET' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 非居民机构账户国民经济部门分类 -->
+	<bean id="FTZ_NON_RESIDENT_DEPT_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_NON_RESIDENT_DEPT_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_NON_RESIDENT_DEPT_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_NON_RESIDENT_DEPT_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_NON_RESIDENT_DEPT_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_NON_RESIDENT_DEPT_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_NON_RESIDENT_DEPT_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 利率期限单位 -->
+	<bean id="FTZ_RATE_TERM_UNIT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_RATE_TERM_UNIT_EN" />
+				<entry key="zh_CN" value-ref="FTZ_RATE_TERM_UNIT_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_RATE_TERM_UNIT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_RATE_TERM_UNIT' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_RATE_TERM_UNIT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_RATE_TERM_UNIT' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 期限条件 -->
+	<bean id="FTZ_TERM_CONDITION"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_TERM_CONDITION_EN" />
+				<entry key="zh_CN" value-ref="FTZ_TERM_CONDITION_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_TERM_CONDITION_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TERM_CONDITION' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_TERM_CONDITION_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TERM_CONDITION' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 反担保方式 -->
+	<bean id="FTZ_COUNTER_GUARANTEE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_COUNTER_GUARANTEE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_COUNTER_GUARANTEE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_COUNTER_GUARANTEE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_COUNTER_GUARANTEE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_COUNTER_GUARANTEE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_COUNTER_GUARANTEE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 资金划转类型 -->
+	<bean id="FTZ_FUND_TRANSFER_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_FUND_TRANSFER_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_FUND_TRANSFER_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_FUND_TRANSFER_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FUND_TRANSFER_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_FUND_TRANSFER_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FUND_TRANSFER_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 股票发行种类 -->
+	<bean id="FTZ_ISSUANCE_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_ISSUANCE_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_ISSUANCE_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_ISSUANCE_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ISSUANCE_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_ISSUANCE_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ISSUANCE_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 取现标识 -->
+	<bean id="FTZ_CASH_WITHDRAWAL_FLAG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_CASH_WITHDRAWAL_FLAG_EN" />
+				<entry key="zh_CN" value-ref="FTZ_CASH_WITHDRAWAL_FLAG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_CASH_WITHDRAWAL_FLAG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_CASH_WITHDRAWAL_FLAG' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_CASH_WITHDRAWAL_FLAG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_CASH_WITHDRAWAL_FLAG' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 出/入账标志 -->
+	<bean id="FTZ_CD_FLAG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_CD_FLAG_EN" />
+				<entry key="zh_CN" value-ref="FTZ_CD_FLAG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_CD_FLAG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_CD_FLAG' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_CD_FLAG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_CD_FLAG' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 融资类型 -->
+	<bean id="FTZ_FINACING_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_FINACING_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_FINACING_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_FINACING_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FINACING_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_FINACING_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FINACING_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 内向证券投资持仓投资人类型 -->
+	<bean id="FTZ_INWARD_INVESTOR_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_INWARD_INVESTOR_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_INWARD_INVESTOR_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_INWARD_INVESTOR_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_INWARD_INVESTOR_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_INWARD_INVESTOR_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_INWARD_INVESTOR_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 证券类型 -->
+	<bean id="FTZ_SECURITIES_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_SECURITIES_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_SECURITIES_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_SECURITIES_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_SECURITIES_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_SECURITIES_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_SECURITIES_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 账户状态 -->
+	<bean id="FTZ_ACC_STATUS"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_ACC_STATUS_EN" />
+				<entry key="zh_CN" value-ref="FTZ_ACC_STATUS_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_ACC_STATUS_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ACC_STATUS' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_ACC_STATUS_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ACC_STATUS' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 国民经济部门分类 -->
+	<bean id="FTZ_DEPT_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_DEPT_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_DEPT_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_DEPT_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DEPT_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_DEPT_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DEPT_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 外汇买卖类型 -->
+	<bean id="FTZ_EXCHANGE_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_EXCHANGE_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_EXCHANGE_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_EXCHANGE_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_EXCHANGE_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_EXCHANGE_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_EXCHANGE_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 外来投资专户国民经济部门分类 -->
+	<bean id="FTZ_FOREIGN_DEPT_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_FOREIGN_DEPT_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_FOREIGN_DEPT_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_FOREIGN_DEPT_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FOREIGN_DEPT_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_FOREIGN_DEPT_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_FOREIGN_DEPT_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 类别 -->
+	<bean id="FTZ_ACC_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_ACC_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_ACC_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_ACC_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ACC_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_ACC_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ACC_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 证件类型 -->
+	<bean id="FTZ_DOCUMENT_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_DOCUMENT_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_DOCUMENT_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_DOCUMENT_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DOCUMENT_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_DOCUMENT_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DOCUMENT_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 担保方向 -->
+	<bean id="FTZ_GUARANTEE DIRECTION"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_GUARANTEE DIRECTION_EN" />
+				<entry key="zh_CN" value-ref="FTZ_GUARANTEE DIRECTION_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_GUARANTEE DIRECTION_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_GUARANTEE DIRECTION' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_GUARANTEE DIRECTION_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_GUARANTEE DIRECTION' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 保函类型 -->
+	<bean id="FTZ_LG_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_LG_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_LG_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_LG_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_LG_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_LG_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_LG_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_MSG_STATUS"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_MSG_STATUS_EN" />
+				<entry key="zh_CN" value-ref="FTZ_MSG_STATUS_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_MSG_STATUS_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_MSG_STATUS_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 批量状态(录入查询条件) -->
+	<bean id="FTZ_MSG_STATUS_INPUT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_MSG_STATUS_INPUT_ZH" />
+				<entry key="zh_CN" value-ref="FTZ_MSG_STATUS_INPUT_EN" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_MSG_STATUS_INPUT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='zh_CN' and META_VAL in ('01','02','04')" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_MSG_STATUS_INPUT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='en_US' and META_VAL in ('01','02','04')" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 处理结果 -->
+	<bean id="FTZ_PROC_RESULT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_PROC_RESULT_EN" />
+				<entry key="zh_CN" value-ref="FTZ_PROC_RESULT_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_PROC_RESULT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_PROC_RESULT' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_PROC_RESULT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_PROC_RESULT' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 利率重新定价期限 -->
+	<bean id="FTZ_REPRICING_PERIOD"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_REPRICING_PERIOD_EN" />
+				<entry key="zh_CN" value-ref="FTZ_REPRICING_PERIOD_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_REPRICING_PERIOD_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_REPRICING_PERIOD' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_REPRICING_PERIOD_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_REPRICING_PERIOD' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 外汇买卖工具类型 -->
+	<bean id="FTZ_TOOL_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_TOOL_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_TOOL_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_TOOL_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TOOL_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_TOOL_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TOOL_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 定价基准 -->
+	<bean id="FTZ_BENCHMARK"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_BENCHMARK_EN" />
+				<entry key="zh_CN" value-ref="FTZ_BENCHMARK_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_BENCHMARK_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BENCHMARK' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_BENCHMARK_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BENCHMARK' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 债券种类 -->
+	<bean id="FTZ_BOND_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_BOND_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_BOND_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_BOND_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BOND_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_BOND_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BOND_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 操作类型 -->
+	<bean id="FTZ_OPER_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_OPER_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_OPER_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_OPER_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_OPER_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_OPER_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_OPER_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 回购期限单位 -->
+	<bean id="FTZ_REBUY_TERM_UNIT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_REBUY_TERM_UNIT_EN" />
+				<entry key="zh_CN" value-ref="FTZ_REBUY_TERM_UNIT_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_REBUY_TERM_UNIT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_REBUY_TERM_UNIT' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_REBUY_TERM_UNIT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_REBUY_TERM_UNIT' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 交易性质 -->
+	<bean id="FTZ_TRAN_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_TRAN_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_TRAN_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_TRAN_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TRAN_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_TRAN_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TRAN_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+	<!-- 地区代码 -->
+	<bean id="FTZ_DISITRICT_CODE" class="org.terasoluna.fw.common.codelist.JdbcCodeList">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select REGION_INFO, REGION_NUM from SYS_REGION_INFO " />
+		<property name="valueColumn" value="REGION_NUM" />
+		<property name="labelColumn" value="REGION_INFO" />
+		<property name="cacheMillis" value="#{3600 * 1 * 1000}"></property>
+	</bean>
+	
+	<!-- 国别代码 -->
+	<bean id="FTZ_COUNTRY_CODE" class="org.terasoluna.fw.common.codelist.JdbcCodeList">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select NATION_CODE, NATION_NAME from SYS_NATION_INFO " />
+		<property name="valueColumn" value="NATION_CODE" />
+		<property name="labelColumn" value="NATION_NAME" />
+		<property name="cacheMillis" value="#{3600 * 1 * 1000}"></property>
+	</bean>
+
+<!-- 资产负债指标大类 -->
+	<bean id="FTZ_BLANCE_ONE_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_ACC_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_ACC_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_BLANCE_ONE_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BLANCE_ONE_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_BLANCE_ONE_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_BLANCE_ONE_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<!-- FTZ数据字典end -->
+
+
+	<bean id="aaa_0001"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rows">
+			<util:map>
+				<entry key="en_US">
+					<util:map>
+						<entry key="101010" value="一般贸易收入/支出" />
+						<entry key="101020" value="补偿贸易收入/支出" />
+						<entry key="101030" value="寄售代销贸易收入/支出" />
+					</util:map>
+				</entry>
+				<entry key="zh_CN">
+					<util:map>
+						<entry key="101010" value="一般贸易收入/支出" />
+						<entry key="101020" value="补偿贸易收入/支出" />
+						<entry key="101030" value="寄售代销贸易收入/支出" />
+					</util:map>
+				</entry>
+			</util:map>
+		</property>
+	</bean>
+
+
+	<!-- 表外类型 -->
+	<bean id="FTZ_OFF_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_OFF_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_OFF_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_OFF_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_OFF_MSG' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_OFF_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_OFF_MSG' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	
+	<!-- 资金来源 -->
+	<bean id="FTZ_2101_MSG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_2101_MSG_EN" />
+				<entry key="zh_CN" value-ref="FTZ_2101_MSG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_2101_MSG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_2101_MSG' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_2101_MSG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_2101_MSG' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	
+	<!-- 卖出资产类别  -->
+	<bean id="FTZ_ASSETS_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_ASSETS_TYPE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_ASSETS_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_ASSETS_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ASSETS_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_ASSETS_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_ASSETS_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	
+	<!-- 交易类型  -->
+	<bean id="FTZ_TRAN_GENRE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_TRAN_GENRE_EN" />
+				<entry key="zh_CN" value-ref="FTZ_TRAN_GENRE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_TRAN_GENRE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TRAN_GENRE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_TRAN_GENRE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_TRAN_GENRE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+
+		<!-- 资金运用 -->
+	<bean id="FTZ_2102_MSG"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_2102_MSG_EN" />
+				<entry key="zh_CN" value-ref="FTZ_2102_MSG_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_2102_MSG_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_2102_MSG' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_2102_MSG_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_2102_MSG' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	
+	
+</beans>
+
+

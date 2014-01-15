@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="org.springframework.data.web.PageableArgumentResolver">
+			</bean>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	
+	<bean id="validator" 
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+	        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>  
+	</bean>
+	
+	<bean class="com.synesoft.fisp.app.common.processor.UTF8StringBeanPostProcessor"></bean>
+	
+	<context:component-scan base-package="com.synesoft" />
+	<tx:annotation-driven />
+
+	<mvc:resources mapping="/resources/**"
+		location="/resources/,classpath:META-INF/resources/" cache-period="#{60 * 60}" />
+
+	<mvc:default-servlet-handler />
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="locale"></property>
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="org.terasoluna.fw.web.codelist.CodeListInterceptor">
+				<property name="codeListIdPattern" value=".+" />
+			</bean>
+		</mvc:interceptor>
+		
+		<!--    session拦截器    -->
+		<mvc:interceptor>  
+			<mvc:mapping path="/**" />  
+			<bean class="com.synesoft.fisp.app.common.interceptor.SessionTimeoutInterceptor" >  
+				<property name="allowUrls">    
+					<list>
+						<value>/</value>    
+					  	<value>/login</value>
+					  	<value>/sm/pwdChg/init</value>
+					  	<value>/sm/pwdChg/submit</value>
+					  	<value>/logout</value>
+					  	<value>.css</value>
+					  	<value>.js</value>
+					  	<value>.jpg</value>
+					  	<value>.gif</value>
+					  	<value>.png</value>
+					  	<value>.bmp</value>
+					  	<value>/language</value>
+					</list>    
+				</property>    
+			</bean>  
+		</mvc:interceptor>
+		
+		<!--    权限控制拦截器    -->
+		<mvc:interceptor>  
+			<mvc:mapping path="/**" />  
+			<bean class="com.synesoft.fisp.app.common.interceptor.AuthorityInterceptor" >  
+				<property name="allowUrls">    
+					<list>
+						<value>/</value>    
+					  	<value>/login</value>
+					  	<value>/sm/pwdChg/init</value>
+					  	<value>/sm/pwdChg/submit</value>
+					  	<value>/logout</value>
+					  	<value>/index</value>
+					  	<value>/notFound</value>
+					  	<value>.css</value>
+					  	<value>.js</value>
+					  	<value>.jpg</value>
+					  	<value>.gif</value>
+					  	<value>.png</value>
+					  	<value>.bmp</value>
+					  	<value>/main</value>
+					  	<value>leftFrame</value>
+					  	<value>rightFrame</value>
+					  	<value>.eot</value>
+					  	<value>.svg</value>
+					  	<value>.ttf</value>
+					  	<value>.woff</value>
+					  	<value>.otf</value>
+					</list>    
+				</property>    
+			</bean>  
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+		<property name="order" value="1" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/tiles-definitions.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
+	
+	<bean class="org.terasoluna.fw.web.exception.SystemExceptionResolver">
+	    <property name="order" value="3" />
+	    <property name="exceptionMappings">
+	        <map>
+	            <entry key=".DataAccessException" value="dataAccessError" />
+	            <entry key=".TransactionException" value="dataAccessError" />
+	            <entry key=".SessionTimeoutException" value="sessionError" />
+	            <!-- 
+	            <entry key=".ResourceNotFoundException" value="notFoundError" />
+	            <entry key=".MultipartException" value="uploadMaxSizeError" />
+	             -->
+	        </map>
+	    </property>
+	    <property name="defaultErrorView" value="systemError" />
+	    <property name="statusCodes">
+	        <map>
+	            <entry key="notFoundError" value="404" />
+	        </map>
+	    </property>
+	    <property name="defaultStatusCode" value="500" />
+	    <property name="exceptionCodeResolver" ref="exceptionCodeResolver" />
+	</bean>
+	
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"> 
+	</bean>
+</beans>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TIPS_BACINF" >
+  <resultMap id="TipsBaCInfResult" class="com.synesoft.fisp.domain.model.TipsBaCInf" >
+    <result column="RECKBANKNO" property="reckbankno" jdbcType="CHAR" />
+    <result column="GENBANKNAME" property="genbankname" jdbcType="VARCHAR" />
+    <result column="RECKONTYPE" property="reckontype" jdbcType="CHAR" />
+    <result column="OFNODECODE" property="ofnodecode" jdbcType="CHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POSTALCODE" property="postalcode" jdbcType="CHAR" />
+    <result column="PEOPLENAME" property="peoplename" jdbcType="VARCHAR" />
+    <result column="PEOPLEPHONE" property="peoplephone" jdbcType="VARCHAR" />
+    <result column="PEOPLEMOBILE" property="peoplemobile" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="OPERSIGN" property="opersign" jdbcType="CHAR" />
+    <result column="EFFECTDATE" property="effectdate" jdbcType="CHAR" />
+    <result column="UPDATEAREA" property="updatearea" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" resultMap="TipsBaCInfResult" parameterClass="java.lang.String" >
+    select RECKBANKNO, GENBANKNAME, RECKONTYPE, OFNODECODE, ADDRESS, POSTALCODE, PEOPLENAME,
+      PEOPLEPHONE, PEOPLEMOBILE, EMAIL, OPERSIGN, EFFECTDATE, UPDATEAREA, RSV1, RSV2, RSV3, RSV4, RSV5
+    from TIPS_BACINF
+    where trim(RECKBANKNO) = #value:CHAR#
+  </select>
+  
+  <select id="selectList" resultMap="TipsBaCInfResult" parameterClass="com.synesoft.fisp.domain.model.TipsBaCInf" >
+    select * FROM TIPS_BACINF
+    <dynamic prepend="where" >
+      <isNotEmpty prepend="and" property="reckbankno" >
+         trim(RECKBANKNO) = #reckbankno:CHAR#
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="genbankname" >
+         trim(GENBANKNAME) like '%$genbankname$%'
+     </isNotEmpty>
+    </dynamic>
+  </select>
+    
+  <select id="selectCounts" resultClass="java.lang.Integer" parameterClass="com.synesoft.fisp.domain.model.TipsBaCInf" >
+    select count(*) FROM TIPS_BACINF
+    <dynamic prepend="where" >
+      <isNotEmpty prepend="and" property="reckbankno" >
+         trim(RECKBANKNO) = #reckbankno:CHAR#
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="genbankname" >
+         trim(GENBANKNAME) like '%$genbankname$%'
+     </isNotEmpty>
+    </dynamic>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.TipsBaCInf" >
+    delete from TIPS_BACINF
+    where trim(RECKBANKNO) = #reckbankno:CHAR#
+  </delete>
+  
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.TipsBaCInf" >
+    insert into TIPS_BACINF (RECKBANKNO, GENBANKNAME, RECKONTYPE, OFNODECODE, ADDRESS, POSTALCODE,
+      PEOPLENAME, PEOPLEPHONE, PEOPLEMOBILE, EMAIL, OPERSIGN, EFFECTDATE, UPDATEAREA, RSV1, RSV2, RSV3, 
+      RSV4, RSV5)
+    values (#reckbankno:CHAR#, #genbankname:VARCHAR#, #reckontype:CHAR#, #ofnodecode:CHAR#,
+      #address:VARCHAR#, #postalcode:CHAR#, #peoplename:VARCHAR#, #peoplephone:VARCHAR#,
+      #peoplemobile:VARCHAR#, #email:VARCHAR#, #opersign:CHAR#, #effectdate:CHAR#,
+      #updatearea:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.TipsBaCInf" >
+    update TIPS_BACINF
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="genbankname" >
+        GENBANKNAME = #genbankname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reckontype" >
+        RECKONTYPE = #reckontype:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="ofnodecode" >
+        OFNODECODE = #ofnodecode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="address" >
+        ADDRESS = #address:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="postalcode" >
+        POSTALCODE = #postalcode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="peoplename" >
+        PEOPLENAME = #peoplename:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="peoplephone" >
+        PEOPLEPHONE = #peoplephone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="peoplemobile" >
+        PEOPLEMOBILE = #peoplemobile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        EMAIL = #email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="opersign" >
+        OPERSIGN = #opersign:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="effectdate" >
+        EFFECTDATE = #effectdate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updatearea" >
+        UPDATEAREA = #updatearea:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where trim(RECKBANKNO) = #reckbankno:CHAR#
+  </update>
+</sqlMap>

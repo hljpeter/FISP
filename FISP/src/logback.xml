@@ -1,0 +1,95 @@
+<!DOCTYPE logback>
+<configuration>
+	<substitutionProperty name="log.base" value="${user.home}/fisp/logs/log" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <Pattern><![CDATA[%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] [%-48logger{48}] - %msg%n]]></Pattern>
+        </encoder>
+    </appender>
+	
+	<appender name="ROLLING"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>${log.base}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+            <FileNamePattern>${log.base}.%d{yyyy-MM-dd}.log.zip</FileNamePattern>  
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">  
+            <pattern><![CDATA[%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] [%-48logger{48}] - %msg%n]]></pattern>
+        </layout>
+    </appender>
+	
+    <!-- Application Loggers -->
+    <logger name="com.synesoft">
+        <level value="debug" />
+    </logger>
+    
+    <!-- 3rdparty Loggers -->
+    <logger name="org.springframework.core">
+        <level value="warn" />
+    </logger>
+
+    <logger name="org.springframework.beans">
+        <level value="warn" />
+    </logger>
+
+    <logger name="org.springframework.context">
+        <level value="warn" />
+    </logger>
+
+    <logger name="org.springframework.web">
+        <level value="warn" />
+    </logger>
+
+    <logger name="org.springframework.web.servlet">
+        <level value="warn" />
+    </logger>
+
+    <logger
+        name="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <level value="warn" />
+    </logger>
+
+    <logger name="org.springframework.security.core.userdetails">
+        <level value="debug" />
+    </logger>
+    
+    <!-- for ibatis -->
+    <logger name="com.ibatis">
+    	<level value="debug"></level>
+    </logger>
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource">
+    	<level value="debug"></level>
+    </logger>
+    <logger name="com.ibatis.common.jdbc.ScriptRunner">
+    	<level value="debug"></level>
+    </logger>
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate">
+    	<level value="debug"></level>
+    </logger>
+    <logger name="java.sql.Connection">
+    	<level value="debug"></level>
+    </logger>
+    <logger name="java.sql.Statement">
+    	<level value="debug"></level>
+    </logger>
+    <logger name="java.sql.PreparedStatement">
+    	<level value="debug"></level>
+    </logger>
+    
+    <!-- for apache common -->
+    <logger name="org.apache.commons">
+    	<level value="info"></level>
+    </logger>
+	
+	<logger name="org.terasoluna.fw.common.exception.ExceptionLogger">
+	    <level value="warn" />
+	</logger>
+	
+    <root>
+        <level value="debug" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ROLLING" />
+    </root>
+</configuration>

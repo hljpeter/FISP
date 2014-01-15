@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="DB_TABLE_INFO" >
+  <resultMap id="DBColumnInfoResult" class="com.synesoft.fisp.domain.model.vo.DBTableInfoVO" >
+    <result column="COLUMN_NAME" property="colName" jdbcType="VARCHAR" />
+    <result column="DATA_TYPE" property="colType" jdbcType="VARCHAR" />
+    <result column="DATA_LENGTH" property="colLen" jdbcType="VARCHAR" />
+    <result column="NULLABLE" property="nullable" jdbcType="VARCHAR" />
+    <result column="COL_COMMENTS" property="colComments" jdbcType="VARCHAR" />
+    <result column="COLUMN_ID" property="columnId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="DBTableInfoResult" class="com.synesoft.fisp.domain.model.DBTableInfo" >
+    <result column="TABLESPACE_NAME" property="tableSpaceName" jdbcType="VARCHAR" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="COMMENTS" property="tableComments" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- query records -->
+  <select id="selectList"  
+  		parameterClass="java.lang.String" resultMap="DBColumnInfoResult">
+	SELECT DISTINCT 
+		ALL_TAB_COLS.COLUMN_NAME,
+		ALL_TAB_COLS.DATA_TYPE,
+		ALL_TAB_COLS.DATA_LENGTH,
+		ALL_TAB_COLS.NULLABLE,
+		ALL_COL_COMMENTS.COMMENTS COL_COMMENTS,
+		ALL_TAB_COLS.COLUMN_ID
+	FROM 
+		ALL_TAB_COLS 
+	INNER JOIN
+		ALL_TAB_COMMENTS ON
+		ALL_TAB_COMMENTS.TABLE_NAME = ALL_TAB_COLS.TABLE_NAME
+	INNER JOIN
+		ALL_COL_COMMENTS ON 
+		ALL_TAB_COLS.TABLE_NAME = ALL_COL_COMMENTS.TABLE_NAME AND 
+		ALL_TAB_COLS.COLUMN_NAME = ALL_COL_COMMENTS.COLUMN_NAME   
+	LEFT JOIN
+		(
+			SELECT 
+				DP_TABLE.TABLE_NAME TABLE_NAME,
+				DP_TABLE_DTL.COL_NAME
+			FROM 
+				DP_TABLE_DTL
+			INNER JOIN
+				DP_TABLE ON
+				DP_TABLE_DTL.TABLE_ID = DP_TABLE.TABLE_ID
+		) A ON
+		ALL_TAB_COLS.TABLE_NAME = A.TABLE_NAME AND
+		ALL_TAB_COLS.COLUMN_NAME = A.COL_NAME
+	WHERE
+		ALL_TAB_COLS.TABLE_NAME = #value:VARCHAR# AND
+		A.TABLE_NAME IS NULL
+	ORDER BY
+      	ALL_TAB_COLS.COLUMN_ID
+  </select>
+  
+  <!-- query records -->
+  <select id="selectQueryList" 
+  		parameterClass="com.synesoft.fisp.domain.model.DBTableInfo" resultMap="DBTableInfoResult">
+	SELECT DISTINCT 
+		ALL_TABLES.TABLESPACE_NAME,
+		ALL_TABLES.TABLE_NAME,
+		ALL_TAB_COMMENTS.COMMENTS
+	FROM
+		ALL_TABLES
+	INNER JOIN
+		ALL_TAB_COMMENTS ON 
+		ALL_TABLES.TABLE_NAME = ALL_TAB_COMMENTS.TABLE_NAME
+	LEFT JOIN
+		DP_TABLE ON
+		ALL_TABLES.TABLE_NAME = DP_TABLE.TABLE_NAME
+   	WHERE
+   		DP_TABLE.TABLE_NAME IS NULL
+   		<isNotEmpty property="type">
+	   		<isEqual prepend="AND" property="type" compareValue="1">
+				ALL_TABLES.TABLESPACE_NAME = #tableSpaceName:VARCHAR#
+	   		</isEqual>
+	   		<isEqual prepend="AND" property="type" compareValue="2">
+				<iterate property="tablespaceNames" open="ALL_TABLES.TABLESPACE_NAME IN (" 
+						close=")" conjunction=",">
+					#tablespaceNames[]#
+		        </iterate> 
+			</isEqual> 
+	   		<isEqual prepend="AND" property="type" compareValue="3">
+				<iterate property="tableNameStarts" open="(" close=")" conjunction="OR">
+					ALL_TABLES.TABLE_NAME LIKE #tableNameStarts[]#||'%'
+		        </iterate> 
+	   		</isEqual>
+	   		<isEqual prepend="AND" property="type" compareValue="4">
+				$tableSpaceName$
+	   		</isEqual>
+   		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="owners" >
+			<iterate property="owners" open="ALL_TABLES.OWNER IN(" close=")" conjunction=",">
+				#owners[]# 
+	        </iterate> 
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="owner" >
+				ALL_TABLES.OWNER = #owner# 
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="tableNameExcludes" >
+			<iterate property="tableNameExcludes" open="ALL_TABLES.TABLE_NAME NOT IN(" close=")" conjunction=",">
+				#tableNameExcludes[]# 
+	        </iterate> 
+		</isNotEmpty>
+	ORDER BY
+		ALL_TABLES.TABLESPACE_NAME,
+		ALL_TABLES.TABLE_NAME
+  </select>
+  
+  <!-- query a piece of record -->
+  <select id="selectByPrimaryKey" 
+  		parameterClass="java.lang.String" resultMap="DBTableInfoResult">
+	SELECT DISTINCT 
+		ALL_TABLES.TABLESPACE_NAME,
+		ALL_TABLES.TABLE_NAME,
+		ALL_TAB_COMMENTS.COMMENTS
+	FROM
+		ALL_TABLES
+	INNER JOIN
+		ALL_TAB_COMMENTS ON 
+		ALL_TABLES.TABLE_NAME = ALL_TAB_COMMENTS.TABLE_NAME
+    WHERE
+		ALL_TABLES.TABLE_NAME = #value:VARCHAR#
+  </select>
+  
+</sqlMap>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig 
+            PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+            "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<!-- SqlMapConfig define -->
+<sqlMapConfig>
+	<settings useStatementNamespaces="true"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/Numbering_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/ORGINF_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/ORGINFTMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERINF_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERINFTMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_PASSWORD_HISTORYS_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/ROLEINF_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/ROLEINFTMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERROLEINF_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERROLEINFTMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERORGINF_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERORGINFTMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERROLEINFQuery_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/USERROLEINFTMPQuery_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/MENUFUNC_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/TIPSACCTINF_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/TIPSBACINF_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/TIPSCONN_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DM_LOAN_AMOUNT_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DM_DEPOSIT_BALANCE_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_ALERT_RCPT_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/REPORT_DATA_DETAIL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/REPORT_DATA_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DM_LOAN_BALANCE_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DmDepositBalanceCheck_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DmLoanBalanceCheck_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DmLoanAmountCheck_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/BAT_DATE_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_PARAM_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_EXP_CFG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_EXP_CFG_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_EXP_LOG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_EXPR_METHOD_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_EXPR_METHOD_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_MPP_CFG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_MPP_CFG_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_MPP_LOG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_EXPR_TMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_MAP_DICT_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_CHG_BIZ_LOG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_CHG_SYS_LOG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_OPER_LOG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_DATA_DICT_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_FILE_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_FILE_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_IMP_CFG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_IMP_CFG_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_IMP_LOG_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_TABLE_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_TABLE_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DP_EXPR_PARAVAL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/DB_TABLE_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_FUNC_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_ROLE_FUNC_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_CURRENCY_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_REGION_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_ROLE_FUNC_TMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/SYS_NATION_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_USER_ROLE_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_USER_ROLE_TMP_SqlMap.xml"/>
+	
+	<sqlMap resource="com/synesoft/pisa/domain/model/BIZ_DRAFT_ACPT_LIST_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/pisa/domain/model/BIZ_DRAFT_DRAW_LIST_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/pisa/domain/model/EXP_SHEET_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/pisa/domain/model/EXP_SHEET_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/pisa/domain/model/EXP_SHEET_FORMULA_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/pisa/domain/model/EXP_SHEET_FORMULA_RESULT_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/pisa/domain/model/XML_TO_TABLE_SqlMap.xml"/>
+	
+	
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_CTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_STEP_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_STEP_RELY_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_STEP_RTM_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_STEP_EXCL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_SUBSTEP_RTM_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_TASK_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_TASK_RTM_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_DIM_INFO_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/BAT_TASK_DIM_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/sysrunner/domain/model/DP_BAT_MPP_SqlMap.xml"/>
+	
+	
+	<!-- FTZMIS -->
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_OFF_MSG_CTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_OFF_TXN_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_MSG_CTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_TXN_DTL_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_ACT_MSTR_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_ACT_MSTR_TMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_BALANCE_CODE_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_BANK_CODE_SqlMap.xml"/>
+	
+	
+		<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_MSG_CTL.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_TXN_DTL.xml"/>
+</sqlMapConfig>

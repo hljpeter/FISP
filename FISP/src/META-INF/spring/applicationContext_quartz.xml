@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- 触发器  -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--检删除表达式参数值表(dp_expr_paraval)中无效的数据触发器 -->
+				<ref bean="dpExprParavalSchedule" />
+			    <!-- <ref bean="formulaCheckSchedule" /> -->
+			</list>
+		</property>
+		<property name="autoStartup" value="true" />
+	</bean>
+	
+	
+	  <!--检删除表达式参数值表(dp_expr_paraval)中无效的数据Schedule -->	 
+	<bean id="dpExprParavalSchedule" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="dpExprParavalJob" />
+		<!-- 每天03点触发一次  	 -->
+		<property name="cronExpression" value="0 0 3 * * ? " />
+	</bean>
+	
+	
+	<!-- 检删除表达式参数值表(dp_expr_paraval)中无效的数据Job -->
+	<bean id="dpExprParavalJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="triggerDpExprParaval" />
+		<property name="targetMethod" value="execute" />
+		<!-- 是否允许任务并发执行。当值为false 时，表示必须等到前一个线程处理完毕后才再启一个新的线程  -->
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!-- 检删除表达式参数值表(dp_expr_paraval)中无效的数据Bean  -->
+	<bean id="triggerDpExprParaval" class="com.synesoft.fisp.app.common.trigger.TriggerDpExprParaval" />
+	
+	
+	<!-- 公式校验 BEGIN -->
+	<!--公式校验Schedule -->	 
+	 <bean id="formulaCheckSchedule" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="formulaCheckJob" />
+		  	
+		<property name="cronExpression" value="* * 2 * * ? " />
+	</bean>
+	
+	
+	<!-- 公式校验Job -->
+	<bean id="formulaCheckJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="formulaCheckBean" />
+		<property name="targetMethod" value="execute" />
+		<!--是否允许任务并发执行。当值为false 时，表示必须等到前一个线程处理完毕后才再启一个新的线程       -->
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!-- 公式校验Bean  -->
+	<bean id="formulaCheckBean" class="com.synesoft.pisa.app.common.scheduler.FormulaCheckScheduler" />
+
+    <!-- 公式校验 END -->
+
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MENUFUNC" >
+  <resultMap id="MenuFuncResult" class="com.synesoft.fisp.domain.model.MenuFunc" >
+    <result column="THIRDMENUID" property="thirdmenuid" jdbcType="CHAR" />
+    <result column="THIRDMENUNAME" property="thirdmenuname" jdbcType="VARCHAR" />
+    <result column="SECONDMENUID" property="secondmenuid" jdbcType="CHAR" />
+    <result column="SECONDMENUNAME" property="secondmenuname" jdbcType="VARCHAR" />
+    <result column="FIRSTMENUID" property="firstmenuid" jdbcType="CHAR" />
+    <result column="FIRSTMENUNAME" property="firstmenuname" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="MenuFuncResult" parameterClass="com.synesoft.fisp.domain.model.MenuFunc" >
+    select THIRDMENUID, THIRDMENUNAME, SECONDMENUID, SECONDMENUNAME, FIRSTMENUID, FIRSTMENUNAME,
+      URL, RSV1, RSV2, RSV3, RSV4, RSV5
+    from MENUFUNC 
+    where trim(THIRDMENUID) = #thirdmenuid:CHAR#
+  </select>
+  
+  <select id="selectList" parameterClass="com.synesoft.fisp.domain.model.MenuFunc" resultMap="MenuFuncResult">
+    select THIRDMENUID, THIRDMENUNAME, SECONDMENUID, SECONDMENUNAME, FIRSTMENUID, FIRSTMENUNAME,
+      URL, RSV1, RSV2, RSV3, RSV4, RSV5
+    from MENUFUNC 
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="thirdmenuid">
+         trim(THIRDMENUID) = #thirdmenuid:CHAR#
+	  </isNotEmpty>
+	  <isNotEmpty prepend="and" property="secondmenuid">
+	     trim(SECONDMENUID) = #secondmenuid:CHAR#
+	  </isNotEmpty>
+	  <isNotEmpty prepend="and" property="firstmenuid">
+	     trim(FIRSTMENUID) = #firstmenuid:CHAR#
+	  </isNotEmpty>
+    </dynamic>
+    order by firstmenuid, secondmenuid, thirdmenuid
+  </select>
+  
+</sqlMap>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="USERROLEINFTMPQUERY">
+  <resultMap class="com.synesoft.fisp.domain.model.UserRoleInfTmp" id="UserRoleInfTmpResult">
+    <result column="USERID" jdbcType="CHAR" property="userid" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="ORGID" jdbcType="CHAR" property="orgid" />
+    <result column="ORGNAME" jdbcType="VARCHAR" property="orgname" />
+    <result column="OPTTYPE" jdbcType="CHAR" property="opttype" />
+  </resultMap>
+  <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.UserRoleInfTmp" resultClass="java.lang.Integer">
+      select count(count(1)) from SYS_USER_ROLE_INF_TMP  where 1=1
+     <isNotEmpty prepend="and" property="userid" >
+         trim(USERID) = #userid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="orgid">
+       trim(ORGID) = #orgid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="username">
+       	 USERNAME like '%$username$%'
+   	</isNotEmpty>
+   	<isNotEmpty prepend="and" property="opttype">
+       	 OPTTYPE = #opttype:CHAR#
+   	</isNotEmpty>
+     and OPTSTATUS='01' group by USERID,ORGID,ORGNAME,USERNAME,OPTTYPE
+  </select>
+  <select id="selectList" parameterClass="com.synesoft.fisp.domain.model.UserRoleInfTmp" resultMap="UserRoleInfTmpResult">
+   select USERID,ORGID,ORGNAME,USERNAME,OPTTYPE from SYS_USER_ROLE_INF_TMP  where 1=1
+      <isNotEmpty prepend="and" property="userid" >
+         trim(USERID) = #userid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="orgid">
+       trim(ORGID) = #orgid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="username">
+       	 USERNAME  like '%$username$%'
+   	</isNotEmpty> 
+ 	<isNotEmpty prepend="and" property="opttype">
+       	 OPTTYPE = #opttype:CHAR#
+   	</isNotEmpty> 
+     and OPTSTATUS='01' group by USERID,ORGID,ORGNAME,USERNAME,OPTTYPE
+  </select>
+</sqlMap>

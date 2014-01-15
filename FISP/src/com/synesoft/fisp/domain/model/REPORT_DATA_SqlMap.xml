@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="REPORT_DATA" >
+  <resultMap id="reportDataResult" class="com.synesoft.fisp.domain.model.ReportData" >
+    <result column="REPORT_ID" property="reportId" jdbcType="VARCHAR" />
+    <result column="REPORT_NAME" property="reportName" jdbcType="VARCHAR" />
+    <result column="REPORT_MONTH" property="reportMonth" jdbcType="CHAR" />
+    <result column="REPORT_STATUS" property="reportStatus" jdbcType="CHAR" />
+    <result column="SUM_CNT" property="sumCnt" jdbcType="DECIMAL" />
+    <result column="SUM_AMOUNT" property="sumAmount" jdbcType="DECIMAL" />
+    <result column="FEEDB_STATUS" property="feedbStatus" jdbcType="CHAR" />
+    <result column="ERROR_CNT" property="errorCnt" jdbcType="DECIMAL" />
+    <result column="ERROR_STATUS" property="errorStatus" jdbcType="CHAR" />
+    <result column="INPUT_CNT" property="inputCnt" jdbcType="DECIMAL" />
+    <result column="AUTH_CNT" property="authCnt" jdbcType="DECIMAL" />
+    <result column="BRANCH_NO" property="branchNo" jdbcType="VARCHAR" />
+    <result column="BRANCH_NAME" property="branchName" jdbcType="VARCHAR" />
+    <result column="ORG_NO" property="orgNo" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="REPORT_TLRNO" property="reportTlrno" jdbcType="VARCHAR" />
+    <result column="REPORT_TIME" property="reportTime" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="reportDataResult" parameterClass="com.synesoft.fisp.domain.model.ReportData" >
+    select REPORT_ID, REPORT_NAME, REPORT_MONTH, REPORT_STATUS, SUM_CNT, SUM_AMOUNT, FEEDB_STATUS,
+      ERROR_CNT, ERROR_STATUS, INPUT_CNT, AUTH_CNT, BRANCH_NO, BRANCH_NAME, ORG_NO, ORG_NAME,
+      REPORT_TLRNO, REPORT_TIME, RSV1, RSV2, RSV3, RSV4, RSV5
+    from REPORT_DATA
+    where REPORT_ID = #reportId:VARCHAR#
+  </select>
+  <select id="selectByKey" resultMap="reportDataResult" parameterClass="com.synesoft.fisp.domain.model.ReportData" >
+    select REPORT_ID, REPORT_NAME, REPORT_MONTH, REPORT_STATUS, SUM_CNT, SUM_AMOUNT, FEEDB_STATUS,
+      ERROR_CNT, ERROR_STATUS, INPUT_CNT, AUTH_CNT, BRANCH_NO, BRANCH_NAME, ORG_NO, ORG_NAME,
+      REPORT_TLRNO, REPORT_TIME, RSV1, RSV2, RSV3, RSV4, RSV5
+    from REPORT_DATA
+     <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="reportMonth" >
+        REPORT_MONTH = #reportMonth:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="reportStatus" >
+        REPORT_STATUS = #reportStatus:CHAR#
+      </isNotEmpty>
+    </dynamic>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.ReportData" >
+    delete from REPORT_DATA
+    where REPORT_ID = #reportId:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.ReportData" >
+    insert into REPORT_DATA (REPORT_ID, REPORT_NAME, REPORT_MONTH, REPORT_STATUS, SUM_CNT,
+      SUM_AMOUNT, FEEDB_STATUS, ERROR_CNT, ERROR_STATUS, INPUT_CNT, AUTH_CNT, BRANCH_NO,
+      BRANCH_NAME, ORG_NO, ORG_NAME, REPORT_TLRNO, REPORT_TIME, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#reportId:VARCHAR#, #reportName:VARCHAR#, #reportMonth:CHAR#, #reportStatus:CHAR#,
+      #sumCnt:DECIMAL#, #sumAmount:DECIMAL#, #feedbStatus:CHAR#, #errorCnt:DECIMAL#,
+      #errorStatus:CHAR#, #inputCnt:DECIMAL#, #authCnt:DECIMAL#, #branchNo:VARCHAR#,
+      #branchName:VARCHAR#, #orgNo:VARCHAR#, #orgName:VARCHAR#, #reportTlrno:VARCHAR#,
+      #reportTime:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#,
+      #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.ReportData" >
+    update REPORT_DATA
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="reportName" >
+        REPORT_NAME = #reportName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reportMonth" >
+        REPORT_MONTH = #reportMonth:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reportStatus" >
+        REPORT_STATUS = #reportStatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sumCnt" >
+        SUM_CNT = #sumCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="sumAmount" >
+        SUM_AMOUNT = #sumAmount:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="feedbStatus" >
+        FEEDB_STATUS = #feedbStatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="errorCnt" >
+        ERROR_CNT = #errorCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="errorStatus" >
+        ERROR_STATUS = #errorStatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="inputCnt" >
+        INPUT_CNT = #inputCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="authCnt" >
+        AUTH_CNT = #authCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="branchNo" >
+        BRANCH_NO = #branchNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="branchName" >
+        BRANCH_NAME = #branchName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="orgNo" >
+        ORG_NO = #orgNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="orgName" >
+        ORG_NAME = #orgName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reportTlrno" >
+        REPORT_TLRNO = #reportTlrno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reportTime" >
+        REPORT_TIME = #reportTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where REPORT_ID = #reportId:VARCHAR#
+  </update>
+  <select id="selectList" parameterClass="com.synesoft.fisp.domain.model.ReportData" resultMap="reportDataResult">
+  	select * from REPORT_DATA
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="reportMonth" >
+        REPORT_MONTH = #reportMonth:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="reportStatus" >
+        REPORT_STATUS = #reportStatus:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="feedbStatus" >
+        FEEDB_STATUS = #feedbStatus:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="errorStatus" >
+        ERROR_STATUS = #errorStatus:CHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="reportName" >
+        REPORT_NAME like '%$reportName$%'
+      </isNotEmpty>
+    </dynamic>
+    order by report_month desc
+   </select>
+   <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.ReportData" resultClass="java.lang.Integer">
+  	select count(*) from REPORT_DATA
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="reportMonth" >
+        REPORT_MONTH = #reportMonth:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="reportStatus" >
+        REPORT_STATUS = #reportStatus:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="feedbStatus" >
+        FEEDB_STATUS = #feedbStatus:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="errorStatus" >
+        ERROR_STATUS = #errorStatus:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="reportName" >
+        REPORT_NAME like '%$reportName$%'
+      </isNotEmpty>
+    </dynamic>
+   </select>
+</sqlMap>

@@ -1,0 +1,88 @@
+.suckerdiv{
+   position:absolute;
+   display: none;
+   background-color:#ffffff; 
+   z-index:100005;
+}
+.suckerdiv ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+width: 180px; /* Width of Menu Items */
+border-bottom: 1px solid #18a1c0;
+}
+.suckerdiv ul li{
+position: relative;
+}
+.suckerdiv ul li ul{
+left: 179px;
+position: absolute;
+width: 180px; /*sub menu width*/
+top: 0;
+margin: 0;
+padding: 0;
+list-style-type: none;
+border-bottom: 1px solid #18a1c0;
+display: none;
+}
+
+.suckerdiv ul li ul li ul{
+left: 179px;
+width: 180px; /*sub menu width*/
+top: 0;
+margin: 0px 0px 0px 0px;
+padding: 0;
+list-style-type: none;
+border-bottom: 1px solid #18a1c0;
+display: none;
+}
+
+.suckerdiv ul li ul li{
+position: static;
+background-color: #FFFFFF;
+}
+
+.suckerdiv ul li ul li ul li{
+position: static;
+}
+
+/* menu links style */
+.suckerdiv ul li a{
+display: block;
+color: black;
+text-decoration: none;
+font:12px 宋体;
+background: #fff;
+padding: 5px 5px;
+border: 1px solid #18a1c0;
+border-bottom: 0;
+}
+.suckerdiv ul li a:hover{
+color: white;
+background-color: #18a1c0;
+}
+
+/* menu links style */
+.suckerdiv ul li ul li a{
+display: block;
+color: black;
+text-decoration: none;
+font:12px 宋体;
+padding: 5px 5px;
+border: 1px solid #18a1c0;
+border-bottom: 0;
+background-color: #FFFFFF;
+}
+.suckerdiv ul li ul li a:hover{
+color: white;
+background-color: #18a1c0;
+}
+
+.suckerdiv .subfolderstyle{
+background: url(../img/arrow-list.gif) no-repeat center right;
+}
+/* Holly Hack for IE \*/
+* html .suckerdiv ul li { float: left; height: 1%; }
+* html .suckerdiv ul li a { height: 1%; }
+/* End */
+

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ORGINFTMP">
+  <resultMap id="OrgInfTmpResult" class="com.synesoft.fisp.domain.model.OrgInfTmp" >
+    <result column="ID" jdbcType="CHAR" property="id" />
+    <result column="ORGID" jdbcType="CHAR" property="orgid" />
+    <result column="ORGNAME" jdbcType="VARCHAR" property="orgname" />
+    <result column="SUPRORGID" jdbcType="CHAR" property="suprorgid" />
+    <result column="SUPRORGNAME" jdbcType="VARCHAR" property="suprorgname" />
+    <result column="BANKID" jdbcType="CHAR" property="bankid" />
+    <result column="BANKNAME" jdbcType="VARCHAR" property="bankname" />
+    <result column="NODECODE" jdbcType="CHAR" property="nodecode" />
+    <result column="MAXFAILCNT" jdbcType="DECIMAL" property="maxfailcnt" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="CREATETIME" jdbcType="CHAR" property="createtime" />
+    <result column="CHECKER" jdbcType="VARCHAR" property="checker" />
+    <result column="CHECKTIME" jdbcType="CHAR" property="checktime" />
+    <result column="OPTTYPE" jdbcType="CHAR" property="opttype" />
+    <result column="OPTSTATUS" jdbcType="CHAR" property="optstatus" />
+    <result column="RSV1" jdbcType="VARCHAR" property="rsv1" />
+    <result column="RSV2" jdbcType="VARCHAR" property="rsv2" />
+    <result column="RSV3" jdbcType="VARCHAR" property="rsv3" />
+    <result column="RSV4" jdbcType="VARCHAR" property="rsv4" />
+    <result column="RSV5" jdbcType="VARCHAR" property="rsv5" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="OrgInfTmpResult" parameterClass="com.synesoft.fisp.domain.model.OrgInfTmp" >
+    select ID, ORGID, ORGNAME, SUPRORGID, SUPRORGNAME, BANKID, BANKNAME, NODECODE, MAXFAILCNT,
+      CREATER, CREATETIME, CHECKER, CHECKTIME, OPTTYPE, OPTSTATUS, RSV1, RSV2, RSV3, RSV4, RSV5
+    from SYS_ORG_INF_TMP
+    where ID = #id:CHAR#
+  	and OPTSTATUS='01'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.OrgInfTmp" >
+    delete from SYS_ORG_INF_TMP
+    where ID = #id:CHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.OrgInfTmp" >
+    insert into SYS_ORG_INF_TMP (ID, ORGID, ORGNAME, SUPRORGID, SUPRORGNAME, BANKID, BANKNAME, NODECODE,
+      MAXFAILCNT, CREATER, CREATETIME, CHECKER, CHECKTIME, OPTTYPE, OPTSTATUS, RSV1, RSV2, RSV3,
+      RSV4, RSV5)
+    values (#id:CHAR#, #orgid:CHAR#, #orgname:VARCHAR#, #suprorgid:CHAR#, #suprorgname:VARCHAR#,
+      #bankid:CHAR#, #bankname:VARCHAR#, #nodecode:CHAR#, #maxfailcnt:DECIMAL#, #creater:VARCHAR#,
+      #createtime:CHAR#, #checker:VARCHAR#, #checktime:CHAR#, #opttype:CHAR#, #optstatus:CHAR#,
+      #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#, #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.OrgInfTmp" >
+    update SYS_ORG_INF_TMP
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="orgid">
+        ORGID = #orgid:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="orgname">
+        ORGNAME = #orgname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="suprorgid">
+        SUPRORGID = #suprorgid:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="suprorgname">
+        SUPRORGNAME = #suprorgname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankid">
+        BANKID = #bankid:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankname">
+        BANKNAME = #bankname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="nodecode">
+        NODECODE = #nodecode:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="maxfailcnt">
+        MAXFAILCNT = #maxfailcnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="creater">
+        CREATER = #creater:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createtime">
+        CREATETIME = #createtime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checker">
+        CHECKER = #checker:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checktime">
+        CHECKTIME = #checktime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="opttype">
+        OPTTYPE = #opttype:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="optstatus">
+        OPTSTATUS = #optstatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1">
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2">
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3">
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4">
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5">
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where ID = #id:CHAR#
+  </update>
+  <select id="selectCounts" resultClass="java.lang.Integer" parameterClass="com.synesoft.fisp.domain.model.OrgInfTmp" >
+    select count(*) from SYS_ORG_INF_TMP where 1=1
+      <isNotEmpty prepend="and" property="orgid" >
+         trim(ORGID)  = #orgid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="orgname" >
+         trim(ORGNAME) like '%$orgname$%'
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="opttype" >
+         OPTTYPE = #opttype:CHAR#
+     </isNotEmpty>
+     and OPTSTATUS='01'
+  </select>
+  <select id="selectList" resultMap="OrgInfTmpResult" parameterClass="com.synesoft.fisp.domain.model.OrgInfTmp" >
+   select * from SYS_ORG_INF_TMP where 1=1
+     <isNotEmpty prepend="and" property="orgid" >
+         trim(ORGID)  = #orgid:CHAR#
+     </isNotEmpty>
+     <isNotEmpty prepend="and" property="orgname" >
+        trim(ORGNAME) like '%$orgname$%'
+     </isNotEmpty>
+      <isNotEmpty prepend="and" property="opttype" >
+         OPTTYPE = #opttype:CHAR#
+     </isNotEmpty>
+     and OPTSTATUS='01'
+  </select>
+</sqlMap>

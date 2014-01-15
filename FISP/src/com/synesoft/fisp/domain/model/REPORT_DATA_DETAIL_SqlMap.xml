@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="REPORT_DATA_DETAIL" >
+  <resultMap id="reportDataDetailResult" class="com.synesoft.fisp.domain.model.ReportDataDetail" >
+    <result column="REPORT_DETAIL_ID" property="reportDetailId" jdbcType="VARCHAR" />
+    <result column="REPORT_ID" property="reportId" jdbcType="VARCHAR" />
+    <result column="MSG_TYPE" property="msgType" jdbcType="CHAR" />
+    <result column="SUM_CNT" property="sumCnt" jdbcType="DECIMAL" />
+    <result column="INPUT_CNT" property="inputCnt" jdbcType="DECIMAL" />
+    <result column="AUTH_CNT" property="authCnt" jdbcType="DECIMAL" />
+    <result column="ERROR_CNT" property="errorCnt" jdbcType="DECIMAL" />
+    <result column="SUM_AMOUNT" property="sumAmount" jdbcType="DECIMAL" />
+    <result column="ERROR_STATUS" property="errorStatus" jdbcType="CHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="reportDataDetailResult" parameterClass="com.synesoft.fisp.domain.model.ReportDataDetail" >
+    select REPORT_DETAIL_ID, REPORT_ID, MSG_TYPE, SUM_CNT, INPUT_CNT, AUTH_CNT, ERROR_CNT,
+      SUM_AMOUNT, ERROR_STATUS, RSV1, RSV2, RSV3, RSV4, RSV5
+    from REPORT_DATA_DETAIL_DETAIL
+    where REPORT_DETAIL_ID = #reportDetailId:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.ReportDataDetail" >
+    delete from REPORT_DATA_DETAIL_DETAIL
+    where REPORT_DETAIL_ID = #reportDetailId:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.ReportDataDetail" >
+    insert into REPORT_DATA_DETAIL_DETAIL (REPORT_DETAIL_ID, REPORT_ID, MSG_TYPE, SUM_CNT, INPUT_CNT,
+      AUTH_CNT, ERROR_CNT, SUM_AMOUNT, ERROR_STATUS, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#reportDetailId:VARCHAR#, #reportId:VARCHAR#, #msgType:CHAR#, #sumCnt:DECIMAL#,
+      #inputCnt:DECIMAL#, #authCnt:DECIMAL#, #errorCnt:DECIMAL#, #sumAmount:DECIMAL#,
+      #errorStatus:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#,
+      #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.ReportDataDetail" >
+    update REPORT_DATA_DETAIL_DETAIL
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="reportId" >
+        REPORT_ID = #reportId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="msgType" >
+        MSG_TYPE = #msgType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sumCnt" >
+        SUM_CNT = #sumCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="inputCnt" >
+        INPUT_CNT = #inputCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="authCnt" >
+        AUTH_CNT = #authCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="errorCnt" >
+        ERROR_CNT = #errorCnt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="sumAmount" >
+        SUM_AMOUNT = #sumAmount:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="errorStatus" >
+        ERROR_STATUS = #errorStatus:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where REPORT_DETAIL_ID = #reportDetailId:VARCHAR#
+  </update>
+  <select id="selectList" parameterClass="com.synesoft.fisp.domain.model.ReportDataDetail" resultMap="reportDataDetailResult">
+  	select * from REPORT_DATA_DETAIL
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="reportId" >
+        REPORT_ID = #reportId:VARCHAR#
+      </isNotEmpty>
+    </dynamic>
+   </select>
+   <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.ReportDataDetail" resultClass="java.lang.Integer">
+  	select count(*) from REPORT_DATA_DETAIL
+    <dynamic prepend="where">
+      <isNotEmpty prepend="and" property="reportId" >
+        REPORT_ID = #reportId:VARCHAR#
+      </isNotEmpty>
+    </dynamic>
+   </select>
+</sqlMap>

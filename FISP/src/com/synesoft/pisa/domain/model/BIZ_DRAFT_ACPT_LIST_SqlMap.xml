@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BIZ_DRAFT_ACPT_LIST">
+  <resultMap class="com.synesoft.pisa.domain.model.BizDraftAcptList" id="BizDraftAcptListResult">
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+    <result column="INST_ID" jdbcType="VARCHAR" property="instId" />
+    <result column="VOC_NO" jdbcType="VARCHAR" property="vocNo" />
+    <result column="PAYER_NAME" jdbcType="VARCHAR" property="payerName" />
+    <result column="PAYER_ACTNO" jdbcType="VARCHAR" property="payerActno" />
+    <result column="PAYER_BANK_CODE" jdbcType="VARCHAR" property="payerBankCode" />
+    <result column="PAYER_BANK_NAME" jdbcType="VARCHAR" property="payerBankName" />
+    <result column="PAYEE_NAME" jdbcType="VARCHAR" property="payeeName" />
+    <result column="PAYEE_ACTNO" jdbcType="VARCHAR" property="payeeActno" />
+    <result column="PAYEE_BANK_CODE" jdbcType="VARCHAR" property="payeeBankCode" />
+    <result column="PAYEE_BANK_NAME" jdbcType="VARCHAR" property="payeeBankName" />
+    <result column="AGRMT_NO" jdbcType="VARCHAR" property="agrmtNo" />
+    <result column="ACPT_NAME" jdbcType="VARCHAR" property="acptName" />
+    <result column="ACPT_ACTNO" jdbcType="VARCHAR" property="acptActno" />
+    <result column="ACPT_BANK_CODE" jdbcType="VARCHAR" property="acptBankCode" />
+    <result column="ACPT_BANK_NAME" jdbcType="VARCHAR" property="acptBankName" />
+    <result column="START_DATE" jdbcType="VARCHAR" property="startDate" />
+    <result column="END_DATE" jdbcType="VARCHAR" property="endDate" />
+    <result column="DRAFT_AMT" jdbcType="DECIMAL" property="draftAmt" />
+    <result column="DRAFT_TYPE" jdbcType="CHAR" property="draftType" />
+    <result column="DRAFT_TERM" jdbcType="VARCHAR" property="draftTerm" />
+    <result column="PAYER_BIZ_TYPE" jdbcType="CHAR" property="payerBizType" />
+    <result column="ADV_AMT" jdbcType="DECIMAL" property="advAmt" />
+    <result column="WOFF_AMT" jdbcType="DECIMAL" property="woffAmt" />
+    <result column="DRAFT_STS" jdbcType="CHAR" property="draftSts" />
+    <result column="ACPT_DATE" jdbcType="CHAR" property="acptDate" />
+    <result column="PAY_DATE" jdbcType="CHAR" property="payDate" />
+    <result column="ADV_DATE" jdbcType="CHAR" property="advDate" />
+    <result column="WOFF_DATE" jdbcType="CHAR" property="woffDate" />
+    <result column="OPT_STS" jdbcType="CHAR" property="optSts" />
+    <result column="INPUT_USER" jdbcType="VARCHAR" property="inputUser" />
+    <result column="INPUT_TIME" jdbcType="CHAR" property="inputTime" />
+    <result column="CHECK_USER" jdbcType="VARCHAR" property="checkUser" />
+    <result column="CHECK_TIME" jdbcType="CHAR" property="checkTime" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="RSV1" jdbcType="VARCHAR" property="rsv1" />
+    <result column="RSV2" jdbcType="VARCHAR" property="rsv2" />
+    <result column="RSV3" jdbcType="VARCHAR" property="rsv3" />
+    <result column="RSV4" jdbcType="VARCHAR" property="rsv4" />
+    <result column="RSV5" jdbcType="VARCHAR" property="rsv5" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterClass="com.synesoft.pisa.domain.model.BizDraftAcptList" resultMap="BizDraftAcptListResult">
+    select SEQ_NO, INST_ID, VOC_NO, PAYER_NAME, PAYER_ACTNO, PAYER_BANK_CODE, PAYER_BANK_NAME,
+      PAYEE_NAME, PAYEE_ACTNO, PAYEE_BANK_CODE, PAYEE_BANK_NAME, AGRMT_NO, ACPT_NAME, ACPT_ACTNO,
+      ACPT_BANK_CODE, ACPT_BANK_NAME, START_DATE, END_DATE, DRAFT_AMT, DRAFT_TYPE, DRAFT_TERM,
+      PAYER_BIZ_TYPE, ADV_AMT, WOFF_AMT, DRAFT_STS, ACPT_DATE, PAY_DATE, ADV_DATE, WOFF_DATE,
+      OPT_STS, INPUT_USER, INPUT_TIME, CHECK_USER, CHECK_TIME, COMMENTS, RSV1, RSV2, RSV3, RSV4,
+      RSV5
+    from BIZ_DRAFT_ACPT_LIST
+    where SEQ_NO = #seqNo:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.pisa.domain.model.BizDraftAcptList">
+    delete from BIZ_DRAFT_ACPT_LIST
+    where SEQ_NO = #seqNo:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.pisa.domain.model.BizDraftAcptList">
+    insert into BIZ_DRAFT_ACPT_LIST (SEQ_NO, INST_ID, VOC_NO, PAYER_NAME, PAYER_ACTNO,
+      PAYER_BANK_CODE, PAYER_BANK_NAME, PAYEE_NAME, PAYEE_ACTNO, PAYEE_BANK_CODE, PAYEE_BANK_NAME,
+      AGRMT_NO, ACPT_NAME, ACPT_ACTNO, ACPT_BANK_CODE, ACPT_BANK_NAME, START_DATE, END_DATE,
+      DRAFT_AMT, DRAFT_TYPE, DRAFT_TERM, PAYER_BIZ_TYPE, ADV_AMT, WOFF_AMT, DRAFT_STS, ACPT_DATE,
+      PAY_DATE, ADV_DATE, WOFF_DATE, OPT_STS, INPUT_USER, INPUT_TIME, CHECK_USER, CHECK_TIME,
+      COMMENTS, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#seqNo:VARCHAR#, #instId:VARCHAR#, #vocNo:VARCHAR#, #payerName:VARCHAR#,
+      #payerActno:VARCHAR#, #payerBankCode:VARCHAR#, #payerBankName:VARCHAR#, #payeeName:VARCHAR#,
+      #payeeActno:VARCHAR#, #payeeBankCode:VARCHAR#, #payeeBankName:VARCHAR#, #agrmtNo:VARCHAR#,
+      #acptName:VARCHAR#, #acptActno:VARCHAR#, #acptBankCode:VARCHAR#, #acptBankName:VARCHAR#,
+      #startDate:VARCHAR#, #endDate:VARCHAR#, #draftAmt:DECIMAL#, #draftType:CHAR#,
+      #draftTerm:VARCHAR#, #payerBizType:CHAR#, #advAmt:DECIMAL#, #woffAmt:DECIMAL#,
+      #draftSts:CHAR#, #acptDate:CHAR#, #payDate:CHAR#, #advDate:CHAR#, #woffDate:CHAR#,
+      #optSts:CHAR#, #inputUser:VARCHAR#, #inputTime:CHAR#, #checkUser:VARCHAR#, #checkTime:CHAR#,
+      #comments:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#,
+      #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.pisa.domain.model.BizDraftAcptList">
+    update BIZ_DRAFT_ACPT_LIST
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="instId">
+        INST_ID = #instId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="vocNo">
+        VOC_NO = #vocNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payerName">
+        PAYER_NAME = #payerName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payerActno">
+        PAYER_ACTNO = #payerActno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payerBankCode">
+        PAYER_BANK_CODE = #payerBankCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payerBankName">
+        PAYER_BANK_NAME = #payerBankName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payeeName">
+        PAYEE_NAME = #payeeName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payeeActno">
+        PAYEE_ACTNO = #payeeActno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payeeBankCode">
+        PAYEE_BANK_CODE = #payeeBankCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payeeBankName">
+        PAYEE_BANK_NAME = #payeeBankName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="agrmtNo">
+        AGRMT_NO = #agrmtNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="acptName">
+        ACPT_NAME = #acptName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="acptActno">
+        ACPT_ACTNO = #acptActno:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="acptBankCode">
+        ACPT_BANK_CODE = #acptBankCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="acptBankName">
+        ACPT_BANK_NAME = #acptBankName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="startDate">
+        START_DATE = #startDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="endDate">
+        END_DATE = #endDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="draftAmt">
+        DRAFT_AMT = #draftAmt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="draftType">
+        DRAFT_TYPE = #draftType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="draftTerm">
+        DRAFT_TERM = #draftTerm:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payerBizType">
+        PAYER_BIZ_TYPE = #payerBizType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="advAmt">
+        ADV_AMT = #advAmt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="woffAmt">
+        WOFF_AMT = #woffAmt:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="draftSts">
+        DRAFT_STS = #draftSts:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="acptDate">
+        ACPT_DATE = #acptDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payDate">
+        PAY_DATE = #payDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="advDate">
+        ADV_DATE = #advDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="woffDate">
+        WOFF_DATE = #woffDate:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="optSts">
+        OPT_STS = #optSts:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="inputUser">
+        INPUT_USER = #inputUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="inputTime">
+        INPUT_TIME = #inputTime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checkUser">
+        CHECK_USER = #checkUser:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checkTime">
+        CHECK_TIME = #checkTime:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="comments">
+        COMMENTS = #comments:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1">
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2">
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3">
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4">
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5">
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where SEQ_NO = #seqNo:VARCHAR#
+  </update>
+   <select id="selectCounts" parameterClass="com.synesoft.pisa.domain.model.BizDraftAcptList" resultClass="java.lang.Integer">
+  	select count(*) from BIZ_DRAFT_ACPT_LIST
+    <dynamic prepend="where">
+     <isNotEmpty prepend="and" property="instId">
+        INST_ID = #instId:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="vocNo">
+        VOC_NO = #vocNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payerName">
+        PAYER_NAME = #payerName:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payerActno">
+        PAYER_ACTNO = #payerActno:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payeeName">
+        PAYEE_NAME = #payeeName:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payeeActno">
+        PAYEE_ACTNO = #payeeActno:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="minDraftAmt">
+        DRAFT_AMT &gt;= #minDraftAmt:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="maxDraftAmt">
+        DRAFT_AMT <![CDATA[<= #maxDraftAmt:DECIMAL#]]>
+      </isNotEmpty>
+    </dynamic>
+   </select>
+   <select id="selectList" parameterClass="com.synesoft.pisa.domain.model.BizDraftAcptList" resultMap="BizDraftAcptListResult">
+  	select * from BIZ_DRAFT_ACPT_LIST 
+    <dynamic prepend="where">
+     <isNotEmpty prepend="and" property="instId">
+        INST_ID = #instId:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="vocNo">
+        VOC_NO = #vocNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payerName">
+        PAYER_NAME = #payerName:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payerActno">
+        PAYER_ACTNO = #payerActno:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payeeName">
+        PAYEE_NAME = #payeeName:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="payeeActno">
+        PAYEE_ACTNO = #payeeActno:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="minDraftAmt">
+        DRAFT_AMT &gt;= #minDraftAmt:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="maxDraftAmt">
+        DRAFT_AMT <![CDATA[<= #maxDraftAmt:DECIMAL#]]>
+      </isNotEmpty>
+    </dynamic>
+   </select>
+</sqlMap>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="DM_LOAN_AMOUNT">
+  <resultMap class="com.synesoft.fisp.domain.model.DmLoanAmount" id="dmLoanAmountResult">
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="REFERENCE_NO" property="referenceNo" jdbcType="VARCHAR" />
+    <result column="WORK_DATE" property="workDate" jdbcType="VARCHAR" />
+    <result column="BRANCH" property="branch" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_NO" property="customerNo" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_TYPE" property="customerType" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION_CODE" property="organizationCode" jdbcType="VARCHAR" />
+    <result column="LOAN_CARD_NO" property="loanCardNo" jdbcType="VARCHAR" />
+    <result column="PERSON_ID_TYPE" property="personIdType" jdbcType="VARCHAR" />
+    <result column="PERSON_ID_NO" property="personIdNo" jdbcType="VARCHAR" />
+    <result column="LOAN_INDUSTRY_TYPE" property="loanIndustryType" jdbcType="VARCHAR" />
+    <result column="BORROWER_REGISTER_CODE" property="borrowerRegisterCode" jdbcType="VARCHAR" />
+    <result column="CI_ECONOMY" property="ciEconomy" jdbcType="VARCHAR" />
+    <result column="SCALE_ENTERPRISE" property="scaleEnterprise" jdbcType="VARCHAR" />
+    <result column="LOAN_IOU_CODE" property="loanIouCode" jdbcType="VARCHAR" />
+    <result column="PRODUCT_TYPE" property="productType" jdbcType="VARCHAR" />
+    <result column="LOAN_ACTUAL_INVEST" property="loanActualInvest" jdbcType="VARCHAR" />
+    <result column="LOAN_ORIGINATION_DATE" property="loanOriginationDate" jdbcType="VARCHAR" />
+    <result column="LOAN_MATURITY_DATE" property="loanMaturityDate" jdbcType="VARCHAR" />
+    <result column="CURRENCY" property="currency" jdbcType="VARCHAR" />
+    <result column="LOAN_IOU_AMOUNT" property="loanIouAmount" jdbcType="DECIMAL" />
+    <result column="FCURR_DOLLAR" property="fcurrDollar" jdbcType="DECIMAL" />
+    <result column="INTEREST_RATE_FIX" property="interestRateFix" jdbcType="VARCHAR" />
+    <result column="INTEREST_RATE" property="interestRate" jdbcType="DECIMAL" />
+    <result column="LOAN_GUARANTEE_KIND" property="loanGuaranteeKind" jdbcType="VARCHAR" />
+    <result column="LOAN_RECOVERY_SIGN" property="loanRecoverySign" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="END_DATE" property="endDate" jdbcType="VARCHAR" />
+    <result column="SINPUT_STATUS" property="sinputStatus" jdbcType="VARCHAR" />
+    <result column="REPORT_STATUS" property="reportStatus" jdbcType="VARCHAR" />
+    <result column="DEL_FLAG" property="delFlag" jdbcType="VARCHAR" />
+    <result column="SINPUT_NAME" property="sinputName" jdbcType="VARCHAR" />
+    <result column="SINPUT_TIME" property="sinputTime" jdbcType="VARCHAR" />
+    <result column="SCHECK_NAME" property="scheckName" jdbcType="VARCHAR" />
+    <result column="SCHECK_TIME" property="scheckTime" jdbcType="VARCHAR" />
+    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+    <result column="RSV4" property="rsv4" jdbcType="VARCHAR" />
+    <result column="RSV5" property="rsv5" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount" resultMap="dmLoanAmountResult">
+   select ID, REFERENCE_NO, WORK_DATE, BRANCH, CUSTOMER_NO, CUSTOMER_NAME, CUSTOMER_TYPE,
+      ORGANIZATION_CODE, LOAN_CARD_NO, PERSON_ID_TYPE, PERSON_ID_NO, LOAN_INDUSTRY_TYPE,
+      BORROWER_REGISTER_CODE, CI_ECONOMY, SCALE_ENTERPRISE, LOAN_IOU_CODE, PRODUCT_TYPE,
+      LOAN_ACTUAL_INVEST, LOAN_ORIGINATION_DATE, LOAN_MATURITY_DATE, CURRENCY, LOAN_IOU_AMOUNT,
+      FCURR_DOLLAR, INTEREST_RATE_FIX, INTEREST_RATE, LOAN_GUARANTEE_KIND, LOAN_RECOVERY_SIGN,
+      STATUS, END_DATE, SINPUT_STATUS, REPORT_STATUS, DEL_FLAG, SINPUT_NAME, SINPUT_TIME,
+      SCHECK_NAME, SCHECK_TIME, RSV1, RSV2, RSV3, RSV4, RSV5
+    from DM_LOAN_AMOUNT
+    where ID = #id:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount">
+    delete from DM_LOAN_AMOUNT
+    where ID = #id:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount">
+    insert into DM_LOAN_AMOUNT (ID, REFERENCE_NO, WORK_DATE, BRANCH, CUSTOMER_NO, CUSTOMER_NAME,
+      CUSTOMER_TYPE, ORGANIZATION_CODE, LOAN_CARD_NO, PERSON_ID_TYPE, PERSON_ID_NO,
+      LOAN_INDUSTRY_TYPE, BORROWER_REGISTER_CODE, CI_ECONOMY, SCALE_ENTERPRISE, LOAN_IOU_CODE,
+      PRODUCT_TYPE, LOAN_ACTUAL_INVEST, LOAN_ORIGINATION_DATE, LOAN_MATURITY_DATE, CURRENCY,
+      LOAN_IOU_AMOUNT, FCURR_DOLLAR, INTEREST_RATE_FIX, INTEREST_RATE, LOAN_GUARANTEE_KIND,
+      LOAN_RECOVERY_SIGN, STATUS, END_DATE, SINPUT_STATUS, REPORT_STATUS, DEL_FLAG, SINPUT_NAME,
+      SINPUT_TIME, SCHECK_NAME, SCHECK_TIME, RSV1, RSV2, RSV3, RSV4, RSV5)
+    values (#id:VARCHAR#, #referenceNo:VARCHAR#, #workDate:VARCHAR#, #branch:VARCHAR#,
+      #customerNo:VARCHAR#, #customerName:VARCHAR#, #customerType:VARCHAR#,
+      #organizationCode:VARCHAR#, #loanCardNo:VARCHAR#, #personIdType:VARCHAR#,
+      #personIdNo:VARCHAR#, #loanIndustryType:VARCHAR#, #borrowerRegisterCode:VARCHAR#,
+      #ciEconomy:VARCHAR#, #scaleEnterprise:VARCHAR#, #loanIouCode:VARCHAR#, #productType:VARCHAR#,
+      #loanActualInvest:VARCHAR#, #loanOriginationDate:VARCHAR#, #loanMaturityDate:VARCHAR#,
+      #currency:VARCHAR#, #loanIouAmount:DECIMAL#, #fcurrDollar:DECIMAL#, #interestRateFix:VARCHAR#,
+      #interestRate:DECIMAL#, #loanGuaranteeKind:VARCHAR#, #loanRecoverySign:VARCHAR#,
+      #status:VARCHAR#, #endDate:VARCHAR#, #sinputStatus:VARCHAR#, #reportStatus:VARCHAR#,
+      #delFlag:VARCHAR#, #sinputName:VARCHAR#, #sinputTime:VARCHAR#, #scheckName:VARCHAR#,
+      #scheckTime:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#, #rsv4:VARCHAR#,
+      #rsv5:VARCHAR#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount">
+    update DM_LOAN_AMOUNT
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="referenceNo" >
+        REFERENCE_NO = #referenceNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="workDate" >
+        WORK_DATE = #workDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="branch" >
+        BRANCH = #branch:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="customerNo" >
+        CUSTOMER_NO = #customerNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="customerName" >
+        CUSTOMER_NAME = #customerName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="customerType" >
+        CUSTOMER_TYPE = #customerType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="organizationCode" >
+        ORGANIZATION_CODE = #organizationCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanCardNo" >
+        LOAN_CARD_NO = #loanCardNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="personIdType" >
+        PERSON_ID_TYPE = #personIdType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="personIdNo" >
+        PERSON_ID_NO = #personIdNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanIndustryType" >
+        LOAN_INDUSTRY_TYPE = #loanIndustryType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="borrowerRegisterCode" >
+        BORROWER_REGISTER_CODE = #borrowerRegisterCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="ciEconomy" >
+        CI_ECONOMY = #ciEconomy:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="scaleEnterprise" >
+        SCALE_ENTERPRISE = #scaleEnterprise:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanIouCode" >
+        LOAN_IOU_CODE = #loanIouCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="productType" >
+        PRODUCT_TYPE = #productType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanActualInvest" >
+        LOAN_ACTUAL_INVEST = #loanActualInvest:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanOriginationDate" >
+        LOAN_ORIGINATION_DATE = #loanOriginationDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanMaturityDate" >
+        LOAN_MATURITY_DATE = #loanMaturityDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="currency" >
+        CURRENCY = #currency:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanIouAmount" >
+        LOAN_IOU_AMOUNT = #loanIouAmount:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="fcurrDollar" >
+        FCURR_DOLLAR = #fcurrDollar:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="interestRateFix" >
+        INTEREST_RATE_FIX = #interestRateFix:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="interestRate" >
+        INTEREST_RATE = #interestRate:DECIMAL#
+      </isNotNull>
+      <isNotNull prepend="," property="loanGuaranteeKind" >
+        LOAN_GUARANTEE_KIND = #loanGuaranteeKind:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="loanRecoverySign" >
+        LOAN_RECOVERY_SIGN = #loanRecoverySign:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="status" >
+        STATUS = #status:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="endDate" >
+        END_DATE = #endDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sinputStatus" >
+        SINPUT_STATUS = #sinputStatus:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="reportStatus" >
+        REPORT_STATUS = #reportStatus:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="delFlag" >
+        DEL_FLAG = #delFlag:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sinputName" >
+        SINPUT_NAME = #sinputName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sinputTime" >
+        SINPUT_TIME = #sinputTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="scheckName" >
+        SCHECK_NAME = #scheckName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="scheckTime" >
+        SCHECK_TIME = #scheckTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv1" >
+        RSV1 = #rsv1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv2" >
+        RSV2 = #rsv2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv3" >
+        RSV3 = #rsv3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv4" >
+        RSV4 = #rsv4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rsv5" >
+        RSV5 = #rsv5:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where ID = #id:VARCHAR#
+  </update>
+  
+  <select id="selectList" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount" resultMap="dmLoanAmountResult" >
+  	select * from DM_LOAN_AMOUNT  where SINPUT_STATUS in('1','4')   
+    <dynamic>
+     <isNotEmpty prepend="and" property="productType" >
+        PRODUCT_TYPE = #productType:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="workDate" >
+        WORK_DATE = #workDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="loanIouAmount" >
+        LOAN_IOU_AMOUNT = #loanIouAmount:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerNo" >
+        CUSTOMER_NO = #customerNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="sinputStatus" >
+        SINPUT_STATUS != #sinputStatus:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerName" >
+        CUSTOMER_NAME  like '%$customerName$%'
+      </isNotEmpty>
+    </dynamic>
+   </select>
+   <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount" resultClass="java.lang.Integer" >
+  	select count(*) from DM_LOAN_AMOUNT  where SINPUT_STATUS in('1','4')   
+    <dynamic>
+     <isNotEmpty prepend="and" property="productType" >
+        PRODUCT_TYPE = #productType:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="workDate" >
+        WORK_DATE = #workDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="loanIouAmount" >
+        LOAN_IOU_AMOUNT = #loanIouAmount:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerNo" >
+        CUSTOMER_NO = #customerNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="sinputStatus" >
+        SINPUT_STATUS != #sinputStatus:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerName" >
+        CUSTOMER_NAME  like '%$customerName$%'
+      </isNotEmpty>
+    </dynamic>
+   </select>
+    <select id="selectAuthList" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount" resultMap="dmLoanAmountResult" >
+  	select * from DM_LOAN_AMOUNT where SINPUT_STATUS ='2' 
+    <dynamic>
+     <isNotEmpty prepend="and" property="branch" >
+        BRANCH = #branch:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="workDate" >
+        WORK_DATE = #workDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="referenceNo" >
+        REFERENCE_NO = #referenceNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerNo" >
+        CUSTOMER_NO = #customerNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerName" >
+        CUSTOMER_NAME  like '%$customerName$%'
+      </isNotEmpty>
+    </dynamic>
+   </select>
+   <select id="selectAuthCounts" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount" resultClass="java.lang.Integer" >
+  	select count(*) from DM_LOAN_AMOUNT  where SINPUT_STATUS ='2' 
+    <dynamic>
+     <isNotEmpty prepend="and" property="branch" >
+        BRANCH = #branch:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="workDate" >
+        WORK_DATE = #workDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="referenceNo" >
+        REFERENCE_NO = #referenceNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerNo" >
+        CUSTOMER_NO = #customerNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerName" >
+        CUSTOMER_NAME  like '%$customerName$%'
+      </isNotEmpty>
+    </dynamic>
+   </select>
+   <select id="selectQueryList" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount" resultMap="dmLoanAmountResult" >
+  	select * from DM_LOAN_AMOUNT 
+    <dynamic prepend="where" >
+     <isNotEmpty prepend="and" property="branch" >
+        BRANCH = #branch:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="workDate" >
+        WORK_DATE = #workDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="referenceNo" >
+        REFERENCE_NO = #referenceNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerNo" >
+        CUSTOMER_NO = #customerNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerName" >
+        CUSTOMER_NAME  like '%$customerName$%'
+      </isNotEmpty>
+    </dynamic>
+   </select>
+   <select id="selectQueryCounts" parameterClass="com.synesoft.fisp.domain.model.DmLoanAmount" resultClass="java.lang.Integer" >
+  	select count(*) from DM_LOAN_AMOUNT  
+    <dynamic prepend="where" >
+     <isNotEmpty prepend="and" property="branch" >
+        BRANCH = #branch:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="workDate" >
+        WORK_DATE = #workDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="referenceNo" >
+        REFERENCE_NO = #referenceNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerNo" >
+        CUSTOMER_NO = #customerNo:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="customerName" >
+        CUSTOMER_NAME  like '%$customerName$%'
+      </isNotEmpty>
+    </dynamic>
+   </select>
+</sqlMap>

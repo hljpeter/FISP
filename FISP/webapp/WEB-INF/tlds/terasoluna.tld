@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+
+    <description>TERASOLUNA Framework JSP Tag Library</description>
+    <tlib-version>3.0</tlib-version>
+    <short-name>t</short-name>
+    <uri>http://terasoluna.org/tags</uri>
+
+    <tag>
+        <description>pagination</description>
+        <name>pagination</name>
+        <tag-class>org.terasoluna.fw.web.pagination.PaginationTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>pathTmpl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>queryTmpl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>maxDisplayCount</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>outerElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>innerElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>firstLinkText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>previousLinkText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>nextLinkText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>lastLinkText</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>disabledHref</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>activeClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>disabledClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Set HTML escaping for this tag, as a boolean
+                value. Overrides the
+                default HTML escaping setting for the current page.</description>
+            <name>htmlEscape</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <!-- TODO:naming mistake 下に messagesPanelを定義しているが既に使用しているところがエラーになるので後で消す -->
+    <tag>
+        <description>Messages Panel Tag</description>
+        <name>messagePanel</name>
+        <tag-class>org.terasoluna.fw.web.message.MessagesPanelTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>messagesAttributeName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>panelClassName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>panelTypeClassPrefix</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>panelElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>outerElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>innerElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>messagesType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Messages Panel Tag</description>
+        <name>messagesPanel</name>
+        <tag-class>org.terasoluna.fw.web.message.MessagesPanelTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>
+            メッセージの属性名を設定。modelで指定した属性名。default is "ResultMessages"
+            </description>
+            <name>messagesAttributeName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+            使用するCSSのclassを設定。default is "alert"
+            </description>
+            <name>panelClassName</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+            使用するCSSのclassを2つ使用する場合の2つ目のclassの接頭語を設定。default is "alert-"
+            </description>
+            <name>panelTypeClassPrefix</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+            本パネルの最外側のタグを設定。default is "div"
+            </description>
+            <name>panelElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+            本パネルを構成する外側のタグを設定。default is "ul"
+            </description>
+            <name>outerElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+            本パネルを構成する内側のタグを設定。default is "li"
+            </description>
+            <name>innerElement</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+            メッセージのタイプを設定。default is "null"
+            </description>
+            <name>messagesType</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>CSRF Token</description>
+        <name>csrf</name>
+        <tag-class>org.terasoluna.fw.web.token.csrf.CSRFTokenTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Transaction Token</description>
+        <name>transaction</name>
+        <tag-class>org.terasoluna.fw.web.token.transaction.TransactionTokenTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    
+    <tag>
+        <description>Money Format Tag</description>
+        <name>moneyFormat</name>
+        <tag-class>com.synesoft.fisp.app.common.taglib.MoneyFormatTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+        	<description>Money Format type</description>
+            <name>type</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format Value</description>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format Style</description>
+            <name>format</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format id</description>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format name</description>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format oncontextmenu</description>
+            <name>oncontextmenu</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format onbeforepaste</description>
+            <name>onbeforepaste</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format dot</description>
+            <name>dot</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format class</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format style</description>
+            <name>cssStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format readonly</description>
+            <name>readonly</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format maxlength</description>
+            <name>maxlength</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format percent</description>
+            <name>percent</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <description>Code Value Tag</description>
+        <name>codeValue</name>
+        <tag-class>com.synesoft.fisp.app.common.taglib.CodeValueTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+        	<description>Code Value Items</description>
+            <name>items</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Code Value Key</description>
+            <name>key</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>>Code Value type</description>
+            <name>type</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Code Value id</description>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Code Value name</description>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Code Value class</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Code Value style</description>
+            <name>cssStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Code Value readonly</description>
+            <name>readonly</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <description>Back Last Url Tag</description>
+        <name>back</name>
+        <tag-class>com.synesoft.fisp.app.common.taglib.BackLastUrlTag</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+    
+    <tag>
+        <description>Date Time Format Tag</description>
+        <name>dateTimeFormat</name>
+        <tag-class>com.synesoft.fisp.app.common.taglib.DateTimeFormatTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+        	<description>Date Time Format type</description>
+            <name>type</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format Value</description>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format Style</description>
+            <name>format</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format id</description>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format name</description>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format oncontextmenu</description>
+            <name>oncontextmenu</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time onbeforepaste</description>
+            <name>onbeforepaste</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format dot</description>
+            <name>dot</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format class</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format style</description>
+            <name>cssStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Money Format readonly</description>
+            <name>readonly</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+        	<description>Date Time Format maxlength</description>
+            <name>maxlength</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <description>ifAuthorized Tag</description>
+        <name>ifAuthorized</name>
+        <tag-class>com.synesoft.fisp.app.common.taglib.AuthorityTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+        	<description>Authorized path</description>
+            <name>path</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <description>ifNotAuthorized Tag</description>
+        <name>ifNotAuthorized</name>
+        <tag-class>com.synesoft.fisp.app.common.taglib.NotAuthorityTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+        	<description>Authorized path</description>
+            <name>path</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+</taglib>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FTZ_OFF_MSG_CTL" >
+	<!-- ========================== 通用SQL，由FtzOffMsgCtlRepository的实现类调用 ========================== -->
+	<resultMap id="abatorgenerated_FtzOffMsgCtlResult" class="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl" >
+	    <result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+	    <result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+	    <result column="VER" property="ver" jdbcType="CHAR" />
+	    <result column="SRC" property="src" jdbcType="CHAR" />
+	    <result column="DES" property="des" jdbcType="CHAR" />
+	    <result column="APP" property="app" jdbcType="VARCHAR" />
+	    <result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
+	    <result column="MSG_REF" property="msgRef" jdbcType="CHAR" />
+	    <result column="WORK_DATE" property="workDate" jdbcType="VARCHAR" />
+	    <result column="EDIT_FLAG" property="editFlag" jdbcType="CHAR" />
+	    <result column="RESERVE" property="reserve" jdbcType="VARCHAR" />
+	    <result column="RESULT" property="result" jdbcType="CHAR" />
+	    <result column="ADD_WORD" property="addWord" jdbcType="VARCHAR" />
+	    <result column="MSG_STATUS" property="msgStatus" jdbcType="CHAR" />
+	    <result column="MAK_USER_ID" property="makUserId" jdbcType="VARCHAR" />
+	    <result column="MAK_DATETIME" property="makDatetime" jdbcType="VARCHAR" />
+	    <result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
+	    <result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
+	    <result column="SND_USER_ID" property="sndUserId" jdbcType="VARCHAR" />
+	    <result column="SND_DATETIME" property="sndDatetime" jdbcType="VARCHAR" />
+	    <result column="ACK_DATETIME" property="ackDatetime" jdbcType="VARCHAR" />
+	    <result column="ERR_DATETIME" property="errDatetime" jdbcType="VARCHAR" />
+	    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+	    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+	    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="FtzOffMsgCtlVOResult" class="com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO" >
+	    <result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+	    <result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+	    <result column="VER" property="ver" jdbcType="CHAR" />
+	    <result column="SRC" property="src" jdbcType="CHAR" />
+	    <result column="DES" property="des" jdbcType="CHAR" />
+	    <result column="APP" property="app" jdbcType="VARCHAR" />
+	    <result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
+	    <result column="MSG_REF" property="msgRef" jdbcType="CHAR" />
+	    <result column="WORK_DATE" property="workDate" jdbcType="VARCHAR" />
+	    <result column="EDIT_FLAG" property="editFlag" jdbcType="CHAR" />
+	    <result column="RESERVE" property="reserve" jdbcType="VARCHAR" />
+	    <result column="RESULT" property="result" jdbcType="CHAR" />
+	    <result column="ADD_WORD" property="addWord" jdbcType="VARCHAR" />
+	    <result column="MSG_STATUS" property="msgStatus" jdbcType="CHAR" />
+	    <result column="MAK_USER_ID" property="makUserId" jdbcType="VARCHAR" />
+	    <result column="MAK_DATETIME" property="makDatetime" jdbcType="VARCHAR" />
+	    <result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
+	    <result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
+	    <result column="SND_USER_ID" property="sndUserId" jdbcType="VARCHAR" />
+	    <result column="SND_DATETIME" property="sndDatetime" jdbcType="VARCHAR" />
+	    <result column="ACK_DATETIME" property="ackDatetime" jdbcType="VARCHAR" />
+	    <result column="ERR_DATETIME" property="errDatetime" jdbcType="VARCHAR" />
+	    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+	    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+	    <result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+	    <result column="TOTALNUM" property="totalNum" jdbcType="VARCHAR" />
+	    <result column="APRNUM" property="aprNum" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="where_condition" >
+		<dynamic prepend="WHERE">
+			<isNotEmpty property="branchId" prepend="AND">
+			FTZ_OFF_MSG_CTL.BRANCH_ID = #branchId:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty property="msgNo" prepend="AND">
+			FTZ_OFF_MSG_CTL.MSG_NO = #msgNo:CHAR#
+			</isNotEmpty>
+			<isNotEmpty property="msgId" prepend="AND">
+			FTZ_OFF_MSG_CTL.MSG_ID = #msgId:CHAR#
+			</isNotEmpty>
+			<isNotEmpty property="startDate" prepend="AND">
+			<![CDATA[FTZ_OFF_MSG_CTL.WORK_DATE >= #startDate:VARCHAR#]]>
+			</isNotEmpty>
+			<isNotEmpty property="endDate" prepend="AND">
+			<![CDATA[FTZ_OFF_MSG_CTL.WORK_DATE <= #endDate:VARCHAR#]]>
+			</isNotEmpty>
+			<isNotEmpty property="msgStatus" prepend="AND">
+			FTZ_OFF_MSG_CTL.MSG_STATUS = #msgStatus:CHAR#
+			</isNotEmpty>
+			<isNotEmpty property="msgStatuss" prepend="AND">
+			<iterate property="msgStatuss" open="FTZ_OFF_MSG_CTL.MSG_STATUS IN (" close=")" conjunction=",">
+	        	#msgStatuss[]#
+	        </iterate>
+			</isNotEmpty>
+			<isNotEmpty property="editFlag" prepend="AND">
+			FTZ_OFF_MSG_CTL.EDIT_FLAG = #editFlag:CHAR#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+  	<!-- 根据条件查询数据，返回多条记录，用于查询列表 -->
+	<select id="selectCounts" 
+			parameterClass="com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO" 
+			resultClass="java.lang.Integer">
+	    SELECT
+	    	COUNT(*)
+	    FROM 
+	    	FTZ_OFF_MSG_CTL
+		<include refid="FTZ_OFF_MSG_CTL.where_condition" />
+	</select>
+  
+  	<!-- 根据条件查询数据，返回多条记录，用于查询列表 -->
+	<select id="selectList" 
+			parameterClass="com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO" 
+			resultMap="abatorgenerated_FtzOffMsgCtlResult">
+	    SELECT
+	    	MSG_ID, BRANCH_ID, VER, SRC, DES, APP, MSG_NO, MSG_REF, WORK_DATE, EDIT_FLAG, RESERVE,
+			RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME,
+			SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME, RSV1, RSV2, RSV3
+	    FROM 
+	    	FTZ_OFF_MSG_CTL
+		<include refid="FTZ_OFF_MSG_CTL.where_condition" />
+	    ORDER BY
+	    	WORK_DATE DESC
+	</select>
+  	
+  	<!-- 查询待查询数据，新增两个字段（所有交易条数，待审核交易条数） -->
+	<select id="selectListSelective" 
+			parameterClass="com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO" 
+			resultMap="FtzOffMsgCtlVOResult">
+	    SELECT
+	    	FTZ_OFF_MSG_CTL.*,
+	    	DECODE(A.TOTALNUM, NULL, 0, A.TOTALNUM) TOTALNUM,
+	    	DECODE(B.APRNUM, NULL, 0, B.APRNUM) APRNUM
+	    FROM 
+	    	FTZ_OFF_MSG_CTL
+	    LEFT JOIN
+	    	(
+	    		SELECT MSG_ID, COUNT(*) TOTALNUM FROM FTZ_OFF_TXN_DTL GROUP BY MSG_ID
+	    	) A ON
+	    	FTZ_OFF_MSG_CTL.MSG_ID = A.MSG_ID
+	    LEFT JOIN
+	    	(
+	    		<![CDATA[SELECT MSG_ID, COUNT(*) APRNUM FROM FTZ_OFF_TXN_DTL WHERE CHK_STATUS = '01' GROUP BY MSG_ID]]>
+	    	) B ON
+	    	FTZ_OFF_MSG_CTL.MSG_ID = B.MSG_ID
+		<include refid="FTZ_OFF_MSG_CTL.where_condition" />
+	</select>
+  
+  	<!-- 根据主键查询数据，返回一条记录 -->
+	<select id="selectByPrimaryKey" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl" 
+			resultMap="abatorgenerated_FtzOffMsgCtlResult">
+	    SELECT
+	    	MSG_ID, BRANCH_ID, VER, SRC, DES, APP, MSG_NO, MSG_REF, WORK_DATE, EDIT_FLAG, RESERVE,
+			RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME,
+			SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME, RSV1, RSV2, RSV3
+	    FROM 
+	    	FTZ_OFF_MSG_CTL
+		WHERE
+			MSG_ID = #msgId:VARCHAR#
+	</select>
+  
+  	<!-- 插入，MAK_DATETIME使用当前时间TO_CHAR(SYSDATE,'yyyymmddhh24miss') -->
+	<insert id="insert" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl" >
+    	INSERT INTO 
+    		FTZ_OFF_MSG_CTL 
+    	(
+    		MSG_ID, BRANCH_ID, VER, SRC, DES, APP, MSG_NO, MSG_REF, WORK_DATE,
+      		EDIT_FLAG, RESERVE, RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
+      		CHK_DATETIME, SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME, RSV1, RSV2, RSV3
+      	) VALUES (
+      		#msgId:VARCHAR#, #branchId:VARCHAR#, #ver:CHAR#, #src:CHAR#, #des:CHAR#, #app:VARCHAR#,
+			#msgNo:CHAR#, #msgRef:CHAR#, #workDate:VARCHAR#, #editFlag:CHAR#, #reserve:VARCHAR#,
+			#result:CHAR#, #addWord:VARCHAR#, #msgStatus:CHAR#, #makUserId:VARCHAR#,
+			TO_CHAR(SYSDATE,'yyyymmddhh24miss'), #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#, #sndUserId:VARCHAR#,
+			#sndDatetime:VARCHAR#, #ackDatetime:VARCHAR#, #errDatetime:VARCHAR#, #rsv1:VARCHAR#,
+			#rsv2:VARCHAR#, #rsv3:VARCHAR#
+		)
+	</insert>
+	
+  	<!-- 更新业务字段 -->
+	<update id="updateByCondtionSelective" 
+			parameterClass="com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO" >
+    	UPDATE 
+    		FTZ_OFF_MSG_CTL 
+		SET
+	    	MAK_DATETIME = TO_CHAR(SYSDATE,'yyyymmddhh24miss'),
+    		MAK_USER_ID = #makUserId:VARCHAR#
+    		<isNotEmpty property="editFlag" prepend=",">
+    		EDIT_FLAG = #editFlag:CHAR#
+    		</isNotEmpty>
+    		<isNotEmpty property="branchId" prepend=",">
+    		BRANCH_ID = #branchId:VARCHAR#
+    		</isNotEmpty>
+    		<isNotEmpty property="workDate" prepend=",">
+    		WORK_DATE = #workDate:VARCHAR#
+    		</isNotEmpty>
+    		<isNotEmpty property="msgStatus" prepend=",">
+    		MSG_STATUS = #msgStatus:CHAR#
+    		</isNotEmpty>
+      	WHERE
+      		MSG_ID = #msgId:VARCHAR# AND
+      		MAK_DATETIME = #makDatetime:CHAR# AND
+      		MSG_STATUS = #oldMsgStatus:CHAR#
+	</update>
+	
+  	<!-- 更新状态，内控字段 -->
+	<update id="updateByPrimaryKeySelective" 
+			parameterClass="com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO" >
+    	UPDATE 
+    		FTZ_OFF_MSG_CTL 
+		SET
+    		MSG_STATUS = #msgStatus:CHAR#
+			<!-- submit -->
+      		<isNotEmpty property="makUserId" prepend=",">
+	    	MAK_DATETIME = TO_CHAR(SYSDATE,'yyyymmddhh24miss'),
+    		MAK_USER_ID = #makUserId:VARCHAR#
+      		</isNotEmpty>
+      		<!-- auth -->
+      		<isNotEmpty property="chkUserId" prepend=",">
+	    	CHK_DATETIME = TO_CHAR(SYSDATE,'yyyymmddhh24miss'),
+    		CHK_USER_ID = #chkUserId:VARCHAR#
+      		</isNotEmpty>
+      	WHERE
+      		MSG_ID = #msgId:VARCHAR# AND
+      		MSG_STATUS = #oldMsgStatus:CHAR# AND
+      		(CHK_DATETIME = #chkDatetime:CHAR# OR CHK_DATETIME IS NULL) AND
+      		(MAK_DATETIME = #makDatetime:CHAR# OR MAK_DATETIME IS NULL)
+	</update>
+	
+  	<!-- 根据主键删除信息，删除一条 -->
+	<delete id="deleteByPrimaryKey" 
+			parameterClass="com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO" >
+	    DELETE FROM 
+	    	FTZ_OFF_MSG_CTL
+	    WHERE 
+	    	MSG_ID = #msgId:VARCHAR# AND
+      		MSG_STATUS = #oldMsgStatus:CHAR#
+      		<isNotEmpty property="chkDatetime" prepend="AND">
+      		(CHK_DATETIME = #chkDatetime:CHAR# OR CHK_DATETIME IS NULL)
+      		</isNotEmpty>
+      		<isNotEmpty property="makDatetime" prepend="AND">
+      		(MAK_DATETIME = #makDatetime:CHAR# OR MAK_DATETIME IS NULL)
+      		</isNotEmpty>
+	</delete>
+	<!-- ========================== 通用SQL，由FtzOffMsgCtlRepository的实现类调用 ========================== -->
+	
+	<!-- 应付信用证录入/修改 -->
+	<sql id="where_condition_210302" >
+		<dynamic prepend="WHERE">
+		    <isNotEmpty property="msgNo" prepend="AND">
+			FTZ_OFF_MSG_CTL.MSG_NO = #msgNo:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty property="branchId" prepend="AND">
+			FTZ_OFF_MSG_CTL.BRANCH_ID = #branchId:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty property="msgId" prepend="AND">
+			FTZ_OFF_MSG_CTL.MSG_ID = #msgId:CHAR#
+			</isNotEmpty>
+			<isNotEmpty property="msgStatus" prepend="AND">
+			FTZ_OFF_MSG_CTL.MSG_STATUS = #msgStatus:CHAR#
+			</isNotEmpty>
+			<isNotEmpty property="rsv1" prepend="AND">
+			<![CDATA[FTZ_OFF_MSG_CTL.WORK_DATE >= #rsv1:VARCHAR#]]>
+			</isNotEmpty>
+			<isNotEmpty property="rsv2" prepend="AND">
+			<![CDATA[FTZ_OFF_MSG_CTL.WORK_DATE <= #rsv2:VARCHAR#]]>
+			</isNotEmpty>
+			<isNotEmpty property="msgStatuss" prepend="AND">
+			<iterate property="msgStatuss" open="FTZ_OFF_MSG_CTL.MSG_STATUS IN (" close=")" conjunction=",">
+	        	#msgStatuss[]#
+	        </iterate>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!-- 远期结售汇新增修改 -->
+	<insert id="insertInput" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl" >
+    	INSERT INTO 
+    		FTZ_OFF_MSG_CTL 
+    	(
+    		MSG_ID, BRANCH_ID, VER, SRC, DES, APP, MSG_NO, MSG_REF, WORK_DATE,
+      		EDIT_FLAG, RESERVE, RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
+      		CHK_DATETIME, SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME, RSV1, RSV2, RSV3
+      	) VALUES (
+      		#msgId:VARCHAR#, #branchId:VARCHAR#, #ver:CHAR#, #src:CHAR#, #des:CHAR#, #app:VARCHAR#,
+			#msgNo:CHAR#, #msgRef:CHAR#, #workDate:VARCHAR#, #editFlag:CHAR#, #reserve:VARCHAR#,
+			#result:CHAR#, #addWord:VARCHAR#, #msgStatus:CHAR#, #makUserId:VARCHAR#,
+			#makDatetime:VARCHAR#, #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#, #sndUserId:VARCHAR#,
+			#sndDatetime:VARCHAR#, #ackDatetime:VARCHAR#, #errDatetime:VARCHAR#, #rsv1:VARCHAR#,
+			#rsv2:VARCHAR#, #rsv3:VARCHAR#
+		)
+	</insert>
+	<update id="updateByPrimaryKeyInput" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl">
+		update FTZ_OFF_MSG_CTL
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="branchId">
+				BRANCH_ID = #branchId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="ver">
+				VER = #ver:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="src">
+				SRC = #src:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="des">
+				DES = #des:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="app">
+				APP = #app:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgNo">
+				MSG_NO = #msgNo:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgRef">
+				MSG_REF = #msgRef:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="workDate">
+				WORK_DATE = #workDate:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="editFlag">
+				EDIT_FLAG = #editFlag:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="reserve">
+				RESERVE = #reserve:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="result">
+				RESULT = #result:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="addWord">
+				ADD_WORD = #addWord:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgStatus">
+				MSG_STATUS = #msgStatus:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makUserId">
+				MAK_USER_ID = #makUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makDatetime">
+				MAK_DATETIME = #makDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkUserId">
+				CHK_USER_ID = #chkUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkDatetime">
+				CHK_DATETIME = #chkDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="sndUserId">
+				SND_USER_ID = #sndUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="sndDatetime">
+				SND_DATETIME = #sndDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="ackDatetime">
+				ACK_DATETIME = #ackDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="errDatetime">
+				ERR_DATETIME = #errDatetime:VARCHAR#
+			</isNotNull>
+		</dynamic>
+		where MSG_ID = #msgId:VARCHAR#
+		<isNotEmpty property="rsv1">
+			and MAK_DATETIME = #rsv1:VARCHAR#
+		</isNotEmpty>
+		<isNotEmpty property="rsv2">
+			and CHK_DATETIME = #rsv2:VARCHAR#
+		</isNotEmpty>
+	</update>
+	
+	<delete id="deleteByMsgId" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl">
+		delete from FTZ_OFF_MSG_CTL
+		where MSG_ID = #msgId:VARCHAR#
+	</delete>
+	
+	<select id="selectModelCounts" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl" 
+			resultClass="java.lang.Integer">
+	    SELECT
+	    	COUNT(*)
+	    FROM 
+	    	FTZ_OFF_MSG_CTL
+		<include refid="FTZ_OFF_MSG_CTL.where_condition_210302" />
+	</select>
+  
+	<select id="selectModelList" 
+			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl" 
+			resultMap="abatorgenerated_FtzOffMsgCtlResult">
+	    SELECT
+	    	MSG_ID, BRANCH_ID, VER, SRC, DES, APP, MSG_NO, MSG_REF, WORK_DATE, EDIT_FLAG, RESERVE,
+			RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID, CHK_DATETIME,
+			SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME, RSV1, RSV2, RSV3
+	    FROM 
+	    	FTZ_OFF_MSG_CTL
+		<include refid="FTZ_OFF_MSG_CTL.where_condition_210302" />
+	    ORDER BY
+	    	WORK_DATE DESC
+	</select>
+	
+</sqlMap>

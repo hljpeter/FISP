@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BAT_CTL" >
+  <resultMap id="BatCtlResult" class="com.synesoft.sysrunner.domain.model.BatCtl" >
+    <result column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="BAT_DATE" property="batDate" jdbcType="VARCHAR" />
+    <result column="RUNTIME_ID" property="runtimeId" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" resultMap="BatCtlResult" parameterClass="com.synesoft.sysrunner.domain.model.BatCtl" >
+    select ID, BAT_DATE, RUNTIME_ID
+    from BAT_CTL
+    where ID = #id:DECIMAL#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.sysrunner.domain.model.BatCtl" >
+    delete from BAT_CTL
+    where ID = #id:DECIMAL#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.sysrunner.domain.model.BatCtl" >
+    insert into BAT_CTL (ID, BAT_DATE, RUNTIME_ID)
+    values (#id:DECIMAL#, #batDate:VARCHAR#, #runtimeId:DECIMAL#)
+  </insert>
+  <update id="updateByPrimaryKey" parameterClass="com.synesoft.sysrunner.domain.model.BatCtl" >
+    update BAT_CTL
+    set BAT_DATE = #batDate:VARCHAR#,
+      RUNTIME_ID = #runtimeId:DECIMAL#
+    where ID = #id:DECIMAL#
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.sysrunner.domain.model.BatCtl" >
+    update BAT_CTL
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="batDate" >
+        BAT_DATE = #batDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="runtimeId" >
+        RUNTIME_ID = #runtimeId:DECIMAL#
+      </isNotNull>
+    </dynamic>
+    where ID = #id:DECIMAL#
+  </update>
+  
+  <select id="selectList" resultMap="BatCtlResult" parameterClass="com.synesoft.sysrunner.domain.model.BatCtl" >
+    select ID, BAT_DATE, RUNTIME_ID
+    from BAT_CTL
+  </select>
+  
+</sqlMap>

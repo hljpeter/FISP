@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SYS_CHG_SYS_LOG">
+  <resultMap class="com.synesoft.fisp.domain.model.SysChgSysLog" id="SysChgSysLogResult">
+    <result column="SYS_DATA_ID" jdbcType="VARCHAR" property="sysDataId" />
+    <result column="BRANCH_ID" jdbcType="VARCHAR" property="branchId" />
+    <result column="FUNC_ID" jdbcType="VARCHAR" property="funcId" />
+    <result column="FUNC_NAME" jdbcType="VARCHAR" property="funcName" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NAME_EN" jdbcType="VARCHAR" property="userNameEn" />
+    <result column="USER_NAME_CN" jdbcType="VARCHAR" property="userNameCn" />
+    <result column="OPER_DATE" jdbcType="VARCHAR" property="operDate" />
+    <result column="OPER_TIME" jdbcType="VARCHAR" property="operTime" />
+    <result column="OPER_TYPE" jdbcType="CHAR" property="operType" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="REV1" jdbcType="VARCHAR" property="rev1" />
+    <result column="REV2" jdbcType="VARCHAR" property="rev2" />
+    <result column="REV3" jdbcType="VARCHAR" property="rev3" />
+    <result column="REV4" jdbcType="VARCHAR" property="rev4" />
+    <result column="REV5" jdbcType="VARCHAR" property="rev5" />
+  </resultMap>
+  <resultMap id="SysChgSysLogResultWithBLOBs" class="com.synesoft.fisp.domain.model.SysChgSysLogWithBLOBs" extends="SYS_CHG_SYS_LOG.SysChgSysLogResult" >
+    <result column="DATA_BEFORE" property="dataBefore" jdbcType="CLOB" />
+    <result column="DATA_AFTER" property="dataAfter" jdbcType="CLOB" />
+  </resultMap>
+  <select id="selectByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.SysChgSysLog" resultMap="SysChgSysLogResultWithBLOBs">
+    select SYS_DATA_ID, BRANCH_ID, FUNC_ID, FUNC_NAME, USER_ID, USER_NAME_EN, USER_NAME_CN,
+      OPER_DATE, OPER_TIME, OPER_TYPE, COMMENTS, REV1, REV2, REV3, REV4, REV5, DATA_BEFORE,
+      DATA_AFTER
+    from SYS_CHG_SYS_LOG
+    where SYS_DATA_ID = #sysDataId:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.synesoft.fisp.domain.model.SysChgSysLog">
+    delete from SYS_CHG_SYS_LOG
+    where SYS_DATA_ID = #sysDataId:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.synesoft.fisp.domain.model.SysChgSysLogWithBLOBs">
+    insert into SYS_CHG_SYS_LOG (SYS_DATA_ID, BRANCH_ID, FUNC_ID, FUNC_NAME, USER_ID, USER_NAME_EN,
+      USER_NAME_CN, OPER_DATE, OPER_TIME, OPER_TYPE, COMMENTS, REV1, REV2, REV3, REV4, REV5,
+      DATA_BEFORE, DATA_AFTER)
+    values (#sysDataId:VARCHAR#, #branchId:VARCHAR#, #funcId:VARCHAR#, #funcName:VARCHAR#,
+      #userId:VARCHAR#, #userNameEn:VARCHAR#, #userNameCn:VARCHAR#, #operDate:VARCHAR#,
+      #operTime:VARCHAR#, #operType:CHAR#, #comments:VARCHAR#, #rev1:VARCHAR#, #rev2:VARCHAR#,
+      #rev3:VARCHAR#, #rev4:VARCHAR#, #rev5:VARCHAR#, #dataBefore:CLOB#, #dataAfter:CLOB#)
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.fisp.domain.model.SysChgSysLogWithBLOBs">
+    update SYS_CHG_SYS_LOG
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="branchId">
+        BRANCH_ID = #branchId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="funcId">
+        FUNC_ID = #funcId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="funcName">
+        FUNC_NAME = #funcName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userId">
+        USER_ID = #userId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userNameEn">
+        USER_NAME_EN = #userNameEn:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userNameCn">
+        USER_NAME_CN = #userNameCn:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="operDate">
+        OPER_DATE = #operDate:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="operTime">
+        OPER_TIME = #operTime:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="operType">
+        OPER_TYPE = #operType:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="comments">
+        COMMENTS = #comments:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rev1">
+        REV1 = #rev1:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rev2">
+        REV2 = #rev2:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rev3">
+        REV3 = #rev3:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rev4">
+        REV4 = #rev4:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="rev5">
+        REV5 = #rev5:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="dataBefore">
+        DATA_BEFORE = #dataBefore:CLOB#
+      </isNotNull>
+      <isNotNull prepend="," property="dataAfter">
+        DATA_AFTER = #dataAfter:CLOB#
+      </isNotNull>
+    </dynamic>
+    where SYS_DATA_ID = #sysDataId:VARCHAR#
+  </update>
+   <select id="selectCounts" parameterClass="com.synesoft.fisp.domain.model.SysChgSysLog" resultClass="java.lang.Integer" >
+  	select count(*) from SYS_CHG_SYS_LOG
+    <dynamic prepend="where">
+     <isNotEmpty prepend="and" property="branchId" >
+        BRANCH_ID = #branchId:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="funcId" >
+        FUNC_ID = #funcId:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="userId" >
+        USER_ID = #userId:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="operType" >
+        OPER_TYPE = #operType:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="minOperDate" >
+        OPER_DATE >= #minOperDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="maxOperDate" >
+        OPER_DATE <![CDATA[<= #maxOperDate:VARCHAR#]]>
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="minOperTime" >
+        OPER_TIME >= #minOperTime:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="maxOperTime" >
+        OPER_TIME <![CDATA[<= #maxOperTime:VARCHAR#]]>
+      </isNotEmpty>
+    </dynamic>
+   </select>
+   <select id="selectList" parameterClass="com.synesoft.fisp.domain.model.SysChgSysLog" resultMap="SysChgSysLogResult" >
+  	select * from SYS_CHG_SYS_LOG 
+    <dynamic prepend="where">
+     <isNotEmpty prepend="and" property="branchId" >
+        BRANCH_ID = #branchId:VARCHAR#
+      </isNotEmpty>
+       <isNotEmpty prepend="and" property="funcId" >
+        FUNC_ID = #funcId:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="userId" >
+        USER_ID = #userId:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="operType" >
+        OPER_TYPE = #operType:CHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="minOperDate" >
+        OPER_DATE >= #minOperDate:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="maxOperDate" >
+        OPER_DATE <![CDATA[<= #maxOperDate:VARCHAR#]]>
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="minOperTime" >
+        OPER_TIME >= #minOperTime:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="maxOperTime" >
+        OPER_TIME <![CDATA[<= #maxOperTime:VARCHAR#]]>
+      </isNotEmpty>
+    </dynamic>
+   </select>
+</sqlMap>
