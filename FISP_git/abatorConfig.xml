@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN" "http://ibatis.apache.org/dtd/abator-config_1_0.dtd" >
+<abatorConfiguration >
+  <abatorContext >
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@10.30.60.222:1521:orcl" userId="fisp" password="fisp" >
+
+      <classPathEntry location="D:\gongsi\Workspace\FISP\webapp\WEB-INF\lib\ojdbc6.jar" />
+
+    </jdbcConnection>
+    <javaModelGenerator targetPackage="com.synesoft.ftzmis.domain.model" targetProject="FISP" />
+    <sqlMapGenerator targetPackage="com.synesoft.ftzmis.domain.model" targetProject="FISP" />
+    <table tableName="FTZ_ACT_MSTR_TMP" domainObjectName="FtzActMstrTmp">  </table>
+  </abatorContext>
+</abatorConfiguration>
