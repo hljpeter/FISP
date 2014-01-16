@@ -53,14 +53,11 @@
 									.text();
 							var selected_seqNo = $(this).find("td:eq(9)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210202/QryDtlDtl?selected_msgId='
-													+ selected_msgId
-													+ "&selected_seqNo="
-													+ selected_seqNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+							showDialog('${pageContext.request.contextPath}/FTZ210202/QryDtlDtl?selected_msgId='
+							+ selected_msgId
+							+ "&selected_seqNo="
+							+ selected_seqNo,'500','1024');
+							
 						});
 	});
 
@@ -260,7 +257,7 @@
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUSS" />：</td>
-				<td><form:select path="ftzInMsgCtl.msgStatus" readonly="true">
+				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>
@@ -317,7 +314,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: center;" colspan="4">
-					<button type="button" class="btn btn-primary" onclick="DtlSubmit()"><spring:message code="ftz.label.SAVE_MSG" /></button>
+					<button type="button" class="btn btn-primary" onclick="DtlSubmit()"><spring:message code="ftz.label.SUBMIT_MSG" /></button>
 					
 				</td>
 			</tr>

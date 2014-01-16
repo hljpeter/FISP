@@ -20,12 +20,8 @@
 		$("#pageTable").find("tr").bind('dblclick', function() {
 			var selected_actNo = $(this).find("td:eq(3)").text();
 			var selected_subActNo = $(this).find("td:eq(4)").text();
-			window
-			.showModalDialog(
-					'${pageContext.request.contextPath}/FTZCMAccountQry/QryDtl?selected_actNo='
-							+ selected_actNo +'&selected_subActNo='+ selected_subActNo,
-					window,
-					'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZCMAccountQry/QryDtl?selected_actNo='
+					+ selected_actNo +'&selected_subActNo='+ selected_subActNo,'500','1024');
 		});
 	});
 	
@@ -60,12 +56,8 @@
 			alert("请选择一条账户数据!");
 			return;
 		} else {
-			window
-			.showModalDialog(
-					'${pageContext.request.contextPath}/FTZCMAccountQry/QryDtl?selected_actNo='
-							+ selected_actNo +'&selected_subActNo='+ selected_subActNo,
-					window,
-					'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZCMAccountQry/QryDtl?selected_actNo='
+					+ selected_actNo +'&selected_subActNo='+ selected_subActNo,'500','1024');
 		}
 	}
 </script>

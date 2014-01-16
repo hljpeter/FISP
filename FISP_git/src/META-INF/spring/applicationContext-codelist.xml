@@ -3706,7 +3706,7 @@
 		lazy-init="true">
 		<property name="dataSource" ref="dataSource" />
 		<property name="querySql"
-			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='zh_CN' and META_VAL in ('01','02','04')" />
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='zh_CN' and META_VAL in ('01','02','04','16')" />
 		<property name="valueColumn" value="META_VAL" />
 		<property name="labelColumn" value="META_NAME" />
 		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
@@ -3715,7 +3715,7 @@
 		lazy-init="true">
 		<property name="dataSource" ref="dataSource" />
 		<property name="querySql"
-			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='en_US' and META_VAL in ('01','02','04')" />
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_MSG_STATUS' and META_LAN='en_US' and META_VAL in ('01','02','04','16')" />
 		<property name="valueColumn" value="META_VAL" />
 		<property name="labelColumn" value="META_NAME" />
 		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>

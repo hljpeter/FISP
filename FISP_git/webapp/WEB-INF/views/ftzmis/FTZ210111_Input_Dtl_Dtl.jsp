@@ -187,7 +187,7 @@
 						code="ftz.label.valueDate" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.valueDate"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
-				<td class="label_td"><spring:message
+				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.EXPIRE_DATE" />：</td>
 				<td><form:input id="ftzInTxnDtl.expireDate"
 						path="ftzInTxnDtl.expireDate"

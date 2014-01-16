@@ -177,5 +177,7 @@ public class Table {
 	public static final String SYS_ROLE_FUNC = "SYS_ROLE_FUNC";
 	/** 角色-功能对照零时表 **/
 	public static final String SYS_ROLE_FUNC_TMP = "SYS_ROLE_FUNC_TMP";
+	
+	public static final String SYS_KEY = "SYS_KEY";
 
 }

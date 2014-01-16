@@ -96,8 +96,17 @@ public class FTZ210306ServiceImp extends FTZOffCommonServiceImp {
 			messages.add("e.ftzmis.210306.0015");								
 			throw new BusinessException(messages);
 		}
+
+		// 期限类型为“远期”时，期限长度必填
+		String termCondin = ftzOffTxnDtl.getTermCondition();
+		Short termLength = ftzOffTxnDtl.getTermLength();
+		if (CommonConst.TERM_CONDITION_FUTURE.equals(termCondin) && null == termLength) {
+			log.error("[e.ftzmis.210306.0016] the termlength cannot be empty!"); 
+			messages.add("e.ftzmis.210306.0016");								
+			throw new BusinessException(messages);
+		}
 		
-		ftzOffTxnDtl.setTermLength(CommonConst.TERM_CONDITION_IMMEDIATE.equals(ftzOffTxnDtl.getTermCondition())? 0: ftzOffTxnDtl.getTermLength());
+		ftzOffTxnDtl.setTermLength(CommonConst.TERM_CONDITION_IMMEDIATE.equals(termCondin)? 0: termLength);
 		ftzOffTxnDtl.setReportCode(msgNo);
 		ftzOffTxnDtl.setSubmitDate(DateUtil.getFormatDateRemoveSprit(ftzOffTxnDtl.getSubmitDate()));
 		ftzOffTxnDtl.setTranDate(DateUtil.getFormatDateRemoveSprit(ftzOffTxnDtl.getTranDate()));
@@ -141,8 +150,17 @@ public class FTZ210306ServiceImp extends FTZOffCommonServiceImp {
 			messages.add("e.ftzmis.210306.0015");								
 			throw new BusinessException(messages);
 		}
+
+		// 期限类型为“远期”时，期限长度必填
+		String termCondin = ftzOffTxnDtl.getTermCondition();
+		Short termLength = ftzOffTxnDtl.getTermLength();
+		if (CommonConst.TERM_CONDITION_FUTURE.equals(termCondin) && null == termLength) {
+			log.error("[e.ftzmis.210306.0016] the termlength cannot be empty!"); 
+			messages.add("e.ftzmis.210306.0016");								
+			throw new BusinessException(messages);
+		}
 		
-		ftzOffTxnDtl.setTermLength(CommonConst.TERM_CONDITION_IMMEDIATE.equals(ftzOffTxnDtl.getTermCondition())? 0: ftzOffTxnDtl.getTermLength());
+		ftzOffTxnDtl.setTermLength(CommonConst.TERM_CONDITION_IMMEDIATE.equals(termCondin)? 0: termLength);
 		ftzOffTxnDtl.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzOffTxnDtl.getMakDatetime()));
 		ftzOffTxnDtl.setChkDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzOffTxnDtl.getChkDatetime()));
 		ftzOffTxnDtl.setCountryCode(countryCode);

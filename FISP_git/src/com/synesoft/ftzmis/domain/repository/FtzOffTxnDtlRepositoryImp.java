@@ -17,6 +17,7 @@ import com.synesoft.fisp.domain.component.PageHandler;
 import com.synesoft.ftzmis.app.common.constants.SQLMap;
 import com.synesoft.ftzmis.app.common.constants.Table;
 import com.synesoft.ftzmis.domain.model.FtzOffTxnDtl;
+import com.synesoft.ftzmis.domain.model.vo.FtzOffTxnDtlVO;
 
 /**
  * 表外交易明细表(DAT_OFF_TXN_DTL)
@@ -100,11 +101,11 @@ public class FtzOffTxnDtlRepositoryImp implements FtzOffTxnDtlRepository {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.synesoft.ftzmis.domain.repository.FtzOffTxnDtlRepository#updateSatus(com.synesoft.ftzmis.domain.model.FtzOffTxnDtl)
+	 * @see com.synesoft.ftzmis.domain.repository.FtzOffTxnDtlRepository#updateSatus(com.synesoft.ftzmis.domain.model.vo.FtzOffTxnDtlVO)
 	 */
-	public int updateStatus(FtzOffTxnDtl ftzOffTxnDtl) {
+	public int updateStatus(FtzOffTxnDtlVO ftzOffTxnDtlVO) {
 		log.debug("FtzOffTxnDtlRepositoryImp.update() start ...");
-		return updateDAO.execute(Table.FTZ_OFF_TXN_DTL + "." + SQLMap.UPDATE_PRIMARY_KEY_SELECTIVE, ftzOffTxnDtl);
+		return updateDAO.execute(Table.FTZ_OFF_TXN_DTL + "." + SQLMap.UPDATE_PRIMARY_KEY_SELECTIVE, ftzOffTxnDtlVO);
 	}
 
 	/* (non-Javadoc)

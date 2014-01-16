@@ -18,12 +18,8 @@
 		$("#pageTable").find("tr").bind('dblclick', function() {
 			var selected_actNo = $(this).find("td:eq(3)").text();
 			var selected_subActNo = $(this).find("td:eq(4)").text();
-			window
-			.showModalDialog(
-					'${pageContext.request.contextPath}/FTZ210501/QryDtl?selected_actNo='
-							+ selected_actNo +'&selected_subActNo='+ selected_subActNo,
-					window,
-					'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210501/QryDtl?selected_actNo='
+					+ selected_actNo +'&selected_subActNo='+ selected_subActNo,'500','1024');
 		});
 	});
 	
@@ -37,8 +33,7 @@
 	//add button
 	function addAct() {
 		var form = document.getElementById("form");
-		window.showModalDialog('${pageContext.request.contextPath}/FTZ210501/InputInit',window,
-		'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+		showDialog('${pageContext.request.contextPath}/FTZ210501/InputInit','500','1024');
 		form.submit();
 	}
 	
@@ -70,7 +65,7 @@
 		} else {
 			if("n" == $("#updAuthFlag").val()) {
 				showDialog('${pageContext.request.contextPath}/FTZ210501/InputUpd?selected_actNo='+
-						selected_actNo+'&selected_subActNo='+selected_subActNo, '600', '1024');
+						selected_actNo+'&selected_subActNo='+selected_subActNo, '500', '1024');
 			} else if("y" == $("#updAuthFlag").val()){
 				alert("该账户待审核，请审核后操作！");
 			}
@@ -103,11 +98,8 @@
 			alert("请选择一条账户数据!");
 			return;
 		} else {
-			window
-			.showModalDialog(
-					'${pageContext.request.contextPath}/FTZ210501/QryDtl?selected_actNo='
-							+ selected_actNo+'&selected_subActNo='+selected_subActNo, window,
-					'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210501/QryDtl?selected_actNo='
+					+ selected_actNo+'&selected_subActNo='+selected_subActNo,'500','1024');
 		}
 	}
 </script>
@@ -175,15 +167,10 @@
 				<td><form:select path="query_accType">
 					<form:option value=""></form:option>
 					<form:options items="${FTZ_ACC_TYPE}"/>
-				</form:select>
+				</form:select></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.ACC_STATUS"/>：</td>
-				<td><form:select path="query_accStatus">
-						<form:option value=""></form:option>
-						<form:options items="${FTZ_ACC_STATUS}" />
-					</form:select></td>
-				<td style="text-align: right;" colspan="2">
+				<td style="text-align: right;" colspan="4">
 					<button type="submit" class="btn btn-primary" onclick="search()">
 						<spring:message code="button.label.Search" />
 					</button>

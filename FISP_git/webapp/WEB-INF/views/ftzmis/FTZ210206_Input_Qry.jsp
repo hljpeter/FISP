@@ -87,7 +87,7 @@ $("#dtl").click(function() {
 	} else {
 		
 		selectedRow = eval("(" + checkSelected() + ")"); 
-		showDialog('${pageContext.request.contextPath}/FTZ210206/Input/Dtl/Init?ftzInMsgCtl.msgId=' + selectedRow.msgId, '500', '1040');
+		showDialog('${pageContext.request.contextPath}/FTZ210206/QryDtl?ftzInMsgCtl.msgId=' + selectedRow.msgId, '500', '1040');
 	}
 });
 
@@ -107,7 +107,7 @@ $("#pageTable")
 			var selected_msgId = $(this).find("td:eq(3)")
 					.text();
 			
-			showDialog('${pageContext.request.contextPath}/FTZ210206/Input/Dtl/Init?ftzInMsgCtl.msgId=' + selected_msgId, '500', '1040');
+			showDialog('${pageContext.request.contextPath}/FTZ210206/QryDtl?ftzInMsgCtl.msgId=' + selected_msgId, '500', '1040');
 
 		});
 
@@ -125,6 +125,7 @@ function queryFTZ210206() {
 <div id="id_showMsg" style="display: none"> 
 	<br /><br />
 	<div id="id_result">
+	    <t:messagePanel />
 		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
 		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
 		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />

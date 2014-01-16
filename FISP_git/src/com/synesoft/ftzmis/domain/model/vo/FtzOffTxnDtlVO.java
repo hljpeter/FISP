@@ -8,20 +8,21 @@ import com.synesoft.ftzmis.domain.model.FtzOffTxnDtl;
  */
 public class FtzOffTxnDtlVO extends FtzOffTxnDtl {
 
-	private String oldMakDatetime;
+	private String oldChkStatus;
 
 	/**
-	 * @return the oldMakDatetime
+	 * @return the oldChkStatus
 	 */
-	public String getOldMakDatetime() {
-		return oldMakDatetime;
+	public String getOldChkStatus() {
+		return oldChkStatus;
 	}
 
 	/**
-	 * @param oldMakDatetime the oldMakDatetime to set
+	 * @param oldChkStatus the oldChkStatus to set
 	 */
-	public void setOldMakDatetime(String oldMakDatetime) {
-		this.oldMakDatetime = oldMakDatetime;
+	public void setOldChkStatus(String oldChkStatus) {
+		this.oldChkStatus = oldChkStatus;
 	}
+
 	
 }

@@ -38,7 +38,7 @@ public class FTZ210203Form {
 
 	private String selected_msgId = "";
 
-	private Integer selected_seqNo;
+	private String selected_seqNo;
 
 	private String selected_msgNo = "";
 
@@ -136,11 +136,11 @@ public class FTZ210203Form {
 		this.selected_msgId = selected_msgId;
 	}
 
-	public Integer getSelected_seqNo() {
+	public String getSelected_seqNo() {
 		return selected_seqNo;
 	}
 
-	public void setSelected_seqNo(Integer selected_seqNo) {
+	public void setSelected_seqNo(String selected_seqNo) {
 		this.selected_seqNo = selected_seqNo;
 	}
 

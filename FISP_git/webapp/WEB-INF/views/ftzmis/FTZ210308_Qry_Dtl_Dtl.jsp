@@ -13,7 +13,7 @@
 				
 				<!-- 申报日期 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.SUBMIT_DATE"/>：</td>
-				<td><form:input path="ftzOffTxnDtl.submitDate" type="text" class="input-large date" maxLength="10" maxLength="10" readonly="true"/></td>
+				<td><form:input path="ftzOffTxnDtl.submitDate" type="text" class="input-large date" maxLength="10" readonly="true"/></td>
 			</tr>
 			<tr>	
 				<!-- 所属机构代码 -->
@@ -78,7 +78,7 @@
 			<tr>	
 				<!-- 保兑到期日 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.EXPIRATIONDATE"/>：</td>
-				<td colspan="3"><form:input path="ftzOffTxnDtl.expirationDate" type="text" class="input-large date" maxLength="10" maxLength="10" readonly="true"/></td>
+				<td colspan="3"><form:input path="ftzOffTxnDtl.expirationDate" type="text" class="input-large date" maxLength="10" readonly="true"/></td>
 			</tr>
 			<tr><td colspan="4"><hr/></td><td>
 			<tr>	

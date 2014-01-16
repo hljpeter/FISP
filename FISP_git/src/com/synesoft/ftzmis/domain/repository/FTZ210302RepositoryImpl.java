@@ -49,7 +49,7 @@ public class FTZ210302RepositoryImpl implements FTZ210302Repository {
 		return updateDAO.execute(Table.FTZ_OFF_MSG_CTL + "." + SQLMap.INSERT, insert_FtzOffMsgCtl);
 	}
 	
-	public int getSeqNo(FtzOffTxnDtl ftzOffTxnDtl){
+	public String getSeqNo(FtzOffTxnDtl ftzOffTxnDtl){
 		return queryDAO.executeForObject(Table.FTZ_OFF_TXN_DTL + "." + SQLMap.SELECT_SEQ_NO, ftzOffTxnDtl, Integer.class);
 	}
 	

@@ -19,7 +19,7 @@
 </div>
 
 <div class="page_title">
-	<spring:message code="ftzmis.title.210108.qry.dtl.dtl" />
+	<spring:message code="ftzmis.title.210210.qry.dtl.dtl" />
 </div>
 
 <div class="row">

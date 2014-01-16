@@ -22,9 +22,9 @@
 		}
 
 		$("#pageTable").find("tr").bind('click', function() {
-			var selected_msgId = $(this).find("td:eq(10)").text();
-			var selected_seqNo = $(this).find("td:eq(11)").text();
-			var selected_chkStatus = $(this).find("td:eq(12)").text();
+			var selected_msgId = $(this).find("td:eq(11)").text();
+			var selected_seqNo = $(this).find("td:eq(12)").text();
+			var selected_chkStatus = $(this).find("td:eq(13)").text();
 			var old_selected_msgId = $("#msgId").val();
 			var old_selected_seqNo = $("#selected_seqNo").val();
 			if (null == old_selected_seqNo) {
@@ -47,20 +47,16 @@
 			}
 
 		});
-		$("#pageTable")
-				.find("tr")
-				.bind(
-						'dblclick',
-						function() {
-							var selected_msgId = $(this).find("td:eq(10)")
-									.text();
-							var selected_seqNo = $(this).find("td:eq(11)")
-									.text();
-							showDialog('${pageContext.request.contextPath}/FTZ210103/QryDtlDtl?selected_msgId='
-									+ selected_msgId
-									+ "&selected_seqNo="
-									+ selected_seqNo,'500','1024');
-						});
+		$("#pageTable").find("tr").bind(
+				'dblclick',
+				function() {
+					var selected_msgId = $(this).find("td:eq(11)").text();
+					var selected_seqNo = $(this).find("td:eq(12)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210103/QryDtlDtl?selected_msgId='
+									+ selected_msgId + "&selected_seqNo="
+									+ selected_seqNo, '500', '1024');
+				});
 	});
 
 	function accoutQry() {
@@ -138,9 +134,10 @@
 			alert("请选择一条明细数据！");
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210103/QryDtlDtl?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210103/QryDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
 		}
 	}
 	function delDetailDtl() {
@@ -170,8 +167,9 @@
 	}
 	function addDetailDtl() {
 		var selected_msgId = $("#msgId").val();
-		showDialog('${pageContext.request.contextPath}/FTZ210103/AddDtlDtlInit?selected_msgId='
-				+ selected_msgId,'500','1024');
+		showDialog(
+				'${pageContext.request.contextPath}/FTZ210103/AddDtlDtlInit?selected_msgId='
+						+ selected_msgId, '500', '1024');
 		queryFTZ210103();
 	}
 	function uptDetailDtl() {
@@ -186,9 +184,10 @@
 				alert("审核通过明细无法修改或删除！");
 				return;
 			}
-			showDialog('${pageContext.request.contextPath}/FTZ210103/UptDtlDtlInit?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210103/UptDtlDtlInit?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
 			queryFTZ210103();
 		}
 	}
@@ -303,7 +302,8 @@
 				<tr>
 					<td class="label_td"><spring:message
 							code="ftz.label.PBOC_STATUS" />：</td>
-					<td colspan="3"><form:select path="ftzInMsgCtl.result" disabled="true">
+					<td colspan="3"><form:select path="ftzInMsgCtl.result"
+							disabled="true">
 							<form:option value=""></form:option>
 							<form:options items="${FTZ_PROC_RESULT}" />
 						</form:select></td>
@@ -314,7 +314,7 @@
 							path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
 				</tr>
 			</c:if>
-			
+
 			<tr>
 				<td style="text-align: center;" colspan="4"><input id="dtlSub"
 					type="button" class="btn btn-primary" onclick="DtlSubmit()"
@@ -335,7 +335,7 @@
 				<tr>
 					<th style="vertical-align: middle; text-align: center" width="10px"><spring:message
 							code="fisp.label.common.no" /></th>
-					<th style="vertical-align: middle; text-align: center" width="80px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="70px"><spring:message
 							code="ftz.label.CD_FLAG" /></th>
 					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
 							code="ftz.label.TRAN_DATE" /></th>
@@ -343,9 +343,9 @@
 							code="ftz.label.AMOUNT" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.COUNTRY_CODE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="15px"><spring:message
 							code="ftz.label.TERM_LENGTH" /></th>
-					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="15px"><spring:message
 							code="ftz.label.TERM_UNIT" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.valueDate" /></th>
@@ -353,7 +353,8 @@
 							code="ftz.label.EXPIRE_DATE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.INTEREST_RATE" /></th>
-
+					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
+							code="ftz.label.DTL_STATUS" /></th>
 				</tr>
 			</thead>
 		</table>
@@ -366,7 +367,7 @@
 				<c:forEach var="dto1" items="${page.content}" varStatus="i">
 					<tr>
 						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
-						<td class="vtip" style="text-align: left; width: 80px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 70px;"><t:codeValue
 								items="${FTZ_CD_FLAG}" key="${dto1.cdFlag}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
 						<td class="vtip" style="text-align: right; width: 90px;"><t:moneyFormat
@@ -374,14 +375,17 @@
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
 								items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}"
 								type="label" /></td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.termLength}</td>
-						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 15px;">${dto1.termLength}</td>
+						<td class="vtip" style="text-align: left; width: 15px;"><t:codeValue
 								items="${FTZ_REBUY_TERM_UNIT}" key="${dto1.termUnit}"
 								type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.valueDate}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.expireDate}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
-								type="label" value="${dto1.interestRate}" dot="true" format="###,###,###,###.000000"/></td>
+								type="label" value="${dto1.interestRate}" dot="true"
+								format="###,###,###,###.000000" /></td>
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>
 						<td style="display: none;">${dto1.seqNo}</td>
 						<td style="display: none;">${dto1.chkStatus}</td>

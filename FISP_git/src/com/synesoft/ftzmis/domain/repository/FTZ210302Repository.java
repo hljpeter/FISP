@@ -25,7 +25,7 @@ public interface FTZ210302Repository {
 
 	public int insertFtzOffTxnDtl(FtzOffTxnDtl ftzOffTxnDtl);
 
-	public int getSeqNo(FtzOffTxnDtl ftzOffTxnDtl);
+	public String getSeqNo(FtzOffTxnDtl ftzOffTxnDtl);
 
 	public FtzOffMsgCtl queryFtzOffMsgCtl(FtzOffMsgCtl ftzOffMsgCtl);
 

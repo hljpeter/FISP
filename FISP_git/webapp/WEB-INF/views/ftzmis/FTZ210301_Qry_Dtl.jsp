@@ -127,7 +127,7 @@ $("#dtl").click(function() {
 			<tbody>
 			<form:form id="FTZ210301Form" action="${pageContext.request.contextPath}" modelAttribute="FTZ210301Form">
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id="${dto.seqNo }">
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
 		          	<td class="tbl_page_td_left vtip" width="20px">${(page.number * page.size) + (i.index + 1)}</td>
 				  	<td class="tbl_page_td_left vtip" width="100px"><t:dateTimeFormat type="label" value="${dto.submitDate}" format="date"/></td>
 		            <td class="tbl_page_td_left vtip" width="100px">${dto.accountNo}</td>

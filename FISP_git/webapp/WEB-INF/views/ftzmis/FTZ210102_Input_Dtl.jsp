@@ -22,9 +22,9 @@
 			form.action = "${pageContext.request.contextPath}/FTZ210102/UptDtlSubmit";
 		}
 		$("#pageTable").find("tr").bind('click', function() {
-			var selected_msgId = $(this).find("td:eq(7)").text();
-			var selected_seqNo = $(this).find("td:eq(8)").text();
-			var selected_chkStatus = $(this).find("td:eq(9)").text();
+			var selected_msgId = $(this).find("td:eq(8)").text();
+			var selected_seqNo = $(this).find("td:eq(9)").text();
+			var selected_chkStatus = $(this).find("td:eq(10)").text();
 			var old_selected_msgId = $("#msgId").val();
 			var old_selected_seqNo = $("#selected_seqNo").val();
 			if (null == old_selected_seqNo) {
@@ -52,9 +52,9 @@
 				.bind(
 						'dblclick',
 						function() {
-							var selected_msgId = $(this).find("td:eq(7)")
+							var selected_msgId = $(this).find("td:eq(8)")
 									.text();
-							var selected_seqNo = $(this).find("td:eq(8)")
+							var selected_seqNo = $(this).find("td:eq(9)")
 									.text();
 							showDialog('${pageContext.request.contextPath}/FTZ210102/QryDtlDtl?selected_msgId='
 									+ selected_msgId
@@ -349,7 +349,9 @@
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.COUNTRY_CODE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.VALUE_DATE" /></th>
 					<th style="vertical-align: middle; text-align: center"
-						width="150px"><spring:message code="ftz.label.EXPIRE_DATE" /></th>
+						width="100px"><spring:message code="ftz.label.EXPIRE_DATE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
+							code="ftz.label.DTL_STATUS" /></th>
 				</tr>
 			</thead>
 		</table>
@@ -370,7 +372,9 @@
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
 								items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.valueDate}</td>
-						<td class="vtip" style="text-align: left; width: 150px;">${dto1.expireDate}</td>
+						<td class="vtip" style="text-align: left; width: 100px;">${dto1.expireDate}</td>
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>
 						<td style="display: none;">${dto1.seqNo}</td>
 						<td style="display: none;">${dto1.chkStatus}</td>

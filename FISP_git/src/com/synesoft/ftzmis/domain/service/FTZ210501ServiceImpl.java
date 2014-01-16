@@ -97,12 +97,34 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 		FtzActMstr ftzActMstr = new FtzActMstr();
 		ftzActMstr.setAccountNo(ftzActMstrTmp.getAccountNo());
 		ftzActMstr.setSubAccountNo(ftzActMstrTmp.getSubAccountNo());
-		if (null == ftz210501repository.queryFtzActMstr(ftzActMstr)) {
+		FtzActMstr result_FtzActMstr = ftz210501repository.queryFtzActMstr(ftzActMstr);
+		if (null == result_FtzActMstr) {
 			if(null == ftz210501repository.queryFtzActMstrTmp(ftzActMstrTmp)){
 				ftzActMstrTmp.setAccStatus("DS01");
 				ftzActMstrTmp.setMakUserId(ContextConst.getCurrentUser().getUserid());
 				ftzActMstrTmp.setMakDatetime(DateUtil.getNowInputDateTime());
 				ftzActMstrTmp.setOpType("A");
+				if(ftz210501repository.insertFtzActMstrTmp(ftzActMstrTmp) != 1) {
+					//插入账户信息临时表异常处理
+					log.error("插入账户信息临时表错误！");
+					messages.add("e.ftzmis.210501.0012");
+					throw new BusinessException(messages);
+				}
+				//记录操作日志
+				tlrBizLogPrintForFtzActMstrTmp("FTZ_Add_210501", "A", ftzActMstrTmp);
+			} else {
+				//账户信息临时表中存在相同的账户和子账户
+				log.error("账户信息临时表中存在相同的账号和子账号");
+				messages.add("e.ftzmis.210501.0015");
+				throw new BusinessException(messages);
+			}
+		//如果有，状态为撤销，为重开户
+		} else if (result_FtzActMstr.getAccStatus().equals("DS05")) {
+			if (null == ftz210501repository.queryFtzActMstrTmp(ftzActMstrTmp)) {
+				ftzActMstrTmp.setAccStatus("DS01");
+				ftzActMstrTmp.setMakUserId(ContextConst.getCurrentUser().getUserid());
+				ftzActMstrTmp.setMakDatetime(DateUtil.getNowInputDateTime());
+				ftzActMstrTmp.setOpType("M");
 				if(ftz210501repository.insertFtzActMstrTmp(ftzActMstrTmp) != 1) {
 					//插入账户信息临时表异常处理
 					log.error("插入账户信息临时表错误！");

@@ -50,7 +50,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data" />');
+			alert('<spring:message code="ftz.validate.choose.dataTxn" />');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210310/QryAuthDtlDtl?selected_msgId='
@@ -125,7 +125,7 @@
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS" />：</td>
 				<td><form:select path="ftzOffMsgCtl.msgStatus" id="msgStatus" disabled="true">
 						<form:option value=""></form:option>
-						<form:options items="${FTZ_MSG_STATUS_INPUT}" />
+						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>
 			</tr>
 			</table>

@@ -62,8 +62,8 @@ public class FtzInController {
 		if (page.getContent().size() > 0) {
 			List<FtzInMsgCtl> ftzInMsgCtls = page.getContent();
 			for (FtzInMsgCtl ftzInMsgCtl : ftzInMsgCtls) {
-				ftzInMsgCtl.setWorkDate(DateUtil
-						.getFormatDateAddSprit(ftzInMsgCtl.getWorkDate()));
+				ftzInMsgCtl.setSubmitDate(DateUtil
+						.getFormatDateAddSprit(ftzInMsgCtl.getSubmitDate()));
 			}
 			model.addAttribute("page", page);
 		} else {
@@ -108,8 +108,8 @@ public class FtzInController {
 		if (page.getContent().size() > 0) {
 			List<FtzInMsgCtl> ftzInMsgCtls = page.getContent();
 			for (FtzInMsgCtl ftzInMsgCtl : ftzInMsgCtls) {
-				ftzInMsgCtl.setWorkDate(DateUtil
-						.getFormatDateAddSprit(ftzInMsgCtl.getWorkDate()));
+				ftzInMsgCtl.setSubmitDate(DateUtil
+						.getFormatDateAddSprit(ftzInMsgCtl.getSubmitDate()));
 				
 				FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
 				query_FtzInTxnDtl.setMsgId(ftzInMsgCtl.getMsgId());
@@ -187,19 +187,19 @@ public class FtzInController {
 		} else if (CommonConst.MSG_NO_210309.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210309/Auth/DtlMsg/Init?operFlag=2&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210201.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210201/QryDtl?selected_msgId="
+			return "redirect:/FTZ210201/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210202.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210202/QryDtl?selected_msgId="
+			return "redirect:/FTZ210202/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210203.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210203/QryDtl?selected_msgId="
+			return "redirect:/FTZ210203/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210204.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210204/QryDtl?selected_msgId="
+			return "redirect:/FTZ210204/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210205.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210205/QryDtl?selected_msgId="
+			return "redirect:/FTZ210205/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210206.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210206/Auth/DtlMsg/Init?operFlag=2&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
@@ -249,19 +249,19 @@ public class FtzInController {
 		} else if (CommonConst.MSG_NO_210309.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210309/Auth/DtlMsg/Init?operFlag=1&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210201.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210201/QryDtl?selected_msgId="
+			return "redirect:/FTZ210201/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210202.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210202/QryDtl?selected_msgId="
+			return "redirect:/FTZ210202/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210203.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210203/QryDtl?selected_msgId="
+			return "redirect:/FTZ210203/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210204.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210204/QryDtl?selected_msgId="
+			return "redirect:/FTZ210204/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210205.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210205/QryDtl?selected_msgId="
+			return "redirect:/FTZ210205/QryAuthDtl?selected_msgId="
 			+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210206.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210206/Auth/DtlMsg/Init?operFlag=1&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
@@ -270,10 +270,10 @@ public class FtzInController {
 			return "redirect:/FTZ210207/Auth/DtlMsg/Init?operFlag=1&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
 		}
 		else if (CommonConst.MSG_NO_210208.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210207/Auth/DtlMsg/Init?operFlag=1&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
+			return "redirect:/FTZ210208/Auth/DtlMsg/Init?operFlag=1&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
 		}
 		else if (CommonConst.MSG_NO_210209.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210207/Auth/DtlMsg/Init?operFlag=1&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
+			return "redirect:/FTZ210209/Auth/DtlMsg/Init?operFlag=1&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
 		}else if (CommonConst.MSG_NO_210210.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210210/QryAuthDtl?selected_msgId="+ form.getSelected_msgId()+"&unAuthFlag=2";
 		}else if (CommonConst.MSG_NO_210211.equals(form.getSelected_msgNo())) {

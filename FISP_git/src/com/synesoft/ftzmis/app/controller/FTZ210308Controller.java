@@ -18,7 +18,6 @@ import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.StringUtil;
-import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.model.FTZ210308Form;
@@ -78,6 +77,7 @@ public class FTZ210308Controller {
 			vo.setStartDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getStartDate())));
 			vo.setEndDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getEndDate())));
 			vo.setMsgId(StringUtil.trim(msgCtlVO.getMsgId()));
+			vo.setEditFlag(CommonConst.FTZ_MSG_EDIT_FLAG_ADD);	// 录入查询中，只能查到报"新增"的报文
 			if (!StringUtil.isNotTrimEmpty(msgCtlVO.getMsgStatus())) {
 				vo.setMsgStatuss(new String[] {CommonConst.FTZ_MSG_STATUS_INPUTING, CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED, 
 						CommonConst.FTZ_MSG_STATUS_AUTH_FAIL, CommonConst.FTZ_MSG_STATUS_PBOC_RTN_FAIL });
@@ -142,7 +142,7 @@ public class FTZ210308Controller {
 		ctl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
 		ctl.setBranchId(ContextConst.getCurrentUser().getLoginorg());
 		ctl.setWorkDate(DateUtil.getNowOutputDate());
-		ctl.setMsgId(numberService.getSysIDSequence(32));
+//		ctl.setMsgId(numberService.getSysIDSequence(32));
 
 		form.setFtzOffMsgCtl(ctl);
 		form.setActionFlag(CommonConst.ACTION_FLAG_ADD_MSG);
@@ -172,7 +172,7 @@ public class FTZ210308Controller {
 			ftz210308Service.addMsgCtl(ctl);
 			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210308.0000")));
 
-			return "forward:/FTZ210308/Input/UptMsg/Init";
+			return "forward:/FTZ210308/Input/UptMsg/Init?ftzOffMsgCtl.msgId=" + ctl.getMsgId();
 		} catch (BusinessException e) {
 			log.error("Add FtzOffMsgCtl failure!" + e.getMessage());
 			model.addAttribute("infomsg", e.getResultMessages());
@@ -181,8 +181,8 @@ public class FTZ210308Controller {
 	}
 
 	/**
-	 * 刷新明细页面(FTZ210301_Input_Qry_Dtl.jsp)
-	 * 跳转FTZ210301_Input_Qry_Dtl.jsp
+	 * 刷新明细页面(FTZ210308_Input_Qry_Dtl.jsp)
+	 * 跳转FTZ210308_Input_Qry_Dtl.jsp
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -221,7 +221,7 @@ public class FTZ210308Controller {
 
 	/**
 	 * 修改批量-提交
-	 * 跳转FTZ210301_Qry_Dtl.jsp
+	 * 跳转FTZ210308_Qry_Dtl.jsp
 	 * @return
 	 */
 	@RequestMapping("/Input/UptMsg/Sumbit")
@@ -263,7 +263,7 @@ public class FTZ210308Controller {
 		} catch (BusinessException e) {
 			log.error("Submit FtzOffMsgCtl failure!" + e.getMessage());
 			model.addAttribute("errmsg", e.getResultMessages());
-			return "forward:/FTZ210307/Input/Qry";
+			return "forward:/FTZ210308/Input/Qry";
 		}
 	}
 	
@@ -281,13 +281,13 @@ public class FTZ210308Controller {
 
 			log.info("Submit success");
 			form.setActionFlag(CommonConst.ACTION_FLAG_SUB_MSG);
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0002")));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210308.0002")));
 
 			return "forward:/FTZ210308/Input/Qry";
 		} catch (BusinessException e) {
 			log.error("Submit FtzOffMsgCtl failure!" + e.getMessage());
 			model.addAttribute("errmsg", e.getResultMessages());
-			return "forward:/FTZ210307/Input/Qry";
+			return "forward:/FTZ210308/Input/Qry";
 		}
 	}
 
@@ -304,11 +304,11 @@ public class FTZ210308Controller {
 		
 		try {
 			FtzOffTxnDtl txn = form.getFtzOffTxnDtl();
-			String seqNo = ftz210308Service.getTxnDtlMaxSeqNo(txn);
+//			String seqNo = ftz210308Service.getTxnDtlMaxSeqNo(txn);
 			
 			FtzOffTxnDtl txnDtl = new FtzOffTxnDtl();
 			txnDtl.setMsgId(txn.getMsgId());
-			txnDtl.setSeqNo(seqNo);
+//			txnDtl.setSeqNo(seqNo);
 			
 			form.setFtzOffTxnDtl(txnDtl);
 
@@ -337,7 +337,8 @@ public class FTZ210308Controller {
 			
 			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210308.0003")));
 
-			return "ftzmis/FTZ210308_Input_Qry_Dtl_Dtl";
+//			return "ftzmis/FTZ210308_Input_Qry_Dtl_Dtl";
+			return "forward:/FTZ210308/Input/DtlTxn/Init?ftzOffTxnDtl.seqNo=" + txn.getSeqNo() + "&actionFlag=" + CommonConst.ACTION_FLAG_ADD_TXN;
 		} catch (BusinessException e) {
 			log.error("Submit FtzOffMsgCtl failure!" + e.getMessage());
 			model.addAttribute("errmsg", e.getResultMessages());
@@ -621,8 +622,6 @@ public class FTZ210308Controller {
 		}
 	}
 	
-	@Autowired
-	private NumberService numberService;
 	@Autowired
 	private FTZOffCommonService ftz210308Service;
 }

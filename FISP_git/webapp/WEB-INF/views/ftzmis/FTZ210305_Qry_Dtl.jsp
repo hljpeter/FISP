@@ -118,7 +118,7 @@ $("#dtl").click(function() {
 	          	<th class="tbl_page_th" width="100px"><spring:message code="ftz.label.CURRENCY"/></th>
 	          	<th class="tbl_page_th" width="120px"><spring:message code="ftz.label.COUNTRY_CODE"/></th>
 	          	<th class="tbl_page_th" width="160px"><spring:message code="ftz.label.ENT_NAME"/></th>
-	          	<th class="tbl_page_th" width="80px"><spring:message code="ftz.label.MSG_STATUSSS"/></th>
+	          	<th class="tbl_page_th" width="80px"><spring:message code="ftz.label.DTL_STATUS"/></th>
 			</tr>
 			</thead>
 		</table>
@@ -148,7 +148,7 @@ $("#dtl").click(function() {
 <div class="row" style="margin-top: 10px;">
 	<div class="pagination pull-right" style="margin-top: 5px; margin-bottom: 0px;">
 		<div class="leftPage">
-			<util:pagination page="${page }" action="/FTZ210305/Auth/DtlMsg/Init" query="ftzOffMsgCtl.msgId=${FTZ210301Form.ftzOffMsgCtl.msgId }" />
+			<util:pagination page="${page }" action="/FTZ210305/Auth/DtlMsg/Init" query="ftzOffMsgCtl.msgId=${FTZ210305Form.ftzOffMsgCtl.msgId }" />
 		</div>
 	</div>
 </div>

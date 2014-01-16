@@ -67,7 +67,7 @@
 				</td>
 			<tr>
 			<tr>
-				<td class="label_td"><spring:message code="fisp.label.sysParam.val"/>
+				<td class="label_td"><font color="red">*</font><spring:message code="fisp.label.sysParam.val"/>
 				</td>
 				<td>
 					<form:input id="paramVal" path="sysParam.paramVal" type="text" class=".input-small" maxlength="30"/>

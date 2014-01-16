@@ -67,7 +67,7 @@ $("#dtl").click(function() {
 	} else {
 		
 		selectedRow = eval("(" + checkSelected() + ")"); 
-		showDialog('${pageContext.request.contextPath}/FTZ210209/Input/DtlTxn/Init?ftzInTxnDtl.msgId=' 
+		showDialog('${pageContext.request.contextPath}/FTZ210209/QryDtlDtl?ftzInTxnDtl.msgId=' 
 				+ $("#msgId").val() + "&ftzInTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
 	}
 });
@@ -78,15 +78,16 @@ $("#upt").click(function() {
 	if (!selectedRow || selectedRow == "") {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
+		
+		selectedRow = eval("(" + selectedRow + ")");
 		if("03" == msgStatus){
 		       alert("批量审核已完成");
 		       return;
 		}
 		if("03" == selectedRow.chkStatus){
-		       alert("明细审核已完成");
+		       alert("审核通过明细无法修改或删除");
 		       return;
 		}
-		selectedRow = eval("(" + selectedRow + ")");
 		$("#operFlag").val("updated");
 		showDialog('${pageContext.request.contextPath}/FTZ210209/Input/UptTxn/Init?ftzInTxnDtl.msgId=' 
 				+ $("#msgId").val() + '&ftzInTxnDtl.seqNo=' + selectedRow.seqNo, '600', '1040');
@@ -109,8 +110,8 @@ $("#del").click(function() {
 			       alert("批量审核已完成");
 			       return;
 			}
-			if("03" == selectedRow.chkStatus||"04" == selectedRow.chkStatus){
-			       alert("明细审核已完成");
+			if("03" == selectedRow.chkStatus){
+			       alert("审核通过明细无法修改或删除");
 			       return;
 			}
 			$("#operFlag").val("updated");
@@ -132,11 +133,11 @@ $("#pageTable")
 .bind(
 		'dblclick',
 		function() {
-			var selected_msgId = $(this).find("td:eq(7)")
+			var selected_msgId = $(this).find("td:eq(11)")
 					.text();
-			var selected_seqNo = $(this).find("td:eq(8)")
+			var selected_seqNo = $(this).find("td:eq(12)")
 					.text();
-			showDialog('${pageContext.request.contextPath}/FTZ210209/Input/DtlTxn/Init?ftzInTxnDtl.msgId=' 
+			showDialog('${pageContext.request.contextPath}/FTZ210209/QryDtlDtl?ftzInTxnDtl.msgId=' 
 					+ selected_msgId + "&ftzInTxnDtl.seqNo=" + selected_seqNo, '600', '1040');
 		});
 
@@ -206,6 +207,7 @@ function accoutQry() {
 <div id="id_showMsg" style="display: none"> 
 	<br /><br />
 	<div id="id_result">
+	    <t:messagePanel />
 		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
 		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
 		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />
@@ -351,25 +353,27 @@ function accoutQry() {
 							code="ftz.label.COUNTRY_CODE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 					code="ftz.label.TERM_LENGTH" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
 					code="ftz.label.TERM_UNIT" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 					code="ftz.label.valueDate" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 					code="ftz.label.EXPIRE_DATE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
-							code="ftz.label.interestRate" /></th>
+							code="210209ftz.label.INTERESTRATE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+					code="ftz.label.DTL_STATUS" /></th>
 					
 			</tr>
 			</thead>
 		</table>
     </div>
     <div class="tbl_page_body">
-		<table class="table table-striped table-bordered table-condensed tbl_page">
+		<table id="pageTable" class="table table-striped table-bordered table-condensed tbl_page">
 			<tbody>
 			<form:form id="FTZ210206Form" action="${pageContext.request.contextPath}" modelAttribute="FTZ210206Form">
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }",chkStatus:"${dto.chkStatus}"}'>
 		          <td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
 								items="${FTZ_CD_FLAG}" key="${dto.cdFlag}" type="label" /></td>
@@ -379,10 +383,15 @@ function accoutQry() {
 						
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.countryCode}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.termLength}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.termUnit}</td>
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+								items="${FTZ_REBUY_TERM_UNIT}" key="${dto.termUnit}"
+								type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.valueDate}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.expireDate}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.interestRate}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
+								type="label" value="${dto.interestRate}" dot="true" format="###,###,###,###.000000"/></td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_MSG_STATUS}" key="${dto.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto.msgId}</td>
 						<td style="display: none;">${dto.seqNo}</td>
 				</tr>

@@ -88,7 +88,7 @@ $("#dtl").click(function() {
 	} else {
 		
 		selectedRow = eval("(" + checkSelected() + ")"); 
-		showDialog('${pageContext.request.contextPath}/FTZ210207/Input/Dtl/Init?ftzInMsgCtl.msgId=' + selectedRow.msgId, '500', '1040');
+		showDialog('${pageContext.request.contextPath}/FTZ210207/QryDtl?ftzInMsgCtl.msgId=' + selectedRow.msgId, '500', '1040');
 	}
 });
 
@@ -108,7 +108,7 @@ $("#pageTable")
 			var selected_msgId = $(this).find("td:eq(3)")
 					.text();
 			
-			showDialog('${pageContext.request.contextPath}/FTZ210207/Input/Dtl/Init?ftzInMsgCtl.msgId=' + selected_msgId, '500', '1040');
+			showDialog('${pageContext.request.contextPath}/FTZ210207/QryDtl?ftzInMsgCtl.msgId=' + selected_msgId, '500', '1040');
 
 		});
 

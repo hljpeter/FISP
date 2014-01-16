@@ -82,7 +82,7 @@
 </div>
 
 <div class="page_title">
-	<spring:message code="ftzmis.title.210108.input.dtl.dtl" />
+	<spring:message code="ftzmis.title.210210.input.dtl.dtl" />
 </div>
 
 <div class="row">

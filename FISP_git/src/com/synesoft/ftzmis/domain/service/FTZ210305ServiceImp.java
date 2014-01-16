@@ -192,7 +192,7 @@ public class FTZ210305ServiceImp extends FTZOffCommonServiceImp {
 			messages.addAll(msg);
 		}
 		// 承兑金额
-		if (ftzOffTxnDtl.getAmount() == new BigDecimal(0)) {
+		if (ftzOffTxnDtl.getAmount() == null) {
 			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.210305.0003");								
 			messages.addAll(msg);
 		}
@@ -217,7 +217,7 @@ public class FTZ210305ServiceImp extends FTZOffCommonServiceImp {
 			messages.addAll(msg);
 		}
 		// 承兑日期
-		if (!StringUtil.isNotTrimEmpty(ftzOffTxnDtl.getExpirationDate())) {
+		if (!StringUtil.isNotTrimEmpty(ftzOffTxnDtl.getTranDate())) {
 			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.210305.0008");								
 			messages.addAll(msg);
 		}

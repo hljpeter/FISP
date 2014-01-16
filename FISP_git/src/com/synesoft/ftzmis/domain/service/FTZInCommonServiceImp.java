@@ -213,7 +213,7 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 		}
 		
 		ftzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
-		ftzInMsgCtl.setMakDatetime(ftzInMsgCtl.getMakDatetime());
+		ftzInMsgCtl.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzInMsgCtl.getMakDatetime()));
 		
 		ftzInMsgCtl.setEditFlag(editFlag);
 		ftzInMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
@@ -246,15 +246,15 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 			throw new BusinessException(messages);
 		}
 		
-		ftzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
-		ftzInMsgCtl.setMakDatetime(ftzInMsgCtl.getMakDatetime());
+		FtzInMsgCtl ftzInMsgCtl1=new FtzInMsgCtl();
+		ftzInMsgCtl1.setMsgId(ftzInMsgCtl.getMsgId());
+		//ftzInMsgCtl.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzInMsgCtl.getMakDatetime()));
 		
 		// setup value when submitted
-		ftzInMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
-		ftzInMsgCtl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
-		
-		
-		int ret = ftzInMsgCtlRepository.updateMsgStatus(ftzInMsgCtl);
+		//ftzInMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
+		ftzInMsgCtl1.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
+
+		int ret = ftzInMsgCtlRepository.updateMsgStatus(ftzInMsgCtl1);
 		if (ret != 1) {
 			log.error("[e.ftzmis.2103.0001] Update FtzInMsgCtl information failure!");
 			messages.add("e.ftzmis.2103.0001");					
@@ -371,7 +371,7 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 	    
 		ftzInTxnDtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
 		ftzInTxnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
-		ftzInTxnDtl.setMakDatetime(ftzInTxnDtl.getMakDatetime());
+		ftzInTxnDtl.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzInTxnDtl.getMakDatetime()));
 		
 		int ret = ftzInTxnDtlRepository.update(ftzInTxnDtl);
 		if (ret != 1) {
@@ -513,8 +513,8 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 		//更新批量头
 		FtzInMsgCtl ftzInMsgCtl1 = new FtzInMsgCtl();
 		ftzInMsgCtl1.setMsgId(ftzInMsgCtl.getMsgId());
-		ftzInMsgCtl1.setMakDatetime(ftzInMsgCtl.getMakDatetime());
-		ftzInMsgCtl1.setChkDatetime(ftzInMsgCtl.getChkDatetime());
+		ftzInMsgCtl1.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzInMsgCtl.getMakDatetime()));
+		ftzInMsgCtl1.setChkDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzInMsgCtl.getChkDatetime()));
 		ftzInMsgCtl1.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
 		ftzInMsgCtl1.setChkUserId(ContextConst.getCurrentUser().getUserid());
 		int ret = ftzInMsgCtlRepository.updateAuth(ftzInMsgCtl1);

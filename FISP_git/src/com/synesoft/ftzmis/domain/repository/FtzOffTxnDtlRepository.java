@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.synesoft.ftzmis.domain.model.FtzOffTxnDtl;
+import com.synesoft.ftzmis.domain.model.vo.FtzOffTxnDtlVO;
 
 /**
  * 表外交易明细表(DAT_OFF_TXN_DTL)
@@ -94,7 +95,7 @@ public interface FtzOffTxnDtlRepository {
 	 * @return
 	 * 		int - 受影响的行数
 	 */
-	public int updateStatus(FtzOffTxnDtl ftzOffTxnDtl);
+	public int updateStatus(FtzOffTxnDtlVO ftzOffTxnDtlVO);
 
 	/**
 	 * 删除一条数据(DAT_OFF_TXN_DTL - 表外交易明细表)，根据主键

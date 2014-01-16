@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.fw.common.exception.BusinessException;
-import org.terasoluna.fw.common.message.ResultMessage;
 import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.common.constants.ContextConst;
@@ -19,11 +18,13 @@ import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
+import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.domain.model.FtzOffMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzOffTxnDtl;
 import com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO;
+import com.synesoft.ftzmis.domain.model.vo.FtzOffTxnDtlVO;
 import com.synesoft.ftzmis.domain.repository.FtzOffMsgCtlRepository;
 import com.synesoft.ftzmis.domain.repository.FtzOffTxnDtlRepository;
 
@@ -178,15 +179,16 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		}
 		
 		// 已经审核通过
-		if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(result.getChkStatus())) {
-			log.error("[ftz.validate.chk.success] No data!");
-			messages.add("ftz.validate.chk.success");	
-			throw new BusinessException(messages);
-		}
+//		if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(result.getChkStatus())) {
+//			log.error("[ftz.validate.chk.success] No data!");
+//			messages.add("ftz.validate.chk.success");	
+//			throw new BusinessException(messages);
+//		}
 		
 		// 状态不正确
 		if (!CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED.equals(result.getChkStatus()) && 
-				!CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(result.getChkStatus())) {
+				!CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(result.getChkStatus()) && 
+				!CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(result.getChkStatus())) {
 			log.error("[i.ftzmis.2103.0021] No data!");
 			messages.add("i.ftzmis.2103.0021");	
 			throw new BusinessException(messages);
@@ -276,6 +278,7 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		
 		addMsgLogic(ftzOffMsgCtl);
 		
+		ftzOffMsgCtl.setMsgId(numberService.getSysIDSequence(16));
 		ftzOffMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
 		ftzOffMsgCtl.setEditFlag(CommonConst.FTZ_MSG_EDIT_FLAG_ADD);
 		ftzOffMsgCtl.setApp(CommonConst.FTZ_MSG_APP_DEFAULT);
@@ -409,10 +412,10 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 			throw new BusinessException(messages);
 		}
 
-		FtzOffTxnDtl txnDtl = new FtzOffTxnDtl();
-		txnDtl.setMsgId(ftzOffMsgCtl.getMsgId());
-		txnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
-		ftzOffTxnDtlRepository.updateStatus(txnDtl);
+//		FtzOffTxnDtl txnDtl = new FtzOffTxnDtl();
+//		txnDtl.setMsgId(ftzOffMsgCtl.getMsgId());
+//		txnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
+//		ftzOffTxnDtlRepository.updateStatus(txnDtl);
 
 		BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY, result.toString(), ftzOffMsgCtl.toString());
 	}
@@ -549,6 +552,7 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		addTxnLogic(ftzOffTxnDtl);
 		
 		// 插入交易
+		ftzOffTxnDtl.setSeqNo(ftzOffTxnDtlRepository.queryTxnDtlMaxSeqNo(ftzOffTxnDtl));
 		ftzOffTxnDtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
 		ftzOffTxnDtl.setChkStatus(CommonConst.TXN_SKIP_SUBMIT? CommonConst
 				.FTZ_MSG_STATUS_INPUT_COMPLETED: CommonConst.FTZ_MSG_STATUS_INPUTING);
@@ -593,6 +597,13 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		if (null == txnResult) {
 			log.error("[e.ftzmis.2103.0009] The TxnDtl is wrong!"); 
 			messages.add("e.ftzmis.2103.0009");								
+			throw new BusinessException(messages);
+		}
+		
+		// 审核通过不可修改
+		if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(txnResult.getChkStatus())) {
+			log.error("[e.ftzmis.2103.0022] The TxnDtl auditing successfully and cannot be updated!"); 
+			messages.add("e.ftzmis.2103.0022");								
 			throw new BusinessException(messages);
 		}
 		
@@ -691,6 +702,13 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 			messages.add("e.ftzmis.2103.0009");								
 			throw new BusinessException(messages);
 		}
+
+		// 审核通过不可删除
+		if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(txnDtlResult.getChkStatus())) {
+			log.error("[e.ftzmis.2103.0023] The TxnDtl auditing successfully and cannot be deleted!"); 
+			messages.add("e.ftzmis.2103.0023");								
+			throw new BusinessException(messages);
+		}
 		
 		// 查询该交易对应的批量是否存在
 		FtzOffMsgCtl ftzOffMsgCtl = new FtzOffMsgCtl();
@@ -769,9 +787,6 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		funcId = CommonConst.FUNCTION_FTZ_AUTH_2103;
 		ResultMessages messages = ResultMessages.error();
 		
-		ftzOffTxnDtl.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzOffTxnDtl.getMakDatetime()));
-		ftzOffTxnDtl.setChkDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzOffTxnDtl.getChkDatetime()));
-		
 		validMsgIdAndSeqNo(ftzOffTxnDtl);
 		
 		FtzOffTxnDtl txnDtlResult = ftzOffTxnDtlRepository.queryByPK(ftzOffTxnDtl);
@@ -792,26 +807,40 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		}
 
 		// 如果报文状态为"发送成功"，则审核交易失败
-		if (CommonConst.FTZ_MSG_STATUS_SEND_SUCC.equals(msgCtlResult.getMsgStatus())) {
-			ftzOffTxnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL);
-			ftzOffTxnDtl.setChkUserId(ContextConst.getCurrentUser().getUserid());
-			ftzOffTxnDtl.setChkAddWord(ResultMessage.fromCode("e.ftzmis.2103.0018").getText());
-			ftzOffTxnDtlRepository.updateStatus(ftzOffTxnDtl);
-
-			BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT, txnDtlResult.toString(), ftzOffTxnDtl.toString());
-			
-			log.error("[e.ftzmis.2103.0018] The MsgCtl is wrong!"); 
-			messages.add("e.ftzmis.2103.0018");								
-			throw new BusinessException(messages);
-		}
 		
-		ftzOffTxnDtl.setChkStatus(status);
-		ftzOffTxnDtl.setChkUserId(ContextConst.getCurrentUser().getUserid());
-		int ret = ftzOffTxnDtlRepository.updateStatus(ftzOffTxnDtl);
+		// 更新状态
+		FtzOffTxnDtlVO vo = new FtzOffTxnDtlVO();
+		vo.setMsgId(ftzOffTxnDtl.getMsgId());
+		vo.setSeqNo(ftzOffTxnDtl.getSeqNo());
+		vo.setOldChkStatus(ftzOffTxnDtl.getChkStatus());
+		vo.setMakUserId(ftzOffTxnDtl.getMakUserId());
+		vo.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzOffTxnDtl.getMakDatetime()));
+		vo.setChkDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzOffTxnDtl.getChkDatetime()));
+		vo.setChkStatus(status);
+		vo.setChkUserId(ContextConst.getCurrentUser().getUserid());
+		vo.setChkAddWord(ftzOffTxnDtl.getChkAddWord());
+		int ret = ftzOffTxnDtlRepository.updateStatus(vo);
 		if (ret != 1) {
 			log.error("[e.ftzmis.2103.0008] Auth TxnDtl information failure!"); 
 			messages.add("e.ftzmis.2103.0008");								
 			throw new BusinessException(messages);
+		}
+		
+		// 如果审核失败，更新批量状态为审核失败
+		if (CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(status)) {
+			FtzOffMsgCtlVO ftzOffMsgCtlVO = new FtzOffMsgCtlVO();
+			ftzOffMsgCtlVO.setMsgId(msgCtlResult.getMsgId());
+			ftzOffMsgCtlVO.setOldMsgStatus(msgCtlResult.getMsgStatus());
+			ftzOffMsgCtlVO.setMakDatetime(msgCtlResult.getMakDatetime());
+			ftzOffMsgCtlVO.setChkDatetime(msgCtlResult.getChkDatetime());
+			ftzOffMsgCtlVO.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL);
+			ftzOffMsgCtlVO.setChkUserId(ContextConst.getCurrentUser().getUserid());
+			ret = ftzOffMsgCtlRepository.updateMsgStatus(ftzOffMsgCtlVO);
+			if (ret != 1) {
+				log.error("[e.ftzmis.2103.0008] Auth FtzOffMsgCtl information failure!");
+				messages.add("e.ftzmis.2103.0008");					
+				throw new BusinessException(messages);
+			}
 		}
 		
 		BizLog(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(status)? CommonConst
@@ -832,6 +861,8 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 			m.add("e.ftzmis.2103.0002");								
 			throw new BusinessException(m);
 		}
+		
+		ftzOffMsgCtl.setMsgId(ftzOffMsgCtl.getMsgId().replace(",", "").trim());
 	}
 
 	private void validMsgId(FtzOffTxnDtl ftzOffTxnDtl) {
@@ -851,11 +882,15 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 			m.add("e.ftzmis.2103.0009");								
 			throw new BusinessException(m);
 		}
+
+		ftzOffTxnDtl.setMsgId(ftzOffTxnDtl.getMsgId().replace(",", "").trim());
+		ftzOffTxnDtl.setSeqNo(ftzOffTxnDtl.getSeqNo().replace(",", "").trim());
 	}
 	
 	@Autowired
 	protected FtzOffMsgCtlRepository ftzOffMsgCtlRepository;
 	@Autowired
 	protected FtzOffTxnDtlRepository ftzOffTxnDtlRepository;
-
+	@Autowired
+	private NumberService numberService;
 }

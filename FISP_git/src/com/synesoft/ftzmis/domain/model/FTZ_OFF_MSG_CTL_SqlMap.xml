@@ -79,6 +79,9 @@
 			<isNotEmpty property="msgStatus" prepend="AND">
 			FTZ_OFF_MSG_CTL.MSG_STATUS = #msgStatus:CHAR#
 			</isNotEmpty>
+			<isNotEmpty property="editFlag" prepend="AND">
+			FTZ_OFF_MSG_CTL.EDIT_FLAG = #editFlag:CHAR#
+			</isNotEmpty>
 			<isNotEmpty property="msgStatuss" prepend="AND">
 			<iterate property="msgStatuss" open="FTZ_OFF_MSG_CTL.MSG_STATUS IN (" close=")" conjunction=",">
 	        	#msgStatuss[]#

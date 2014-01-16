@@ -151,7 +151,7 @@
 		<input type="hidden" id="selected_msgType">
 		<table class="tbl_search">
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.BRANCH" /><!-- 机构号 -->：</td>
+				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID" /><!-- 机构号 -->：</td>
 				<td><form:select path="query_branchId">
 						<form:option value=""></form:option>
 						<form:options items="${SM_0002}" />

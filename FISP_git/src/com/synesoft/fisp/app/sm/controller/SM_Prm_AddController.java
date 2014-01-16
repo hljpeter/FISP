@@ -3,13 +3,13 @@ package com.synesoft.fisp.app.sm.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.terasoluna.fw.common.exception.BusinessException;
@@ -19,6 +19,7 @@ import org.terasoluna.fw.common.message.ResultMessages;
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.DateUtil;
 import com.synesoft.fisp.app.sm.model.SM_Prm_QryForm;
+import com.synesoft.fisp.app.sm.model.SM_Prm_QryForm.SM_Prm_QryFormAdd;
 import com.synesoft.fisp.domain.model.SysParam;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.sm.SysParamService;
@@ -63,24 +64,22 @@ public class SM_Prm_AddController {
 	 * @return
 	 */
 	@RequestMapping("Add")
-	public String add(SM_Prm_QryForm form,BindingResult result, Model model) {
+	public String add(@Validated({SM_Prm_QryFormAdd.class})SM_Prm_QryForm form,BindingResult result, Model model) {
 		logger.info("start add ...");
+		if (result.hasErrors()) {
+			return "sm/SM_Prm_Add";
+		}
 		SysParam sysParam = form.getSysParam();
 		//判断系统参数组号              
 		String paramGroup = sysParam.getParamGroup();
-		if(StringUtils.isBlank(paramGroup)){
-			model.addAttribute("errmsg", ResultMessages.error().add(ResultMessage.fromCode("e.sm.7001")));
-			return "sm/SM_Prm_Add";
-		}else if(paramGroup.indexOf("'")>0||paramGroup.indexOf("\"")>0){
+		
+		if(paramGroup.indexOf("'")>0||paramGroup.indexOf("\"")>0){
 			model.addAttribute("errmsg", ResultMessages.error().add(ResultMessage.fromCode("e.sm.7004")));
 			return "sm/SM_Prm_Add";
 		}
 		//系统参数编号 
 		String paramCode = sysParam.getParamCode();
-		if(StringUtils.isBlank(paramCode)){
-			model.addAttribute("errmsg", ResultMessages.error().add(ResultMessage.fromCode("e.sm.7002")));
-			return "sm/SM_Prm_Add";
-		}else if(paramCode.indexOf("'")>0||paramCode.indexOf("\"")>0){
+		if(paramCode.indexOf("'")>0||paramCode.indexOf("\"")>0){
 			model.addAttribute("errmsg", ResultMessages.error().add(ResultMessage.fromCode("e.sm.7005")));
 			return "sm/SM_Prm_Add";
 		}

@@ -3,12 +3,12 @@
 $(function() {
 var success = '${successmsg }';
 if (success && success != "") {
-	$("button[name=btnChk]").attr("disabled", true);
+	//$("button[name=btnChk]").attr("disabled", true);
 	$("input").attr("readonly", true);
 }
 var error = '${errmsg }';
 if (error && error != "") {
-	$("button[name=btnChk]").attr("disabled", true);
+	//$("button[name=btnChk]").attr("disabled", true);
 	$("input").attr("readonly", true);
 }
 
@@ -25,7 +25,10 @@ if(msgStatus=='03')
    $("#chkPass").attr("disabled", true);
    $("#chkRej").attr("disabled", true);
 }
-
+if(txnStatus=='04')
+{
+   $("#chkRej").attr("disabled", true);
+}
 var msg = '${FTZ210208Form.msg }';
 if (msg && msg != "") {
 	$("#notice").css("display", "");
@@ -34,10 +37,9 @@ if (msg && msg != "") {
 	
 $("button[name=btnChk]").click(function() {
 	var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
-	if (confirm(msg)) {
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210208/Auth/DtlTxn/Auth");
-		$("#form").submit();
-	}
+	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210208/Auth/DtlTxn/Auth");
+	$("#form").submit();
+	
 });
 
 $("#next").click(function() {
@@ -51,6 +53,7 @@ $("#next").click(function() {
 <div id="id_showMsg" style="display: none"> 
 	<br /><br />
 	<div id="id_result">
+	 <t:messagePanel />
 		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
 		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
 		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />
@@ -71,6 +74,10 @@ $("#next").click(function() {
 	<form:form id="form" action="${pageContext.request.contextPath}" method="post" modelAttribute="FTZ210208Form" class="form-horizontal">
 		<form:hidden path="ftzInTxnDtl.msgId" id="msgId"/>
 		<form:hidden path="operFlag" id="operFlag"/>
+		<form:hidden path="ftzInTxnDtl.cdFlag"/>
+		<form:hidden path="ftzInTxnDtl.countryCode"/>
+		<form:hidden path="ftzInTxnDtl.disitrictCode"/>
+		<form:hidden path="ftzInTxnDtl.tranType"/>
 		<table class="tbl_search">
 			
 			<tr>
@@ -141,7 +148,7 @@ $("#next").click(function() {
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font><spring:message
-						code="210208ftz.label.VALUE_DATE" />：</td>
+						code="210207ftz.label.VALUE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.valueDate" readonly="true"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
 						
@@ -153,7 +160,7 @@ $("#next").click(function() {
 			
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
-						code="210208ftz.label.INTERESTRATE" />：</td>
+						code="210207ftz.label.INTERESTRATE" />：</td>
 				<td><t:moneyFormat type="text" id="interestRate" readonly="true"
 						name="ftzInTxnDtl.interestRate"
 						value="${FTZ210208Form.ftzInTxnDtl.interestRate}"
@@ -191,10 +198,17 @@ $("#next").click(function() {
 				<td><form:input id="chkDatetime"
 						path="ftzInTxnDtl.chkDatetime" class=".input-large" readonly="true"/></td>
 			</tr>
+			
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.CHK_ADD_WORD" />：</td>
+				<td colspan="3"><form:input id="chkAddWord"
+						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge" /></td>
+			</tr>
 		</table>
 
 	</form:form>
-	<p id="notice" class="text-error" style="display: none;"><spring:message code="i.ftzmis.210303.0006"/></p>
+	<p id="notice" class="text-error" style="display: none;"><spring:message code="i.ftzmis.210308.0006"/></p>
 </div>
 
 <div class="row">

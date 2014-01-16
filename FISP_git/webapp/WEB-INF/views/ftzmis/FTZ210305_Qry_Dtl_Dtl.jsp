@@ -40,7 +40,7 @@
 			<tr>	
 				<!-- 企业账号 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.ENT_ACCOUNT"/>：</td>
-				<td><form:input id="accountNo" path="ftzOffTxnDtl.accountNo" class="input-large" maxLength="35" readonly="true"/></td>
+				<td><form:input id="accountNo" path="ftzOffTxnDtl.accountNo" type="text" class="input-large" maxLength="35" readonly="true"/></td>
 				
 				<!-- 企业名称 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.ENT_NAME"/>：</td>

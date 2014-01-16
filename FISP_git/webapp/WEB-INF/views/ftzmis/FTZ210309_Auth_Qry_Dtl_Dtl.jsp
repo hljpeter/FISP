@@ -17,6 +17,11 @@ if (msg && msg != "") {
 	$("#next").attr("disabled", true);
 }
 	
+var status= '${FTZ210309Form.ftzOffTxnDtl.chkStatus }';
+if (status && status == '03') {
+	$("#chkPass").attr("disabled", true);
+}
+	
 $("button[name=btnChk]").click(function() {
 	$("#amount").val($("#amount").val().replaceAll(",", ""));
 	var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();

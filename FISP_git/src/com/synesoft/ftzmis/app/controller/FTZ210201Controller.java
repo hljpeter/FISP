@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.terasoluna.fw.common.message.ResultMessage;
@@ -26,6 +28,8 @@ import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
 import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
 import com.synesoft.ftzmis.app.model.FTZ210201Form;
+import com.synesoft.ftzmis.app.model.FTZ210102Form.FTZ210102FormAddDtlDtl;
+import com.synesoft.ftzmis.app.model.FTZ210201Form.FTZ210201FormAddDtlDtl;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
@@ -138,16 +142,16 @@ public class FTZ210201Controller {
 			return "redirect:/FTZ210205/QryDtl?selected_msgId="
 					+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210206.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210206/QryDtl?selected_msgId="
+			return "redirect:/FTZ210206/QryDtl?ftzInMsgCtl.msgId="
 					+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210207.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210207/QryDtl?selected_msgId="
+			return "redirect:/FTZ210207/QryDtl?ftzInMsgCtl.msgId="
 					+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210208.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210208/QryDtl?selected_msgId="
+			return "redirect:/FTZ210208/QryDtl?ftzInMsgCtl.msgId="
 			+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210209.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210209/QryDtl?selected_msgId="
+			return "redirect:/FTZ210209/QryDtl?ftzInMsgCtl.msgId="
 			+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210210.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210210/QryDtl?selected_msgId="
@@ -216,9 +220,13 @@ public class FTZ210201Controller {
 	}
 	//修改之后提交明细
 	@RequestMapping("UptDtlDtlSubmit")
-	public String UptDtlDtlSubmit(Model model,
-			 FTZ210201Form form
+	public String UptDtlDtlSubmit(Model model,	@Validated({ FTZ210201FormAddDtlDtl.class })
+			 FTZ210201Form form,BindingResult result
 			) {
+
+		if (result.hasErrors()) {
+			return "ftzmis/FTZ210201_Input_Dtl_Dtl";
+		}
 		FtzInTxnDtl update_FtzInTxnDtl = form.getFtzInTxnDtl();
 		// 开始校验
 		ResultMessages resultMessages = ResultMessages.error();
@@ -229,6 +237,21 @@ public class FTZ210201Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0013");
 			resultMessages.add(resultMessage);
+		}
+		if ("3".equals(update_FtzInTxnDtl.getCdFlag().trim())
+				|| "4".equals(update_FtzInTxnDtl.getCdFlag().trim())) {
+			if (null == update_FtzInTxnDtl.getOrgTranDate()
+					|| "".equals(update_FtzInTxnDtl.getOrgTranDate().trim())
+					|| ((null != update_FtzInTxnDtl.getTranDate()) && DateUtil
+							.getFormatDateRemoveSprit(
+									update_FtzInTxnDtl.getTranDate())
+							.compareToIgnoreCase(
+									DateUtil.getFormatDateRemoveSprit(update_FtzInTxnDtl
+											.getOrgTranDate())) < 0)) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210101.0027");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 记帐日期
@@ -406,9 +429,11 @@ public class FTZ210201Controller {
 	}
 	//新增批量明细-详细信息
 	@RequestMapping("AddDtlDtlSubmit")
-	public String AddDtlDtlSubmit(Model model,
-			FTZ210201Form form) {
-	
+	public String AddDtlDtlSubmit(Model model,@Validated({ FTZ210201FormAddDtlDtl.class }) 
+			FTZ210201Form form,BindingResult result) {
+		if (result.hasErrors()) {
+			return "ftzmis/FTZ210201_Input_Dtl_Dtl";
+		}
 		FtzInTxnDtl issert_FtzInTxnDtl = form.getFtzInTxnDtl();
 		 
 		// 开始校验
@@ -420,6 +445,21 @@ public class FTZ210201Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0013");
 			resultMessages.add(resultMessage);
+		}
+		if ("3".equals(issert_FtzInTxnDtl.getCdFlag().trim())
+				|| "4".equals(issert_FtzInTxnDtl.getCdFlag().trim())) {
+			if (null == issert_FtzInTxnDtl.getOrgTranDate()
+					|| "".equals(issert_FtzInTxnDtl.getOrgTranDate().trim())
+					|| ((null != issert_FtzInTxnDtl.getTranDate()) && DateUtil
+							.getFormatDateRemoveSprit(
+									issert_FtzInTxnDtl.getTranDate())
+							.compareToIgnoreCase(
+									DateUtil.getFormatDateRemoveSprit(issert_FtzInTxnDtl
+											.getOrgTranDate())) < 0)) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210101.0027");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 记帐日期

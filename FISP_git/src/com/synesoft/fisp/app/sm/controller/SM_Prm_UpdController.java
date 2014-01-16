@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.terasoluna.fw.common.exception.BusinessException;
 import org.terasoluna.fw.common.message.ResultMessage;
@@ -18,6 +19,7 @@ import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.CommonUtil;
 import com.synesoft.fisp.app.common.utils.DateUtil;
 import com.synesoft.fisp.app.sm.model.SM_Prm_QryForm;
+import com.synesoft.fisp.app.sm.model.SM_Prm_QryForm.SM_Prm_QryFormAdd;
 import com.synesoft.fisp.domain.model.SysParam;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.sm.SysParamService;
@@ -65,8 +67,11 @@ public class SM_Prm_UpdController {
 	 * @return
 	 */
 	@RequestMapping("Update")
-	public String update(SM_Prm_QryForm form,BindingResult result, Model model) {
+	public String update(@Validated({SM_Prm_QryFormAdd.class})SM_Prm_QryForm form,BindingResult result, Model model) {
 		logger.info("start update ...");
+		if (result.hasErrors()) {
+			return "sm/SM_Prm_Upd";
+		}
 		SysParam sysParam = form.getSysParam();
 		UserInf u = ContextConst.getCurrentUser();
 		sysParam.setUpdateUser(u.getUserid());
@@ -77,7 +82,7 @@ public class SM_Prm_UpdController {
 			sysParamServ.updateSysParam(sysParam);
 		} catch (BusinessException e) {
 			model.addAttribute("errmsg", e.getResultMessages());
-			return "sm/SM_Prm_Qry";
+			return "sm/SM_Prm_Upd";
 		}
 		model.addAttribute(
 				"successmsg",

@@ -90,7 +90,7 @@
 	<br />
 </div>
 
-<div class="page_title"><spring:message code="ftzmis.title.off.auth" /><!-- 应付信用证录入/修改 --></div>
+<div class="page_title"><spring:message code="2102ftz.title" /><!-- 应付信用证录入/修改 --></div>
 
 <div class="row">
 	<form:form id="form"
@@ -154,10 +154,10 @@
 					<th style="vertical-align: middle; text-align: center"
 						width="120px"><spring:message code="ftz.label.MSG_TYPE" /></th>
 					<th style="vertical-align: middle; text-align: center"
-						width="130px"><spring:message code="ftz.label.ACCOUNT_NO" /></th>
-					<th style="vertical-align: middle; text-align: center" width="20px"><spring:message
+						width="50px"><spring:message code="ftz.label.ACCOUNT_NO" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="fisp.rq.sumCnt" /></th>
-					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="80px"><spring:message
 							code="fisp.rq.authCnt" /></th>
 							<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.MSG_STATUS" /></th>
 				</tr>
@@ -178,9 +178,9 @@
 						<td class="vtip" style="text-align: left; width: 70px;">${dto.msgId}</td>
 						<td class="vtip" style="text-align: left; width: 120px;"><t:codeValue
 								items="${FTZ_2102_MSG}" key="${dto.msgNo}" type="label" /></td>
-						<td class="vtip" style="text-align: left; width: 130px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: right; width: 20px;">${dto.totalCount}</td>
-						<td class="vtip" style="text-align: right; width: 40px;">${dto.rsv1}</td>
+						<td class="vtip" style="text-align: left; width: 50px;">${dto.accountNo}</td>
+						<td class="vtip" style="text-align: right; width: 50px;">${dto.totalCount}</td>
+						<td class="vtip" style="text-align: right; width: 80px;">${dto.rsv1}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>
 					</tr>
 				</c:forEach>

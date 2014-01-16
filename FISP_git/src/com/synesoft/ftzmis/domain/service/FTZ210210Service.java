@@ -44,5 +44,5 @@ public interface FTZ210210Service {
 	
 	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode);
 	
-	public Integer queryTxnDtlMaxSeqNo(FtzInTxnDtl ftzInTxnDtl);
+	public String queryTxnDtlMaxSeqNo(FtzInTxnDtl ftzInTxnDtl);
 }

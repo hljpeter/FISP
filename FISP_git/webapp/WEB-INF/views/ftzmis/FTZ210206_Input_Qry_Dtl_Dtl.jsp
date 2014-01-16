@@ -71,6 +71,7 @@ function querytranType() {
 <div id="id_showMsg" style="display: none"> 
 	<br /><br />
 	<div id="id_result">
+	    <t:messagePanel />
 		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
 		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
 		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />

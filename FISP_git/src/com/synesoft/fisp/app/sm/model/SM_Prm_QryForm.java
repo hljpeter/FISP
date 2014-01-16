@@ -2,6 +2,8 @@ package com.synesoft.fisp.app.sm.model;
 
 import java.io.Serializable;
 
+import javax.validation.Valid;
+
 import com.synesoft.fisp.domain.model.SysParam;
 
 /**
@@ -13,12 +15,17 @@ import com.synesoft.fisp.domain.model.SysParam;
  * @company 上海恩梯梯数据晋恒软件有限公司
  */
 public class SM_Prm_QryForm implements Serializable {
+	
+	public static interface SM_Prm_QryFormAdd {
+		
+	}
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3632333956220859923L;
 	
+	@Valid
 	private SysParam sysParam=new SysParam();
 
 	/**

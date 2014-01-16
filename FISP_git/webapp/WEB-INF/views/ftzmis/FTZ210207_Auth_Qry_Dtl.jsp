@@ -31,7 +31,7 @@ $("#dtl").click(function() {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
 		selectedRow = eval("(" + checkSelected() + ")"); 
-		showDialogAndRefresh('${pageContext.request.contextPath}/FTZ210207/Auth/DtlTxn/Init?ftzInTxnDtl.msgId=' 
+		showDialog('${pageContext.request.contextPath}/FTZ210207/Auth/DtlTxn/Init?ftzInTxnDtl.msgId=' 
 				+ $("#msgId").val() + "&ftzInTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
 		
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -51,12 +51,11 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 });
 </script>
 
-<div id="id_showMsg" style="display: none"> 
-	<br /><br />
+<div id="id_showMsg" style="display: none">
+	<br /> <br />
+	<div class="alert alert-error" id="errorMsg" style="display: none"></div>
 	<div id="id_result">
-		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
-		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
-		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />
+		<t:messagePanel />
 		<spring:hasBindErrors name="FTZ210207Form">
 			<form:form commandName="FTZ210207Form">
 				<div class="alert alert-error">
@@ -73,6 +72,7 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 <div class="row">
 	<form:form id="form" action="${pageContext.request.contextPath}/FTZ210207/Auth/DtlMsg/Auth" method="post" modelAttribute="FTZ210207Form" class="form-horizontal">
 		<form:hidden path="ftzInMsgCtl.makDatetime" id="msg_makDatetime"/>
+		<form:hidden path="ftzInMsgCtl.makUserId" id="makUserId"/>
 		<form:hidden path="ftzInMsgCtl.chkDatetime" id="msg_chkDatetime"/>
 		<form:hidden path="ftzInMsgCtl.msgStatus"/>
 		<form:hidden path="operFlag" id="operFlag"/>

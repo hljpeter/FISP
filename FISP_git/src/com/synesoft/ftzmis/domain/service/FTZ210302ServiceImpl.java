@@ -43,7 +43,7 @@ public class FTZ210302ServiceImpl implements FTZ210302Service {
 	
 	@Transactional
 	public int insertFtzOffTxnDtl(FtzOffTxnDtl ftzOffTxnDtl){
-		int seqNo = ftz210302Repository.getSeqNo(ftzOffTxnDtl);
+		String seqNo = ftz210302Repository.getSeqNo(ftzOffTxnDtl);
 		ftzOffTxnDtl.setSeqNo(seqNo);
 		return ftz210302Repository.insertFtzOffTxnDtl(ftzOffTxnDtl);
 	}

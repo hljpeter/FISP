@@ -175,7 +175,8 @@ public class FTZ210101Controller {
 			result_FtzInMsgCtl.setAckDatetime(DateUtil
 					.getFormatDateTimeAddSpritAndColon(result_FtzInMsgCtl
 							.getAckDatetime()));
-			result_FtzInMsgCtl.setBalanceCode(result_FtzInMsgCtl.getBalanceCode().trim());
+			result_FtzInMsgCtl.setBalanceCode(result_FtzInMsgCtl
+					.getBalanceCode().trim());
 			form.setFtzInMsgCtl(result_FtzInMsgCtl);
 			FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
 			query_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
@@ -262,11 +263,13 @@ public class FTZ210101Controller {
 		query_FtzInMsgCtl.setRsv2(DateUtil.getFormatDateRemoveSprit(form
 				.getQuery_submitDate_end()));
 		query_FtzInMsgCtl.setMsgStatus(form.getQuery_msgStatus());
+		query_FtzInMsgCtl
+				.setMsgStatuss(CommonConst.FTZ_MSG_STATUS_INPUT_STATUS);
 		query_FtzInMsgCtl.setMsgNo(CommonConst.MSG_NO_210101);
 
 		// query DpMppCfg page list
-		Page<FtzInMsgCtl> page = ftz210101Serv.queryFtzInMsgCtlPageInput(
-				pageable, query_FtzInMsgCtl);
+		Page<FtzInMsgCtl> page = ftz210101Serv.queryFtzInMsgCtlPage(pageable,
+				query_FtzInMsgCtl);
 
 		if (page.getContent().size() > 0) {
 			List<FtzInMsgCtl> ftzInMsgCtls = page.getContent();
@@ -888,7 +891,8 @@ public class FTZ210101Controller {
 		} else {
 			FtzInTxnDtl ftzInTxnDtl_tmp = ftzInTxnDtls
 					.get(ftzInTxnDtls.size() - 1);
-			String seqNo = Integer.parseInt(ftzInTxnDtl_tmp.getSeqNo())+1+"";
+			String seqNo = Integer.parseInt(ftzInTxnDtl_tmp.getSeqNo()) + 1
+					+ "";
 			issert_FtzInTxnDtl.setSeqNo(StringUtil.addZeroForNum(seqNo, 6));
 		}
 
@@ -1043,22 +1047,22 @@ public class FTZ210101Controller {
 			return "ftzmis/FTZ210101_Input_Dtl_Dtl";
 		}
 
-//		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
-//		query_FtzInMsgCtl.setMsgId(form.getFtzInTxnDtl().getMsgId());
-//		FtzInMsgCtl result_FtzInMsgCtl = ftz210101Serv
-//				.queryFtzInMsgCtl(query_FtzInMsgCtl);
-//		if ((!form.getFather_makTime().equals(
-//				result_FtzInMsgCtl.getMakDatetime()) && null != result_FtzInMsgCtl
-//				.getMakDatetime())
-//				|| (!form.getFather_chkTime().equals(
-//						result_FtzInMsgCtl.getChkDatetime()) && null != result_FtzInMsgCtl
-//						.getChkDatetime())) {
-//			model.addAttribute(ResultMessages.error().add(
-//					"e.ftzmis.210101.0026"));
-//			return "forward:/FTZ210101/UptDtlDtlInit?selected_msgId="
-//					+ form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
-//					+ form.getFtzInTxnDtl().getSeqNo();
-//		}
+		// FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
+		// query_FtzInMsgCtl.setMsgId(form.getFtzInTxnDtl().getMsgId());
+		// FtzInMsgCtl result_FtzInMsgCtl = ftz210101Serv
+		// .queryFtzInMsgCtl(query_FtzInMsgCtl);
+		// if ((!form.getFather_makTime().equals(
+		// result_FtzInMsgCtl.getMakDatetime()) && null != result_FtzInMsgCtl
+		// .getMakDatetime())
+		// || (!form.getFather_chkTime().equals(
+		// result_FtzInMsgCtl.getChkDatetime()) && null != result_FtzInMsgCtl
+		// .getChkDatetime())) {
+		// model.addAttribute(ResultMessages.error().add(
+		// "e.ftzmis.210101.0026"));
+		// return "forward:/FTZ210101/UptDtlDtlInit?selected_msgId="
+		// + form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
+		// + form.getFtzInTxnDtl().getSeqNo();
+		// }
 
 		update_FtzInTxnDtl.setTranDate(DateUtil
 				.getFormatDateRemoveSprit(update_FtzInTxnDtl.getTranDate()));
@@ -1121,10 +1125,8 @@ public class FTZ210101Controller {
 				.getQuery_submitDate_start()));
 		query_FtzInMsgCtl.setRsv2(DateUtil.getFormatDateRemoveSprit(form
 				.getQuery_submitDate_end()));
-		query_FtzInMsgCtl.setMsgStatuss(new String[] {
-				CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED,
-				CommonConst.FTZ_MSG_STATUS_INPUTING,
-				CommonConst.FTZ_MSG_STATUS_AUTH_FAIL});
+		query_FtzInMsgCtl
+		.setMsgStatuss(CommonConst.FTZ_MSG_STATUS_AUTH_STATUS);
 		query_FtzInMsgCtl.setMsgNo(form.getQuery_msgNo());
 		query_FtzInMsgCtl.setMsgNos(new String[] { CommonConst.MSG_NO_210101,
 				CommonConst.MSG_NO_210102, CommonConst.MSG_NO_210103,
@@ -1252,7 +1254,8 @@ public class FTZ210101Controller {
 			result_FtzInMsgCtl.setAckDatetime(DateUtil
 					.getFormatDateTimeAddSpritAndColon(result_FtzInMsgCtl
 							.getAckDatetime()));
-			result_FtzInMsgCtl.setBalanceCode(result_FtzInMsgCtl.getBalanceCode().trim());
+			result_FtzInMsgCtl.setBalanceCode(result_FtzInMsgCtl
+					.getBalanceCode().trim());
 			form.setFtzInMsgCtl(result_FtzInMsgCtl);
 			FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
 			query_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
@@ -1456,22 +1459,22 @@ public class FTZ210101Controller {
 		ftzInTxnDtl.setMsgId(form.getFtzInTxnDtl().getMsgId());
 		ftzInTxnDtl.setSeqNo(form.getFtzInTxnDtl().getSeqNo());
 
-//		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
-//		query_FtzInMsgCtl.setMsgId(form.getFtzInTxnDtl().getMsgId());
-//		FtzInMsgCtl result_FtzInMsgCtl = ftz210101Serv
-//				.queryFtzInMsgCtl(query_FtzInMsgCtl);
-//		if ((!form.getFather_makTime().equals(
-//				result_FtzInMsgCtl.getMakDatetime()) && null != result_FtzInMsgCtl
-//				.getMakDatetime())
-//				|| (!form.getFather_chkTime().equals(
-//						result_FtzInMsgCtl.getChkDatetime()) && null != result_FtzInMsgCtl
-//						.getChkDatetime())) {
-//			model.addAttribute(ResultMessages.error().add(
-//					"e.ftzmis.210101.0026"));
-//			return "forward:/FTZ210101/QryAuthDtlDtl?selected_msgId="
-//					+ form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
-//					+ form.getFtzInTxnDtl().getSeqNo();
-//		}
+		// FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
+		// query_FtzInMsgCtl.setMsgId(form.getFtzInTxnDtl().getMsgId());
+		// FtzInMsgCtl result_FtzInMsgCtl = ftz210101Serv
+		// .queryFtzInMsgCtl(query_FtzInMsgCtl);
+		// if ((!form.getFather_makTime().equals(
+		// result_FtzInMsgCtl.getMakDatetime()) && null != result_FtzInMsgCtl
+		// .getMakDatetime())
+		// || (!form.getFather_chkTime().equals(
+		// result_FtzInMsgCtl.getChkDatetime()) && null != result_FtzInMsgCtl
+		// .getChkDatetime())) {
+		// model.addAttribute(ResultMessages.error().add(
+		// "e.ftzmis.210101.0026"));
+		// return "forward:/FTZ210101/QryAuthDtlDtl?selected_msgId="
+		// + form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
+		// + form.getFtzInTxnDtl().getSeqNo();
+		// }
 
 		UserInf userInfo = ContextConst.getCurrentUser();
 		if (userInfo.getUserid().equals(form.getFtzInTxnDtl().getMakUserId())) {

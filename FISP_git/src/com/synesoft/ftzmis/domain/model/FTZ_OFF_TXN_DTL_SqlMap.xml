@@ -151,7 +151,7 @@
 		WHERE
 			MSG_ID = #msgId:VARCHAR# AND
 			<![CDATA[SEQ_NO > #seqNo:VARCHAR# AND]]>
-			CHK_STATUS = '02' AND
+			CHK_STATUS IN ('02','04') AND
 			ROWNUM = 1
 	</select>
 	
@@ -296,7 +296,7 @@
 	
   	<!-- 更新状态，内控字段 -->
 	<update id="updateByPrimaryKeySelective" 
-			parameterClass="com.synesoft.ftzmis.domain.model.FtzOffTxnDtl" >
+			parameterClass="com.synesoft.ftzmis.domain.model.vo.FtzOffTxnDtlVO" >
 	    UPDATE 
 	    	FTZ_OFF_TXN_DTL
 	    SET 
@@ -309,10 +309,10 @@
 	    	CHK_ADD_WORD = #chkAddWord:VARCHAR#
 	    	</isNotEmpty> 
 		WHERE 
-			MSG_ID = #msgId:VARCHAR# AND
-			<![CDATA[CHK_STATUS = '02']]>
+			MSG_ID = #msgId:VARCHAR#
 			<isNotEmpty property="seqNo" prepend="AND">
 			SEQ_NO = #seqNo:VARCHAR# AND
+			CHK_STATUS = #oldChkStatus:CHAR# AND 
 	    	(MAK_DATETIME = #makDatetime:CHAR# OR MAK_DATETIME IS NULL) AND
 			(CHK_DATETIME = #chkDatetime:CHAR# OR CHK_DATETIME IS NULL)
 			</isNotEmpty>

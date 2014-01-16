@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	$(function() {
 		var msgStatus = $("#msgStatus").val();
-		if("03"==msgStatus || "04"==msgStatus){
+		if("02" != msgStatus){
 			$("#sbdetail").attr("disabled", "disabled");
 		}else{
 			$("#sbdetail").removeAttr("disabled");
@@ -37,10 +37,10 @@
 							.text();
 					var selected_seqNo = $(this).find("td:eq(9)")
 							.text();
-					showDialog('${pageContext.request.contextPath}/FTZ210311/QryDtlDtl?selected_msgId='
+					showDialog('${pageContext.request.contextPath}/FTZ210311/QryAuthDtlDtl?selected_msgId='
 							+ selected_msgId
 							+ "&selected_seqNo="
-							+ selected_seqNo,'550','1024');
+							+ selected_seqNo,'560','1024');
 					queryFTZ210311Dtl();
 				});
 	});
@@ -50,12 +50,12 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data" />');
+			alert('<spring:message code="ftz.validate.choose.dataTxn" />');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210311/QryDtlDtl?selected_msgId='
+			showDialog('${pageContext.request.contextPath}/FTZ210311/QryAuthDtlDtl?selected_msgId='
 					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'550','1024');
+					+ selected_seqNo,'560','1024');
 			queryFTZ210311Dtl();
 		}
 	}

@@ -17,6 +17,11 @@ if (msg && msg != "") {
 	$("#next").attr("disabled", true);
 }
 	
+var status= '${FTZ210304Form.ftzOffTxnDtl.chkStatus }';
+if (status && status == '03') {
+	$("#chkPass").attr("disabled", true);
+}
+	
 $("button[name=btnChk]").click(function() {
 	$("#amount").val($("#amount").val().replaceAll(",", ""));
 	var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
@@ -60,6 +65,7 @@ $("#next").click(function() {
 		<form:hidden path="ftzOffTxnDtl.msgId" id="msgId"/>
 		<form:hidden path="operFlag" id="operFlag"/>
 		<form:hidden path="msg"/>
+		<form:hidden path="ftzOffTxnDtl.chkStatus"/>
 		<table class="tbl_search">
 			<tr>
 				<!-- 申报序号 -->

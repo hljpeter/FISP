@@ -1,6 +1,7 @@
 package com.synesoft.ftzmis.app.controller;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -338,24 +339,36 @@ public class FTZ210106Controller {
 		JSONObject jo = new JSONObject();
 		FtzActMstr query_FtzActMstr = new FtzActMstr();
 		query_FtzActMstr.setAccountNo(accountNo);
-	//	query_FtzActMstr.setSubAccountNo(subAccountNo);
-		FtzActMstr result_FtzActMstr = ftz210106Serv
-				.queryFtzActMstr(query_FtzActMstr);
-		if (null == result_FtzActMstr) {
+		List<FtzActMstr> result_FtzActMstrs = ftz210101Serv
+				.queryFtzActMstrs(query_FtzActMstr);
+		if (null == result_FtzActMstrs) {
 			jo.put("dtlExist", false);
 		} else {
-			jo.put("dtlExist", true);
-			jo.put("branchId", result_FtzActMstr.getBranchId());
-			jo.put("accType", result_FtzActMstr.getAccType());
-			jo.put("accountName", result_FtzActMstr.getAccountName());
-			jo.put("depositRate", result_FtzActMstr.getDepositRate());
-			jo.put("customType", result_FtzActMstr.getCustomType());
-			jo.put("balanceCode", result_FtzActMstr.getBalanceCode());
-			jo.put("documentType", result_FtzActMstr.getDocumentType());
-			jo.put("currency", result_FtzActMstr.getCurrency());
-			jo.put("documentNo", result_FtzActMstr.getDocumentNo());
-			jo.put("balance", result_FtzActMstr.getBalance());
-			jo.put("accOrgCode", result_FtzActMstr.getAccOrgCode());
+			if (result_FtzActMstrs.size() == 1) {
+				FtzActMstr result_FtzActMstr = result_FtzActMstrs.get(0);
+				DecimalFormat df_ins = new DecimalFormat("###.000000");
+				DecimalFormat df_amt = new DecimalFormat("###,###,###,###.00");
+				jo.put("dtlExist", true);
+				jo.put("branchId", result_FtzActMstr.getBranchId());
+				jo.put("accType", result_FtzActMstr.getAccType());
+				jo.put("accountName", result_FtzActMstr.getAccountName());
+				if (null != result_FtzActMstr.getDepositRate()) {
+					jo.put("depositRate",
+							df_ins.format(result_FtzActMstr.getDepositRate()));
+				}
+				jo.put("customType", result_FtzActMstr.getCustomType());
+				jo.put("balanceCode", result_FtzActMstr.getBalanceCode().trim());
+				jo.put("documentType", result_FtzActMstr.getDocumentType());
+				jo.put("currency", result_FtzActMstr.getCurrency());
+				jo.put("documentNo", result_FtzActMstr.getDocumentNo());
+				if (null != result_FtzActMstr.getBalance()) {
+					jo.put("balance",
+							df_amt.format(result_FtzActMstr.getBalance()));
+				}
+				jo.put("accOrgCode", result_FtzActMstr.getAccOrgCode());
+			} else {
+				jo.put("dtlExist", true);
+			}
 
 		}
 		return jo.toString();

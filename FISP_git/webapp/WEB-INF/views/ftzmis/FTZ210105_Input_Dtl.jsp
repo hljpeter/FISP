@@ -22,9 +22,9 @@
 		}
 
 		$("#pageTable").find("tr").bind('click', function() {
-			var selected_msgId = $(this).find("td:eq(7)").text();
-			var selected_seqNo = $(this).find("td:eq(8)").text();
-			var selected_chkStatus = $(this).find("td:eq(9)").text();
+			var selected_msgId = $(this).find("td:eq(8)").text();
+			var selected_seqNo = $(this).find("td:eq(9)").text();
+			var selected_chkStatus = $(this).find("td:eq(10)").text();
 			var old_selected_msgId = $("#msgId").val();
 			var old_selected_seqNo = $("#selected_seqNo").val();
 			if (null == old_selected_seqNo) {
@@ -52,9 +52,9 @@
 				.bind(
 						'dblclick',
 						function() {
-							var selected_msgId = $(this).find("td:eq(7)")
+							var selected_msgId = $(this).find("td:eq(8)")
 									.text();
-							var selected_seqNo = $(this).find("td:eq(8)")
+							var selected_seqNo = $(this).find("td:eq(9)")
 									.text();
 							showDialog('${pageContext.request.contextPath}/FTZ210105/QryDtlDtl?selected_msgId='
 									+ selected_msgId
@@ -346,7 +346,9 @@
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.OPP_BANK_CODE1" /></th>
 					<th style="vertical-align: middle; text-align: center"
-						width="150px"><spring:message code="ftz.label.OPP_NAME1" /></th>
+						width="100px"><spring:message code="ftz.label.OPP_NAME1" /></th>
+					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
+							code="ftz.label.DTL_STATUS" /></th>
 				</tr>
 			</thead>
 		</table>
@@ -366,7 +368,9 @@
 								type="label" value="${dto1.amount}" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.countryCode}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.oppBankCode}</td>
-						<td class="vtip" style="text-align: left; width: 150px;">${dto1.oppName}</td>
+						<td class="vtip" style="text-align: left; width: 100px;">${dto1.oppName}</td>
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>
 						<td style="display: none;">${dto1.seqNo}</td>
 						<td style="display: none;">${dto1.chkStatus}</td>

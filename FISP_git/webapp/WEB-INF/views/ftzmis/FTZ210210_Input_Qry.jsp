@@ -130,7 +130,7 @@
 </div>
 
 <div class="page_title">
-	<spring:message code="ftzmis.title.210108.input" />
+	<spring:message code="ftzmis.title.210210.input" />
 </div>
 
 <div class="row">

@@ -75,7 +75,7 @@
 		var selected_msgId = $("#msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data" />');
+			alert('<spring:message code="ftz.validate.choose.dataTxn" />');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210310/QryDtlDtl?selected_msgId='
@@ -91,7 +91,7 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data" />');
+			alert('<spring:message code="ftz.validate.choose.dataTxn" />');
 			return;
 		} else {
 			if("02" == selected_chkStatus || "04" == selected_chkStatus) {
@@ -123,7 +123,7 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data"/>');
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			if ("02" == selected_chkStatus || "04" == selected_chkStatus) {

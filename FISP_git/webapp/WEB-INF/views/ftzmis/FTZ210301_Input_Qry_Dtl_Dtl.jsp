@@ -90,39 +90,63 @@ function queryShowAllOrg3(){
 		<form:hidden path="ftzOffTxnDtl.msgId" id="msgId"/>
 		<table class="tbl_search">
 			<tr>
+				<!-- 申报序号 -->
 				<td class="label_td"><spring:message code="ftz.label.SEQ_NO"/>：</td>
 				<td><form:input path="ftzOffTxnDtl.seqNo" type="text" class="input-large" readonly="true"/></td>
 				
+				<!-- 申报日期 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.SUBMIT_DATE"/>：</td>
 				<td><form:input path="ftzOffTxnDtl.submitDate" type="text" class="input-large date" maxLength="10" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
 			</tr>
 			<tr>	
+				<!-- 企业机构代码 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.TRAN_INSTITUTION_CODE"/>：</td>
 				<td><form:input path="ftzOffTxnDtl.institutionCode" type="text" class="input-large" maxLength="12"/></td>
 		
+				<!-- 企业账号 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.ENT_ACCOUNT_NO"/>：</td>
-				<td><form:input path="ftzOffTxnDtl.accountNo" type="text" class="input-large"/></td>
+				<td><form:input path="ftzOffTxnDtl.accountNo" type="text" class="input-large" maxLength="35"/></td>
 			</tr>
 			<tr>	
+				<!-- 债券号码 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.BONDS_CODE"/>：</td>
-				<td><form:input path="ftzOffTxnDtl.bondsCode" type="text" class="input-large"/></td>
+				<td><form:input path="ftzOffTxnDtl.bondsCode" type="text" class="input-large" maxLength="20"/></td>
 				
+				<!-- 名称 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.BONDS_NAME"/>：</td>
-				<td><form:input path="ftzOffTxnDtl.bondsName" type="text" class="input-large"/></td>
+				<td><form:input path="ftzOffTxnDtl.bondsName" type="text" class="input-large" maxLength="40"/></td>
 			</tr>
 			<tr>	
+				<!-- 货币 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.CURRENCY"/>：</td>
-				<td><form:input path="ftzOffTxnDtl.currency" type="text" class="input-large"/></td>
+				<td>
+					<form:select path="ftzOffTxnDtl.currency">
+						<form:option value=""></form:option>
+						<form:options items="${SYS_CURRENCY }" />
+					</form:select>
+				</td>
 				
+				<!-- 金额 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.ISSUE_AMOUNT"/>：</td>
 				<td><t:moneyFormat type="text" id="amount" name="ftzOffTxnDtl.amount" value="${FTZ210301Form.ftzOffTxnDtl.amount }" format="###,###,###,###.00" dot="true" /></td>
 			</tr>
 			<tr>	
+				<!-- 国别代码 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.COUNTRY_CODE"/>：</td>
-				<td><form:input path="ftzOffTxnDtl.countryCode" type="text" class="input-large"/></td>
+				<td>
+					<form:input id="countryCode" path="ftzOffTxnDtl.countryCode" class="input-large" maxLength="3"/>
+					<input type="button" class="btn btn-small" onclick="queryShowSelNation()" value="<spring:message code="button.label.Search"/>">
+				</td>
 				
+				<!-- 国内地区码 -->
 				<td class="label_td"><spring:message code="ftz.label.DISTRICT_CODE"/>：</td>
-				<td><form:input path="ftzOffTxnDtl.districtCode" type="text" class="input-large"/></td>
+				<td>
+					 <form:select path="ftzOffTxnDtl.districtCode"  id="districtCode">
+						<form:option value=""></form:option>
+						<form:options items="${FTZ_DISITRICT_CODE}" />
+					</form:select>
+					<input type="button" class="btn btn-small" onclick="queryShowSelReg()" value="<spring:message code="button.label.Search"/>">
+				</td>
 			</tr>
 			<tr>	
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.TRAN_TYPE"/>：</td>
@@ -143,14 +167,14 @@ function queryShowAllOrg3(){
 				</td>
 				
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.TERM_LENGTH"/>：</td>	
-				<td><form:input path="ftzOffTxnDtl.termLength" type="text" class="input-large" onkeyup="numberFormat(this);"/></td>
+				<td><form:input path="ftzOffTxnDtl.termLength" type="text" class="input-large" maxLength="4" onkeyup="numberFormat(this);"/></td>
 			</tr>
 			<tr>	
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.SETTLE_DATE"/>：</td>	
-				<td><form:input path="ftzOffTxnDtl.tranDate" type="text" class="input-large date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
+				<td><form:input path="ftzOffTxnDtl.tranDate" type="text" class="input-large date" maxLength="10" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
 				
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.EXPIRE_DATE"/>：</td>	
-				<td><form:input path="ftzOffTxnDtl.expirationDate" type="text" class="input-large date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
+				<td><form:input path="ftzOffTxnDtl.expirationDate" type="text" class="input-large date" maxLength="10" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
 			</tr>
 			<tr>	
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.INTEREST_TYPE"/>：</td>	

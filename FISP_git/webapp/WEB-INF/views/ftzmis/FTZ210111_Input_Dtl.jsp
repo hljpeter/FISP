@@ -22,9 +22,9 @@
 		}
 
 		$("#pageTable").find("tr").bind('click', function() {
-			var selected_msgId = $(this).find("td:eq(7)").text();
-			var selected_seqNo = $(this).find("td:eq(8)").text();
-			var selected_chkStatus = $(this).find("td:eq(9)").text();
+			var selected_msgId = $(this).find("td:eq(11)").text();
+			var selected_seqNo = $(this).find("td:eq(12)").text();
+			var selected_chkStatus = $(this).find("td:eq(13)").text();
 			var old_selected_msgId = $("#msgId").val();
 			var old_selected_seqNo = $("#selected_seqNo").val();
 			if (null == old_selected_seqNo) {
@@ -52,9 +52,9 @@
 				.bind(
 						'dblclick',
 						function() {
-							var selected_msgId = $(this).find("td:eq(7)")
+							var selected_msgId = $(this).find("td:eq(11)")
 									.text();
-							var selected_seqNo = $(this).find("td:eq(8)")
+							var selected_seqNo = $(this).find("td:eq(12)")
 									.text();
 							showDialog('${pageContext.request.contextPath}/FTZ210111/QryDtlDtl?selected_msgId='
 									+ selected_msgId
@@ -335,18 +335,26 @@
 				<tr>
 					<th style="vertical-align: middle; text-align: center" width="10px"><spring:message
 							code="fisp.label.common.no" /></th>
-					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="70px"><spring:message
 							code="ftz.label.CD_FLAG" /></th>
 					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
 							code="ftz.label.TRAN_DATE" /></th>
-					<th style="vertical-align: middle; text-align: center"
-						width="150px"><spring:message code="ftz.label.AMOUNT" /></th>
+					<th style="vertical-align: middle; text-align: center" width="90px"><spring:message
+							code="ftz.label.AMOUNT" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.COUNTRY_CODE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="15px"><spring:message
+							code="ftz.label.TERM_LENGTH" /></th>
+					<th style="vertical-align: middle; text-align: center" width="15px"><spring:message
+							code="ftz.label.TERM_UNIT" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
-							code="ftz.label.OPP_BANK_CODE1" /></th>
-					<th style="vertical-align: middle; text-align: center"
-						width="150px"><spring:message code="ftz.label.OPP_NAME1" /></th>
+							code="ftz.label.valueDate" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.EXPIRE_DATE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.INTEREST_RATE1" /></th>
+					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
+							code="ftz.label.DTL_STATUS" /></th>
 				</tr>
 			</thead>
 		</table>
@@ -359,14 +367,25 @@
 				<c:forEach var="dto1" items="${page.content}" varStatus="i">
 					<tr>
 						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
-						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 70px;"><t:codeValue
 								items="${FTZ_CD_FLAG}" key="${dto1.cdFlag}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
-						<td class="vtip" style="text-align: right; width: 150px;"><t:moneyFormat
+						<td class="vtip" style="text-align: right; width: 90px;"><t:moneyFormat
 								type="label" value="${dto1.amount}" /></td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.countryCode}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.oppBankCode}</td>
-						<td class="vtip" style="text-align: left; width: 150px;">${dto1.oppName}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}"
+								type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 15px;">${dto1.termLength}</td>
+						<td class="vtip" style="text-align: left; width: 15px;"><t:codeValue
+								items="${FTZ_REBUY_TERM_UNIT}" key="${dto1.termUnit}"
+								type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 50px;">${dto1.valueDate}</td>
+						<td class="vtip" style="text-align: left; width: 50px;">${dto1.expireDate}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
+								type="label" value="${dto1.interestRate}" dot="true"
+								format="###,###,###,###.000000" /></td>
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>
 						<td style="display: none;">${dto1.seqNo}</td>
 						<td style="display: none;">${dto1.chkStatus}</td>

@@ -181,7 +181,7 @@ public class FTZ210304ServiceImp extends FTZOffCommonServiceImp {
 			messages.addAll(msg);
 		}
 		// 境内外对手行代码
-		if (!StringUtil.isNotTrimEmpty(ftzOffTxnDtl.getAccOrgCode())) {
+		if (!StringUtil.isNotTrimEmpty(ftzOffTxnDtl.getSwiftCode())) {
 			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.210304.0005");								
 			messages.addAll(msg);
 		}

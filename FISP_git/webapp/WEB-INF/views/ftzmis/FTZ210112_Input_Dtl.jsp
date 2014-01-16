@@ -280,7 +280,7 @@
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUSS" /></td>
-				<td><form:select path="ftzInMsgCtl.msgStatus" readonly="true" id="msgStatus">
+				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true" id="msgStatus">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>

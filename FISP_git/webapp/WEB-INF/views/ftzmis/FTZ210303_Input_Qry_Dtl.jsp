@@ -40,7 +40,7 @@ if (actionFlag == "addMsg") {
 	//}
 } else {
 	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210303/Input/UptMsg/Sumbit");
-	//var operFlag = '${FTZ210309Form.operFlag }';
+	//var operFlag = '${FTZ210303Form.operFlag }';
 	//if (operFlag == "updated") {
 	//	$("input[type=submit]").attr("disabled", true);
 	//}
@@ -192,6 +192,7 @@ $("#del").click(function() {
 	          	<th class="tbl_page_th" width="100px"><spring:message code="ftz.label.CURRENCY"/></th>
 	          	<th class="tbl_page_th" width="120px"><spring:message code="ftz.label.DEBT_COUNTRY_CODE"/></th>
 	          	<th class="tbl_page_th" width="160px"><spring:message code="ftz.label.DEBT_NAME"/></th>
+	          	<th class="tbl_page_th" width="80px"><spring:message code="ftz.label.DTL_STATUS"/></th>
 			</tr>
 			</thead>
 		</table>
@@ -209,6 +210,7 @@ $("#del").click(function() {
 		            <td class="tbl_page_td_left vtip" width="100px"><t:codeValue items="${SYS_CURRENCY }" key="${dto.currency }" type="label" /></td>
 		            <td class="tbl_page_td_left vtip" width="120px">${dto.countryCode }</td>
 		            <td class="tbl_page_td_left vtip" width="160px">${dto.accountName }</td>
+		            <td class="tbl_page_td_left vtip" width="80px"><t:codeValue items="${FTZ_MSG_STATUS }" key="${dto.chkStatus }" type="label" /></td>
 				</tr>
 	        </c:forEach>
 	        

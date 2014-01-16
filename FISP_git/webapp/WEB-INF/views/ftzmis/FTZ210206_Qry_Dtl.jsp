@@ -33,9 +33,9 @@
 									.text();
 							window
 									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210206/QryDtlDtl?selected_msgId='
+											'${pageContext.request.contextPath}/FTZ210206/QryDtlDtl?ftzInTxnDtl.msgId='
 													+ selected_msgId
-													+ "&selected_seqNo="
+													+ "&ftzInTxnDtl.seqNo="
 													+ selected_seqNo,
 											window,
 											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
@@ -50,8 +50,8 @@
 		} else {
 			window
 					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210206/QryDtlDtl?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
+							'${pageContext.request.contextPath}/FTZ210206/QryDtlDtl?ftzInTxnDtl.msgId='
+									+ selected_msgId + "&ftzInTxnDtl.seqNo="
 									+ selected_seqNo,
 							window,
 							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
@@ -88,8 +88,9 @@
 	<form:form id="form"
 		action="${pageContext.request.contextPath}/BMG_TASK_Qry/Qry"
 		method="post" modelAttribute="FTZ210206Form" class="form-horizontal">
-		<form:hidden path="selected_msgId" id="selected_msgId" />
-		<form:hidden path="selected_seqNo" id="selected_seqNo" />
+		<form:hidden path="ftzInMsgCtl.msgId" id="selected_msgId" />
+		<form:hidden path="ftzInTxnDtl.seqNo" id="selected_seqNo" />
+
 		<table class="tbl_search">
 		<tr>
 				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID" />：</td>
@@ -105,7 +106,7 @@
 			<tr>
 				<td class="label_td"><font color="red">*</font>
 				<spring:message code="ftz.label.SUBMIT_DATE" />：</td>
-				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
+				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate" readonly="true"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUS" />：</td>
@@ -119,11 +120,9 @@
 			<tr>
 				<td class="label_td"><font color="red">*</font>
 				<spring:message code="ftz.label.ACCOUNT_NO" />：</td>
-				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo"
+				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo" readonly="true"
 						class=".input-large" onblur="accountFill()" />
-					<button type="button" class="btn btn-small" onclick="queryAct()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					</td>
 				
 				<td class="label_td"><font color="red">*</font>
 				<spring:message code="ftz.label.ACCOUNT_NAME" />：</td>
@@ -217,6 +216,8 @@
 					code="ftz.label.valueDate" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.interestRate" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+					code="ftz.label.DTL_STATUS" /></th>
 				</tr>
 			</thead>
 		</table>
@@ -234,11 +235,13 @@
 						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
 						<td class="vtip" style="text-align: right; width: 50px;"><t:moneyFormat
 								type="label" value="${dto1.amount}" /></td>
-						
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.countryCode}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.valueDate}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.interestRate}</td>
-						
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
+						<td style="display: none;">${dto1.msgId}</td>
+						<td style="display: none;">${dto1.seqNo}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -87,7 +87,7 @@
 				<!-- 期限条件 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.TERM_CONDITION"/>：</td>
 				<td>
-					 <form:select id="termCondition" path="ftzOffTxnDtl.termCondition">
+					 <form:select id="termCondition" path="ftzOffTxnDtl.termCondition" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TERM_CONDITION }" />
 					</form:select>
@@ -96,12 +96,12 @@
 			<tr>	
 				<!-- 期限长度 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.TERM_LENGTH"/>：</td>
-				<td><form:input id="termLength" path="ftzOffTxnDtl.termLength" type="text" class="input-large"/></td>
+				<td><form:input id="termLength" path="ftzOffTxnDtl.termLength" type="text" class="input-large" readonly="true"/></td>
 					
 				<!-- 期限单位 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.TERM_UNIT"/>：</td>
 				<td>
-					 <form:select path="ftzOffTxnDtl.termUnit">
+					 <form:select path="ftzOffTxnDtl.termUnit" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TERM_UNIT }" />
 					</form:select>

@@ -4,8 +4,8 @@
 	//input button
 	function orgSelect(orgid, orgname) {
 		var json = {
-			"param1" : orgid,
-			"param2" : orgname
+			"param1" : $.trim(orgid),
+			"param2" : $.trim(orgname)
 		};
 		window.returnValue = JSON.stringify(json);
 

@@ -618,23 +618,6 @@ public class FTZ210310Controller {
 			return "ftzmis/FTZ210310_Input_Dtl_Dtl";
 		}
 		
-		FtzOffMsgCtl query_FtzOffMsgCtl = new FtzOffMsgCtl();
-		query_FtzOffMsgCtl.setMsgId(form.getFtzOffTxnDtl().getMsgId());
-		FtzOffMsgCtl result_FtzOffMsgCtl = ftz210310Service
-				.queryFtzOffMsgCtl(query_FtzOffMsgCtl);
-		if ((!form.getFather_makTime().equals(
-				result_FtzOffMsgCtl.getMakDatetime()) && null != result_FtzOffMsgCtl
-				.getMakDatetime())
-				|| (!form.getFather_chkTime().equals(
-						result_FtzOffMsgCtl.getChkDatetime()) && null != result_FtzOffMsgCtl
-						.getChkDatetime())) {
-			model.addAttribute(ResultMessages.error().add(
-					"e.ftzmis.210101.0026"));
-			return "forward:/FTZ210310/UpdDtlDtlInit?selected_msgId="
-					+ form.getFtzOffTxnDtl().getMsgId() + "&selected_seqNo="
-					+ form.getFtzOffTxnDtl().getSeqNo();
-		}
-		
 		ftzOffTxnDtl.setRsv1(DateUtil.getFormatDateTimeRemoveSpritAndColon(
 				ftzOffTxnDtl.getMakDatetime()));
 		ftzOffTxnDtl.setRsv2(DateUtil.getFormatDateTimeRemoveSpritAndColon(
@@ -1033,20 +1016,6 @@ public class FTZ210310Controller {
 		ftzOffTxnDtl.setMsgId(form.getFtzOffTxnDtl().getMsgId());
 		ftzOffTxnDtl.setSeqNo(form.getFtzOffTxnDtl().getSeqNo());
 		
-//		FtzOffMsgCtl query_FtzOffMsgCtl = new FtzOffMsgCtl();
-//		query_FtzOffMsgCtl.setMsgId(form.getFtzOffTxnDtl().getMsgId());
-//		FtzOffMsgCtl result_FtzOffMsgCtl = ftz210310Service.queryFtzOffMsgCtl(query_FtzOffMsgCtl);
-//		if ((!form.getFather_makTime().equals(
-//				result_FtzOffMsgCtl.getMakDatetime()) && null != result_FtzOffMsgCtl.getMakDatetime())
-//				|| (!form.getFather_chkTime().equals(
-//						result_FtzOffMsgCtl.getChkDatetime()) && null != result_FtzOffMsgCtl
-//						.getChkDatetime())) {
-//			model.addAttribute(ResultMessages.error().add(
-//			"e.ftzmis.210101.0026"));
-//			return "forward:/FTZ210310/QryAuthDtlDtl?selected_msgId="
-//				+ form.getFtzOffTxnDtl().getMsgId() + "&selected_seqNo="
-//				+ form.getFtzOffTxnDtl().getSeqNo();
-//		}
 		
 		UserInf userInfo = ContextConst.getCurrentUser();
 		if (userInfo.getUserid().equals(form.getFtzOffTxnDtl().getMakUserId())) {

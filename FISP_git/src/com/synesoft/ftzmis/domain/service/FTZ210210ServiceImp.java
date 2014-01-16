@@ -171,7 +171,7 @@ public class FTZ210210ServiceImp implements FTZ210210Service {
 	}
 	
 	@Override
-	public Integer queryTxnDtlMaxSeqNo(FtzInTxnDtl ftzInTxnDtl) {
+	public String queryTxnDtlMaxSeqNo(FtzInTxnDtl ftzInTxnDtl) {
 		return ftzInTxnDtlRepository.queryTxnDtlMaxSeqNo(ftzInTxnDtl);
 	}
 

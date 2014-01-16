@@ -232,7 +232,7 @@ function authRefuse() {
 			onclick="authPass()" value="<spring:message code="ftz.label.AUTH" />"> 
 		<input id="authRefuse"
 			type="button" class="btn btn-primary" onclick="authRefuse()" value="<spring:message code="ftz.label.UNAUTH" />">
-		<button name="btn" class="btn btn-primary" onclick="javascript: window.close();">
+		<button id="clswin" name="btn" class="btn btn-primary" onclick="javascript: window.close();">
 		<spring:message code="button.lable.close"/></button><!-- 关闭 -->
 	</div>
 </div>

@@ -24,7 +24,6 @@
 	});
 	function addDetail() {
 		$("#amount").val($("#amount").val().replaceAll(",", ""));
-		$("#interestRate").val($("#interestRate").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
@@ -175,7 +174,7 @@
 				<td><t:moneyFormat type="text" id="interestRate"
 						name="ftzInTxnDtl.interestRate"
 						value="${FTZ210201Form.ftzInTxnDtl.interestRate}"
-						format="###.000000" dot="true" maxlength="9" />
+						format="###.000000" dot="true" maxlength="9" /></td>
 				</td>
 				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>

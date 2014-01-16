@@ -17,6 +17,11 @@ if (msg && msg != "") {
 	$("#next").attr("disabled", true);
 }
 	
+var status= '${FTZ210301Form.ftzOffTxnDtl.chkStatus }';
+if (status && status == '03') {
+	$("#chkPass").attr("disabled", true);
+}
+
 $("button[name=btnChk]").click(function() {
 	$("#amount").val($("#amount").val().replaceAll(",", ""));
 	var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
@@ -176,7 +181,9 @@ $("#next").click(function() {
 </div>
 <div class="row">
 	<div class="navbar navbar-fixed-bottom text-right" id="footer" style="text-align:center; margin-bottom:0px; line-height:30px; background-color: #eee; opacity:0.9;">
-		<button id="sbm" name="btn" class="btn btn-primary"><spring:message code="ftz.label.SUBMIT_MSG_DTL"/></button>
+		<button id="chkPass" name="btnChk" class="btn btn-primary" onclick='javascript: $("#operFlag").val("03");'><spring:message code="ftz.label.AUTH"/></button>
+		<button id="chkRej" name="btnChk" class="btn btn-primary" onclick='javascript: $("#operFlag").val("04");'><spring:message code="ftz.label.UNAUTH"/></button>
+		<button id="next" name="btn" class="btn btn-primary"><spring:message code="ftz.label.NEXT"/></button>
 		<button id="cls" name="btn" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

@@ -114,7 +114,6 @@ public class FTZ210501Controller {
 		query_FtzActMstr.setSubAccountNo(form.getQuery_subAccountNo());
 		query_FtzActMstr.setCurrency(form.getQuery_currency());
 		query_FtzActMstr.setAccType(form.getQuery_accType());
-		query_FtzActMstr.setAccStatus(form.getQuery_accStatus());
 		
 		//query page list
 		Page<FtzActMstr> page = ftz210501Service.queryFtzActMstrPage(pageable, query_FtzActMstr);
@@ -287,6 +286,7 @@ public class FTZ210501Controller {
 		}
 		return json.toString();
 	}
+	
 	//账户信息修改提交
 	@RequestMapping("Update")
 	public String update(Model model, FTZ210501Form form) {

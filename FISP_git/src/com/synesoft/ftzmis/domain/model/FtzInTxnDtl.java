@@ -15,6 +15,7 @@ import com.synesoft.ftzmis.app.model.FTZ210104Form.FTZ210104FormAddDtlDtl;
 import com.synesoft.ftzmis.app.model.FTZ210105Form.FTZ210105FormAddDtlDtl;
 import com.synesoft.ftzmis.app.model.FTZ210106Form.FTZ210106FormAddDtlDtl;
 import com.synesoft.ftzmis.app.model.FTZ210112Form.FTZ210112FormAddDtlDtl;
+import com.synesoft.ftzmis.app.model.FTZ210201Form.FTZ210201FormAddDtlDtl;
 
 public class FtzInTxnDtl extends FtzInTxnDtlKey {
 	/**
@@ -126,7 +127,7 @@ public class FtzInTxnDtl extends FtzInTxnDtlKey {
 	 * 
 	 * @abatorgenerated Wed Dec 25 11:25:40 CST 2013
 	 */
-	@NotNull(groups = { FTZ210102FormAddDtlDtl.class , FTZ210106FormAddDtlDtl.class,FTZ210105FormAddDtlDtl.class}, message = "{e.ftzmis.210101.0018}")
+	@NotNull(groups = { FTZ210102FormAddDtlDtl.class ,FTZ210201FormAddDtlDtl.class , FTZ210106FormAddDtlDtl.class,FTZ210105FormAddDtlDtl.class}, message = "{e.ftzmis.210101.0018}")
 	private Short termLength;
 
 	/**
@@ -162,7 +163,7 @@ public class FtzInTxnDtl extends FtzInTxnDtlKey {
 	 * 
 	 * @abatorgenerated Wed Dec 25 11:25:40 CST 2013
 	 */
-	@NotNull(groups = { FTZ210102FormAddDtlDtl.class,FTZ210103FormAddDtlDtl.class}, message = "{e.ftzmis.210101.0022}")
+	@NotNull(groups = { FTZ210102FormAddDtlDtl.class, FTZ210106FormAddDtlDtl.class,FTZ210201FormAddDtlDtl.class,FTZ210103FormAddDtlDtl.class}, message = "{e.ftzmis.210101.0022}")
 	private BigDecimal interestRate;
 
 	/**

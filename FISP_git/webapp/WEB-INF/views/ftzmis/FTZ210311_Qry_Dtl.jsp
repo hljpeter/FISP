@@ -44,7 +44,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data" />');
+			alert('<spring:message code="ftz.validate.choose.dataTxn" />');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210311/QryDtlDtl?selected_msgId='
