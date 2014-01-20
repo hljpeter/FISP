@@ -30,15 +30,11 @@
 									.text();
 							var selected_msgNo = $(this).find("td:eq(8)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210101/QryRedirect?selected_msgId='
-													+ selected_msgId
-													+ "&selected_msgNo="
-													+ selected_msgNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-
+									
+							showDialog('${pageContext.request.contextPath}/FTZ210203/QryRedirect?selected_msgId='
+									+ selected_msgId
+									+ "&selected_msgNo="
+									+ selected_msgNo,'500','1024');
 						});
 	});
 
@@ -46,21 +42,17 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210101/QryRedirect?selected_msgId='
-									+ selected_msgId + "&selected_msgNo="
-									+ selected_msgNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210203/QryRedirect?selected_msgId='
+					+ selected_msgId + "&selected_msgNo="
+					+ selected_msgNo,'500','1024');
 		}
 	}
-	function queryFTZ210101() {
+	function queryFTZ210203() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210101/Qry";
+		form.action = "${pageContext.request.contextPath}/FTZ210203/Qry";
 		form.submit();
 	}
 </script>
@@ -70,8 +62,8 @@
 	<div class="alert alert-error" id="errorMsg" style="display: none"></div>
 	<div id="id_result">
 		<t:messagePanel />
-		<spring:hasBindErrors name="FTZ210101Form">
-			<form:form commandName="FTZ210101Form">
+		<spring:hasBindErrors name="FTZ210203Form">
+			<form:form commandName="FTZ210203Form">
 				<div class="alert alert-error">
 					<form:errors path="*" cssStyle="color:red"></form:errors>
 				</div>
@@ -87,8 +79,8 @@
 
 <div class="row">
 	<form:form id="form"
-		action="${pageContext.request.contextPath}/FTZ210101/Qry"
-		method="post" modelAttribute="FTZ210101Form" class="form-horizontal">
+		action="${pageContext.request.contextPath}/FTZ210203/Qry"
+		method="post" modelAttribute="FTZ210203Form" class="form-horizontal">
 		<form:hidden path="selected_msgId" id="selected_msgId" />
 		<form:hidden path="selected_seqNo" id="selected_seqNo" />
 		<form:hidden path="selected_msgNo" id="selected_msgNo" />
@@ -110,7 +102,8 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
 				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_TYPE" />：</td>
 				<td><form:select path="query_msgNo">
 						<form:option value=""></form:option>
@@ -189,7 +182,8 @@
 						<td class="vtip" style="text-align: left; width: 120px;"><t:codeValue
 								items="${FTZ_2101_MSG}" key="${dto.msgNo}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 70px;">${dto.msgId}</td>
-						<td class="vtip" style="text-align: left; width: 30px;">${dto.currency}</td>
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 120px;">${dto.accountNo}</td>
 						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>
@@ -211,8 +205,8 @@
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZ210101Form.query_branchId}&query_submitDate_start=${FTZ210101Form.query_submitDate_start}&query_submitDate_end=${FTZ210101Form.query_submitDate_end}&query_msgId=${FTZ210101Form.query_msgId}&query_accountName=${FTZ210101Form.query_accountName}&query_accountNo=${FTZ210101Form.query_accountNo}&query_subAccountNo=${FTZ210101Form.query_subAccountNo}&query_msgStatus=${FTZ210101Form.query_msgStatus}"
-								action="/FTZ210101/Qry" /></td>
+								query="query_branchId=${FTZ210203Form.query_branchId}&query_submitDate_start=${FTZ210203Form.query_submitDate_start}&query_submitDate_end=${FTZ210203Form.query_submitDate_end}&query_msgId=${FTZ210203Form.query_msgId}&query_accountName=${FTZ210203Form.query_accountName}&query_accountNo=${FTZ210203Form.query_accountNo}&query_msgStatus=${FTZ210203Form.query_msgStatus}"
+								action="/FTZ210203/Qry" /></td>
 					</tr>
 				</table>
 			</td>

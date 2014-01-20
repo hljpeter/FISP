@@ -129,6 +129,7 @@
 			<isNotEmpty property="accountNo" prepend="AND">
 			FTZ_IN_MSG_CTL.ACCOUNT_NO = #accountNo:VARCHAR#
 			</isNotEmpty>
+			order by MSG_ID,SUBMIT_DATE
 		</dynamic>
 	</sql>
 	
@@ -150,8 +151,6 @@
 	    FROM 
 	    	FTZ_IN_MSG_CTL
 		<include refid="FTZIN_MSG_CTL.where_condition" />
-	    ORDER BY
-	    	WORK_DATE DESC
 	</select>
   	
 	<select id="selectListSelective" 

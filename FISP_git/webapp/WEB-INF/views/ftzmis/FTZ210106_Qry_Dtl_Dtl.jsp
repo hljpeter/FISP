@@ -31,7 +31,7 @@
 						class=".input-large" readonly="true" /></td>
 				<td class="label_td"><font color="red">* </font><spring:message
 						code="ftz.label.CD_FLAG" />：</td>
-				<td><form:select path="ftzInTxnDtl.cdFlag" readonly="true"> 
+				<td><form:select path="ftzInTxnDtl.cdFlag"  disabled="true"> 
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_CD_FLAG}" />
 					</form:select></td>
@@ -44,7 +44,7 @@
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large"  disabled="true"/></td>						
 				<td class="label_td"><spring:message	code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readonly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.AMOUNT"/>：</td>
@@ -69,28 +69,26 @@
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.VALUE_DATES" />：</td>
 				<td><form:input id="valueDate"
-						path="ftzInTxnDtl.valueDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class=".input-large" readonly="true"/></td>
+						path="ftzInTxnDtl.valueDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class=".input-large" disabled="true"/></td>
 					
 				<td class="label_td"><font color="red">* </font><spring:message
 						code="ftz.label.EXPIRE_DATE" />：</td>
 				<td><form:input id="ftzInTxnDtl.expireDate"
 						path="ftzInTxnDtl.expireDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readonly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 			</tr>
 			<tr>				
-				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.INTEREST_RATES" />：</td>
-				<td><form:input id="interestRate" path="ftzInTxnDtl.interestRate" class=".input-large" readonly="true" /></td>
-				
+					<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.INTEREST_RATES" />：</td>
+				<td><t:moneyFormat type="text"
+						value="${FTZ210106Form.ftzInTxnDtl.interestRate}"
+						format="###.000000" dot="true" readonly="true" /></td>
 				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>
 				<td><form:select path="ftzInTxnDtl.tranType" id="tranType" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TRAN_TYPE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querytranType()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+				</td>
 			</tr>
 		
 			<tr>

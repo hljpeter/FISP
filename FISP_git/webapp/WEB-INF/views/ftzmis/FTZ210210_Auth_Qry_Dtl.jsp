@@ -47,7 +47,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210210/QryAuthDtlDtl?selected_msgId='
@@ -60,7 +60,7 @@
 	function queryFTZ210210Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210210/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210210/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	function sbDtl() {
@@ -159,18 +159,7 @@
 			</tr>
 
 		</table>
-
 		<table class="tbl_search">
-			<tr>
-				<td class="label_td"><spring:message
-						code="ftz.label.SND_DATETIME" />：</td>
-				<td><form:input id="sndDatetime" path="ftzInMsgCtl.sndDatetime"
-						class=".input-large" readonly="true" /></td>
-				<td class="label_td"><spring:message
-						code="ftz.label.ACK_DATETIME" />：</td>
-				<td><form:input id="ackDatetime" path="ftzInMsgCtl.ackDatetime"
-						class=".input-large" readonly="true" /></td>
-			</tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.PBOC_STATUS" />：</td>
@@ -180,7 +169,7 @@
 					</form:select></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.ADD_WORD" />：</td>
+				<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
 				<td colspan="3"><form:input id="addWord"
 						path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
 			</tr>

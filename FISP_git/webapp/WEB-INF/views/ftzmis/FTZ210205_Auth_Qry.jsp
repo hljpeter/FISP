@@ -1,0 +1,225 @@
+<script type="text/javascript">
+	$(function() {
+		$("#pageTable").find("tr").bind('click', function() {
+			var selected_msgId = $(this).find("td:eq(3)").text();
+			var selected_msgNo = $(this).find("td:eq(9)").text();
+			var old_selected_msgId = $("#selected_msgId").val();
+			if (null == old_selected_msgId) {
+				$("#selected_msgId").val(selected_msgId);
+				$("#selected_msgNo").val(selected_msgNo);
+				return;
+			}
+			if (old_selected_msgId == selected_msgId) {
+				$("#selected_msgId").val("");
+				$("#selected_msgNo").val("");
+				return;
+			}
+			if (old_selected_msgId != selected_msgId) {
+				$("#selected_msgId").val(selected_msgId);
+				$("#selected_msgNo").val(selected_msgNo);
+				return;
+			}
+
+		});
+		$("#pageTable").find("tr").bind(
+				'dblclick',
+				function() {
+					var selected_msgId = $(this).find("td:eq(3)").text();
+					var selected_msgNo = $(this).find("td:eq(9)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210205/QryAuthRedirect?selected_msgId='
+									+ selected_msgId + "&selected_msgNo="
+									+ selected_msgNo, '500', '1024');
+					queryFTZ210205();
+
+				});
+	});
+
+	function showAllDetail() {
+		var selected_msgId = $("#selected_msgId").val();
+		var selected_msgNo = $("#selected_msgNo").val();
+		if (null == selected_msgId || "" == selected_msgId) {
+			alert('<spring:message code="ftz.validate.choose.data"/>');
+			return;
+		} else {
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210205/QryAuthRedirect?selected_msgId='
+							+ selected_msgId + "&selected_msgNo="
+							+ selected_msgNo, '500', '1024');
+			queryFTZ210205();
+		}
+	}
+	function showDetail() {
+		var selected_msgId = $("#selected_msgId").val();
+		var selected_msgNo = $("#selected_msgNo").val();
+		if (null == selected_msgId || "" == selected_msgId) {
+			alert('<spring:message code="ftz.validate.choose.data"/>');
+			return;
+		} else {
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210205/QryAuthRedirect?selected_msgId='
+							+ selected_msgId + "&unAuthFlag=1"
+							+ "&selected_msgNo=" + selected_msgNo, '500',
+					'1024');
+			queryFTZ210205();
+		}
+	}
+	function queryFTZ210205() {
+		var form = document.getElementById("form");
+		form.action = "${pageContext.request.contextPath}/FTZ210205/AuthQry?page.page="+${page.number+1};
+		form.submit();
+	}
+</script>
+
+
+<div id="id_showMsg" style="display: none">
+	<br /> <br />
+	<div class="alert alert-error" id="errorMsg" style="display: none"></div>
+	<div id="id_result">
+		<t:messagePanel />
+		<spring:hasBindErrors name="fTZ210205Form">
+			<form:form commandName="fTZ210205Form">
+				<div class="alert alert-error">
+					<form:errors path="*" cssStyle="color:red"></form:errors>
+				</div>
+			</form:form>
+		</spring:hasBindErrors>
+	</div>
+	<br />
+</div>
+
+<div class="page_title">
+	<spring:message code="ftzmis.title.2102.auth" />
+</div>
+
+<div class="row">
+	<form:form id="form"
+		action="${pageContext.request.contextPath}/FTZ210205/AuthQry"
+		method="post" modelAttribute="FTZ210205Form" class="form-horizontal">
+		<form:hidden path="selected_msgId" id="selected_msgId" />
+		<form:hidden path="selected_seqNo" id="selected_seqNo" />
+		<form:hidden path="selected_msgNo" id="selected_msgNo" />
+		<table class="tbl_search">
+			<tr>
+				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID" />：</td>
+				<td><form:select path="query_branchId">
+						<form:option value=""></form:option>
+						<form:options items="${SM_0002}" />
+					</form:select></td>
+				<td class="label_td"><spring:message
+						code="ftz.label.SUBMIT_DATE" />：</td>
+				<td><form:input id="query_submitDate_start"
+						path="query_submitDate_start"
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" cssClass="span2" />-<form:input
+						id="query_submitDate_end" path="query_submitDate_end"
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" cssClass="span2" /></td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
+				<td><form:input id="query_msgId" path="query_msgId"
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
+				<td class="label_td"><spring:message code="ftz.label.MSG_TYPE" />：</td>
+				<td><form:select path="query_msgNo">
+						<form:option value=""></form:option>
+						<form:options items="${FTZ_2101_MSG}" />
+					</form:select></td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.ACCOUNT_NO" />：</td>
+				<td><form:input id="query_accountNo" path="query_accountNo"
+						class=".input-large" /></td>
+				<td align="right" colspan="2">
+					<button type="submit" class="btn btn-primary">
+						<spring:message code="ftz.label.SELECT_MSG" />
+					</button>
+				</td>
+			</tr>
+		</table>
+	</form:form>
+</div>
+
+<div class="tbl_page_head">
+		<table
+			class="table table-striped table-bordered table-condensed tbl_page">
+			<thead>
+				<p class="text-info" align="center">
+					<spring:message code="ftz.label.MSG_DTL_List" />
+				</p>
+				<tr>
+					<th style="vertical-align: middle; text-align: center" width="10px"><spring:message
+							code="fisp.label.common.no" /></th>
+					<th style="vertical-align: middle; text-align: center" width="60px"><spring:message
+							code="ftz.label.CD_FLAG" /></th>
+					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+							code="ftz.label.TRAN_DATE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="100px"><spring:message
+							code="ftz.label.AMOUNT" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.COUNTRY_CODE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.ASSETS_TYPES" /></th>
+					<th style="vertical-align: middle; text-align: center"
+						width="150px"><spring:message code="ftz.label.OPP_NAME1" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.DTL_STATUS" /></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="tbl_page_body" style="min-height: 340px; height: 340px;">
+		<table id="pageTable"
+			class="table table-striped table-bordered table-condensed tbl_page"
+			style="border: 0">
+			<tbody>
+				<c:forEach var="dto1" items="${page.content}" varStatus="i">
+					<tr>
+						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
+						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue
+								items="${FTZ_CD_FLAG}" key="${dto1.cdFlag}" type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
+						<td class="vtip" style="text-align: right; width: 100px;"><t:moneyFormat
+								type="label" value="${dto1.amount}" /></td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}"
+								type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_ASSETS_TYPE}" key="${dto1.assetsType}"
+								type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 150px;">${dto1.oppName}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
+						<td style="display: none;">${dto1.msgId}</td>
+						<td style="display: none;">${dto1.seqNo}</td>
+						<td style="display: none;">${dto1.chkStatus}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="pagination pull-right" style="margin-top: 10px;">
+	<table class="text-center">
+		<tr>
+			<td width="50%" align="center"><input id="detail" type="button"
+				class="btn btn-primary" onclick="showAllDetail();"
+				value="<spring:message code="ftz.label.MSG_ALL_Dtl" />"> <input
+				id="detail" type="button" class="btn btn-primary"
+				onclick="showDetail();"
+				value="<spring:message code="ftz.label.MSG_UNAUTH_Dtl" />"></td>
+			<td width="50%" align="right">
+				<table>
+					<tr>
+						<td><util:pagination page="${page}"
+								query="query_branchId=${FTZ210205Form.query_branchId}&query_submitDate_start=${FTZ210205Form.query_submitDate_start}&query_submitDate_end=${FTZ210205Form.query_submitDate_end}&query_msgId=${FTZ210205Form.query_msgId}&query_msgNo=${FTZ210205Form.query_msgNo}&query_accountNo=${FTZ210205Form.query_accountNo}"
+								action="/FTZ210205/AuthQry" /></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+
+

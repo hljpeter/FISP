@@ -28,32 +28,29 @@
 			}
 
 		});
-		$("#pageTable")
-				.find("tr")
-				.bind(
-						'dblclick',
-						function() {
-							var selected_msgId = $(this).find("td:eq(8)")
-									.text();
-							var selected_seqNo = $(this).find("td:eq(9)")
-									.text();
-							showDialog('${pageContext.request.contextPath}/FTZ210104/QryAuthDtlDtl?selected_msgId='
-									+ selected_msgId
-									+ "&selected_seqNo="
-									+ selected_seqNo,'500','1024');
-							queryFTZ210104Dtl();
-						});
+		$("#pageTable").find("tr").bind(
+				'dblclick',
+				function() {
+					var selected_msgId = $(this).find("td:eq(8)").text();
+					var selected_seqNo = $(this).find("td:eq(9)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210104/QryAuthDtlDtl?selected_msgId='
+									+ selected_msgId + "&selected_seqNo="
+									+ selected_seqNo, '500', '1024');
+					queryFTZ210104Dtl();
+				});
 	});
 	function showDetaildetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210104/QryAuthDtlDtl?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210104/QryAuthDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
 			queryFTZ210104Dtl();
 		}
 	}
@@ -61,7 +58,12 @@
 	function queryFTZ210104Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210104/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210104/QryAuthDtl?page.page="
+				+ $
+		{
+			page.number + 1
+		}
+		;
 		form.submit();
 	}
 	function sbDtl() {
@@ -119,7 +121,8 @@
 						class=".input-large" readonly="true" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUS" />：</td>
-				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true" id="msgStatus">
+				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true"
+						id="msgStatus">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>
@@ -159,9 +162,9 @@
 						class=".input-large" readonly="true" /></td>
 			</tr>
 
-		</table>
-
-		<table class="tbl_search">
+			<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.SND_DATETIME" />：</td>
@@ -175,7 +178,8 @@
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.PBOC_STATUS" />：</td>
-				<td colspan="3"><form:select path="ftzInMsgCtl.result" disabled="true">
+				<td colspan="3"><form:select path="ftzInMsgCtl.result"
+						disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_PROC_RESULT}" />
 					</form:select></td>

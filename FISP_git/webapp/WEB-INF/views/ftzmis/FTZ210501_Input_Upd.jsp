@@ -1,4 +1,19 @@
 <script type="text/javascript">
+$(function(){
+	var uptFlag = '${updFlag}';
+	if (uptFlag == '1') {
+		$("input").attr("disabled", true);
+		$("select").attr("disabled", true);
+		$("#clswin").removeAttr("disabled");
+	}
+});
+
+function qryBalCode() {
+	showSelBalance([{
+		"balanceCode" : "param1"
+	}]);
+};
+
 function actSubmit(){
 	$("#balance").val($("#balance").val().replaceAll(",", ""));
 	var form = document.getElementById("form");
@@ -32,7 +47,7 @@ function actSubmit(){
 	<form:form id="form" action="" method="post" modelAttribute="FTZ210501Form" class="form-horizontal">
 		<table class="tbl_search">
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.BRANCH"/>：</td>
+				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID"/>：</td>
 				<td>
 					<form:select path="ftzActMstr.branchId">
 						<option value=""></option>
@@ -55,7 +70,7 @@ function actSubmit(){
 				</td>
 				<td class="label_td" colspan="2"><font color="red">*</font><spring:message code="ftz.label.BALANCE_CODE"/>：
 				
-					<form:select path="ftzActMstr.balanceCode">
+					<form:select id="balanceCode" path="ftzActMstr.balanceCode">
 						<option value=""></option>
 						<form:options items="${FTZ_BALANCE_INDEX_CODE}"/>
 					</form:select>
@@ -177,7 +192,7 @@ function actSubmit(){
 		style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
 		<input id="submit" type="button" class="btn btn-primary"
 			onclick="actSubmit();" value="<spring:message code="button.lable.Submit"/>">
-		<input type="button" class="btn btn-primary" onclick="javascript:window.close();"
+		<input id="clswin" type="button" class="btn btn-primary" onclick="javascript:window.close();"
 			value="<spring:message code="button.lable.close"/>">
 	</div>
 </div>

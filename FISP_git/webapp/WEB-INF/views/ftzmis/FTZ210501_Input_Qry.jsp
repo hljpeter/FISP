@@ -26,7 +26,7 @@
 	//search button
 	function search() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210501/InputQry";
+		form.action = "${pageContext.request.contextPath}/FTZ210501/InputQry?page.page="+${page.number+1};
 		form.submit();
 	}
 	
@@ -60,14 +60,15 @@
 			}
 		});
 		if(null == selected_actNo || "" == selected_actNo) {
-			alert("请选择一条账户数据!");
+			alert('<spring:message code="ftz.validate.choose.dataAct"/>');
 			return;
 		} else {
 			if("n" == $("#updAuthFlag").val()) {
 				showDialog('${pageContext.request.contextPath}/FTZ210501/InputUpd?selected_actNo='+
 						selected_actNo+'&selected_subActNo='+selected_subActNo, '500', '1024');
+				search();
 			} else if("y" == $("#updAuthFlag").val()){
-				alert("该账户待审核，请审核后操作！");
+				alert('<spring:message code="ftz.validate.act.notChk"/>');
 			}
 		}
 	}
@@ -76,7 +77,7 @@
 	function deleteAct() {
 		var selected_actNo = $("#selected_actNo").val();
 		if(null == selected_actNo || "" == selected_actNo) {
-			alert("请选择一条账户数据!");
+			alert('<spring:message code="ftz.validate.choose.dataAct"/>');
 			return;
 		} else {
 			var form = document.getElementById("form");
@@ -95,7 +96,7 @@
 		var selected_actNo = $("#selected_actNo").val();
 		var selected_subActNo = $("#selected_subActNo").val();
 		if(null == selected_actNo || "" == selected_actNo) {
-			alert("请选择一条账户数据!");
+			alert('<spring:message code="ftz.validate.choose.dataAct"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210501/QryDtl?selected_actNo='
@@ -148,12 +149,12 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO"/>：</td>
-				<td><form:input id="query_accountNo"
-						path="query_accountNo" class=".input-large"/>
+				<td><form:input id="query_accountNo" path="query_accountNo" class=".input-large"
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.SUB_ACCOUNT_NO"/>：</td>
-				<td><form:input id="query_subAccountNo"
-						path="query_subAccountNo" class=".input-large"/>
+				<td><form:input id="query_subAccountNo" path="query_subAccountNo" class=".input-large"
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
 				</td>
 			</tr>
 			<tr>

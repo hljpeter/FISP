@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.synesoft.fisp.domain.component.PageHandler;
 import com.synesoft.ftzmis.app.common.constants.SQLMap;
 import com.synesoft.ftzmis.app.common.constants.Table;
+import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 
@@ -62,5 +63,11 @@ public class FTZMsgResendRepositoryImpl implements FTZMsgResendRepository {
 	public FtzInTxnDtl queryFtzInTxnDtl(FtzInTxnDtl ftzInTxnDtl) {
 		return queryDAO.executeForObject(Table.FTZ_IN_TXN_DTL + "."
 				+ SQLMap.SELECT_PRIMARY_KEY, ftzInTxnDtl, FtzInTxnDtl.class);
+	}
+
+	@Override
+	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode) {
+		return queryDAO.executeForObject(Table.FTZ_BANK_CODE + "."
+				+ SQLMap.SELECT_PRIMARY_KEY, ftzBankCode, FtzBankCode.class);
 	}
 }

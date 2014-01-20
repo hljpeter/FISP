@@ -30,15 +30,11 @@
 									.text();
 							var selected_msgNo = $(this).find("td:eq(8)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210202/QryRedirect?selected_msgId='
-													+ selected_msgId
-													+ "&selected_msgNo="
-													+ selected_msgNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-
+							
+							showDialog('${pageContext.request.contextPath}/FTZ210202/QryRedirect?selected_msgId='
+								+ selected_msgId
+								+ "&selected_msgNo="
+								+ selected_msgNo,'500','1024');	
 						});
 	});
 
@@ -46,19 +42,15 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("è¯·éæ©ä¸æ¡æ¹éæ°æ®ï¼");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210202/QryRedirect?selected_msgId='
-									+ selected_msgId + "&selected_msgNo="
-									+ selected_msgNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210202/QryRedirect?selected_msgId='
+					+ selected_msgId + "&selected_msgNo="
+					+ selected_msgNo,'500','1024');
 		}
 	}
-	function queryFTZ210101() {
+	function queryFTZ210202() {
 		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZ210202/Qry";
 		form.submit();
@@ -82,7 +74,7 @@
 </div>
 
 <div class="page_title">
-	<spring:message code="ftzmis.title.2101.qry" />
+	<spring:message code="ftzmis.title.2102.qry" />
 </div>
 
 <div class="row">
@@ -107,10 +99,11 @@
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" cssClass="span2" /></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
+				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
 				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
-				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO" />Âï¼</td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
+				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="query_accountName" path="query_accountNo"
 						class=".input-large" /></td>
 			</tr>
@@ -168,7 +161,8 @@
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: center; width: 65px;">${dto.msgId}</td>
 						<td class="vtip" style="text-align: left; width: 65px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: center; width: 65px;">${dto.currency}</td>   
+						<td class="vtip" style="text-align: center; width: 65px;"><t:codeValue
+								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>   
 						<td class="vtip" style="text-align: right; width: 65px;"><t:moneyFormat
 								type="label" value="${dto.balance}" /></td>
 						<td class="vtip" style="text-align: center; width: 30px;"><t:codeValue

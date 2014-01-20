@@ -2,13 +2,8 @@ package com.synesoft.ftzmis.domain.model;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.synesoft.fisp.app.common.utils.MessagesUtil;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
-import com.synesoft.ftzmis.app.model.FTZ210302Form.FTZ210302FormAddDtlDtl;
 
 public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
     /**
@@ -25,7 +20,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0003}")
     private String submitDate;
 
     /**
@@ -34,7 +28,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0004}")
     private String accOrgCode;
 
     /**
@@ -43,7 +36,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotNull(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0010}")
     private BigDecimal amount;
 
     /**
@@ -52,7 +44,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0009}")
     private String currency;
 
     /**
@@ -69,7 +60,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0005}")
     private String accountName;
 
     /**
@@ -78,7 +68,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0006}")
     private String institutionCode;
 
     /**
@@ -87,7 +76,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0008}")
     private String swiftCode;
 
     /**
@@ -96,7 +84,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0007}")
     private String countryCode;
 
     /**
@@ -129,7 +116,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class}, message = "{e.ftzmis.210302.0014}")
     private String termUnit;
 
     /**
@@ -138,7 +124,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class}, message = "{e.ftzmis.210302.0011}")
     private String tranDate;
 
     /**
@@ -147,7 +132,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class }, message = "{e.ftzmis.210302.0012}")
     private String expirationDate;
 
     /**
@@ -260,7 +244,6 @@ public class FtzOffTxnDtl extends FtzOffTxnDtlKey implements Cloneable {
      *
      * @abatorgenerated Wed Dec 25 16:41:01 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtlDtl.class}, message = "{e.ftzmis.210302.0013}")
     private String termCondition;
 
     /**

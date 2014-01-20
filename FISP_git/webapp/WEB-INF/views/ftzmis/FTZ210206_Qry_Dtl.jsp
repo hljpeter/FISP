@@ -45,7 +45,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			window
@@ -159,11 +159,8 @@
 					</form:select></td>
 			
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.ACC_ORG_CODE" />：</td>
-				<td><form:hidden path="ftzInMsgCtl.accOrgCode" id="accOrgCode1" />
-					<form:select id="accOrgCode" path="ftzInMsgCtl.accOrgCode" disabled="true">
-						<form:option value=""></form:option>
-						<form:options items="${SM_0002}" />
-					</form:select></td>
+				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
+						class=".input-large" readonly="true" /></td>
 			</tr>
 			
 		
@@ -237,7 +234,8 @@
 								type="label" value="${dto1.amount}" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.countryCode}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.valueDate}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.interestRate}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
+								type="label" value="${dto1.interestRate}" dot="true" format="###,###,###,###.000000"/></td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>

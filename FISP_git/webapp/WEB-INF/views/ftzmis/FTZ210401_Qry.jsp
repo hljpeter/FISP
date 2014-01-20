@@ -31,7 +31,7 @@
 	function showDetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210401/QryDtl?selected_msgId='
@@ -40,7 +40,7 @@
 	}
 	function queryFTZ210401() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210401/Qry";
+		form.action = "${pageContext.request.contextPath}/FTZ210401/Qry?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -86,9 +86,11 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
-				<td><form:input id="query_msgId" path="query_msgId" class=".input-large" /></td>
+				<td><form:input id="query_msgId" path="query_msgId" class=".input-large" 
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/></td>
 				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
-				<td><form:input id="query_accountNo" path="query_accountNo" class=".input-large" /></td>
+				<td><form:input id="query_accountNo" path="query_accountNo" class=".input-large" 
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS" />：</td>
@@ -120,12 +122,12 @@
 					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
 							code="ftz.label.SUBMIT_DATE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="80px"><spring:message
-							code="ftz.label.BRANCH" /></th>
+							code="ftz.label.BRANCH_ID" /></th>
 					<th style="vertical-align: middle; text-align: center" width="70px"><spring:message
 							code="ftz.label.MSG_ID" /></th>
 					<th style="vertical-align: middle; text-align: center"
-						width="100px"><spring:message code="ftz.label.ACCOUNT_NO" /></th>
-					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
+						width="90px"><spring:message code="ftz.label.ACCOUNT_NO" /></th>
+					<th style="vertical-align: middle; text-align: center" width="60px"><spring:message
 							code="ftz.label.CURRENCY" /></th>
 					<th style="vertical-align: right; text-align: center" width="90px"><spring:message
 							code="ftz.label.DAILY_BALANCE" /></th>
@@ -147,9 +149,10 @@
 						<td class="vtip" style="text-align: left; width: 80px;"><t:codeValue
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 70px;">${dto.msgId}</td>
-						<td class="vtip" style="text-align: left; width: 100px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: left; width: 30px;">${dto.currency}</td>
-						<td class="vtip" style="text-align: left; width: 90px;">
+						<td class="vtip" style="text-align: left; width: 90px;">${dto.accountNo}</td>
+						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue
+							 items="${SYS_CURRENCY}" key="${dto.currency}" type="label"/></td>
+						<td class="vtip" style="text-align: right; width: 90px;">
 							<t:moneyFormat type="label" value="${dto.balance}"/></td>
 						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>

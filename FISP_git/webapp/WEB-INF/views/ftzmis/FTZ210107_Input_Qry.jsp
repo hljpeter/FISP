@@ -37,7 +37,7 @@
 	function showDetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210107/QryDtl?selected_msgId='
@@ -49,11 +49,11 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgType = $("#selected_msgType").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("02" == selected_msgType){
-				alert("录入已完成！");
+				alert('<spring:message code="w.cm.1006"/>');
 				return;
 			}
 			var form = document.getElementById("form");
@@ -72,11 +72,11 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgType = $("#selected_msgType").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_msgType){
-				alert("审核通过批量无法修改或删除！");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			var form = document.getElementById("form");
@@ -99,7 +99,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgType = $("#selected_msgType").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if ("01" == selected_msgType || "04" == selected_msgType
@@ -115,7 +115,7 @@
 	}
 	function queryFTZ210107() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210107/AddQry";
+		form.action = "${pageContext.request.contextPath}/FTZ210107/AddQry?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -258,7 +258,7 @@
 				value="<spring:message code="ftz.label.DEL_MSG" />"> <input
 				id="detail" type="button" class="btn btn-primary"
 				onclick="sbDetail();"
-				value="<spring:message code="ftz.label.SUBMIT_MSG" />"> <input
+				value="<spring:message code="ftz.label.FINISH_MSG" />"> <input
 				id="detail" type="button" class="btn btn-primary"
 				onclick="showDetail();"
 				value="<spring:message code="ftz.label.MSG_Dtl" />"></td>

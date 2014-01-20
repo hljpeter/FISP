@@ -17,6 +17,7 @@ import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.model.FTZMsgResendForm;
+import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.service.FTZMsgResendService;
@@ -157,6 +158,18 @@ public class FTZMsgResendController {
 		result_FtzInTxnDtl.setChkDatetime(DateUtil
 				.getFormatDateTimeAddSpritAndColon(result_FtzInTxnDtl
 						.getChkDatetime()));
+		if (null != result_FtzInTxnDtl.getOppBankCode()
+				|| !"".equals(result_FtzInTxnDtl.getOppBankCode())) {
+			FtzBankCode query_FtzBankCode = new FtzBankCode();
+			query_FtzBankCode.setBankCode(result_FtzInTxnDtl.getOppBankCode());
+			FtzBankCode result_FtzBankCode = ftzMsgResendServ
+					.queryFtzBankCode(query_FtzBankCode);
+			if (null != result_FtzBankCode) {
+				result_FtzInTxnDtl.setOppBankName(result_FtzBankCode
+						.getBankName());
+			}
+		}
+		
 		form.setFtzInTxnDtl(result_FtzInTxnDtl);
 		logger.info("资金来源再发送明细详情查询结束...");
 		return "ftzmis/FTZMsgResend_Qry_Dtl_Dtl";

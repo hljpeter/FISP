@@ -133,8 +133,9 @@
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message
 						code="ftz.label.TERM_LENGTH" />：</td>
-				<td><form:input id="termLength" path="ftzInTxnDtl.termLength"
-						class=".input-large" /></td>
+				<td><form:input id="termLength" path="ftzInTxnDtl.termLength" maxlength="4"
+						class=".input-large"  onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);"/></td>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.TERM_UNIT" />：</td>
 				<td><form:select path="ftzInTxnDtl.termUnit">
 						<form:option value=""></form:option>
@@ -152,7 +153,10 @@
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.INTEREST_RATES" />：</td>
-				<td><form:input id="interestRate" path="ftzInTxnDtl.interestRate" class=".input-large" /></td>
+				<td><t:moneyFormat type="text" id="interestRate"
+						name="ftzInTxnDtl.interestRate"
+						value="${FTZ210106Form.ftzInTxnDtl.interestRate}"
+						format="###,###,###,###.000000" dot="true" maxlength="9" /></td>
 				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>
 				<td><form:select path="ftzInTxnDtl.tranType" id="tranType">

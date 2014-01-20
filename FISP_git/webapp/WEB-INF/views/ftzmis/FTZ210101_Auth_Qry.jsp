@@ -39,7 +39,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			showDialog(
@@ -53,7 +53,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			showDialog(
@@ -66,7 +66,7 @@
 	}
 	function queryFTZ210101() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210101/AuthQry";
+		form.action = "${pageContext.request.contextPath}/FTZ210101/AuthQry?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -117,7 +117,8 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
 				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_TYPE" />：</td>
 				<td><form:select path="query_msgNo">
 						<form:option value=""></form:option>

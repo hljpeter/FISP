@@ -34,6 +34,7 @@ if (actionFlag == "addMsg") {
 	$(".pboc").css("display", "");
 } else if (actionFlag == "uptMsg") {
 	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210306/Input/UptMsg/Sumbit");
+	$(".pboc").css("display", "");
 	//var success = '${successmsg}';
 	//if (success && success != '') {
 	//	$("input[type=submit]").attr("disabled", true);
@@ -74,12 +75,16 @@ $("#upt").click(function() {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
 		selectedRow = eval("(" + selectedRow + ")");
-		$("#operFlag").val("updated");
-		showDialog('${pageContext.request.contextPath}/FTZ210306/Input/UptTxn/Init?ftzOffTxnDtl.msgId=' 
-				+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo + '&time=' + new Date().getTime(), '600', '1040');
+		if (selectedRow.chkStatus == '03') {
+			alert('<spring:message code="e.ftzmis.2103.0027"/>');
+		} else {
+			$("#operFlag").val("updated");
+			showDialog('${pageContext.request.contextPath}/FTZ210306/Input/UptTxn/Init?ftzOffTxnDtl.msgId=' 
+					+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo + '&time=' + new Date().getTime(), '600', '1040');
 				
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210306/Input/UptMsg/Init");
-		$("#form").submit();
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210306/Input/UptMsg/Init?page.page=" + ${page.number + 1 });
+			$("#form").submit();
+		}
 	}
 });
 
@@ -90,16 +95,19 @@ $("#del").click(function() {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
 		selectedRow = eval("(" + selectedRow + ")");
-		var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
-		if (confirm(msg)) {
-			$("#operFlag").val("updated");
-			$("#form").attr("action", '${pageContext.request.contextPath}/FTZ210306/Input/DelTxn/Submit?ftzOffTxnDtl.msgId=' 
-					+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo + "&ftzOffTxnDtl.makDatetime=" + selectedRow.makDatetime 
-					+ "&ftzOffTxnDtl.chkDatetime=" + selectedRow.chkDatetime);
-			$("#form").submit();
-
+		if (selectedRow.chkStatus == '03') {
+			alert('<spring:message code="e.ftzmis.2103.0027"/>');
 		} else {
-			return false;
+			var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
+			if (confirm(msg)) {
+				$("#operFlag").val("updated");
+				$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210306/Input/DelTxn/Submit?page.page=" + ${page.number + 1 } + "&ftzOffTxnDtl.msgId=" 
+						+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo + "&ftzOffTxnDtl.makDatetime=" + selectedRow.makDatetime 
+						+ "&ftzOffTxnDtl.chkDatetime=" + selectedRow.chkDatetime);
+				$("#form").submit();
+			} else {
+				return false;
+			}
 		}
 	}
 });
@@ -136,7 +144,7 @@ $("#del").click(function() {
 			<tr>
 	    		<td class="label_td"><spring:message code="ftz.label.BRANCH"/>：</td>
 				<td>
-					<form:select path="ftzOffMsgCtl.branchId" disabled="true">
+					<form:select path="ftzOffMsgCtl.branchId">
 						<option value=""></option>
 						<form:options items="${SM_0002 }" />
 					</form:select>
@@ -144,7 +152,7 @@ $("#del").click(function() {
 				
 				<td class="label_td"><span style="color:red;">*</span><spring:message code="ftz.label.WORK_DATE"/>：</td>
 				<td>
-					<t:dateTimeFormat type="text" value="${FTZ210306Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large" readonly="true"/>
+					<t:dateTimeFormat type="text" value="${FTZ210306Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large"/>
 				</td>
 			</tr>
 			<tr>	

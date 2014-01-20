@@ -67,6 +67,7 @@
 	        	#chkStatuss[]#
 	        </iterate>
 			</isNotEmpty>
+			order by MSG_ID,SEQ_NO
 		</dynamic>
 	</sql>
 	
@@ -88,8 +89,6 @@
     	FROM
     		FTZ_IN_TXN_DTL
 		<include refid="FTZIN_TXN_DTL.WHERE_CONDITION"/>
-	    ORDER BY
-	    	SEQ_NO DESC
 	</select>
   
 	<select id="selectByPrimaryKey" 

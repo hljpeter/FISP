@@ -147,12 +147,12 @@
 				<p class="text-info" align="center"><spring:message code="ftz.label.ACCOUNT_LIST"/></p>
 				<tr>
 					<th style="vertical-align: middle; text-align: center" width="20px"><spring:message code="fisp.label.common.no" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.BRANCH_ID"/></th>
+					<th style="vertical-align: middle; text-align: center" width="70px"><spring:message code="ftz.label.BRANCH_ID"/></th>
 					<th style="vertical-align: middle; text-align: center" width="150px"><spring:message code="ftz.label.ACCOUNT_NAME"/></th>
 					<th style="vertical-align: middle; text-align: center" width="150px"><spring:message code="ftz.label.ACCOUNT_NO"/></th>
-					<th style="vertical-align: middle; text-align: center" width="150px"><spring:message code="ftz.label.SUB_ACCOUNT_NO"/></th>
-					<th style="vertical-align: middle; text-align: center" width="70px"><spring:message code="ftz.label.CURRENCY"/></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.ACC_TYPE"/></th>
+					<th style="vertical-align: middle; text-align: center" width="100px"><spring:message code="ftz.label.SUB_ACCOUNT_NO"/></th>
+					<th style="vertical-align: middle; text-align: center" width="80px"><spring:message code="ftz.label.CURRENCY"/></th>
+					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message code="ftz.label.ACC_TYPE"/></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.ACC_STATUS"/></th>
 				</tr>
 			</thead>
@@ -166,14 +166,14 @@
 				<c:forEach var="dto" items="${page.content}" varStatus="i">
 					<tr>
 						<td style="text-align: center; width: 20px;">${(page.number*page.size)+(i.index+1)}</td>
-						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 70px;"><t:codeValue
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: center; width: 150px;">${dto.accountName}</td>
 						<td class="vtip" style="text-align: center; width: 150px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: center; width: 150px;">${dto.subAccountNo}</td>
-						<td class="vtip" style="text-align: center; width: 70px;"><t:codeValue
+						<td class="vtip" style="text-align: center; width: 100px;">${dto.subAccountNo}</td>
+						<td class="vtip" style="text-align: center; width: 80px;"><t:codeValue
 								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>
-						<td class="vtip" style="text-align: center; width: 50px;"><t:codeValue
+						<td class="vtip" style="text-align: center; width: 40px;"><t:codeValue
 								items="${FTZ_ACC_TYPE}" key="${dto.accType}" type="label" /></td>
 						<td class="vtip" style="text-align: center; width: 50px;"><t:codeValue
 								items="${FTZ_ACC_STATUS}" key="${dto.accStatus}" type="label" /></td>

@@ -129,7 +129,7 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.OPP_BANK_CODE1" />：</td>
+						code="ftz.label.OPP_BANK_CODE2" />：</td>
 				<td><form:input id="oppBankCode" path="ftzInTxnDtl.oppBankCode" class=".input-large" 
 						maxlength="12" onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
 					<button type="button" class="btn btn-small"
@@ -199,7 +199,7 @@
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.INTEREST_RATES1"/>：</td>
 				<td><t:moneyFormat type="text" id="interestRate" name="ftzInTxnDtl.interestRate"
 						value="${FTZ210401Form.ftzInTxnDtl.interestRate}"
-						format="###.000000" dot="true" maxlength="9"/></td>
+						format="###.000000" dot="true" maxlength="15"/></td>
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>
 				<td><form:select path="ftzInTxnDtl.tranType" id="tranType">

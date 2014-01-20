@@ -1,7 +1,5 @@
 package com.synesoft.ftzmis.app.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +9,13 @@ import org.springframework.data.web.PageableDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.terasoluna.fw.common.message.ResultMessages;
+import org.terasoluna.fw.common.exception.BusinessException;
 
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.model.FTZOFFForm;
-import com.synesoft.ftzmis.domain.model.FtzOffMsgCtl;
-import com.synesoft.ftzmis.domain.service.FTZ210302Service;
+import com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO;
+import com.synesoft.ftzmis.domain.service.FTZOffCommonService;
 
 /**
  * @author 李峰
@@ -31,78 +29,99 @@ import com.synesoft.ftzmis.domain.service.FTZ210302Service;
 @RequestMapping("FTZOFF")
 public class FtzOffController {
 
-	public Logger logger = LoggerFactory.getLogger(getClass());
+	private Logger log = LoggerFactory.getLogger(getClass());
+
+	private final static String MODEL_KEY_PAGE = "page";
 	
 	@Autowired
-	private FTZ210302Service ftz210302Service;
+	private FTZOffCommonService ftz210302Service;
 	
 	@RequestMapping("Qry")
-	public String query(Model model, FTZOFFForm form,
-			@PageableDefaults Pageable pageable){
-		// trans form to queryObject
-		FtzOffMsgCtl query_FtzOffMsgCtl = new FtzOffMsgCtl();
-		query_FtzOffMsgCtl.setMsgId(form.getQuery_msgId());
-		query_FtzOffMsgCtl.setBranchId(form.getQuery_branchId().trim());
-		query_FtzOffMsgCtl.setRsv1(form.getQuery_workDate_start());
-		query_FtzOffMsgCtl.setRsv2(form.getQuery_workDate_end());
-		query_FtzOffMsgCtl.setMsgStatus(form.getQuery_msgStatus());
-		query_FtzOffMsgCtl.setMsgNo(form.getQuery_msgNo());
-		
-		//Query
-		// query DpMppCfg page list
-		Page<FtzOffMsgCtl> page = ftz210302Service.queryFtzOffMsgCtlPage(pageable,
-				query_FtzOffMsgCtl);
+	public String query(Model model, FTZOFFForm form, @PageableDefaults Pageable pageable){
 
-		if (page.getContent().size() > 0) {
-			List<FtzOffMsgCtl> ftzOffMsgCtls = page.getContent();
-			for (FtzOffMsgCtl ftzOffMsgCtl : ftzOffMsgCtls) {
-				ftzOffMsgCtl.setWorkDate(DateUtil
-						.getFormatDateAddSprit(ftzOffMsgCtl.getWorkDate()));
-			}
-			model.addAttribute("page", page);
-		} else {
-			model.addAttribute(ResultMessages.info().add("w.sm.0001"));
-			logger.info("表外查询结束...");
+		try {
+			// trans form to queryObject
+			FtzOffMsgCtlVO ftzOffMsgCtlVO = new FtzOffMsgCtlVO();
+			ftzOffMsgCtlVO.setMsgId(form.getQuery_msgId());
+			ftzOffMsgCtlVO.setBranchId(form.getQuery_branchId().trim());
+			ftzOffMsgCtlVO.setStartDate(DateUtil.getFormatDateRemoveSprit(form.getQuery_workDate_start()));
+			ftzOffMsgCtlVO.setEndDate(DateUtil.getFormatDateRemoveSprit(form.getQuery_workDate_end()));
+			ftzOffMsgCtlVO.setMsgStatus(form.getQuery_msgStatus());
+			ftzOffMsgCtlVO.setMsgNo(form.getQuery_msgNo());
+			
+			//Query
+			// query DpMppCfg page list
+			Page<FtzOffMsgCtlVO> page = ftz210302Service.getMsgPage(pageable, ftzOffMsgCtlVO);
+
+			model.addAttribute(MODEL_KEY_PAGE, page);
+			return "ftzmis/FTZOFF_Qry";
+		} catch (BusinessException e) {
+			log.info("[w.dp.0001] No data!");
+			model.addAttribute("errmsg", e.getResultMessages());
 			return "ftzmis/FTZOFF_Qry";
 		}
-				
-		return "ftzmis/FTZOFF_Qry";
 	}
 	
 	@RequestMapping("AuthQry")
-	public String authQuery(Model model, FTZOFFForm form,
-			@PageableDefaults Pageable pageable){
-		// trans form to queryObject
-		FtzOffMsgCtl query_FtzOffMsgCtl = new FtzOffMsgCtl();
-		query_FtzOffMsgCtl.setMsgId(form.getQuery_msgId());
-		query_FtzOffMsgCtl.setBranchId(form.getQuery_branchId().trim());
-		query_FtzOffMsgCtl.setRsv1(form.getQuery_workDate_start());
-		query_FtzOffMsgCtl.setRsv2(form.getQuery_workDate_end());
-		query_FtzOffMsgCtl.setMsgStatuss(new String[] {
-				CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED,
-				CommonConst.FTZ_MSG_STATUS_INPUTING,
-				CommonConst.FTZ_MSG_STATUS_AUTH_FAIL});
-		query_FtzOffMsgCtl.setMsgNo(form.getQuery_msgNo());
-		
-		//Query
-		// query DpMppCfg page list
-		Page<FtzOffMsgCtl> page = ftz210302Service.queryFtzOffMsgCtlPage(pageable,
-				query_FtzOffMsgCtl);
+	public String authQuery(Model model, FTZOFFForm form, @PageableDefaults Pageable pageable) {
 
-		if (page.getContent().size() > 0) {
-			List<FtzOffMsgCtl> ftzOffMsgCtls = page.getContent();
-			for (FtzOffMsgCtl ftzOffMsgCtl : ftzOffMsgCtls) {
-				ftzOffMsgCtl.setWorkDate(DateUtil
-						.getFormatDateAddSprit(ftzOffMsgCtl.getWorkDate()));
-			}
-			model.addAttribute("page", page);
-		} else {
-			model.addAttribute(ResultMessages.info().add("w.sm.0001"));
-			logger.info("表外查询结束...");
+		try {
+			// trans form to queryObject
+			FtzOffMsgCtlVO ftzOffMsgCtlVO = new FtzOffMsgCtlVO();
+			ftzOffMsgCtlVO.setMsgId(form.getQuery_msgId());
+			ftzOffMsgCtlVO.setBranchId(form.getQuery_branchId().trim());
+			ftzOffMsgCtlVO.setStartDate(DateUtil.getFormatDateRemoveSprit(form.getQuery_workDate_start()));
+			ftzOffMsgCtlVO.setEndDate(DateUtil.getFormatDateRemoveSprit(form.getQuery_workDate_end()));
+			ftzOffMsgCtlVO.setMsgNo(form.getQuery_msgNo());
+			ftzOffMsgCtlVO.setMsgStatuss(new String[] {
+					CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED,
+					CommonConst.FTZ_MSG_STATUS_INPUTING,
+					CommonConst.FTZ_MSG_STATUS_AUTH_FAIL});
+			
+			//Query
+			// query DpMppCfg page list
+			Page<FtzOffMsgCtlVO> page = ftz210302Service.getMsgPage(pageable, ftzOffMsgCtlVO);
+
+			model.addAttribute(MODEL_KEY_PAGE, page);
+//		if (page.getContent().size() > 0) {
+//			List<FtzOffMsgCtl> ftzOffMsgCtls = page.getContent();
+//			for (FtzOffMsgCtl ftzOffMsgCtl : ftzOffMsgCtls) {
+//				FtzOffTxnDtl query_FtzOffTxnDtl = new FtzOffTxnDtl();
+//				query_FtzOffTxnDtl.setMsgId(ftzOffMsgCtl.getMsgId());
+//				List<FtzOffTxnDtl> ftzOffTxnDtls = ftz210302Service.
+//						queryFtzOffTxnDtlList(query_FtzOffTxnDtl);
+//				int count = 0;
+//				if (null == ftzOffTxnDtls || ftzOffTxnDtls.size() < 1) {
+//					ftzOffMsgCtl.setRsv1("0");
+//					ftzOffMsgCtl.setRsv2("0");
+//				} else {
+//					for (FtzOffTxnDtl ftzOffTxnDtl : ftzOffTxnDtls) {
+//						if (ftzOffTxnDtl.getChkStatus().equals(
+//								CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)
+//								|| ftzOffTxnDtl.getChkStatus().equals(
+//										CommonConst.FTZ_MSG_STATUS_AUTH_FAIL)) {
+//							count++;
+//						}
+//					}
+//					ftzOffMsgCtl.setRsv1(ftzOffTxnDtls.size()+"");
+//					int lastCnt = ftzOffTxnDtls.size()-count;
+//					ftzOffMsgCtl.setRsv2(lastCnt+"");
+//				}
+//				
+//				ftzOffMsgCtl.setWorkDate(DateUtil
+//						.getFormatDateAddSprit(ftzOffMsgCtl.getWorkDate()));
+//			}
+//			model.addAttribute("page", page);
+//		} else {
+//			model.addAttribute(ResultMessages.info().add("w.sm.0001"));
+//			logger.info("表外查询结束...");
+			return "ftzmis/FTZOFF_Auth_Qry";
+		} catch (BusinessException e) {
+			log.info("[w.dp.0001] No data!");
+			model.addAttribute("errmsg", e.getResultMessages());
 			return "ftzmis/FTZOFF_Auth_Qry";
 		}
-				
-		return "ftzmis/FTZOFF_Auth_Qry";
+	
 	}
 	
 	/**

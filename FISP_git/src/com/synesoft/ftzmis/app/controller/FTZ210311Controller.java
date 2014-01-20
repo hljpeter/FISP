@@ -97,6 +97,8 @@ public class FTZ210311Controller {
 	public String addDtlInit(Model model, FTZ210311Form form) {
 		FtzOffMsgCtl ftzOffMsgCtl = new FtzOffMsgCtl();
 		ftzOffMsgCtl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
+		ftzOffMsgCtl.setBranchId(ContextConst.getCurrentUser().getLoginorg());
+		ftzOffMsgCtl.setWorkDate(DateUtil.getNowOutputDate());
 		form.setFtzOffMsgCtl(ftzOffMsgCtl);
 		form.setActionFlag("addMsg");
 		model.addAttribute("pageUrl", "/FTZ210311/AddDtlInit");
@@ -152,7 +154,7 @@ public class FTZ210311Controller {
 		if (i < 0) {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0006"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.sm.0001"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Add.Msg.Ctl.Success"));
 		}
 		form.getFtzOffMsgCtl().setWorkDate(
 				DateUtil.getFormatDateAddSprit(form.getFtzOffMsgCtl()
@@ -326,7 +328,7 @@ public class FTZ210311Controller {
 		if (i < 0) {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0006"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.sm.0001"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Add.Txn.Dtl.Success"));
 			model.addAttribute("updFlag", "1");
 		}
 		form.getFtzOffTxnDtl().setSubmitDate(
@@ -485,7 +487,7 @@ public class FTZ210311Controller {
 			model.addAttribute("pageUrl", "/FTZ210311/UpdDtlInit");
 			return "ftzmis/FTZ210311_Input_Dtl";
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.mpp.0002"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Update.Msg.Ctl.Success"));
 		}
 		
 		form.getFtzOffMsgCtl().setWorkDate(
@@ -629,7 +631,7 @@ public class FTZ210311Controller {
 			model.addAttribute(ResultMessages.error().add(
 			"e.ftzmis.210101.0026"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.mpp.0002"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Update.Txn.Dtl.Success"));
 			model.addAttribute("updFlag", "1");
 		}
 		form.getFtzOffTxnDtl().setSubmitDate(
@@ -650,13 +652,41 @@ public class FTZ210311Controller {
 		FtzOffMsgCtl del_FtzOffMsgCtl = new FtzOffMsgCtl();
 		del_FtzOffMsgCtl.setMsgId(form.getSelected_msgId());
 
+		FtzOffTxnDtl query_FtzOffTxnDtl = new FtzOffTxnDtl();
+		query_FtzOffTxnDtl.setMsgId(form.getSelected_msgId());
+		List<FtzOffTxnDtl> ftzOffTxnDtls = ftz210310Service.
+				queryFtzOffTxnDtlList(query_FtzOffTxnDtl);
+		if (null != ftzOffTxnDtls) {
+			for(FtzOffTxnDtl ftzOffTxnDtl : ftzOffTxnDtls) {
+				if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzOffTxnDtl
+						.getChkStatus())) {
+					model.addAttribute(ResultMessages.error().add(
+					"e.ftzmis.210101.0035"));
+					form.setSelected_msgId("");
+					return "forward:/FTZ210310/AddQry";
+				}
+			}
+		}
+		
+		//查询数据
+		FtzOffMsgCtl result_FtzOffMsgCtl = ftz210310Service.queryFtzOffMsgCtl(del_FtzOffMsgCtl);
+		if (!CommonConst.FTZ_MSG_STATUS_INPUTING.equals(result_FtzOffMsgCtl.getMsgStatus()) 
+				&& !CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED.equals(result_FtzOffMsgCtl.getMsgStatus())
+				&& !CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(
+						result_FtzOffMsgCtl.getMsgStatus())) {
+			model.addAttribute(ResultMessages.error().add(
+			"e.ftzmis.210101.0036"));
+			form.setSelected_msgId("");
+			return "forward:/FTZ210310/AddQry";
+		}
+		
 		int i = ftz210310Service.deleteFtzOffMsgCtl(del_FtzOffMsgCtl);
 
 		if (i < 0) {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0002"));
 			form.setSelected_msgId("");
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.0003"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Delete.Msg.Ctl.Success"));
 			form.setSelected_msgId("");
 			return "forward:/FTZ210311/AddQry";
 		}
@@ -676,7 +706,7 @@ public class FTZ210311Controller {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0002"));
 			form.setSelected_seqNo("");
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.0003"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Delete.Txn.Dtl.Success"));
 			form.setSelected_seqNo("");
 			return "forward:/FTZ210311/UpdDtlInit";
 		}
@@ -709,7 +739,7 @@ public class FTZ210311Controller {
 			return "forward:/FTZ210311/AddQry";
 		}
 		
-		model.addAttribute(ResultMessages.success().add("i.ftzmis.210101.0001"));
+		model.addAttribute(ResultMessages.success().add("ftzmis.Submit.Msg.Ctl.Success"));
 		return "forward:/FTZ210311/AddQry";
 	}
 	

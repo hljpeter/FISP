@@ -34,7 +34,7 @@
 									+ selected_msgId
 									+ "&selected_msgNo="
 									+ selected_msgNo,'500','1024');
-							queryFTZ210101();
+							queryFTZ210202();
 
 						});
 	});
@@ -43,7 +43,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210202/QryAuthRedirect?selected_msgId='
@@ -56,18 +56,20 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210202/QryAuthRedirect?selected_msgId='
-					+ selected_msgId + "&unAuthFlag=1"
-					+ "&selected_msgNo=" + selected_msgNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210202/QryAuthRedirect?selected_msgId='
+							+ selected_msgId + "&unAuthFlag=1"
+							+ "&selected_msgNo=" + selected_msgNo, '500',
+					'1024');
 			queryFTZ210202();
 		}
 	}
 	function queryFTZ210202() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210202/AuthQry";
+		form.action = "${pageContext.request.contextPath}/FTZ210202/AuthQry?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -248,8 +250,8 @@
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZ210101Form.query_branchId}&query_submitDate_start=${FTZ210101Form.query_submitDate_start}&query_submitDate_end=${FTZ210101Form.query_submitDate_end}&query_msgId=${FTZ210101Form.query_msgId}&query_msgNo=${FTZ210101Form.query_msgNo}&query_accountNo=${FTZ210101Form.query_accountNo}"
-								action="/FTZ210101/AuthQry" /></td>
+								query="query_branchId=${FTZ210202Form.query_branchId}&query_submitDate_start=${FTZ210202Form.query_submitDate_start}&query_submitDate_end=${FTZ210202Form.query_submitDate_end}&query_msgId=${FTZ210202Form.query_msgId}&query_msgNo=${FTZ210202Form.query_msgNo}&query_accountNo=${FTZ210202Form.query_accountNo}"
+								action="/FTZ210202/AuthQry" /></td>
 					</tr>
 				</table>
 			</td>

@@ -94,18 +94,18 @@
 			alert('<spring:message code="ftz.validate.choose.dataTxn" />');
 			return;
 		} else {
-			if("02" == selected_chkStatus || "04" == selected_chkStatus) {
-				var form = document.getElementById("form");
-				form.action = "${pageContext.request.contextPath}/FTZ210310/InputDtlDel";
-				var msg = $("#confirmMsg1").val() + $("#del").val()
-						+ $("#confirmMsg2").val();
-				if (confirm(msg)) {
-					form.submit();
-				} else {
-					return false;
-				}
+			if("03" == selected_chkStatus) {
+				alert('<spring:message code="ftz.validate.chk.success"/>');
+				return;
+			}
+			var form = document.getElementById("form");
+			form.action = "${pageContext.request.contextPath}/FTZ210310/InputDtlDel";
+			var msg = $("#confirmMsg1").val() + $("#del").val()
+					+ $("#confirmMsg2").val();
+			if (confirm(msg)) {
+				form.submit();
 			} else {
-				alert("非录入或审核失败状态，无法删除！");
+				return false;
 			}
 		}
 	}
@@ -126,20 +126,20 @@
 			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
-			if ("02" == selected_chkStatus || "04" == selected_chkStatus) {
-				showDialog('${pageContext.request.contextPath}/FTZ210310/UpdDtlDtlInit?selected_msgId='
-						+ selected_msgId + "&selected_seqNo="
-						+ selected_seqNo,'550','1024');
-				queryFTZ210310();
-			} else {
-				alert("非录入或审核失败状态，无法编辑！");
+			if ("03" == selected_chkStatus) {
+				alert('<spring:message code="ftz.validate.chk.success"/>');
+				return;
 			}
+			showDialog('${pageContext.request.contextPath}/FTZ210310/UpdDtlDtlInit?selected_msgId='
+					+ selected_msgId + "&selected_seqNo="
+					+ selected_seqNo,'550','1024');
+			queryFTZ210310();
 		}
 	}
 	function queryFTZ210310() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210310/DtlInitReflash";
+		form.action = "${pageContext.request.contextPath}/FTZ210310/DtlInitReflash?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -186,7 +186,7 @@
 			<tr>
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.WORK_DATE" />：</td>
 				<td><form:input id="workDate" path="ftzOffMsgCtl.workDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large"/></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS" />：</td>
 				<td><form:select path="ftzOffMsgCtl.msgStatus" id="msgStatus" disabled="true">
 						<form:option value=""></form:option>

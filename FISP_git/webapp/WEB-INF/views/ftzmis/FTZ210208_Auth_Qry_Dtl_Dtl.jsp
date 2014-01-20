@@ -3,7 +3,7 @@
 $(function() {
 var success = '${successmsg }';
 if (success && success != "") {
-	//$("button[name=btnChk]").attr("disabled", true);
+	$("button[name=btnChk]").attr("disabled", true);
 	$("input").attr("readonly", true);
 }
 var error = '${errmsg }';
@@ -22,11 +22,14 @@ if(txnStatus=='03')
 var msgStatus='${FTZ210208Form.ftzInMsgCtl.msgStatus }';
 if(msgStatus=='03')
 {
+   $("#chkAddWord").attr("readonly", true);
    $("#chkPass").attr("disabled", true);
    $("#chkRej").attr("disabled", true);
 }
 if(txnStatus=='04')
 {
+   $("#chkAddWord").attr("readonly", true);
+   $("#chkPass").attr("disabled", true);
    $("#chkRej").attr("disabled", true);
 }
 var msg = '${FTZ210208Form.msg }';
@@ -78,6 +81,7 @@ $("#next").click(function() {
 		<form:hidden path="ftzInTxnDtl.countryCode"/>
 		<form:hidden path="ftzInTxnDtl.disitrictCode"/>
 		<form:hidden path="ftzInTxnDtl.tranType"/>
+		<form:hidden path="ftzInTxnDtl.termUnit"/>
 		<table class="tbl_search">
 			
 			<tr>
@@ -164,7 +168,7 @@ $("#next").click(function() {
 				<td><t:moneyFormat type="text" id="interestRate" readonly="true"
 						name="ftzInTxnDtl.interestRate"
 						value="${FTZ210208Form.ftzInTxnDtl.interestRate}"
-						format="###,###,###,###.00" dot="true"  /></td>
+						format="###.000000" dot="true"  /></td>
 						
 						<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>

@@ -21,33 +21,30 @@
 			}
 
 		});
-		$("#pageTable")
-				.find("tr")
-				.bind(
-						'dblclick',
-						function() {
-							var selected_msgId = $(this).find("td:eq(4)")
-									.text();
-							var selected_msgNo = $(this).find("td:eq(8)")
-									.text();
-							showDialog('${pageContext.request.contextPath}/FTZ210101/QryRedirect?selected_msgId='
-									+ selected_msgId
-									+ "&selected_msgNo="
-									+ selected_msgNo,'500','1024');
+		$("#pageTable").find("tr").bind(
+				'dblclick',
+				function() {
+					var selected_msgId = $(this).find("td:eq(4)").text();
+					var selected_msgNo = $(this).find("td:eq(8)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210101/QryRedirect?selected_msgId='
+									+ selected_msgId + "&selected_msgNo="
+									+ selected_msgNo, '500', '1024');
 
-						});
+				});
 	});
 
 	function showDetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210101/QryRedirect?selected_msgId='
-					+ selected_msgId + "&selected_msgNo="
-					+ selected_msgNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210101/QryRedirect?selected_msgId='
+							+ selected_msgId + "&selected_msgNo="
+							+ selected_msgNo, '500', '1024');
 		}
 	}
 	function queryFTZ210101() {
@@ -102,7 +99,8 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
 				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_TYPE" />：</td>
 				<td><form:select path="query_msgNo">
 						<form:option value=""></form:option>

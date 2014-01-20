@@ -142,7 +142,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 		} else {
 			//账户信息表中存在相同的账户和子账户
 			log.error("账户信息表中存在相同的账号和子账号");
-			messages.add("e.ftzmis.210501.0011");
+			messages.add("e.ftzmis.210501.0015");
 			throw new BusinessException(messages);
 		}
 		log.info("账户信息新增结束！");
@@ -238,7 +238,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 					//记录操作日志
 					tlrBizLogPrintForFtzActMstrTmp("210501", "C", old_ftzActMstrTmp);
 					//删除临时表中的数据
-					ftz210501repository.deleteFtzActMstrTmp(old_ftzActMstrTmp);
+					ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 					//维护类型为修改
 				} else if (opType.equals("M")) {
 					setFtzActMstr(old_ftzActMstrTmp, ftzActMstr);
@@ -253,7 +253,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 					//记录操作日志
 					tlrBizLogPrintForFtzActMstrTmp("210501", "M", old_ftzActMstrTmp);
 					//删除临时表中的数据
-					ftz210501repository.deleteFtzActMstrTmp(old_ftzActMstrTmp);
+					ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 					//维护类型为删除
 				} else if (opType.equals("D")) {
 					setFtzActMstr(old_ftzActMstrTmp, ftzActMstr);
@@ -263,7 +263,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 					ftzActMstr.setChkUserId(ContextConst.getCurrentUser().getUserid());
 					ftzActMstr.setChkDatetime(DateUtil.getNowInputDateTime());
 					ftzActMstr.setChkAddWord(ftzActMstrTmp.getChkAddWord());
-					if(ftz210501repository.updateFtzActMstrStatus(ftzActMstr) !=1){
+					if(ftz210501repository.updateFtzActMstr(ftzActMstr) !=1){
 						log.error("更新账户信息表错误！");
 						messages.add("e.ftzmis.210501.0018");
 						throw new BusinessException(messages);
@@ -271,7 +271,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 					//记录操作日志
 					tlrBizLogPrintForFtzActMstrTmp("210501", "M", old_ftzActMstrTmp);
 					//删除临时表中的数据
-					ftz210501repository.deleteFtzActMstrTmp(old_ftzActMstrTmp);
+					ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 				} else {
 					log.error("维护类型不存在！");
 					messages.add("e.sm.4010");
@@ -306,7 +306,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 		if (null != old_ftzActMstrTmp) {
 			if (CommonUtil.compareTlr(old_ftzActMstrTmp.getMakUserId()) == 1) {
 				//删除临时表中的数据
-				ftz210501repository.deleteFtzActMstrTmp(old_ftzActMstrTmp);
+				ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 				//记录操作日志
 				tlrBizLogPrintForFtzActMstrTmp("210501", "D", old_ftzActMstrTmp);
 			} else {

@@ -1,10 +1,7 @@
 package com.synesoft.ftzmis.domain.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.synesoft.fisp.app.common.utils.MessagesUtil;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
-import com.synesoft.ftzmis.app.model.FTZ210302Form.FTZ210302FormAddDtl;
 
 public class FtzOffMsgCtl {
     /**
@@ -77,7 +74,6 @@ public class FtzOffMsgCtl {
      *
      * @abatorgenerated Wed Dec 25 11:25:40 CST 2013
      */
-    @NotEmpty(groups = {FTZ210302FormAddDtl.class}, message = "{e.ftzmis.210302.0002}")
     private String workDate;
 
     /**

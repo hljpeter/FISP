@@ -3,8 +3,22 @@
 		$("#pageTable").find("tr").bind('click', function() {
 			var selected_msgId = $(this).find("td:eq(3)").text();
 			var selected_msgNo = $(this).attr("id").substr(2);
-			$("#selected_msgId").val(selected_msgId);
-			$("#selected_msgNo").val(selected_msgNo);
+			var old_selected_msgId = $("#selected_msgId").val();
+			if (null == old_selected_msgId) {
+				$("#selected_msgId").val(selected_msgId);
+				$("#selected_msgNo").val(selected_msgNo);
+				return;
+			}
+			if (old_selected_msgId == selected_msgId) {
+				$("#selected_msgId").val("");
+				$("#selected_msgNo").val("");
+				return;
+			}
+			if (old_selected_msgId != selected_msgId) {
+				$("#selected_msgId").val(selected_msgId);
+				$("#selected_msgNo").val(selected_msgNo);
+				return;
+			}
 		});
 		$("#pageTable")
 		.find("tr")
@@ -15,7 +29,7 @@
 					var selected_msgNo = $(this).attr("id").substr(2);
 					window
 					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ2102/QryRedirectAuth?selected_msgId='
+							'${pageContext.request.contextPath}/FTZ2102/QryRedirectAuthAll?selected_msgId='
 									+ selected_msgId+'&selected_msgNo='+selected_msgNo,
 							window,
 							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
@@ -61,7 +75,7 @@
 		$("#selected_msgId").val("");
 		$("#selected_msgNo").val("");
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ2102/AuthQry";
+		form.action = "${pageContext.request.contextPath}/FTZ2102/AuthQry?page.page="+${page.number+1};
 		form.submit();
 	}
 	

@@ -87,7 +87,27 @@
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.DOCUMENT_NO"/>：</td>
 				<td>
-					<form:input id="subAccountName" path="ftzActMstr.documentNo" class=".input-large" readonly="true" />
+					<form:input id="documentNo" path="ftzActMstr.documentNo" class=".input-large" readonly="true" />
+				</td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message code="ftz.label.CUSTOM_TYPE"/>：</td>
+				<td>
+					<form:select path="ftzActMstr.customType" disabled="true">
+						<option value=""></option>
+						<form:options items="${FTZ_CUSTOM_TYPE}"/>
+					</form:select>
+				</td>
+				<td class="label_td"><spring:message code="ftz.label.ACC_ORG_CODE"/>：</td>
+				<td>
+					<form:input id="accOrgCode" path="ftzActMstr.accOrgCode" class=".input-large" readonly="true"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message code="ftz.label.AMOUNT"/>：</td>
+				<td colspan="3">
+					<t:moneyFormat type="text" id="balance" name="ftzActMstr.balance"
+						value="${FTZCMAccountQryForm.ftzActMstr.balance}" format="###,###,###,###.00" dot="true" readonly="true"/>
 				</td>
 			</tr>			
 		</table>
@@ -105,27 +125,27 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MAK_USER_ID"/>：</td>
 				<td>
-					<form:input id="subAccountName" path="ftzActMstr.makUserId" class=".input-large" readonly="true" />
+					<form:input id="makUserId" path="ftzActMstr.makUserId" class=".input-large" readonly="true" />
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.MAK_DATETIME"/>：</td>
 				<td>
-					<form:input id="subAccountName" path="ftzActMstr.makDatetime" class=".input-large" readonly="true" />
+					<form:input id="makDatetime" path="ftzActMstr.makDatetime" class=".input-large" readonly="true" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.CHK_USER_ID"/>：</td>
 				<td>
-					<form:input id="subAccountName" path="ftzActMstr.chkUserId" class=".input-large" readonly="true" />
+					<form:input id="chkUserId" path="ftzActMstr.chkUserId" class=".input-large" readonly="true" />
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.CHK_DATETIME"/>：</td>
 				<td>
-					<form:input id="subAccountName" path="ftzActMstr.chkDatetime" class=".input-large" readonly="true" />
+					<form:input id="chkDatetime" path="ftzActMstr.chkDatetime" class=".input-large" readonly="true" />
 				</td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.CHK_ADD_WORD"/>：</td>
 				<td colspan="3">
-					<form:input id="subAccountName" path="ftzActMstr.chkAddWord" 
+					<form:input id="chkAddWord" path="ftzActMstr.chkAddWord" 
 						class="input-xxlarge" readonly="true"/>
 				</td>
 			</tr>			
@@ -135,10 +155,6 @@
 <div class="row" style="margin-bottom: 40px;">
 	<div class="navbar navbar-fixed-bottom text-center" id="footer"
 		style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
-		<input id="detaildetail" type="button" class="btn btn-primary"
-			onclick="showDetaildetail();" value="<spring:message code="ftz.label.PREVIOUS"/>">
-		<input id="detaildetail" type="button" class="btn btn-primary"
-			onclick="showDetaildetail();" value="<spring:message code="ftz.label.NEXT"/>"> 
 		<input type="button" class="btn btn-primary" onclick="javascript:window.close();"
 			value="<spring:message code="button.lable.close"/>">
 	</div>

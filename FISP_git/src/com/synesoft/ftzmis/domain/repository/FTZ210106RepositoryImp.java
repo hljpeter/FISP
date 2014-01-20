@@ -23,12 +23,6 @@ import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 public class FTZ210106RepositoryImp implements FTZ210106Repository {
 
 	@Override
-	public FtzActMstr queryFtzActMstr(FtzActMstr ftzActMstr) {
-		return queryDAO.executeForObject(Table.FTZ_ACT_MSTR + "."
-				+ SQLMap.SELECT_LIST, ftzActMstr, FtzActMstr.class);
-	}
-	
-	@Override
 	public FtzInMsgCtl queryFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
 		return queryDAO.executeForObject(Table.FTZ_IN_MSG_CTL + "."
 				+ SQLMap.SELECT_PRIMARY_KEY, ftzInMsgCtl, FtzInMsgCtl.class);
@@ -149,5 +143,12 @@ public class FTZ210106RepositoryImp implements FTZ210106Repository {
 
 	@Resource
 	private PageHandler<FtzInTxnDtl> pageFtzInTxnDtl;
+
+	@Override
+	public FtzActMstr queryFtzActMstr(FtzActMstr ftzActMstr) {
+		// TODO Auto-generated method stub
+		return queryDAO.executeForObject(Table.FTZ_ACT_MSTR + "."
+				+ SQLMap.SELECT_LIST, ftzActMstr, FtzActMstr.class);
+	}
 
 }

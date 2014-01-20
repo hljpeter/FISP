@@ -52,7 +52,7 @@
 			return;
 		} else {
 			if("02" == selected_msgType) {
-				alert("录入已完成！");
+				alert('<spring:message code="w.cm.1006"/>');
 				return;
 			}
 			var form = document.getElementById("form");
@@ -75,18 +75,18 @@
 			alert('<spring:message code="ftz.validate.choose.data" />');
 			return;
 		} else {
-			if ("01" == selected_msgType || "04" == selected_msgType|| "02" == selected_msgType) {
-				var form = document.getElementById("form");
-				form.action = "${pageContext.request.contextPath}/FTZ210311/InputDel";
-				var msg = $("#confirmMsg1").val() + $("#del").val()
-						+ $("#confirmMsg2").val();
-				if (confirm(msg)) {
-					form.submit();
-				} else {
-					return false;
-				}
+			if ("03" == selected_msgType) {
+				alert('<spring:message code="ftz.validate.chk.success"/>');
+				return;
+			}
+			var form = document.getElementById("form");
+			form.action = "${pageContext.request.contextPath}/FTZ210311/InputDel";
+			var msg = $("#confirmMsg1").val() + $("#del").val()
+					+ $("#confirmMsg2").val();
+			if (confirm(msg)) {
+				form.submit();
 			} else {
-				alert("非录入或审核失败状态，无法删除！");
+				return false;
 			}
 		}
 	}
@@ -101,18 +101,18 @@
 			alert('<spring:message code="ftz.validate.choose.data" />');
 			return;
 		} else {
-			if ("01" == selected_msgType || "04" == selected_msgType|| "02" == selected_msgType) {
-				showDialog('${pageContext.request.contextPath}/FTZ210311/UpdDtlInit?selected_msgId='
-						+ selected_msgId,'500','1024');
-				queryFTZ210311();
-			} else {
-				alert("非录入或审核失败状态，无法编辑！");
+			if ("01" == selected_msgType) {
+				alert('<spring:message code="ftz.validate.chk.success"/>');
+				return;
 			}
+			showDialog('${pageContext.request.contextPath}/FTZ210311/UpdDtlInit?selected_msgId='
+					+ selected_msgId,'500','1024');
+			queryFTZ210311();
 		}
 	}
 	function queryFTZ210311() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210311/AddQry";
+		form.action = "${pageContext.request.contextPath}/FTZ210311/AddQry?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -165,8 +165,8 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MGS_ID" /><!-- 批量号 -->：</td>
-				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
+				<td><form:input id="query_msgId" path="query_msgId" class=".input-large" 
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS" /><!-- 批量状态 -->：</td>
 				<td><form:select path="query_msgStatus">
 						<form:option value=""></form:option>
@@ -228,7 +228,7 @@
 			<input id="add" type="button" class="btn btn-primary" onclick="addDetail();" value="<spring:message code="ftz.label.ADD_MSG" />"> 
 			<input id="upd" type="button" class="btn btn-primary" onclick="updDetail();" value="<spring:message code="ftz.label.UPT_MSG" />"> 
 			<input id="del" type="button" class="btn btn-primary" onclick="delDetail();" value="<spring:message code="ftz.label.DEL_MSG" />">
-			<input id="submit" type="button" class="btn btn-primary" onclick="sbDetail();" value="<spring:message code="ftz.label.SUBMIT_MSG" />"> 
+			<input id="submit" type="button" class="btn btn-primary" onclick="sbDetail();" value="<spring:message code="ftz.label.FINISH_MSG" />"> 
 			<input id="detail" type="button" class="btn btn-primary" onclick="showDetail();" value="<spring:message code="ftz.label.MSG_Dtl" />">
 			</td>
 			<td width="30%" align="right">

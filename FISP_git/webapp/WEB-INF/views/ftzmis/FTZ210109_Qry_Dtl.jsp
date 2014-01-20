@@ -41,7 +41,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210109/QryDtlDtl?selected_msgId='
@@ -142,7 +142,7 @@
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
 						class=".input-large" readonly="true" /></td>
 			</tr>
-
+	<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.PBOC_STATUS" />：</td>

@@ -35,7 +35,7 @@ $("#del").click(function() {
 			$("#msgId").val(selectedRow.msgId);
 			$("#makDatetime").val(selectedRow.makDatetime);
 			$("#msgStatus").val(selectedRow.msgStatus);
-			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210304/Input/DelMsg");
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210304/Input/DelMsg?page.page=" + ${page.number + 1 });
 			$("#form").submit();
 		} else {
 			return false;
@@ -57,7 +57,7 @@ $("#sbm").click(function() {
 			$("#msgId").val(selectedRow.msgId);
 			$("#makDatetime").val(selectedRow.makDatetime);
 			$("#msgStatus").val(selectedRow.msgStatus);
-			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210304/Input/SubmitMsg");
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210304/Input/SubmitMsg?page.page=" + ${page.number + 1 });
 			$("#form").submit();
 		} else {
 			return false;
@@ -197,19 +197,21 @@ $("#add").click(function() {
 	</div>
 </div>
 <!-- page and buttons -->
-<div class="row" style="margin-top: 10px;">
-	<div class="pagination pull-right" style="margin-top: 5px; margin-bottom: 0px;">
-		<div class="leftPage">
-			<util:pagination page="${page }" action="/FTZ210304/Input/Qry" query="ftzOffMsgCtlVO.branchId=${FTZ210304Form.ftzOffMsgCtlVO.branchId }&ftzOffMsgCtlVO.startDate=${FTZ210304Form.ftzOffMsgCtlVO.startDate }&ftzOffMsgCtlVO.endDate=${FTZ210304Form.ftzOffMsgCtlVO.endDate }&ftzOffMsgCtlVO.msgId=${FTZ210304Form.ftzOffMsgCtlVO.msgId }&ftzOffMsgCtlVO.msgStatus=${FTZ210304Form.ftzOffMsgCtlVO.msgStatus }" />
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="navbar text-right" id="footer" style="text-align:center; margin-bottom:10px; line-height:30px; background-color: #eee; opacity:0.9;">
-		<button id="add" name="btn" class="btn btn-primary"><spring:message code="ftz.label.ADD_MSG"/></button>
-		<button id="upt" name="btn" class="btn btn-primary"><spring:message code="ftz.label.UPT_MSG"/></button>
-		<button id="del" name="btn" class="btn btn-primary"><spring:message code="ftz.label.DEL_MSG"/></button>
-		<button id="dtl" name="btn" class="btn btn-primary"><spring:message code="ftz.label.MSG_Dtl"/></button>
-		<button id="sbm" name="btn" class="btn btn-primary"><spring:message code="ftz.label.SUBMIT_MSG"/></button>
-	</div>
+<div class="pagination pull-right" style="margin-top: 10px;">
+	<table class="text-center">
+		<tr>
+			<td width="50%" align="center">
+				<button id="add" name="btn" class="btn btn-primary"><spring:message code="ftz.label.ADD_MSG"/></button>
+				<button id="upt" name="btn" class="btn btn-primary"><spring:message code="ftz.label.UPT_MSG"/></button>
+				<button id="del" name="btn" class="btn btn-primary"><spring:message code="ftz.label.DEL_MSG"/></button>
+				<button id="sbm" name="btn" class="btn btn-primary"><spring:message code="ftz.label.SUBMIT_MSG"/></button>
+				<button id="dtl" name="btn" class="btn btn-primary"><spring:message code="ftz.label.MSG_Dtl"/></button>
+			</td>
+			<td width="50%" align="right">
+				<table><tr><td>
+					<util:pagination page="${page }" action="/FTZ210304/Input/Qry" query="ftzOffMsgCtlVO.branchId=${FTZ210304Form.ftzOffMsgCtlVO.branchId }&ftzOffMsgCtlVO.startDate=${FTZ210304Form.ftzOffMsgCtlVO.startDate }&ftzOffMsgCtlVO.endDate=${FTZ210304Form.ftzOffMsgCtlVO.endDate }&ftzOffMsgCtlVO.msgId=${FTZ210304Form.ftzOffMsgCtlVO.msgId }&ftzOffMsgCtlVO.msgStatus=${FTZ210304Form.ftzOffMsgCtlVO.msgStatus }" />	
+				</td></tr></table>
+			</td>
+		</tr>
+	</table>
 </div>

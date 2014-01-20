@@ -25,8 +25,8 @@ $("#del").click(function() {
 		var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
 		if (confirm(msg)) {
 			if("03" == selectedRow.msgStatus){
-			       alert("批量审核已完成");
-			       return false;
+				alert('<spring:message code="ftz.validate.chk.success"/>');
+			    return false;
 				}
 			$("#msgId").val(selectedRow.msgId);
 			$("#makDatetime").val(selectedRow.makDatetime);
@@ -49,6 +49,10 @@ $("#sbm").click(function() {
 		selectedRow = eval("(" + checkSelected() + ")"); 
 		var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
 		if (confirm(msg)) {
+			if("02" == selectedRow.msgStatus){
+				alert('<spring:message code="w.cm.1006"/>');
+				return;
+			}
 			$("#msgId").val(selectedRow.msgId);
 			$("#makDatetime").val(selectedRow.makDatetime);
 			$("#msgStatus").val(selectedRow.msgStatus);
@@ -69,7 +73,7 @@ $("#upt").click(function() {
 	else {
 		selectedRow = eval("(" + checkSelected() + ")"); 
 		if("03" == selectedRow.msgStatus){
-		       alert("批量审核已完成");
+			alert("非录入或审核失败状态，无法编辑！");
 		       return;
 			}
 		var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
@@ -118,7 +122,7 @@ $("#pageTable")
 
 function queryFTZ210207() {
 	var form = document.getElementById("form");
-	form.action = "${pageContext.request.contextPath}/FTZ210207/AddQry";
+	form.action = "${pageContext.request.contextPath}/FTZ210207/AddQry?page.page="+${page.number+1};
 	form.submit();
 }
 </script>
@@ -126,6 +130,7 @@ function queryFTZ210207() {
 <div id="id_showMsg" style="display: none"> 
 	<br /><br />
 	<div id="id_result">
+	    <t:messagePanel />
 		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
 		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
 		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />
@@ -239,18 +244,25 @@ function queryFTZ210207() {
 		</table>
 	</div>
 </div>
-<!-- page and buttons -->
-<div class="pagination pull-right" style="margin-top: 5px; margin-bottom: 0px;">
-	<div class="leftPage">
-		<util:pagination page="${page}" query="ftzInMsgCtlVO.branchId=${FTZ210207Form.ftzInMsgCtlVO.branchId }&ftzInMsgCtlVO.startDate=${FTZ210207Form.ftzInMsgCtlVO.startDate }&ftzInMsgCtlVO.endDate=${FTZ210207Form.ftzInMsgCtlVO.endDate }&ftzInMsgCtlVO.msgId=${FTZ210207Form.ftzInMsgCtlVO.msgId }&ftzInMsgCtlVO.msgStatus=${FTZ210207Form.ftzInMsgCtlVO.msgStatus }&ftzInMsgCtlVO.accountNo=${FTZ210206Form.ftzInMsgCtlVO.accountNo }" />
-	</div>
-</div>
-<div class="row">
-	<div class="navbar text-right" id="footer" style="text-align:center; margin-top: 50px; margin-bottom:10px; line-height:30px; background-color: #eee; opacity:0.9;">
-		<button id="add" name="btn" class="btn btn-primary"><spring:message code="ftz.label.ADD_MSG"/></button>
+
+
+<div class="pagination pull-right" style="margin-top: 10px;">
+	<table class="text-center">
+		<tr>
+			<td width="50%" align="center">
+			<button id="add" name="btn" class="btn btn-primary"><spring:message code="ftz.label.ADD_MSG"/></button>
 		<button id="upt" name="btn" class="btn btn-primary"><spring:message code="ftz.label.UPT_MSG"/></button>
 		<button id="del" name="btn" class="btn btn-primary"><spring:message code="ftz.label.DEL_MSG"/></button>
 		<button id="sbm" name="btn" class="btn btn-primary"><spring:message code="ftz.label.SUBMIT_MSG"/></button>
 		<button id="dtl" name="btn" class="btn btn-primary"><spring:message code="ftz.label.MSG_Dtl"/></button>
-	</div>
+			</td>
+			<td width="50%" align="right">
+				<table>
+					<tr>
+						<td><util:pagination page="${page}" query="ftzInMsgCtlVO.branchId=${FTZ210207Form.ftzInMsgCtlVO.branchId }&ftzInMsgCtlVO.startDate=${FTZ210207Form.ftzInMsgCtlVO.startDate }&ftzInMsgCtlVO.endDate=${FTZ210207Form.ftzInMsgCtlVO.endDate }&ftzInMsgCtlVO.msgId=${FTZ210207Form.ftzInMsgCtlVO.msgId }&ftzInMsgCtlVO.msgStatus=${FTZ210207Form.ftzInMsgCtlVO.msgStatus }&ftzInMsgCtlVO.accountNo=${FTZ210207Form.ftzInMsgCtlVO.accountNo }" /></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </div>

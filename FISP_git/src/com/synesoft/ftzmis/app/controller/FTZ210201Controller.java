@@ -27,6 +27,7 @@ import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
 import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
+import com.synesoft.ftzmis.app.model.FTZ210101Form;
 import com.synesoft.ftzmis.app.model.FTZ210201Form;
 import com.synesoft.ftzmis.app.model.FTZ210102Form.FTZ210102FormAddDtlDtl;
 import com.synesoft.ftzmis.app.model.FTZ210201Form.FTZ210201FormAddDtlDtl;
@@ -350,7 +351,7 @@ public class FTZ210201Controller {
 			model.addAttribute(ResultMessages.error().add(
 					"e.ftzmis.210101.0026"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.mpp.0002"));
+			model.addAttribute(ResultMessages.success().add("i.ftzmis.210303.0004"));
 			model.addAttribute("uptFlag", "1");
 		}
 		form.getFtzInTxnDtl().setTranDate(
@@ -543,7 +544,7 @@ public class FTZ210201Controller {
 		if (i < 1) {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0006"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.sm.0001"));
+			model.addAttribute(ResultMessages.success().add("i.ftzmis.210303.0003"));
 			model.addAttribute("uptFlag", "1");
 		}
 		form.getFtzInTxnDtl().setTranDate(
@@ -580,7 +581,7 @@ public class FTZ210201Controller {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0002"));
 			form.setSelected_seqNo(null);
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.0003"));
+			model.addAttribute(ResultMessages.success().add("i.ftzmis.210303.0008"));
 			form.setSelected_seqNo(null);
 			return "forward:/FTZ210201/UptDtlInit";
 		}
@@ -606,6 +607,7 @@ public class FTZ210201Controller {
 		// 查询数据
 		FtzInMsgCtl result_FtzInMsgCtl = ftz210201Serv
 				.queryFtzInMsgCtl(query_FtzInMsgCtl);
+		
 		if (null == result_FtzInMsgCtl) {
 			// 若无数据 则返回提示信息
 			model.addAttribute(ResultMessages.info().add("w.sm.0001"));
@@ -616,6 +618,7 @@ public class FTZ210201Controller {
 			return "ftzmis/FTZ210201_Qry";
 		} else {
 			// 有数据则进行数据转换，查询明细数据
+			result_FtzInMsgCtl.setBalanceCode(result_FtzInMsgCtl.getBalanceCode().trim());
 			result_FtzInMsgCtl.setSubmitDate(DateUtil
 					.getFormatDateAddSprit(result_FtzInMsgCtl.getSubmitDate()));
 			result_FtzInMsgCtl.setSndDatetime(DateUtil
@@ -656,7 +659,7 @@ public class FTZ210201Controller {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0002"));
 			form.setSelected_msgId("");
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.0003"));
+			model.addAttribute(ResultMessages.success().add("i.ftzmis.210303.0007"));
 			form.setSelected_msgId("");
 			logger.info("各项贷款查询批量删除结束...");
 			return "forward:/FTZ210201/AddQry";
@@ -679,6 +682,7 @@ public class FTZ210201Controller {
 		}
 		ftzInMsgCtl.setSubmitDate(DateUtil.getFormatDateAddSprit(ftzInMsgCtl
 				.getSubmitDate()));
+		ftzInMsgCtl.setBalanceCode(ftzInMsgCtl.getBalanceCode().trim());
 		form.setFtzInMsgCtl(ftzInMsgCtl);
 		
 		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
@@ -769,6 +773,7 @@ public class FTZ210201Controller {
 		}
 
 		UserInf userInfo = ContextConst.getCurrentUser();
+		update_FtzInMsgCtl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
 		update_FtzInMsgCtl.setMakUserId(userInfo.getUserid());
 		update_FtzInMsgCtl.setRsv1(DateUtil
 				.getFormatDateTimeRemoveSpritAndColon(update_FtzInMsgCtl
@@ -805,7 +810,7 @@ public class FTZ210201Controller {
 			model.addAttribute("pageUrl", "/FTZ210201/UptDtlInit");
 			return "ftzmis/FTZ210201_Input_Dtl";
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.mpp.0002"));
+			model.addAttribute(ResultMessages.success().add("i.ftzmis.210303.0001"));
 		}
 		form.getFtzInMsgCtl().setSubmitDate(
 				DateUtil.getFormatDateAddSprit(form.getFtzInMsgCtl()
@@ -848,6 +853,7 @@ public class FTZ210201Controller {
 		}
 		ftzInMsgCtl.setSubmitDate(DateUtil.getFormatDateAddSprit(ftzInMsgCtl
 				.getSubmitDate()));
+		ftzInMsgCtl.setBalanceCode(ftzInMsgCtl.getBalanceCode().trim());
 		form.setFtzInMsgCtl(ftzInMsgCtl);
 		
 		// 将查询数据放入form
@@ -900,7 +906,7 @@ public class FTZ210201Controller {
 			return "forward:/FTZ210201/AddQry";
 		}
 
-		model.addAttribute(ResultMessages.success().add("i.ftzmis.210101.0001"));
+		model.addAttribute(ResultMessages.success().add("i.ftzmis.210301.0009"));
 		return "forward:/FTZ210201/AddQry";
 	}
 
@@ -908,7 +914,7 @@ public class FTZ210201Controller {
 	//点击保存新增批量
 	@RequestMapping("AddDtlSubmit")
 	public String AddDtlSubmit(Model model,
-			//@Validated({ FTZ210201FormAddDtl.class }) 
+			
 			FTZ210201Form form) {
 		logger.info("各项贷款批量录入开始...");
 		
@@ -990,11 +996,12 @@ public class FTZ210201Controller {
 		insert_FtzInMsgCtl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
 		insert_FtzInMsgCtl.setMsgNo(CommonConst.MSG_NO_210201);
 		// 插入信息
+		insert_FtzInMsgCtl.setBalanceCode(insert_FtzInMsgCtl.getBalanceCode().trim());
 		int i = ftz210201Serv.insertFtzInMsgCtl(insert_FtzInMsgCtl);
 		if (i < 1) {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0006"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.sm.0001"));
+			model.addAttribute(ResultMessages.success().add("i.ftzmis.210303.0000"));
 		}
 		form.getFtzInMsgCtl().setSubmitDate(
 				DateUtil.getFormatDateAddSprit(form.getFtzInMsgCtl()
@@ -1032,11 +1039,13 @@ public class FTZ210201Controller {
 		query_FtzInMsgCtl.setRsv2(DateUtil.getFormatDateRemoveSprit(form
 				.getQuery_submitDate_end()));
 		query_FtzInMsgCtl.setMsgStatus(form.getQuery_msgStatus());
+		query_FtzInMsgCtl
+				.setMsgStatuss(CommonConst.FTZ_MSG_STATUS_INPUT_STATUS);
 		query_FtzInMsgCtl.setMsgNo(CommonConst.MSG_NO_210201);
-
+		
 		// query DpMppCfg page list
-		Page<FtzInMsgCtl> page = ftz210201Serv.queryFtzInMsgCtlPageInput(
-				pageable, query_FtzInMsgCtl);
+		Page<FtzInMsgCtl> page = ftz210201Serv.queryFtzInMsgCtlPage(pageable,
+				query_FtzInMsgCtl);
 
 		if (page.getContent().size() > 0) {
 			List<FtzInMsgCtl> ftzInMsgCtls = page.getContent();
@@ -1076,6 +1085,8 @@ public class FTZ210201Controller {
 			result_FtzInMsgCtl.setAckDatetime(DateUtil
 					.getFormatDateTimeAddSpritAndColon(result_FtzInMsgCtl
 							.getAckDatetime()));
+			result_FtzInMsgCtl.setBalanceCode(result_FtzInMsgCtl
+					.getBalanceCode().trim());
 			form.setFtzInMsgCtl(result_FtzInMsgCtl);
 			FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
 			query_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
@@ -1187,9 +1198,10 @@ public class FTZ210201Controller {
 				return "forward:/FTZ210201/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
-				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0031",
-						sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
+				//model.addAttribute(ResultMessages.error().add(
+				//		"e.ftzmis.210101.0031",
+				//		sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
+				model.addAttribute(ResultMessages.info().add("e.ftzmis.audit.not.detail"));
 				return "forward:/FTZ210201/QryAuthDtl";
 			}
 

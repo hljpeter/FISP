@@ -38,7 +38,7 @@
 		var selected_actNo = $("#selected_actNo").val();
 		var selected_subActNo = $("#selected_subActNo").val();
 		if(null == selected_actNo || "" == selected_actNo) {
-			alert("请选择一条账户数据!");
+			alert('<spring:message code="ftz.validate.choose.dataAct"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210501/QryDtl?selected_actNo='
@@ -92,12 +92,12 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO"/>：</td>
-				<td><form:input id="query_accountNo"
-						path="query_accountNo" class=".input-large"/>
+				<td><form:input id="query_accountNo" path="query_accountNo" class=".input-large"
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.SUB_ACCOUNT_NO"/>：</td>
-				<td><form:input id="query_subAccountNo"
-						path="query_subAccountNo" class=".input-large"/>
+				<td><form:input id="query_subAccountNo" path="query_subAccountNo" class=".input-large"
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
 				</td>
 			</tr>
 			<tr>

@@ -63,8 +63,7 @@ public class FTZ210210ServiceImp implements FTZ210210Service {
 		FtzInMsgCtl ftzMsgCtl_tmp = this.queryFtzInMsgCtl(query_FtzInMsgCtl);
 		
 		BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE,ftzMsgCtl_tmp.toString(), "");
-		int i = ftz210210Repos.deleteFtzInMsgCtl(ftzInMsgCtl);
-		return i;
+		return ftz210210Repos.deleteFtzInMsgCtl(ftzInMsgCtl);
 	}
 
 	@Override

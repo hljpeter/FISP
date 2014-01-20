@@ -1,54 +1,58 @@
 package com.synesoft.ftzmis.app.model;
 
-import javax.validation.Valid;
+import java.io.Serializable;
 
 import com.synesoft.ftzmis.domain.model.FtzOffMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzOffTxnDtl;
+import com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO;
 
-public class FTZ210302Form {
+/**
+ * 6.3.2　应付信用证（210302）
+ * @author yyw
+ * @date 2014-01-18
+ */
+public class FTZ210302Form implements Serializable {
+ 	
+	private static final long serialVersionUID = 1L;
+
+	private String actionFlag;
+
+	private String operFlag;
 	
-	public static interface FTZ210302FormAddDtl { }
+	private String msg;
 	
-	public static interface FTZ210302FormAddDtlDtl { }
-	
-	@Valid
+	private FtzOffMsgCtlVO ftzOffMsgCtlVO;
+
 	private FtzOffMsgCtl ftzOffMsgCtl;
-	
-	@Valid
+
 	private FtzOffTxnDtl ftzOffTxnDtl;
 	
-	private String query_branchId ="";
-	
-	private String query_workDate_start ="";
-	
-	private String query_workDate_end ="";
-	
-	private String query_msgId ="";
-	
-	private String query_msgStatus ="";
-	
-	private String selected_msgId ="";
-	
-	private String selected_seqNo = "";
-	
-	private String unAuthFlag ="";
-	
-	private String authStat ="";
-	
-	private String authFinishFlag ="";
-
 	/**
-	 * @return the ftzOffMsgCtl
+	 * @return the msg
 	 */
-	public FtzOffMsgCtl getFtzOffMsgCtl() {
-		return ftzOffMsgCtl;
+	public String getMsg() {
+		return msg;
 	}
 
 	/**
-	 * @param ftzOffMsgCtl the ftzOffMsgCtl to set
+	 * @param msg the msg to set
 	 */
-	public void setFtzOffMsgCtl(FtzOffMsgCtl ftzOffMsgCtl) {
-		this.ftzOffMsgCtl = ftzOffMsgCtl;
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	/**
+	 * @return the operFlag
+	 */
+	public String getOperFlag() {
+		return operFlag;
+	}
+
+	/**
+	 * @param operFlag the operFlag to set
+	 */
+	public void setOperFlag(String operFlag) {
+		this.operFlag = operFlag;
 	}
 
 	/**
@@ -66,143 +70,45 @@ public class FTZ210302Form {
 	}
 
 	/**
-	 * @return the query_branchId
+	 * @return the ftzOffMsgCtl
 	 */
-	public String getQuery_branchId() {
-		return query_branchId;
+	public FtzOffMsgCtl getFtzOffMsgCtl() {
+		return ftzOffMsgCtl;
 	}
 
 	/**
-	 * @param query_branchId the query_branchId to set
+	 * @param ftzOffMsgCtl the ftzOffMsgCtl to set
 	 */
-	public void setQuery_branchId(String query_branchId) {
-		this.query_branchId = query_branchId;
+	public void setFtzOffMsgCtl(FtzOffMsgCtl ftzOffMsgCtl) {
+		this.ftzOffMsgCtl = ftzOffMsgCtl;
 	}
 
 	/**
-	 * @return the query_workDate_start
+	 * @return the actionFlag
 	 */
-	public String getQuery_workDate_start() {
-		return query_workDate_start;
+	public String getActionFlag() {
+		return actionFlag;
 	}
 
 	/**
-	 * @param query_workDate_start the query_workDate_start to set
+	 * @param actionFlag the actionFlag to set
 	 */
-	public void setQuery_workDate_start(String query_workDate_start) {
-		this.query_workDate_start = query_workDate_start;
+	public void setActionFlag(String actionFlag) {
+		this.actionFlag = actionFlag;
 	}
 
 	/**
-	 * @return the query_workDate_end
+	 * @return the ftzOffMsgCtlVO
 	 */
-	public String getQuery_workDate_end() {
-		return query_workDate_end;
+	public FtzOffMsgCtlVO getFtzOffMsgCtlVO() {
+		return ftzOffMsgCtlVO;
 	}
 
 	/**
-	 * @param query_workDate_end the query_workDate_end to set
+	 * @param ftzOffMsgCtlVO the ftzOffMsgCtlVO to set
 	 */
-	public void setQuery_workDate_end(String query_workDate_end) {
-		this.query_workDate_end = query_workDate_end;
+	public void setFtzOffMsgCtlVO(FtzOffMsgCtlVO ftzOffMsgCtlVO) {
+		this.ftzOffMsgCtlVO = ftzOffMsgCtlVO;
 	}
-
-	/**
-	 * @return the query_msgId
-	 */
-	public String getQuery_msgId() {
-		return query_msgId;
-	}
-
-	/**
-	 * @param query_msgId the query_msgId to set
-	 */
-	public void setQuery_msgId(String query_msgId) {
-		this.query_msgId = query_msgId;
-	}
-
-	/**
-	 * @return the query_msgStatus
-	 */
-	public String getQuery_msgStatus() {
-		return query_msgStatus;
-	}
-
-	/**
-	 * @param query_msgStatus the query_msgStatus to set
-	 */
-	public void setQuery_msgStatus(String query_msgStatus) {
-		this.query_msgStatus = query_msgStatus;
-	}
-
-	/**
-	 * @return the selected_msgId
-	 */
-	public String getSelected_msgId() {
-		return selected_msgId;
-	}
-
-	/**
-	 * @param selected_msgId the selected_msgId to set
-	 */
-	public void setSelected_msgId(String selected_msgId) {
-		this.selected_msgId = selected_msgId;
-	}
-
-	/**
-	 * @return the selected_seqNo
-	 */
-	public String getSelected_seqNo() {
-		return selected_seqNo;
-	}
-
-	/**
-	 * @param selected_seqNo the selected_seqNo to set
-	 */
-	public void setSelected_seqNo(String selected_seqNo) {
-		this.selected_seqNo = selected_seqNo;
-	}
-
-	/**
-	 * @return the unAuthFlag
-	 */
-	public String getUnAuthFlag() {
-		return unAuthFlag;
-	}
-
-	/**
-	 * @param unAuthFlag the unAuthFlag to set
-	 */
-	public void setUnAuthFlag(String unAuthFlag) {
-		this.unAuthFlag = unAuthFlag;
-	}
-
-	/**
-	 * @return the authStat
-	 */
-	public String getAuthStat() {
-		return authStat;
-	}
-
-	/**
-	 * @param authStat the authStat to set
-	 */
-	public void setAuthStat(String authStat) {
-		this.authStat = authStat;
-	}
-
-	/**
-	 * @return the authFinishFlag
-	 */
-	public String getAuthFinishFlag() {
-		return authFinishFlag;
-	}
-
-	/**
-	 * @param authFinishFlag the authFinishFlag to set
-	 */
-	public void setAuthFinishFlag(String authFinishFlag) {
-		this.authFinishFlag = authFinishFlag;
-	}
-
+	
 }

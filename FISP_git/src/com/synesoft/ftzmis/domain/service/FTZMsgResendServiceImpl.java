@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.repository.FTZMsgResendRepository;
@@ -27,7 +28,6 @@ public class FTZMsgResendServiceImpl implements FTZMsgResendService {
 	@Override
 	public Page<FtzInMsgCtl> queryFtzInMsgCtlPage(Pageable pageable,
 			FtzInMsgCtl ftzInMsgCtl) {
-		
 		return ftzMsgResendRepo.queryFtzInMsgCtlPage(pageable, ftzInMsgCtl);
 	}
 	
@@ -45,5 +45,10 @@ public class FTZMsgResendServiceImpl implements FTZMsgResendService {
 	@Override
 	public FtzInTxnDtl queryFtzInTxnDtl(FtzInTxnDtl ftzInTxnDtl) {
 		return ftzMsgResendRepo.queryFtzInTxnDtl(ftzInTxnDtl);
+	}
+
+	@Override
+	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode) {
+		return ftzMsgResendRepo.queryFtzBankCode(ftzBankCode);
 	}
 }

@@ -79,7 +79,7 @@
 			success : function(rs) {
 				dtlExist = rs.dtlExist;
 				if (null == dtlExist || false == dtlExist) {
-					alert("无此账号信息！");
+					alert('<spring:message code="w.cm.1007"/>');
 					$("#branchId").val("");
 					$("#branchId1").val("");
 					$("#accountName").val("");
@@ -136,7 +136,7 @@
 		var selected_msgId = $("#msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210104/QryDtlDtl?selected_msgId='
@@ -149,11 +149,11 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("审核通过明细无法修改或删除！");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -180,11 +180,11 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("审核通过明细无法修改或删除！");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			showDialog('${pageContext.request.contextPath}/FTZ210104/UptDtlDtlInit?selected_msgId='
@@ -197,7 +197,7 @@
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210104/DtlInitReflash";
+		form.action = "${pageContext.request.contextPath}/FTZ210104/DtlInitReflash?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -303,6 +303,7 @@
 			</tr>
 			
 			<c:if test="${ FTZ210104Form.input_flag eq 'upt'}">
+				<tr><td colspan="4"><hr/></td></tr>
 				<tr>
 					<td class="label_td"><spring:message
 							code="ftz.label.PBOC_STATUS" />：</td>

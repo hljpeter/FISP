@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.terasoluna.fw.common.message.ResultMessages;
 
+import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.domain.model.SysDataDict;
 import com.synesoft.ftzmis.app.model.FTZCMMetaQryForm;
 import com.synesoft.ftzmis.domain.service.FTZCMMetaService;
@@ -43,6 +44,8 @@ public class FTZCMMetaQryController {
 		SysDataDict sysDataDict = new SysDataDict();		
 		sysDataDict.setMetaName(form.getMetaName());
 		sysDataDict.setMetaVal(form.getMetaVal());	
+		String[] str = ContextConst.getLocal();
+		sysDataDict.setMetaLan(str[0]);
 		Page<SysDataDict> page = ftzcmmetaservice.queryMetaPage(pageable,sysDataDict);
 		if(page.getContent().size()>0){
 			model.addAttribute("page", page);

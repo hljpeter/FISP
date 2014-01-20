@@ -34,6 +34,7 @@ if (actionFlag == "addMsg") {
 	$(".pboc").css("display", "");
 } else if (actionFlag == "uptMsg") {
 	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210303/Input/UptMsg/Sumbit");
+	$(".pboc").css("display", "");
 	//var success = '${successmsg}';
 	//if (success && success != '') {
 	//	$("input[type=submit]").attr("disabled", true);
@@ -74,12 +75,16 @@ $("#upt").click(function() {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
 		selectedRow = eval("(" + selectedRow + ")");
-		$("#operFlag").val("updated");
-		showDialog('${pageContext.request.contextPath}/FTZ210303/Input/UptTxn/Init?ftzOffTxnDtl.msgId=' 
-				+ $("#msgId").val() + '&ftzOffTxnDtl.seqNo=' + selectedRow.seqNo + '&time=' + new Date().getTime(), '600', '1040');
+		if (selectedRow.chkStatus == '03') {
+			alert('<spring:message code="e.ftzmis.2103.0027"/>');
+		} else {
+			$("#operFlag").val("updated");
+			showDialog('${pageContext.request.contextPath}/FTZ210303/Input/UptTxn/Init?ftzOffTxnDtl.msgId=' 
+					+ $("#msgId").val() + '&ftzOffTxnDtl.seqNo=' + selectedRow.seqNo + '&time=' + new Date().getTime(), '600', '1040');
 			
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210303/Input/UptMsg/Init");
-		$("#form").submit();
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210303/Input/UptMsg/Init?page.page=" + ${page.number + 1 });
+			$("#form").submit();
+		}
 	}
 });
 
@@ -90,16 +95,20 @@ $("#del").click(function() {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
 		selectedRow = eval("(" + selectedRow + ")");
-		var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
-		if (confirm(msg)) {
-			$("#operFlag").val("updated");
-			$("#form").attr("action", '${pageContext.request.contextPath}/FTZ210303/Input/DelTxn/Submit?ftzOffTxnDtl.msgId=' 
-					+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo + "&ftzOffTxnDtl.makDatetime=" + selectedRow.makDatetime 
-					+ "&ftzOffTxnDtl.chkDatetime=" + selectedRow.chkDatetime);
-			$("#form").submit();
-
+		if (selectedRow.chkStatus == '03') {
+			alert('<spring:message code="e.ftzmis.2103.0027"/>');
 		} else {
-			return false;
+			var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
+			if (confirm(msg)) {
+				$("#operFlag").val("updated");
+				$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210303/Input/DelTxn/Submit?page.page=" + ${page.number + 1 } + "&ftzOffTxnDtl.msgId=" 
+						+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo + "&ftzOffTxnDtl.makDatetime=" + selectedRow.makDatetime 
+						+ "&ftzOffTxnDtl.chkDatetime=" + selectedRow.chkDatetime);
+				$("#form").submit();
+
+			} else {
+				return false;
+			}
 		}
 	}
 });
@@ -136,14 +145,14 @@ $("#del").click(function() {
 			<tr>
 	    		<td class="label_td"><spring:message code="ftz.label.New_BRANCH_ID"/>：</td>
 				<td>${ftzOffMsgCtl.branchId }
-					<form:select path="ftzOffMsgCtl.branchId" disabled="true">
+					<form:select path="ftzOffMsgCtl.branchId">
 						<option value=""></option>
 						<form:options items="${SM_0002 }" />
 					</form:select>
 				</td>
 				
 				<td class="label_td"><span style="color:red;">*</span><spring:message code="ftz.label.WORK_DATE"/>：</td>
-				<td><t:dateTimeFormat type="text" value="${FTZ210303Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large" readonly="true"/></td>
+				<td><t:dateTimeFormat type="text" value="${FTZ210303Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large"/></td>
 			</tr>
 			<tr>	
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID"/>：</td>
@@ -202,7 +211,7 @@ $("#del").click(function() {
 			<tbody>
 			
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }",chkStatus:"${dto.chkStatus }"}'>
 		          	<td class="tbl_page_td_left vtip" width="20px">${(page.number * page.size) + (i.index + 1)}</td>
 				  	<td class="tbl_page_td_left vtip" width="100px"><t:codeValue items="${SM_0002 }" key="${dto.accOrgCode }" type="label" /></td>
 				  	<td class="tbl_page_td_left vtip" width="80px"><t:dateTimeFormat type="label" value="${dto.submitDate }" format="date"/></td>

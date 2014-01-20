@@ -56,7 +56,8 @@
 				<td><form:input id="oppBankCode"
 						path="ftzInTxnDtl.oppBankCode" class=".input-large" readonly="true"/></td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_BANK_NAME"/></td>
-				<td>xx对手方银行</td>
+				<td><form:input id="oppBankName" path="ftzInTxnDtl.oppBankName"
+						class=".input-large" readonly="true" /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.OPP_ACCOUNT" />：</td>
@@ -68,11 +69,18 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.COUNTRY_CODE" />：</td>
-				<td><form:input id="countryCode" path="ftzInTxnDtl.countryCode"
-						class=".input-large" readonly="true" /></td>
+				<td><form:select path="ftzInTxnDtl.countryCode"
+						id="countryCode" disabled="true">
+						<form:option value=""></form:option>
+						<form:options items="${FTZ_COUNTRY_CODE}" />
+					</form:select></td>
 				<td class="label_td"><spring:message code="ftz.label.DISITRICT_CODE" />：</td>
-				<td><form:input id="disitrictCode" path="ftzInTxnDtl.disitrictCode"
-						class=".input-large" readonly="true" /></td>
+				<td><form:select path="ftzInTxnDtl.disitrictCode"
+						id="disitrictCode"  disabled="true">
+						<form:option value=""></form:option>
+						<form:options items="${FTZ_DISITRICT_CODE}" />
+					</form:select>
+					</td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.TRAN_TYPE" />：</td>

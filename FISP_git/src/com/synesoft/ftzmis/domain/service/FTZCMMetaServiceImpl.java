@@ -22,6 +22,7 @@ public  class FTZCMMetaServiceImpl implements FTZCMMetaService {
 	@Override
 	public Page<SysDataDict> queryMetaPage(Pageable pageable,
 			SysDataDict sysDataDict) {
+		
 		return ftzcmmetaqryrepository.queryMetaRegion(pageable,sysDataDict);
 	}
 	@Resource

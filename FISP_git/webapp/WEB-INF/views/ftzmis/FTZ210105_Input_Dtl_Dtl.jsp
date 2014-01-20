@@ -23,6 +23,7 @@
 	});
 	function addDetail() {
 		$("#amount").val($("#amount").val().replaceAll(",", ""));
+		$("#assetsValue").val($("#assetsValue").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
@@ -204,7 +205,8 @@
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TERM_LENGTH1" />：</td>
 				<td><form:input id="termLength" path="ftzInTxnDtl.termLength"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TERM_UNIT1" />：</td>
 				<td><form:select path="ftzInTxnDtl.termUnit">
@@ -226,7 +228,7 @@
 						<spring:message code="button.label.Search" />
 					</button></td>
 			</tr>
-
+	<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_DTL_STATUS" />：</td>

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.fw.common.exception.BusinessException;
+import org.terasoluna.fw.common.message.ResultMessage;
 import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.common.constants.ContextConst;
@@ -88,12 +89,27 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 	 */
 	protected abstract void validateTxn(FtzOffTxnDtl ftzOffTxnDtl);
 	/**
-	 * 表外抽象方法，由子类实现
+	 * 表外通用方法，子类可重写
 	 * 基础信息校验
 	 * 代替Spring验证
 	 * @param ftzOffMsgCtl
 	 */
-	protected abstract void validateMsg(FtzOffMsgCtl ftzOffMsgCtl);
+	protected void validateMsg(FtzOffMsgCtl ftzOffMsgCtl) {
+		ResultMessages m = ResultMessages.error();
+		if (null == ftzOffMsgCtl || !StringUtil.isNotTrimEmpty(ftzOffMsgCtl.getBranchId())) {
+			log.error("[e.ftzmis.2103.0026] The branchId cannot be empty!"); 
+			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.2103.0026");									
+			m.addAll(msg);
+		}
+		if (null == ftzOffMsgCtl || !StringUtil.isNotTrimEmpty(ftzOffMsgCtl.getWorkDate())) {
+			log.error("[e.ftzmis.2103.0025] The workDate cannot be empty!"); 
+			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.2103.0025");								
+			m.addAll(msg);
+		}
+		if (m.isNotEmpty()) {
+			throw new BusinessException(m);
+		}
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.synesoft.ftzmis.domain.service.FTZOffCommonService#getMsgPage(org.springframework.data.domain.Pageable, com.synesoft.ftzmis.domain.model.FtzOffMsgCtl)
@@ -398,13 +414,39 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 			throw new BusinessException(messages);
 		}
 		
+		// 批量已经提交
+		if (CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED.equals(result.getMsgStatus())) {
+			log.error("[e.ftzmis.2103.0024] The MsgCtl has been submitted!"); 
+			messages.add("e.ftzmis.2103.0024");								
+			throw new BusinessException(messages);
+		}
+		
+		// 是否存在交易明细
+		FtzOffTxnDtl ftzOffTxnDtl = new FtzOffTxnDtl();
+		ftzOffTxnDtl.setMsgId(result.getMsgId());
+		int count = ftzOffTxnDtlRepository.queryCount(ftzOffTxnDtl);
+		if (count == 0) {
+			log.error("[e.ftzmis.2103.0028] The MsgCtl has not any TxnDtl!"); 
+			messages.add("e.ftzmis.2103.0028");								
+			throw new BusinessException(messages);
+		}
+
+		// 是否存在审核失败的交易明细
+		ftzOffTxnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL);
+		int count2 = ftzOffTxnDtlRepository.queryCount(ftzOffTxnDtl);
+		if (count2 != 0) {
+			log.error("[e.ftzmis.2103.0029] The MsgCtl has some TxnDtl unauthorized!"); 
+			messages.add("e.ftzmis.2103.0029");								
+			throw new BusinessException(messages);
+		}
+		
+		// 更新状态
 		FtzOffMsgCtlVO ftzOffMsgCtlVO = new FtzOffMsgCtlVO();
 		ftzOffMsgCtlVO.setMsgId(ftzOffMsgCtl.getMsgId());
 		ftzOffMsgCtlVO.setOldMsgStatus(ftzOffMsgCtl.getMsgStatus());
 		ftzOffMsgCtlVO.setMakDatetime(ftzOffMsgCtl.getMakDatetime());
 		ftzOffMsgCtlVO.setMakUserId(ContextConst.getCurrentUser().getUserid());
 		ftzOffMsgCtlVO.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
-		
 		int ret = ftzOffMsgCtlRepository.updateMsgStatus(ftzOffMsgCtlVO);
 		if (ret != 1) {
 			log.error("[e.ftzmis.2103.0001] Update FtzOffMsgCtl information failure!");
@@ -846,7 +888,7 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		BizLog(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(status)? CommonConst
 				.DATA_LOG_OPERTYPE_CHECK: CommonConst.DATA_LOG_OPERTYPE_REJECT, txnDtlResult.toString(), ftzOffTxnDtl.toString());
 	}
-	
+
 	private void BizLog(String operType, String beforeData, String afterData) {
 		OrgInf orgInfo = ContextConst.getOrgInfByUser();
 		UserInf userInfo = ContextConst.getCurrentUser();

@@ -418,6 +418,11 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 		ResultMessages messages = ResultMessages.error();
 
 		int ret = ftzInTxnDtlRepository.delete(ftzInTxnDtl);
+		FtzInMsgCtl ftzInMsgCtl=new FtzInMsgCtl();
+		ftzInMsgCtl.setMsgId(ftzInTxnDtl.getMsgId());
+		ftzInMsgCtl=ftzInMsgCtlRepository.queryByPK(ftzInMsgCtl);
+		ftzInMsgCtl.setTotalCount(ftzInMsgCtl.getTotalCount()-1);
+		ftzInMsgCtlRepository.updateMsg(ftzInMsgCtl);
 		if (ret != 1) {
 			log.error("[i.sm.0003] Delete TxnDtl information failure!"); 
 			messages.add("i.sm.0003");								

@@ -6,6 +6,7 @@ package com.synesoft.ftzmis.domain.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 
@@ -24,4 +25,6 @@ public interface FTZMsgResendRepository {
 	public Page<FtzInTxnDtl> queryFtzInTxnDtlPage(Pageable pageable,FtzInTxnDtl ftzInTxnDtl);
 	
 	public FtzInTxnDtl queryFtzInTxnDtl(FtzInTxnDtl ftzInTxnDtl);
+	
+	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode);
 }

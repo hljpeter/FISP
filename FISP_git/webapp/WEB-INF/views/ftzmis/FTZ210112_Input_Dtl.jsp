@@ -57,14 +57,10 @@
 									.text();
 							var selected_seqNo = $(this).find("td:eq(9)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210112/QryDtlDtl?selected_msgId='
-													+ selected_msgId
-													+ "&selected_seqNo="
-													+ selected_seqNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+							showDialog('${pageContext.request.contextPath}/FTZ210112/QryDtlDtl?selected_msgId='
+							+ selected_msgId
+							+ "&selected_seqNo="
+							+ selected_seqNo,'500','1024');
 						});
 	});
 
@@ -81,7 +77,7 @@
 			success : function(rs) {
 				dtlExist = rs.dtlExist;
 				if (null == dtlExist || false == dtlExist) {
-					alert("请选择一条批量明细!");
+					alert('<spring:message code="w.cm.1007"/>');
 					$("#branchId").val("");
 					$("#branchId1").val("");
 					$("#accType").val("");
@@ -154,16 +150,12 @@
 		var selected_msgId = $("#msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210112/QryDtlDtl?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
-									+ selected_seqNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210112/QryDtlDtl?selected_msgId='
+					+ selected_msgId + "&selected_seqNo="
+					+ selected_seqNo,'500','1024');
 		}
 	}
 	function delDetailDtl() {
@@ -171,11 +163,11 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("该数据已完成!!");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -194,12 +186,9 @@
 	function addDetailDtl() {
 		$("#amount").val($("#amount").val().replaceAll(",", ""));
 		var selected_msgId = $("#msgId").val();
-		window
-				.showModalDialog(
-						'${pageContext.request.contextPath}/FTZ210112/AddDtlDtlInit?selected_msgId='
-								+ selected_msgId,
-						window,
-						'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+		
+		showDialog('${pageContext.request.contextPath}/FTZ210112/AddDtlDtlInit?selected_msgId='
+				+ selected_msgId,'500','1024');
 		queryFTZ210112();
 	}
 	function uptDetailDtl() {
@@ -207,20 +196,16 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("该数据已完成!");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210112/UptDtlDtlInit?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
-									+ selected_seqNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+				showDialog('${pageContext.request.contextPath}/FTZ210112/UptDtlDtlInit?selected_msgId='
+					+ selected_msgId + "&selected_seqNo="
+					+ selected_seqNo,'500','1024');
 			queryFTZ210112();
 		}
 	}
@@ -228,7 +213,7 @@
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210112/DtlInitReflash";
+		form.action = "${pageContext.request.contextPath}/FTZ210112/DtlInitReflash?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -312,8 +297,8 @@
 						format="###,###,###,###.00" dot="true" readonly="true" />	
 			</tr>
 			<tr>
-			<td class="label_td" colspan="2"><font color="red">* </font>
-				<spring:message code="ftz.label.BALANCE_CODE" />：<form:hidden
+				<td class="label_td" colspan="2"><font color="red">*</font> <spring:message
+						code="ftz.label.BALANCE_CODE" />： <form:hidden
 						path="ftzInMsgCtl.balanceCode" id="balanceCode1" /> <form:select
 						id="balanceCode" path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
@@ -334,18 +319,25 @@
 						value="${FTZ210112Form.ftzInTxnDtl.amount}"
 						format="###,###,###,###.00" dot="true"  maxlength="24"/></td>
 			</tr>
-			<tr>
-				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
-				<td><form:select path="ftzInMsgCtl.result" disabled="true">
-						<form:option value=""></form:option>
-						<form:options items="${FTZ_PROC_RESULT}" />
-					</form:select></td>
-			</tr>
-			<tr>
-				<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
-				<td colspan="3"><form:input id="addWord"
-						path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
-			</tr>
+			<c:if test="${ FTZ210112Form.input_flag eq 'upt'}">
+				<tr>
+					<td colspan="4"><hr /></td>
+				</tr>
+				<tr>
+					<td class="label_td"><spring:message
+							code="ftz.label.PBOC_STATUS" />：</td>
+					<td colspan="3"><form:select path="ftzInMsgCtl.result"
+							disabled="true">
+							<form:option value=""></form:option>
+							<form:options items="${FTZ_PROC_RESULT}" />
+						</form:select></td>
+				</tr>
+				<tr>
+					<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
+					<td colspan="3"><form:input id="addWord"
+							path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
+				</tr>
+			</c:if>
 			<tr>
 				<td style="text-align: center;" colspan="4">
 					<button type="button" class="btn btn-primary" onclick="DtlSubmit()"><spring:message code="ftz.label.SUBMIT_MSG" /></button>

@@ -56,7 +56,7 @@
 	function queryFTZ210311() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210311/QryDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210311/QryDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>

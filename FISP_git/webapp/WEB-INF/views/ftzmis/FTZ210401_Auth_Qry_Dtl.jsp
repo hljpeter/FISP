@@ -49,7 +49,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210401/QryAuthDtlDtl?selected_msgId='
@@ -62,7 +62,7 @@
 	function queryFTZ210401Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210401/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210401/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	function sbDtl() {
@@ -213,8 +213,8 @@
 							 items="${FTZ_REBUY_TERM_UNIT }" key="${dto1.termUnit}" type="label"/></td>
 						<td class="vtip" style="text-align: center; width: 70px;">${dto1.valueDate}</td>
 						<td class="vtip" style="text-align: center; width: 70px;">${dto1.expireDate}</td>
-						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
-							 type="label" value="${dto1.interestRate }"/></td>
+						<td class="vtip" style="text-align: right; width: 50px;"><t:moneyFormat
+							 type="label" value="${dto1.interestRate }" dot="true"/></td>
 						<td class="vtip" style="text-align: right; width: 50px;"><t:codeValue 
 							items="${FTZ_MSG_STATUS }" key="${dto1.chkStatus }" type="label"/></td>
 						<td style="display: none;">${dto1.msgId}</td>

@@ -43,6 +43,6 @@ public interface FTZ210106Service {
 	public int updateFtzInMsgCtlForSubmit(FtzInMsgCtl ftzInMsgCtl);
 	
 	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode);
-
+	
 	public FtzActMstr queryFtzActMstr(FtzActMstr ftzActMstr);
 }

@@ -211,14 +211,6 @@ public class FTZ210308ServiceImp extends FTZOffCommonServiceImp {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see com.synesoft.ftzmis.domain.service.FTZOffCommonServiceImp#validateMsg(com.synesoft.ftzmis.domain.model.FtzOffMsgCtl)
-	 */
-	@Override
-	protected void validateMsg(FtzOffMsgCtl ftzOffMsgCtl) {
-		
-	}
-
 	@Autowired
 	protected OrgInfRepository orgInfRepository;
 	

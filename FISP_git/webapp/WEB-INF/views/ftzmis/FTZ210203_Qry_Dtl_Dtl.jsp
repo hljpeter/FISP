@@ -41,11 +41,11 @@
 				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.TRAN_DATE" />：</td>
 				<td><form:input id="tranDate" path="ftzInTxnDtl.tranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readonly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readonly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -63,10 +63,7 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_COUNTRY_CODE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querycountryCode()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+				</td>	
 				<td class="label_td"><spring:message
 						code="ftz.label.DISITRICT_CODE" />：</td>
 				<td><form:select path="ftzInTxnDtl.disitrictCode" disabled="true"
@@ -74,9 +71,7 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>
-					<button type="button" class="btn btn-small" onclick="queryRegion()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+				</td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.OPP_ACCOUNT" />：</td>
@@ -93,10 +88,7 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TRAN_TYPE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querytranType()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+				</td>
 			</tr>
 			
 			<tr>

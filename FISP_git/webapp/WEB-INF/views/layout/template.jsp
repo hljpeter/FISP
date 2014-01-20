@@ -97,5 +97,11 @@ body {
 	<input type ="hidden" value="<spring:message code="w.cm.1003"></spring:message>" id ="confirmMsg2" />
 	<input type ="hidden" value="<spring:message code="w.cm.1004"></spring:message>" id ="alertMsg1" />
 	<input type ="hidden" value="<spring:message code="w.cm.1005"></spring:message>" id ="alertMsg2" />
+	
+	<input type ="hidden" value="<spring:message code="w.cm.1006"></spring:message>" id ="alertMsg3" />
+	
+	<input type ="hidden" value="<spring:message code="ftz.validate.choose.dataTxn"></spring:message>" id ="alertMsg_selectAdetail" />
+	
+	
 </body>
 </html>

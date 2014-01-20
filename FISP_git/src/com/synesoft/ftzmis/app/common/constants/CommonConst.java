@@ -180,6 +180,8 @@ public class CommonConst {
 	// ///////////////////////// 日志 - 功能ID ///////////////////////////
 	/** 代理发债 */
 	public static final String FUNCTION_FTZ_Add_210301 = "210301";
+	/** 应付信用证 */
+	public static final String FUNCTION_FTZ_Add_210302 = "210302";
 	/** 应付保函/备用证 */
 	public static final String FUNCTION_FTZ_Add_210303 = "210303";
 	/** 信用证保兑 - 进口应付 */

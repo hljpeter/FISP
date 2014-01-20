@@ -91,6 +91,7 @@ function querytranType() {
 <div class="row">
 	<form:form id="form" action="${pageContext.request.contextPath}" method="post" modelAttribute="FTZ210207Form" class="form-horizontal">
 		<form:hidden path="ftzInTxnDtl.msgId" id="msgId"/>
+		<form:hidden path="ftzInTxnDtl.chkStatus" id="chkStatus"/>
 <table class="tbl_search">
 			
 			<tr>
@@ -139,7 +140,7 @@ function querytranType() {
 				<td class="label_td"><spring:message
 						code="ftz.label.DISITRICT_CODE" />：</td>
 				<td><form:select path="ftzInTxnDtl.disitrictCode"
-						id="disitrictCode">
+						id="districtCode">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>
@@ -153,7 +154,8 @@ function querytranType() {
 						code="ftz.label.TERM_LENGTH" />：</td>
 				<td>
 				<form:input id="termLength" path="ftzInTxnDtl.termLength"
-						class=".input-large"  onkeyup="numberStringFormat(this);" onbeforepaste="numberStringFormatCopy(this);"/>
+						class=".input-large"  onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);"/>
 				</td>
 				<td class="label_td"><font color="red">*</font><spring:message
 						code="ftz.label.TERM_UNIT" />：</td>
@@ -196,28 +198,41 @@ function querytranType() {
 					</button></td>
 			</tr>
 
-			<tr class="dtl"><td colspan="4"><hr/></td><td>
-			<tr class="dtl">	
-				<td class="label_td"><spring:message code="ftz.label.DTL_STATUS"/>：</td>
-				<td colspan="3"><t:codeValue items="${FTZ_MSG_STATUS }" key="${FTZ210207Form.ftzInTxnDtl.chkStatus }" type="text"  cssClass="input-large" readonly="true"/></td>
+		<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.MSG_DTL_STATUS" />：</td>
+				<td colspan="3"><form:select path="ftzInTxnDtl.chkStatus"
+						disabled="true">
+						<form:option value=""></form:option>
+						<form:options items="${FTZ_MSG_STATUS}" />
+					</form:select></td>
 			</tr>
-			<tr class="dtl">	
-				<td class="label_td"><spring:message code="ftz.label.MAK_USER_ID"/>：</td>
-				<td><form:input path="ftzInTxnDtl.makUserId" type="text" class="input-large" readonly="true"/></td>
-				
-				<td class="label_td"><spring:message code="ftz.label.MAK_DATETIME"/>：</td>
-				<td><t:dateTimeFormat type="text" value="${FTZ210207Form.ftzInTxnDtl.makDatetime }" format="datetime" name="ftzInTxnDtl.makDatetime" cssClass="input-large" readonly="true"/></td>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.MAK_USER_ID" />：</td>
+				<td><form:input id="makUserId" path="ftzInTxnDtl.makUserId"
+						class=".input-large" readonly="true" /></td>
+				<td class="label_td"><spring:message
+						code="ftz.label.MAK_DATETIME" />：</td>
+				<td><form:input id="makDatetime" path="ftzInTxnDtl.makDatetime"
+						class=".input-large" readonly="true" /></td>
 			</tr>
-			<tr class="dtl">	
-				<td class="label_td"><spring:message code="ftz.label.CHK_USER_ID"/>：</td>
-				<td><form:input path="ftzInTxnDtl.chkUserId" type="text" class="input-large" readonly="true"/></td>
-				
-				<td class="label_td"><spring:message code="ftz.label.CHK_DATETIME"/>：</td>
-				<td><t:dateTimeFormat type="text" value="${FTZ210207Form.ftzInTxnDtl.chkDatetime }" format="datetime" name="ftzInTxnDtl.chkDatetime" cssClass="input-large" readonly="true"/></td>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.CHK_USER_ID" />：</td>
+				<td><form:input id="chkUserId" path="ftzInTxnDtl.chkUserId"
+						class=".input-large" readonly="true" /></td>
+				<td class="label_td"><spring:message
+						code="ftz.label.CHK_DATETIME" />：</td>
+				<td><form:input id="chkDatetime" path="ftzInTxnDtl.chkDatetime"
+						class=".input-large" readonly="true" /></td>
 			</tr>
-			<tr class="dtl">	
-				<td class="label_td"><spring:message code="ftz.label.CHK_ADD_WORD"/>：</td>
-				<td colspan="3"><form:input path="ftzInTxnDtl.chkAddWord" type="text" class="input-xxlarge" readonly="true"/></td>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.CHK_ADD_WORD" />：</td>
+				<td colspan="3"><form:input id="chkAddWord"
+						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
+						readonly="true" /></td>
 			</tr>
 	    </table>	
 	    

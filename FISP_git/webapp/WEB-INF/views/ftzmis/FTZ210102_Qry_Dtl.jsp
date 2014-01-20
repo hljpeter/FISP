@@ -22,31 +22,28 @@
 			}
 
 		});
-		$("#pageTable")
-				.find("tr")
-				.bind(
-						'dblclick',
-						function() {
-							var selected_msgId = $(this).find("td:eq(8)")
-									.text();
-							var selected_seqNo = $(this).find("td:eq(9)")
-									.text();
-							showDialog('${pageContext.request.contextPath}/FTZ210102/QryDtlDtl?selected_msgId='
-									+ selected_msgId
-									+ "&selected_seqNo="
-									+ selected_seqNo,'500','1024');
-						});
+		$("#pageTable").find("tr").bind(
+				'dblclick',
+				function() {
+					var selected_msgId = $(this).find("td:eq(8)").text();
+					var selected_seqNo = $(this).find("td:eq(9)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210102/QryDtlDtl?selected_msgId='
+									+ selected_msgId + "&selected_seqNo="
+									+ selected_seqNo, '500', '1024');
+				});
 	});
 	function showDetaildetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210102/QryDtlDtl?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210102/QryDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
 		}
 	}
 
@@ -74,7 +71,9 @@
 	<br />
 </div>
 
-<div class="page_title"><spring:message code="ftzmis.title.210102.qry.dtl" /></div>
+<div class="page_title">
+	<spring:message code="ftzmis.title.210102.qry.dtl" />
+</div>
 
 <div class="row">
 	<form:form id="form"
@@ -94,17 +93,20 @@
 						class=".input-large" readonly="true" /></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.SUBMIT_DATE" />：</td>
+				<td class="label_td"><spring:message
+						code="ftz.label.SUBMIT_DATE" />：</td>
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
 						class=".input-large" readonly="true" /></td>
-				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS" />：</td>
+				<td class="label_td"><spring:message
+						code="ftz.label.MSG_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
+				<td class="label_td"><spring:message
+						code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo"
 						class=".input-large" readonly="true" /></td>
 				<td class="label_td"><spring:message code="ftz.label.ACC_TYPE" />：</td>
@@ -114,7 +116,9 @@
 					</form:select></td>
 			</tr>
 			<tr>
-					<td colspan="2" class="label_td"><spring:message code="ftz.label.BALANCE_CODE" />：<form:select path="ftzInMsgCtl.balanceCode" disabled="true">
+				<td colspan="2" class="label_td"><spring:message
+						code="ftz.label.BALANCE_CODE" />：<form:select
+						path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_BALANCE_INDEX_CODE}" />
 					</form:select></td>
@@ -125,18 +129,24 @@
 					</form:select></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.DAILY_BALANCE" />：</td>
+				<td class="label_td"><spring:message
+						code="ftz.label.DAILY_BALANCE" />：</td>
 				<td><t:moneyFormat type="text"
 						value="${FTZ210102Form.ftzInMsgCtl.balance}"
 						format="###,###,###,###.00" dot="true" readonly="true" />
-				<td class="label_td"><spring:message code="ftz.label.ACC_ORG_CODE" />：</td>
+				<td class="label_td"><spring:message
+						code="ftz.label.ACC_ORG_CODE" />：</td>
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
 						class=".input-large" readonly="true" /></td>
 			</tr>
-			
-				<tr>
-				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
-				<td colspan="3"><form:select path="ftzInMsgCtl.result" disabled="true">
+			<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.PBOC_STATUS" />：</td>
+				<td colspan="3"><form:select path="ftzInMsgCtl.result"
+						disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_PROC_RESULT}" />
 					</form:select></td>
@@ -157,17 +167,26 @@
 		<table
 			class="table table-striped table-bordered table-condensed tbl_page">
 			<thead>
-				<p class="text-info" align="center"><spring:message code="ftz.label.MSG_DTL_List" /></p>
+				<p class="text-info" align="center">
+					<spring:message code="ftz.label.MSG_DTL_List" />
+				</p>
 				<tr>
-					<th style="vertical-align: middle; text-align: center" width="10px"><spring:message code="fisp.label.common.no" /></th>
-					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message code="ftz.label.CD_FLAG" /></th>
-					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message code="ftz.label.TRAN_DATE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="90px"><spring:message code="ftz.label.AMOUNT" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.COUNTRY_CODE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.VALUE_DATE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="10px"><spring:message
+							code="fisp.label.common.no" /></th>
+					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+							code="ftz.label.CD_FLAG" /></th>
+					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+							code="ftz.label.TRAN_DATE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="90px"><spring:message
+							code="ftz.label.AMOUNT" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.COUNTRY_CODE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.VALUE_DATE" /></th>
 					<th style="vertical-align: middle; text-align: center"
 						width="150px"><spring:message code="ftz.label.EXPIRE_DATE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.DTL_STATUS" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.DTL_STATUS" /></th>
 				</tr>
 			</thead>
 		</table>
@@ -210,7 +229,8 @@
 	<div class="navbar navbar-fixed-bottom text-center" id="footer"
 		style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
 		<input id="detaildetail" type="button" class="btn btn-primary"
-			onclick="showDetaildetail();" value="<spring:message code="ftz.label.DTL_DTL"/>"> <input
+			onclick="showDetaildetail();"
+			value="<spring:message code="ftz.label.DTL_DTL"/>"> <input
 			type="button" class="btn btn-primary"
 			onclick="javascript:window.close();"
 			value="<spring:message code="button.lable.close"/>">

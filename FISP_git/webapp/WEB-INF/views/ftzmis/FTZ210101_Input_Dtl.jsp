@@ -48,20 +48,16 @@
 			}
 
 		});
-		$("#pageTable")
-				.find("tr")
-				.bind(
-						'dblclick',
-						function() {
-							var selected_msgId = $(this).find("td:eq(8)")
-									.text();
-							var selected_seqNo = $(this).find("td:eq(9)")
-									.text();
-							showDialog('${pageContext.request.contextPath}/FTZ210101/QryDtlDtl?selected_msgId='
-									+ selected_msgId
-									+ "&selected_seqNo="
-									+ selected_seqNo,'500','1024');
-						});
+		$("#pageTable").find("tr").bind(
+				'dblclick',
+				function() {
+					var selected_msgId = $(this).find("td:eq(8)").text();
+					var selected_seqNo = $(this).find("td:eq(9)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210101/QryDtlDtl?selected_msgId='
+									+ selected_msgId + "&selected_seqNo="
+									+ selected_seqNo, '500', '1024');
+				});
 	});
 
 	function accoutQry() {
@@ -79,7 +75,7 @@
 			success : function(rs) {
 				dtlExist = rs.dtlExist;
 				if (null == dtlExist || false == dtlExist) {
-					alert("无此账号信息！");
+					alert('<spring:message code="w.cm.1007"/>');
 					$("#branchId").val("");
 					$("#branchId1").val("");
 					$("#accType").val("");
@@ -152,12 +148,13 @@
 		var selected_msgId = $("#msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210101/QryDtlDtl?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210101/QryDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
 		}
 	}
 	function delDetailDtl() {
@@ -165,11 +162,11 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			if("03"==selected_chkStatus){
-				alert("审核通过明细无法修改或删除！");
+			if ("03" == selected_chkStatus) {
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -178,7 +175,7 @@
 			var msg = $("#confirmMsg1").val() + $("#del").val()
 					+ $("#confirmMsg2").val();
 			if (confirm(msg)) {
-				form.submit(); 
+				form.submit();
 			} else {
 				return false;
 			}
@@ -187,8 +184,9 @@
 	}
 	function addDetailDtl() {
 		var selected_msgId = $("#msgId").val();
-		showDialog('${pageContext.request.contextPath}/FTZ210101/AddDtlDtlInit?selected_msgId='
-				+ selected_msgId,'500','1024');
+		showDialog(
+				'${pageContext.request.contextPath}/FTZ210101/AddDtlDtlInit?selected_msgId='
+						+ selected_msgId, '500', '1024');
 		queryFTZ210101();
 	}
 	function uptDetailDtl() {
@@ -196,18 +194,19 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			if("03"==selected_chkStatus){
-				alert("审核通过明细无法修改或删除！");
+			if ("03" == selected_chkStatus) {
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
-			
-			showDialog('${pageContext.request.contextPath}/FTZ210101/UptDtlDtlInit?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
-			
+
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210101/UptDtlDtlInit?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
+
 			queryFTZ210101();
 		}
 	}
@@ -215,7 +214,7 @@
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210101/DtlInitReflash";
+		form.action = "${pageContext.request.contextPath}/FTZ210101/DtlInitReflash?page.page="+ ${page.number + 1};
 		form.submit();
 	}
 </script>
@@ -364,9 +363,13 @@
 			</tr>
 			<c:if test="${ FTZ210101Form.input_flag eq 'upt'}">
 				<tr>
+					<td colspan="4"><hr /></td>
+				</tr>
+				<tr>
 					<td class="label_td"><spring:message
 							code="ftz.label.PBOC_STATUS" />：</td>
-					<td colspan="3"><form:select path="ftzInMsgCtl.result" disabled="true">
+					<td colspan="3"><form:select path="ftzInMsgCtl.result"
+							disabled="true">
 							<form:option value=""></form:option>
 							<form:options items="${FTZ_PROC_RESULT}" />
 						</form:select></td>
@@ -374,7 +377,7 @@
 				<tr>
 					<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
 					<td colspan="3"><form:input id="addWord"
-							path="ftzInMsgCtl.addWord" class=".input-xxlarge" readonly="true" /></td>
+							path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
 				</tr>
 			</c:if>
 
@@ -402,8 +405,8 @@
 							code="ftz.label.CD_FLAG" /></th>
 					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
 							code="ftz.label.TRAN_DATE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="100px"><spring:message
-							code="ftz.label.AMOUNT" /></th>
+					<th style="vertical-align: middle; text-align: center"
+						width="100px"><spring:message code="ftz.label.AMOUNT" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.COUNTRY_CODE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message

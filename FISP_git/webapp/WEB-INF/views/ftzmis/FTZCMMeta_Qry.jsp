@@ -117,7 +117,6 @@ $(function(){
 						<td style="text-align: center; width: 20px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.metaVal}</td>
 						<td class="vtip" style="text-align: left; width: 250px;">${dto.metaName}</td>
-
 					</tr>
 				</c:forEach>
 			</tbody>

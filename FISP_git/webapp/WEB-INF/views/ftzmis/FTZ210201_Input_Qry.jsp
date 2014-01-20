@@ -28,28 +28,20 @@
 						function() {
 							var selected_msgId = $(this).find("td:eq(3)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210201/QryDtl?selected_msgId='
-													+ selected_msgId,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-
+							var selected_msgType = $(this).find("td:eq(8)").text();
+							showDialog('${pageContext.request.contextPath}/FTZ210201/QryDtl?selected_msgId='
+							+ selected_msgId,'500','1024');
 						});
 	});
 
 	function showDetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210201/QryDtl?selected_msgId='
-									+ selected_msgId,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210201/QryDtl?selected_msgId='
+							+ selected_msgId,'500','1024');
 		}
 	}
 
@@ -57,11 +49,11 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgType = $("#selected_msgType").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("02" == selected_msgType){
-				alert("录入已完成！");
+				alert('<spring:message code="w.cm.1006"/>');
 				return;
 			}
 			var form = document.getElementById("form");
@@ -80,11 +72,11 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgType = $("#selected_msgType").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_msgType){
-				alert("审核通过批量无法修改或删除！");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			var form = document.getElementById("form");
@@ -100,27 +92,19 @@
 		}
 	}
 	function addDetail() {
-		window
-				.showModalDialog(
-						'${pageContext.request.contextPath}/FTZ210201/AddDtlInit',
-						window,
-						'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+		showDialog('${pageContext.request.contextPath}/FTZ210201/AddDtlInit','500','1024');	
 		queryFTZ210201();
 	}
 	function uptDetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgType = $("#selected_msgType").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if ("01" == selected_msgType || "04" == selected_msgType|| "02" == selected_msgType) {
-				window
-						.showModalDialog(
-								'${pageContext.request.contextPath}/FTZ210201/UptDtlInit?selected_msgId='
-										+ selected_msgId,
-								window,
-								'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+				showDialog('${pageContext.request.contextPath}/FTZ210201/UptDtlInit?selected_msgId='
+							+ selected_msgId,'500','1024');
 				queryFTZ210201();
 			}else{
 				alert("非录入或审核失败状态，无法编辑！");
@@ -130,7 +114,7 @@
 	}
 	function queryFTZ210201() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210201/AddQry";
+		form.action = "${pageContext.request.contextPath}/FTZ210201/AddQry?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -180,9 +164,10 @@
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" cssClass="span2" /></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
+				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
 				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="query_accountName" path="query_accountNo"
 						class=".input-large" /></td>
@@ -241,7 +226,8 @@
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: center; width: 65px;">${dto.msgId}</td>
 						<td class="vtip" style="text-align: left; width: 65px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: center; width: 65px;">${dto.currency}</td>   
+						<td class="vtip" style="text-align: center; width: 65px;"><t:codeValue
+								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>   
 						<td class="vtip" style="text-align: right; width: 65px;"><t:moneyFormat
 								type="label" value="${dto.balance}" /></td>
 						<td class="vtip" style="text-align: center; width: 30px;"><t:codeValue
@@ -267,7 +253,7 @@
 				value="<spring:message code="ftz.label.DEL_MSG" />"> <input
 				id="detail" type="button" class="btn btn-primary"
 				onclick="sbDetail();"
-				value="<spring:message code="ftz.label.SUBMIT_MSG" />"> <input
+				value="<spring:message code="ftz.label.FINISH_MSG" />"> <input
 				id="detail" type="button" class="btn btn-primary"
 				onclick="showDetail();"
 				value="<spring:message code="ftz.label.MSG_Dtl" />"></td>

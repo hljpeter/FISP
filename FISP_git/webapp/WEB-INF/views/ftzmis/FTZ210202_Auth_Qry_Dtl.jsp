@@ -49,7 +49,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210202/QryAuthDtlDtl?selected_msgId='
@@ -63,7 +63,7 @@
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210202/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210202/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	function sbDtl() {

@@ -230,14 +230,41 @@ public class FTZ210401Controller {
 		logger.info("表外理财查询批量删除开始...");
 		FtzInMsgCtl del_FtzInMsgCtl = new FtzInMsgCtl();
 		del_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
-
+		
+		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+		query_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
+		List<FtzInTxnDtl> ftzInTxnDtls = ftz210401Serv.
+				queryFtzInTxnDtlList(query_FtzInTxnDtl);
+		if (null != ftzInTxnDtls) {
+			for(FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
+				if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl
+						.getChkStatus())) {
+					model.addAttribute(ResultMessages.error().add(
+					"e.ftzmis.210101.0035"));
+					form.setSelected_msgId("");
+					return "forward:/FTZ210310/AddQry";
+				}
+			}
+		}
+		
+		//查询数据
+		FtzInMsgCtl result_FtzInMsgCtl = ftz210401Serv.queryFtzInMsgCtl(del_FtzInMsgCtl);
+		if (!CommonConst.FTZ_MSG_STATUS_INPUTING.equals(result_FtzInMsgCtl.getMsgStatus()) 
+				&& !CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED.equals(result_FtzInMsgCtl.getMsgStatus())
+				&& !CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(
+						result_FtzInMsgCtl.getMsgStatus())) {
+			model.addAttribute(ResultMessages.error().add(
+			"e.ftzmis.210101.0036"));
+			form.setSelected_msgId("");
+			return "forward:/FTZ210310/AddQry";
+		}
 		int i = ftz210401Serv.deleteFtzInMsgCtl(del_FtzInMsgCtl);
 
 		if (i < 1) {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0002"));
 			form.setSelected_msgId("");
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.0003"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Delete.Msg.Ctl.Success"));
 			form.setSelected_msgId("");
 			logger.info("表外理财查询批量删除结束...");
 			return "forward:/FTZ210401/AddQry";
@@ -342,7 +369,7 @@ public class FTZ210401Controller {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0006"));
 		} else {
 			model.addAttribute(ResultMessages.success().add(
-					"i.ftzmis.2101.0001"));
+					"ftzmis.Add.Msg.Ctl.Success"));
 		}
 		form.getFtzInMsgCtl().setSubmitDate(
 				DateUtil.getFormatDateAddSprit(form.getFtzInMsgCtl()
@@ -366,6 +393,7 @@ public class FTZ210401Controller {
 		}
 		ftzInMsgCtl.setSubmitDate(DateUtil.getFormatDateAddSprit(ftzInMsgCtl
 				.getSubmitDate()));
+		ftzInMsgCtl.setBalanceCode(ftzInMsgCtl.getBalanceCode().trim());
 		form.setFtzInMsgCtl(ftzInMsgCtl);
 
 		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
@@ -541,7 +569,7 @@ public class FTZ210401Controller {
 			model.addAttribute("pageUrl", "/FTZ210401/UptDtlInit");
 			return "ftzmis/FTZ210401_Input_Dtl";
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.mpp.0002"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Update.Msg.Ctl.Success"));
 		}
 		form.getFtzInMsgCtl().setSubmitDate(
 				DateUtil.getFormatDateAddSprit(form.getFtzInMsgCtl()
@@ -598,7 +626,7 @@ public class FTZ210401Controller {
 			return "forward:/FTZ210401/AddQry";
 		}
 
-		model.addAttribute(ResultMessages.success().add("i.ftzmis.210101.0001"));
+		model.addAttribute(ResultMessages.success().add("ftzmis.Submit.Msg.Ctl.Success"));
 		return "forward:/FTZ210401/AddQry";
 	}
 
@@ -650,7 +678,7 @@ public class FTZ210401Controller {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0002"));
 			form.setSelected_seqNo("");
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.0003"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Delete.Txn.Dtl.Success"));
 			form.setSelected_seqNo("");
 			return "forward:/FTZ210401/UptDtlInit";
 		}
@@ -786,7 +814,7 @@ public class FTZ210401Controller {
 		if (i < 1) {
 			model.addAttribute(ResultMessages.error().add("e.sysrunner.0006"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.sm.0001"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Add.Txn.Dtl.Success"));
 			model.addAttribute("uptFlag", "1");
 		}
 		form.getFtzInTxnDtl().setTranDate(
@@ -971,7 +999,7 @@ public class FTZ210401Controller {
 			model.addAttribute(ResultMessages.error().add(
 					"e.ftzmis.210101.0026"));
 		} else {
-			model.addAttribute(ResultMessages.success().add("i.dp.mpp.0002"));
+			model.addAttribute(ResultMessages.success().add("ftzmis.Update.Txn.Dtl.Success"));
 			model.addAttribute("uptFlag", "1");
 		}
 		form.getFtzInTxnDtl().setTranDate(

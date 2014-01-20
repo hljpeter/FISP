@@ -4,7 +4,8 @@ $(function(){
 	if ("" != success && null != success) {
 		$("input").attr("readonly", true);
 		$("select").attr("disabled", true);
-		$("#actSubmit").val("继续录入");
+		$("#actSubmit").val('<spring:message
+				code="button.lable.AddMore" />');
 		var actAdd = document.getElementById("actSubmit");
 		actAdd.onclick = addRef;
 	} 
@@ -57,7 +58,7 @@ $(function(){
 		
 		<table class="tbl_search">
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.BRANCH"/>：</td>
+				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID"/>：</td>
 				<td>
 					<form:select path="ftzActMstrTmp.branchId">
 						<option value=""></option>

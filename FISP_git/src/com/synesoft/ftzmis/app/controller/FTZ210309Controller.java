@@ -164,8 +164,8 @@ public class FTZ210309Controller {
 		try {
 			FtzOffMsgCtl ctl = form.getFtzOffMsgCtl();
 			ctl.setWorkDate(DateUtil.getFormatDateRemoveSprit(ctl.getWorkDate()));
-			ctl.setBranchId(StringUtil.isNotTrimEmpty(ctl.getBranchId())? StringUtil
-					.trim(ctl.getBranchId()): ContextConst.getOrgInfByUser().getOrgid());
+//			ctl.setBranchId(StringUtil.isNotTrimEmpty(ctl.getBranchId())? StringUtil
+//					.trim(ctl.getBranchId()): ContextConst.getOrgInfByUser().getOrgid());
 			ctl.setMsgStatus(StringUtil.isNotTrimEmpty(ctl.getMsgStatus())? StringUtil
 					.trim(ctl.getMsgStatus()): CommonConst.FTZ_MSG_STATUS_INPUTING);
 			

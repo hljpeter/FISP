@@ -77,7 +77,7 @@
 			success : function(rs) {
 				dtlExist = rs.dtlExist;
 				if (null == dtlExist || false == dtlExist) {
-					alert("无此账号信息！");
+					alert('<spring:message code="w.cm.1007"/>');
 				} else {
 					$("#branchId").val(rs.branchId);
 					$("#accType").val(rs.accType);

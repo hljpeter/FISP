@@ -129,7 +129,7 @@
 				<td><t:moneyFormat type="text" id="interestRate" readonly="true"
 						name="ftzInTxnDtl.interestRate"
 						value="${FTZ210206Form.ftzInTxnDtl.interestRate}"
-						format="###,###,###,###.00" dot="true"  /></td>
+						format="###.000000" dot="true"  /></td>
 						
 						<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>

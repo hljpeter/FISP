@@ -57,14 +57,10 @@
 									.text();
 							var selected_seqNo = $(this).find("td:eq(9)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210203/QryDtlDtl?selected_msgId='
-													+ selected_msgId
-													+ "&selected_seqNo="
-													+ selected_seqNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+							showDialog('${pageContext.request.contextPath}/FTZ210203/QryDtlDtl?selected_msgId='
+									+ selected_msgId
+									+ "&selected_seqNo="
+									+ selected_seqNo,'500','1024');
 						});
 	});
 
@@ -81,7 +77,7 @@
 			success : function(rs) {
 				dtlExist = rs.dtlExist;
 				if (null == dtlExist || false == dtlExist) {
-					alert("无此账号信息!");
+					alert('<spring:message code="w.cm.1007"/>');
 					$("#branchId").val("");
 					$("#branchId1").val("");
 					$("#accType").val("");
@@ -152,16 +148,12 @@
 		var selected_msgId = $("#msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210203/QryDtlDtl?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
-									+ selected_seqNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210203/QryDtlDtl?selected_msgId='
+					+ selected_msgId + "&selected_seqNo="
+					+ selected_seqNo,'500','1024');
 		}
 	}
 	function delDetailDtl() {
@@ -169,11 +161,11 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("审核通过批量无法修改或删除!");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -191,12 +183,8 @@
 	}
 	function addDetailDtl() {
 		var selected_msgId = $("#msgId").val();
-		window
-				.showModalDialog(
-						'${pageContext.request.contextPath}/FTZ210203/AddDtlDtlInit?selected_msgId='
-								+ selected_msgId,
-						window,
-						'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+		showDialog('${pageContext.request.contextPath}/FTZ210203/AddDtlDtlInit?selected_msgId='
+			+ selected_msgId,'500','1024');
 		queryFTZ210203();
 	}
 	function uptDetailDtl() {
@@ -204,20 +192,16 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("审核通过批量无法修改或删除");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210203/UptDtlDtlInit?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
-									+ selected_seqNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210203/UptDtlDtlInit?selected_msgId='
+					+ selected_msgId + "&selected_seqNo="
+					+ selected_seqNo,'500','1024');
 			queryFTZ210203();
 		}
 	}
@@ -225,7 +209,7 @@
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210203/DtlInitReflash";
+		form.action = "${pageContext.request.contextPath}/FTZ210203/DtlInitReflash?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -277,7 +261,8 @@
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUSS" />：</td>
-				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true">
+				<td><form:hidden path="ftzInMsgCtl.msgStatus" /> <form:select
+						path="ftzInMsgCtl.msgStatus" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>
@@ -310,7 +295,7 @@
 			</tr>
 			<tr>
 			<td class="label_td" colspan="2"><font color="red">* </font>
-				<spring:message code="ftz.label.BALANCE_CODE" /><form:hidden
+				<spring:message code="ftz.label.BALANCE_CODE" />：<form:hidden
 						path="ftzInMsgCtl.balanceCode" id="balanceCode1" /> <form:select
 						id="balanceCode" path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
@@ -320,6 +305,7 @@
 				<spring:message code="ftz.label.ACCORGCODE" />：</td>
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode" class="input-large"  readonly="true"/></td>
 			</tr>
+			<c:if test="${ FTZ210203Form.input_flag eq 'upt'}">
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">
@@ -332,6 +318,7 @@
 				<td colspan="3"><form:input id="addWord"
 						path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
 			</tr>
+			</c:if>
 			<tr>
 				<td style="text-align: center;" colspan="4">
 					<button type="button" class="btn btn-primary" onclick="DtlSubmit()"><spring:message code="ftz.label.SUBMIT_MSG" /></button>
@@ -401,6 +388,7 @@
 								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>
 						<td style="display: none;">${dto1.seqNo}</td>
+						<td style="display: none;">${dto1.chkStatus}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

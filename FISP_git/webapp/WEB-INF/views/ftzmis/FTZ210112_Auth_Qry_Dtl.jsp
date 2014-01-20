@@ -42,15 +42,11 @@
 							.text();
 					var selected_seqNo = $(this).find("td:eq(8)")
 							.text();
-					window
-							.showModalDialog(
-									'${pageContext.request.contextPath}/FTZ210112/QryAuthDtlDtl?selected_msgId='
-											+ selected_msgId
-											+ "&selected_seqNo="
-											+ selected_seqNo,
-									window,
-									'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-					queryFTZ210101Dtl();
+					showDialog('${pageContext.request.contextPath}/FTZ210112/QryAuthDtlDtl?selected_msgId='
+							+ selected_msgId
+							+ "&selected_seqNo="
+							+ selected_seqNo,'500','1024');
+					queryFTZ210112Dtl();
 				});
 	});
 	function authPass() {
@@ -73,10 +69,10 @@
 		$("#authPass").attr("disabled", "disabled");
 		$("#authRefuse").attr("disabled", "disabled");
 	}
-	function queryFTZ210101Dtl() {
+	function queryFTZ210112Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210112/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210112/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	function sbDtl() {

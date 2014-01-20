@@ -3,7 +3,7 @@
 $(function() {
 var success = '${successmsg }';
 if (success && success != "") {
-	//$("button[name=btnChk]").attr("disabled", true);
+	$("button[name=btnChk]").attr("disabled", true);
 	$("input").attr("readonly", true);
 }
 var error = '${errmsg }';
@@ -19,16 +19,19 @@ if(txnStatus=='03')
 }
 if(txnStatus=='04')
 {
+   $("#chkAddWord").attr("readonly", true);
+   $("#chkPass").attr("disabled", true);
    $("#chkRej").attr("disabled", true);
 }
 var msgStatus='${FTZ210209Form.ftzInMsgCtl.msgStatus }';
 if(msgStatus=='03')
 {
+   $("#chkAddWord").attr("readonly", true);
    $("#chkPass").attr("disabled", true);
    $("#chkRej").attr("disabled", true);
 }
 
-var msg = '${FTZ210207Form.msg }';
+var msg = '${FTZ210209Form.msg }';
 if (msg && msg != "") {
 	$("#notice").css("display", "");
 	$("#next").attr("disabled", true);
@@ -56,8 +59,8 @@ $("#next").click(function() {
 		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
 		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
 		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />
-		<spring:hasBindErrors name="FTZ210207Form">
-			<form:form commandName="FTZ210207Form">
+		<spring:hasBindErrors name="FTZ210209Form">
+			<form:form commandName="FTZ210209Form">
 				<div class="alert alert-error">
 					<form:errors path="*" cssStyle="color:red"></form:errors>
 				</div>
@@ -70,12 +73,13 @@ $("#next").click(function() {
 <div class="page_title"><spring:message code="ftzmis.title.210207.auth.dtl.dtl" /></div>
 
 <div class="row">
-	<form:form id="form" action="${pageContext.request.contextPath}" method="post" modelAttribute="FTZ210207Form" class="form-horizontal">
+	<form:form id="form" action="${pageContext.request.contextPath}" method="post" modelAttribute="FTZ210209Form" class="form-horizontal">
 		<form:hidden path="ftzInTxnDtl.msgId" id="msgId"/>
 		<form:hidden path="operFlag" id="operFlag"/>
 		<form:hidden path="ftzInTxnDtl.countryCode"/>
 		<form:hidden path="ftzInTxnDtl.disitrictCode"/>
 		<form:hidden path="ftzInTxnDtl.tranType"/>
+		<form:hidden path="ftzInTxnDtl.termUnit"/>
 		<table class="tbl_search">
 			
 			<tr>
@@ -184,7 +188,7 @@ $("#next").click(function() {
 				<td><t:moneyFormat type="text" id="interestRate" readonly="true"
 						name="ftzInTxnDtl.interestRate"
 						value="${FTZ210206Form.ftzInTxnDtl.interestRate}"
-						format="###,###,###,###.00" dot="true"  /></td>
+						format="###.000000" dot="true"  /></td>
 						
 						<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>

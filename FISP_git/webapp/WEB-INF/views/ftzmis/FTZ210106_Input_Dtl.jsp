@@ -77,7 +77,7 @@
 			success : function(rs) {
 				dtlExist = rs.dtlExist;
 				if (null == dtlExist || false == dtlExist) {
-					alert("æ æ­¤è´¦å·ä¿¡æ¯ï¼");
+					alert('<spring:message code="w.cm.1007"/>');
 					$("#branchId").val("");
 					$("#branchId1").val("");
 					$("#accType").val("");
@@ -149,7 +149,7 @@
 		var selected_msgId = $("#msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("è¯·éæ©ä¸æ¡æç»æ°æ®ï¼");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210106/QryDtlDtl?selected_msgId='
@@ -162,11 +162,11 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("è¯·éæ©ä¸æ¡æç»æ°æ®ï¼");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("å®¡æ ¸éè¿æç»æ æ³ä¿®æ¹æå é¤ï¼");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -193,11 +193,11 @@
 		var selected_seqNo = $("#selected_seqNo").val();
 		var selected_chkStatus = $("#selected_chkStatus").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("è¯·éæ©ä¸æ¡æç»æ°æ®ï¼");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
 			if("03"==selected_chkStatus){
-				alert("å®¡æ ¸éè¿æç»æ æ³ä¿®æ¹æå é¤ï¼");
+				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
 			
@@ -212,7 +212,7 @@
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210106/DtlInitReflash";
+		form.action = "${pageContext.request.contextPath}/FTZ210106/DtlInitReflash?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -307,6 +307,7 @@
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
 						class=".input-large" readonly="true" /></td>	
 			</tr>
+			<c:if test="${ FTZ210106Form.input_flag eq 'upt'}">
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" /></td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">
@@ -321,6 +322,7 @@
 						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
 						readonly="true" /></td>
 			</tr>
+			</c:if>
 			<tr>
 				<td style="text-align: center;" colspan="4">
 					<button type="button" class="btn btn-primary" onclick="DtlSubmit()"><spring:message code="ftz.label.SUBMIT_MSG" /></button>
@@ -367,6 +369,7 @@
 								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>
 						<td style="display: none;">${dto1.seqNo}</td>
+						<td style="display: none;">${dto1.chkStatus}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -401,5 +404,5 @@
 			onclick="javascript:window.close();"
 			value="<spring:message code="button.lable.close"/>">
 	</div>
-</div>
+</div> 
 <form:form id="form1" />

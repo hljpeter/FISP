@@ -31,30 +31,21 @@
 									.text();
 							var selected_seqNo = $(this).find("td:eq(9)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210201/QryDtlDtl?selected_msgId='
-													+ selected_msgId
-													+ "&selected_seqNo="
-													+ selected_seqNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+							showDialog('${pageContext.request.contextPath}/FTZ210201/QryDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo,'500','1024');
 						});
 	});
 	function showDetaildetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条批量明细!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210201/QryDtlDtl?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
-									+ selected_seqNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+			showDialog('${pageContext.request.contextPath}/FTZ210201/QryDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo,'500','1024');
 		}
 	}
 
@@ -105,7 +96,7 @@
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.SUBMIT_DATE" />：</td>
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readOnly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUSS" />：</td>
 				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true">
 						<form:option value=""></form:option>
@@ -115,10 +106,8 @@
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo"
-						class=".input-large" onblur="accountFill()" readOnly="true"/>
-					<button type="button" class="btn btn-small" onclick="queryAct()">  
-						<spring:message code="button.label.Search" />
-					</button></td>				
+						class=".input-large" onblur="accountFill()" disabled="true"/>
+				</td>				
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.ACCOUNT_NAME" />：</td>
 				<td><form:input id="accountName" path="ftzInMsgCtl.accountName"
 						class=".input-large" readonly="true" /></td>

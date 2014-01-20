@@ -61,7 +61,7 @@
 	};
 	function addRef() {
 		var form1 = document.getElementById("form1");
-		form1.action = "${pageContext.request.contextPath}/FTZ210210/AddDtlDtlInit?selected_msgId="+$("#msgId").val();
+		form1.action = "${pageContext.request.contextPath}/FTZ210210/AddDtlDtlInit";
 		form1.submit();
 	}
 </script>

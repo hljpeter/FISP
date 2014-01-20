@@ -14,7 +14,7 @@
 					var selected_msgId = $(this).find("td:eq(4)").text();
 					var selected_msgNo = $(this).attr("id").substr(2);
 					window.showModalDialog(
-									'${pageContext.request.contextPath}/FTZOFF/QryRedirect?selected_msgId='+ selected_msgId+'&selected_msgNo='+selected_msgNo,
+									'${pageContext.request.contextPath}/FTZOFF/QryRedirectAuthAll?selected_msgId='+ selected_msgId+'&selected_msgNo='+selected_msgNo,
 									window,
 									'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
 
@@ -140,6 +140,10 @@
 					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message code="ftz.label.WORK_DATE" /><!-- 工作日期 --></th>
 					<th style="vertical-align: middle; text-align: center" width="60px"><spring:message code="ftz.label.common.branchId" /></th>
 					<th style="vertical-align: middle; text-align: center" width="65px"><spring:message code="ftz.label.MGS_ID" /></th>
+					<th style="vertical-align: middle; text-align: center" width="20px"><spring:message
+							code="fisp.rq.sumCnt" /></th>
+					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+							code="fisp.rq.authCnt" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.MSG_STATUS" /></th>
 				</tr>
 			</thead>
@@ -157,6 +161,8 @@
 						<td class="vtip" style="text-align: center; width: 40px;">${dto.workDate}</td>
 						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 65px;">${dto.msgId}</td>
+						<td class="vtip" style="text-align: right; width: 20px;">${dto.rsv1}</td>
+						<td class="vtip" style="text-align: right; width: 40px;">${dto.rsv2}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>
 					</tr>
 				</c:forEach>

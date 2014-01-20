@@ -36,10 +36,27 @@ $("#dtl").click(function() {
 				+ $("#msgId").val() + "&ftzInTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
 		
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Auth/DtlMsg/Init");
+		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Auth/DtlMsg/Init?page.page=${page.number+1}");
 		$("#form").submit();
 		
 	}
+});
+
+
+$("#pageTable")
+.find("tr")
+.bind(
+		'dblclick',
+		function() {
+			var selectedRow = eval("(" + $(this).attr("id") + ")"); 
+			showDialog('${pageContext.request.contextPath}/FTZ210206/Auth/DtlTxn/Init?ftzInTxnDtl.msgId=' 
+					+ $("#msgId").val() + "&ftzInTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
+			
+			$("#balance").val($("#balance").val().replaceAll(",", ""));
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Auth/DtlMsg/Init?page.page=${page.number+1}");
+			$("#form").submit();
+				
+			
 });
 
 var msgStatus = '${FTZ210206Form.ftzInMsgCtl.msgStatus}';
@@ -146,11 +163,8 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 					</form:select></td>
 			
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.OWNER_ACC_ORG_CODE" />：</td>
-				<td><form:hidden path="ftzInMsgCtl.accOrgCode" id="accOrgCode1" />
-					<form:select id="accOrgCode" path="ftzInMsgCtl.accOrgCode" disabled="true">
-						<form:option value=""></form:option>
-						<form:options items="${SM_0002}" />
-					</form:select></td>
+				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
+						class=".input-large" readonly="true" /></td>
 			</tr>
 			
 			
@@ -189,15 +203,22 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 			<thead>
 				<p class="text-info" align="center"><spring:message code="ftz.label.MSG_DTL_List" /></p>
 				<tr>
-					<th style="vertical-align: middle; text-align: center" width="10px"><spring:message code="fisp.label.common.no" /></th>
-					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message code="ftz.label.CD_FLAG" /></th>
-					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message code="ftz.label.TRAN_DATE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="90px"><spring:message code="ftz.label.AMOUNT" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.COUNTRY_CODE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.OPP_BANK_CODE1" /></th>
-					<th style="vertical-align: middle; text-align: center"
-						width="150px"><spring:message code="ftz.label.OPP_NAME1" /></th>
-					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message code="ftz.label.DTL_STATUS" /></th>
+					<th style="vertical-align: middle; text-align: center" width="10px"><spring:message
+							code="fisp.label.common.no" /></th>
+					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+							code="ftz.label.CD_FLAG" /></th>
+					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+							code="ftz.label.TRAN_DATE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.AMOUNT" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.COUNTRY_CODE" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+					code="ftz.label.valueDate" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.interestRate" /></th>
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
+							code="ftz.label.DTL_STATUS" /></th>
 				</tr>
 			</thead>
 		</table>
@@ -207,22 +228,24 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 			class="table table-striped table-bordered table-condensed tbl_page"
 			style="border: 0">
 			<tbody>
-				<c:forEach var="dto1" items="${page.content}" varStatus="i">
-					<tr id='{seqNo:"${dto1.seqNo }",makDatetime:"${dto1.makDatetime }",chkDatetime:"${dto1.chkDatetime }"}'>
-						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
+				<c:forEach var="dto" items="${page.content}" varStatus="i">
+					<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
+						 <td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
-								items="${FTZ_CD_FLAG}" key="${dto1.cdFlag}" type="label" /></td>
-						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
-						<td class="vtip" style="text-align: right; width: 90px;"><t:moneyFormat
-								type="label" value="${dto1.amount}" /></td>
+								items="${FTZ_CD_FLAG}" key="${dto.cdFlag}" type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 40px;">${dto.tranDate}</td>
+						<td class="vtip" style="text-align: right; width: 50px;"><t:moneyFormat
+								type="label" value="${dto.amount}" /></td>
+						
+						<td class="vtip" style="text-align: left; width: 50px;">${dto.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 50px;">${dto.valueDate}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
+								type="label" value="${dto.interestRate}" dot="true" format="###,###,###,###.000000"/></td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
-								items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}" type="label" /></td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.oppBankCode}</td>
-						<td class="vtip" style="text-align: left; width: 150px;">${dto1.oppName}</td>
-						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
-								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
-						<td style="display: none;">${dto1.msgId}</td>
-						<td style="display: none;">${dto1.seqNo}</td>
+								items="${FTZ_MSG_STATUS}" key="${dto.chkStatus}" type="label" /></td>
+						<td style="display: none;">${dto.msgId}</td>
+						<td style="display: none;">${dto.seqNo}</td>
+						
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -235,7 +258,7 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 <div class="row" style="margin-top: 10px;">
 	<div class="pagination pull-right" style="margin-top: 5px; margin-bottom: 0px;">
 		<div class="leftPage">
-			<util:pagination page="${page }" query="ftzInMsgCtl.msgId=${FTZ210206Form.ftzInMsgCtl.msgId }" />
+			<util:pagination page="${page }" query="ftzInMsgCtl.msgId=${FTZ210206Form.ftzInMsgCtl.msgId }&operFlag=${FTZ210206Form.operFlag }" />
 		</div>
 	</div>
 </div>

@@ -30,16 +30,11 @@
 									.text();
 							var selected_msgNo = $(this).find("td:eq(8)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210106/QryAuthRedirect?selected_msgId='
-													+ selected_msgId
-													+ "&selected_msgNo="
-													+ selected_msgNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-							queryFTZ210101();
-
+							showDialog('${pageContext.request.contextPath}/FTZ210106/QryAuthRedirect?selected_msgId='
+							+ selected_msgId
+							+ "&selected_msgNo="
+							+ selected_msgNo,'500','1024');
+							queryFTZ210106();
 						});
 	});
 
@@ -47,38 +42,31 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210106/QryAuthRedirect?selected_msgId='
-									+ selected_msgId + "&selected_msgNo="
-									+ selected_msgNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-			queryFTZ210101();
+			showDialog('${pageContext.request.contextPath}/FTZ210106/QryAuthRedirect?selected_msgId='
+					+ selected_msgId + "&selected_msgNo="
+					+ selected_msgNo,'500','1024');
+			queryFTZ210106();
 		}
 	}
 	function showDetail() {
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据！");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210106/QryAuthRedirect?selected_msgId='
-									+ selected_msgId + "&unAuthFlag=1"
-									+ "&selected_msgNo=" + selected_msgNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+		showDialog('${pageContext.request.contextPath}/FTZ210106/QryAuthRedirect?selected_msgId='
+					+ selected_msgId + "&unAuthFlag=1"
+					+ "&selected_msgNo=" + selected_msgNo,'500','1024');
+			queryFTZ210106();
 		}
 	}
-	function queryFTZ210101() {
+	function queryFTZ210106() {
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210106/AuthQry";
+		form.action = "${pageContext.request.contextPath}/FTZ210106/AuthQry?page.page="+${page.number+1};
 		form.submit();
 	}
 </script>
@@ -131,7 +119,8 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
 				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_TYPE" />：</td>
 				<td><form:select path="query_msgNo">
 						<form:option value=""></form:option>

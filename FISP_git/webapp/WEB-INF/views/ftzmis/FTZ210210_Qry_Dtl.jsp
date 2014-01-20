@@ -39,19 +39,12 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210210/QryDtlDtl?selected_msgId='
 					+ selected_msgId+ "&selected_seqNo="+ selected_seqNo,'500','1024');
 		}
-	}
-
-	function queryFTZ210210Dtl() {
-		$("#selected_msgId").val($("#msgId").val());
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210210/QryDtl";
-		form.submit();
 	}
 </script>
 
@@ -95,8 +88,9 @@
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.SUBMIT_DATE" />：</td>
-				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
-						class=".input-large" readonly="true" /></td>
+				<td><t:dateTimeFormat type="text" id="submitDate" name="ftzInMsgCtl.submitDate"
+						value="${FTZ210210Form.ftzInMsgCtl.submitDate }"
+						cssClass=".input-large" readonly="true" format="date"/></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true">
@@ -139,7 +133,7 @@
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
 						class=".input-large" readonly="true" /></td>
 			</tr>
-
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.PBOC_STATUS" />：</td>

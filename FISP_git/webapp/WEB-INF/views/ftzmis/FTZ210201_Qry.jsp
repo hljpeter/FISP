@@ -30,15 +30,11 @@
 									.text();
 							var selected_msgNo = $(this).find("td:eq(8)")
 									.text();
-							window
-									.showModalDialog(
-											'${pageContext.request.contextPath}/FTZ210201/QryRedirect?selected_msgId='
-													+ selected_msgId
-													+ "&selected_msgNo="
-													+ selected_msgNo,
-											window,
-											'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-
+									
+							showDialog('${pageContext.request.contextPath}/FTZ210201/QryRedirect?selected_msgId='
+								+ selected_msgId
+								+ "&selected_msgNo="
+								+ selected_msgNo,'500','1024');
 						});
 	});
 
@@ -46,16 +42,12 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_msgNo = $("#selected_msgNo").val();
 		if (null == selected_msgId || "" == selected_msgId) {
-			alert("请选择一条批量数据!");
+			alert('<spring:message code="ftz.validate.choose.data"/>');
 			return;
 		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210201/QryRedirect?selected_msgId='
-									+ selected_msgId + "&selected_msgNo="
-									+ selected_msgNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+		showDialog('${pageContext.request.contextPath}/FTZ210201/QryRedirect?selected_msgId='
+					+ selected_msgId + "&selected_msgNo="
+					+ selected_msgNo,'500','1024');
 		}
 	}
 	function queryFTZ210201() {
@@ -110,7 +102,8 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID" />：</td>
 				<td><form:input id="query_msgId" path="query_msgId"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_TYPE" />：</td>
 				<td><form:select path="query_msgNo">
 						<form:option value=""></form:option>
@@ -189,7 +182,8 @@
 						<td class="vtip" style="text-align: left; width: 120px;"><t:codeValue
 								items="${FTZ_2102_MSG}" key="${dto.msgNo}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 70px;">${dto.msgId}</td>
-						<td class="vtip" style="text-align: left; width: 30px;">${dto.currency}</td>
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
+								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 120px;">${dto.accountNo}</td>
 						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>
@@ -211,7 +205,7 @@
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZ210201Form.query_branchId}&query_submitDate_start=${FTZ210201Form.query_submitDate_start}&query_submitDate_end=${FTZ210201Form.query_submitDate_end}&query_msgId=${FTZ210201Form.query_msgId}&query_accountName=${FTZ210201Form.query_accountName}&query_accountNo=${FTZ210201Form.query_accountNo}&query_subAccountNo=${FTZ210201Form.query_subAccountNo}&query_msgStatus=${FTZ210201Form.query_msgStatus}"
+								query="query_branchId=${FTZ210201Form.query_branchId}&query_submitDate_start=${FTZ210201Form.query_submitDate_start}&query_submitDate_end=${FTZ210201Form.query_submitDate_end}&query_msgId=${FTZ210201Form.query_msgId}&query_accountName=${FTZ210201Form.query_accountName}&query_accountNo=${FTZ210201Form.query_accountNo}&query_msgStatus=${FTZ210201Form.query_msgStatus}"
 								action="/FTZ210201/Qry" /></td>
 					</tr>
 				</table>

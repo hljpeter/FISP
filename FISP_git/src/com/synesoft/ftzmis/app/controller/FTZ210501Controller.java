@@ -373,7 +373,7 @@ public class FTZ210501Controller {
 			return "ftzmis/FTZ210501_Input_Upd";
 		}
 		
-		form.getFtzActMstr().setMakDatetime(ContextConst.getCurrentUser().getUserid());
+		form.getFtzActMstr().setMakUserId(ContextConst.getCurrentUser().getUserid());
 		form.getFtzActMstr().setMakDatetime(DateUtil.getNowInputDateTime());
 		form.getFtzActMstr().setChkDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(
 				form.getFtzActMstr().getChkDatetime()));
@@ -384,6 +384,7 @@ public class FTZ210501Controller {
 			return "ftzmis/FTZ210501_Input_Upd";
 		}
 		model.addAttribute("successmsg", ResultMessages.success().add("i.sm.0002"));
+		model.addAttribute("updFlag", "1");
 		logger.info("账户信息修改提交结束...");
 		return "ftzmis/FTZ210501_Input_Upd";
 	}
@@ -550,7 +551,7 @@ public class FTZ210501Controller {
 			}
 			
 			form.setFtzActMstrTmp(result_FtzActMstrTmp);
-			model.addAttribute("authFlag","0");
+			model.addAttribute("authFlag","1");
 			model.addAttribute(ResultMessages.error().add("i.ftzmis.210501.0020"));
 		} else {
 			model.addAttribute(ResultMessages.error().add("e.ftzmis.210501.0021"));

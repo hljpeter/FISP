@@ -3,7 +3,7 @@
 $(function() {
 var success = '${successmsg }';
 if (success && success != "") {
-	//$("button[name=btnChk]").attr("disabled", true);
+	$("button[name=btnChk]").attr("disabled", true);
 	$("input").attr("readonly", true);
 }
 var error = '${errmsg }';
@@ -19,12 +19,15 @@ if(txnStatus=='03')
 }
 if(txnStatus=='04')
 {
+   $("#chkAddWord").attr("readonly", true);
+   $("#chkPass").attr("disabled", true);
    $("#chkRej").attr("disabled", true);
 }
 
 var msgStatus='${FTZ210206Form.ftzInMsgCtl.msgStatus }';
 if(msgStatus=='03')
 {
+   $("#chkAddWord").attr("readonly", true);
    $("#chkPass").attr("disabled", true);
    $("#chkRej").attr("disabled", true);
 }
@@ -141,7 +144,7 @@ $("#next").click(function() {
 				<td><t:moneyFormat type="text" id="interestRate" readonly="true"
 						name="ftzInTxnDtl.interestRate"
 						value="${FTZ210206Form.ftzInTxnDtl.interestRate}"
-						format="###,###,###,###.00" dot="true"  /></td>
+						format="###.000000" dot="true"  /></td>
 			</tr>
 			
 			<tr>

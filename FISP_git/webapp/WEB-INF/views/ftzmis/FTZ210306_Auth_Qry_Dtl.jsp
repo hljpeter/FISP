@@ -39,7 +39,7 @@ $("#dtl").click(function() {
 		showDialog('${pageContext.request.contextPath}/FTZ210306/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
 				+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
 				
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210306/Auth/DtlMsg/Init?FtzOffMsgCtl.msgId="+ ${FTZ210306Form.ftzOffMsgCtl.msgId });
+		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210306/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId="+ ${FTZ210306Form.ftzOffMsgCtl.msgId });
 		$("#form").submit();
 	}
 });
@@ -145,7 +145,7 @@ $("#dtl").click(function() {
 <div class="row" style="margin-top: 10px;">
 	<div class="pagination pull-right" style="margin-top: 5px; margin-bottom: 0px;">
 		<div class="leftPage">
-			<util:pagination page="${page }" action="/FTZ210306/Auth/DtlMsg/Init" query="ftzOffMsgCtl.msgId=${FTZ210306Form.ftzOffMsgCtl.msgId }" />
+			<util:pagination page="${page }" action="/FTZ210306/Auth/DtlMsg/Init" query="operFlag=${FTZ210303Form.operFlag }&ftzOffMsgCtl.msgId=${FTZ210306Form.ftzOffMsgCtl.msgId }" />
 		</div>
 	</div>
 </div>

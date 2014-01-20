@@ -96,7 +96,7 @@ function authRefuse() {
 						format="###,###,###,###.00" dot="true" readonly="true" /></td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.OPP_BANK_CODE1" />：</td>
+				<td class="label_td"><spring:message code="ftz.label.OPP_BANK_CODE2" />：</td>
 				<td><form:input id="oppBankCode" path="ftzInTxnDtl.oppBankCode"
 						class=".input-large" readonly="true" /></td>
 				<td class="label_td"><spring:message

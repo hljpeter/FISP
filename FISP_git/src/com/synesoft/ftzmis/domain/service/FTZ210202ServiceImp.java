@@ -24,6 +24,8 @@ import com.synesoft.ftzmis.domain.repository.FTZ210202Repository;
 @Service
 public class FTZ210202ServiceImp implements FTZ210202Service {
 
+	protected static String funcId ="FTZ_Add_210202";
+	
 	@Override
 	public FtzInMsgCtl queryFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
 		return ftz210202Repos.queryFtzInMsgCtl(ftzInMsgCtl);

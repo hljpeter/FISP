@@ -23,6 +23,11 @@ if (actionFlag == "addTxn") {
 } else if (actionFlag == "uptTxn") {
 	$(".dtl").css("display", "none");
 	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210309/Input/UptTxn/Submit");
+	if ($("#countryCode").val() == "CHN") {
+		$(".disCode").attr("disabled", false);
+	} else {
+		$(".disCode").attr("disabled", true);
+	}
 	var success = '${successmsg }';
 	if (success && success != "") {
 		$("input").attr("readonly", true);
@@ -49,6 +54,11 @@ function queryShowSelReg() {
 
 function queryShowSelNation(){
 	showSelNation([{"countryCode":"param1"}]);
+	if ($("#countryCode").val() == "CHN") {
+		$(".disCode").attr("disabled", false);
+	} else {
+		$(".disCode").attr("disabled", true);
+	}
 }
 
 function queryShowAllOrg1(){
@@ -136,18 +146,18 @@ function queryShowAllOrg3(){
 				<!-- 国别代码 -->
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.COUNTRY_CODE"/>：</td>
 				<td>
-					<form:input id="countryCode" path="ftzOffTxnDtl.countryCode" class="input-large" maxLength="3"/>
+					<form:input id="countryCode" path="ftzOffTxnDtl.countryCode" class="input-large" maxLength="3" readonly="true"/>
 					<input type="button" class="btn btn-small" onclick="queryShowSelNation()" value="<spring:message code="button.label.Search"/>">
 				</td>
 				
 				<!-- 国内地区码 -->
 				<td class="label_td"><spring:message code="ftz.label.DISITRICT_CODE"/>：</td>
 				<td>
-					 <form:select path="ftzOffTxnDtl.districtCode"  id="districtCode">
+					 <form:select path="ftzOffTxnDtl.districtCode" id="districtCode" class="disCode">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE }" />
 					</form:select>
-					<input type="button" class="btn btn-small" onclick="queryShowSelReg()" value="<spring:message code="button.label.Search"/>">
+					<input type="button" class="btn btn-small disCode" onclick="queryShowSelReg()" value="<spring:message code="button.label.Search"/>">
 				</td>
 			</tr>
 			<tr>	

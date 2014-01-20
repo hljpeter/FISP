@@ -4,6 +4,7 @@ package com.synesoft.fisp.app.common.constants;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.synesoft.fisp.app.common.model.SessionForm;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.TipsConn;
 import com.synesoft.fisp.domain.model.UserInf;
@@ -270,5 +272,15 @@ public class ContextConst {
 	    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	    
 	    return request;
+    }
+	
+	/**
+	 * 获取Locale
+	 * @return	String 数组 ：当前语言如：zh_CN ,当前国家，当前语言
+	 */
+	public static String[] getLocal() {
+		Locale local = (Locale) ContextConst.getAttribute(SessionForm.LOCAL);
+		String [] str = {local.toString(),local.getCountry(),local.getLanguage()};
+	    return str;
     }
 }

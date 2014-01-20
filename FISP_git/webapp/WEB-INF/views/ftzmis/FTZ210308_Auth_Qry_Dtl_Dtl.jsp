@@ -24,11 +24,8 @@ if (status && status == '03') {
 	
 $("button[name=btnChk]").click(function() {
 	$("#amount").val($("#amount").val().replaceAll(",", ""));
-	var msg = $("#confirmMsg1").val() + $(this).html() + $("#confirmMsg2").val();
-	if (confirm(msg)) {
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210308/Auth/DtlTxn/Auth");
-		$("#form").submit();
-	}
+	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210308/Auth/DtlTxn/Auth");
+	$("#form").submit();
 });
 
 $("#next").click(function() {
@@ -177,7 +174,7 @@ $("#next").click(function() {
 	<div class="navbar navbar-fixed-bottom text-right" id="footer" style="text-align:center; margin-bottom:0px; line-height:30px; background-color: #eee; opacity:0.9;">
 		<button id="chkPass" name="btnChk" class="btn btn-primary" onclick='javascript: $("#operFlag").val("03");'><spring:message code="ftz.label.AUTH"/></button>
 		<button id="chkRej" name="btnChk" class="btn btn-primary" onclick='javascript: $("#operFlag").val("04");'><spring:message code="ftz.label.UNAUTH"/></button>
-		<button id="next" name="btn" class="btn btn-primary"><spring:message code="ftz.label.NEXT"/></button>
+		<!--<button id="next" name="btn" class="btn btn-primary"><spring:message code="ftz.label.NEXT"/></button>-->
 		<button id="cls" name="btn" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

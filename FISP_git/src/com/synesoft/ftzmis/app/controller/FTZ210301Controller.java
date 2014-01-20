@@ -92,6 +92,7 @@ public class FTZ210301Controller {
 		try {
 			Page<FtzOffMsgCtlVO> page = ftz210301Service.getMsgPage(pageable, vo);
 			model.addAttribute(MODEL_KEY_PAGE, page);
+			
 			return "ftzmis/FTZ210301_Input_Qry";
 		} catch (BusinessException e) {
 			log.info("[w.dp.0001] No data!");
@@ -163,8 +164,8 @@ public class FTZ210301Controller {
 		try {
 			FtzOffMsgCtl ctl = form.getFtzOffMsgCtl();
 			ctl.setWorkDate(DateUtil.getFormatDateRemoveSprit(ctl.getWorkDate()));
-			ctl.setBranchId(StringUtil.isNotTrimEmpty(ctl.getBranchId())? StringUtil
-					.trim(ctl.getBranchId()): ContextConst.getOrgInfByUser().getOrgid());
+//			ctl.setBranchId(StringUtil.isNotTrimEmpty(ctl.getBranchId())? StringUtil
+//					.trim(ctl.getBranchId()): ContextConst.getOrgInfByUser().getOrgid());
 			ctl.setMsgStatus(StringUtil.isNotTrimEmpty(ctl.getMsgStatus())? StringUtil
 					.trim(ctl.getMsgStatus()): CommonConst.FTZ_MSG_STATUS_INPUTING);
 			

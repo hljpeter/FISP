@@ -173,12 +173,11 @@
 						class=".input-large" readonly="true" /></td>
 			</tr>
 			
-			<tr>
+				<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.CHK_ADD_WORD" />：</td>
+						code="ftz.label.CHK_ADD_WORD" />：</td>
 				<td colspan="3"><form:input id="chkAddWord"
-						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
-						readonly="true" /></td>
+						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge" /></td>
 			</tr>
 		</table>
 	</form:form>

@@ -48,7 +48,7 @@
 		var selected_msgId = $("#selected_msgId").val();
 		var selected_seqNo = $("#selected_seqNo").val();
 		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert("请选择一条明细数据！");
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
 			showDialog('${pageContext.request.contextPath}/FTZ210105/QryAuthDtlDtl?selected_msgId='
@@ -61,7 +61,7 @@
 	function queryFTZ210105Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210105/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210105/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	function sbDtl() {
@@ -159,9 +159,7 @@
 						class=".input-large" readonly="true" /></td>
 			</tr>
 
-		</table>
-
-		<table class="tbl_search">
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.SND_DATETIME" />：</td>

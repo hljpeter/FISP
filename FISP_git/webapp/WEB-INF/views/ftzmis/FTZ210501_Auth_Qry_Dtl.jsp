@@ -3,9 +3,6 @@ $(function(){
 	var authFlag = '${authFlag}';
 	if (authFlag == '1'){
 		$("#authPass").attr("disabled", true);
-	}
-	if (authFlag == '0'){
-		$("#authPass").attr("disabled", true);
 		$("#authRefuse").attr("disabled", true);
 		$("#chkAddWord").attr("readonly", true);
 	}
@@ -50,7 +47,7 @@ function authRefuse() {
 		modelAttribute="FTZ210501Form" class="form-horizontal">
 		<table class="tbl_search">
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.BRANCH"/>：</td>
+				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID"/>：</td>
 				<td>
 					<form:select path="ftzActMstrTmp.branchId" disabled="true">
 						<option value=""></option>
@@ -185,8 +182,6 @@ function authRefuse() {
 			value="<spring:message code="ftz.label.AUTH"/>">
 		<input id="authRefuse" type="button" class="btn btn-primary" onclick="authRefuse();" 
 			value="<spring:message code="ftz.label.UNAUTH"/>">
-		<input id="showNex" type="button" class="btn btn-primary" onclick="showNex();" 
-			value="<spring:message code="ftz.label.NEXT"/>"> 
 		<input type="button" class="btn btn-primary" onclick="javascript:window.close();" 
 			value="<spring:message code="button.lable.close"/>">
 	</div>

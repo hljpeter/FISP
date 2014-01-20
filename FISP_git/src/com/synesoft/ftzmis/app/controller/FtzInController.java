@@ -23,7 +23,6 @@ import com.synesoft.ftzmis.app.model.FTZINForm;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.service.FTZ210101Service;
-import com.synesoft.ftzmis.domain.service.FTZ210302Service;
 
 /**
  * @author 李峰
@@ -187,20 +186,15 @@ public class FtzInController {
 		} else if (CommonConst.MSG_NO_210309.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210309/Auth/DtlMsg/Init?operFlag=2&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210201.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210201/QryAuthDtl?selected_msgId="
-			+ form.getSelected_msgId();
+			return "redirect:/FTZ210201/QryAuthDtl?selected_msgId=" + form.getSelected_msgId()+"&unAuthFlag=1";
 		}else if (CommonConst.MSG_NO_210202.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210202/QryAuthDtl?selected_msgId="
-			+ form.getSelected_msgId();
+			return "redirect:/FTZ210202/QryAuthDtl?selected_msgId=" + form.getSelected_msgId()+"&unAuthFlag=1";
 		}else if (CommonConst.MSG_NO_210203.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210203/QryAuthDtl?selected_msgId="
-			+ form.getSelected_msgId();
+			return "redirect:/FTZ210203/QryAuthDtl?selected_msgId=" + form.getSelected_msgId()+"&unAuthFlag=1";
 		}else if (CommonConst.MSG_NO_210204.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210204/QryAuthDtl?selected_msgId="
-			+ form.getSelected_msgId();
+			return "redirect:/FTZ210204/QryAuthDtl?selected_msgId="	+ form.getSelected_msgId()+"&unAuthFlag=1";
 		}else if (CommonConst.MSG_NO_210205.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210205/QryAuthDtl?selected_msgId="
-			+ form.getSelected_msgId();
+			return "redirect:/FTZ210205/QryAuthDtl?selected_msgId="	+ form.getSelected_msgId()+"&unAuthFlag=1";
 		} else if (CommonConst.MSG_NO_210206.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210206/Auth/DtlMsg/Init?operFlag=2&FtzInMsgCtl.msgId="+ form.getSelected_msgId();
 		}

@@ -174,7 +174,8 @@
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TERM_LENGTH" />：</td>
 				<td><form:input id="termLength" path="ftzInTxnDtl.termLength"
-						class=".input-large" /></td>
+						class=".input-large" onkeyup="numberFormat(this);"
+						onbeforepaste="numberFormatCopy(this);" /></td>
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TERM_UNIT" />：</td>
 				<td><form:select path="ftzInTxnDtl.termUnit">
@@ -212,7 +213,7 @@
 					</button></td>
 			</tr>
 
-
+	<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_DTL_STATUS" />：</td>

@@ -57,7 +57,7 @@ $("#add").click(function() {
 			+ $("#msgId").val() + '&time=' + new Date().getTime(), '600', '1040');
 	
 	$("#balance").val($("#balance").val().replaceAll(",", ""));
-	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Input/UptMsg/Init");
+	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Input/UptMsg/Init?page.page=${page.number+1}");
 	$("#form").submit();
 	
 });
@@ -94,7 +94,7 @@ $("#upt").click(function() {
 		showDialog('${pageContext.request.contextPath}/FTZ210206/Input/UptTxn/Init?ftzInTxnDtl.msgId=' 
 				+ $("#msgId").val() + '&ftzInTxnDtl.seqNo=' + selectedRow.seqNo, '600', '1040');
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Input/UptMsg/Init");
+		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Input/UptMsg/Init?page.page=${page.number+1}");
 		$("#form").submit();
 	}
 });
@@ -175,7 +175,7 @@ function accoutQry() {
 		success : function(rs) {
 			dtlExist = rs.dtlExist;
 			if (null == dtlExist || false == dtlExist) {
-				alert("无此账号信息！");
+				alert('<spring:message code="w.cm.1007"/>');
 				$("#branchId").val("");
 				$("#branchId1").val("");
 				$("#accountName").val("");
@@ -185,7 +185,6 @@ function accoutQry() {
 				$("#currency1").val("");
 				$("#balance").val("");
 				$("#accOrgCode").val("");
-				$("#accOrgCode1").val("");
 			} else {
 				$("#branchId").val(rs.branchId);
 				$("#branchId1").val(rs.branchId);
@@ -196,7 +195,6 @@ function accoutQry() {
 				$("#currency1").val(rs.currency);
 				$("#balance").val(rs.balance);
 				$("#accOrgCode").val(rs.accOrgCode);
-				$("#accOrgCode1").val(rs.accOrgCode);
 			}
 		}
 	});
@@ -234,7 +232,7 @@ function accoutQry() {
 		<form:hidden path="ftzInMsgCtl.branchId" id="branchId"/>
 		<form:hidden path="ftzInMsgCtl.currency" id="currency"/>
 		<form:hidden path="ftzInMsgCtl.balanceCode" id="balanceCode"/>
-		<form:hidden path="ftzInMsgCtl.accOrgCode" id="accOrgCode"/>
+
 		<form:hidden path="operFlag" id="operFlag"/>
 		<table class="tbl_search">
 			<tr>
@@ -304,30 +302,26 @@ function accoutQry() {
 					</form:select></td>
 			
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.OWNER_ACC_ORG_CODE" />：</td>
-				<td>
-					<form:select id="accOrgCode1" path="ftzInMsgCtl.accOrgCode" disabled="true">
-						<form:option value=""></form:option>
-						<form:options items="${SM_0002}" />
-					</form:select></td>
+				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
+						class=".input-large" readonly="true" /></td>
 			</tr>
 			
-			<tr class="pboc" style="display: none;"><td colspan="4"><hr/></td></tr>
-			<tr class="pboc" style="display: none;">	
-				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS"/>：</td>
-				<td colspan="3">
-					<form:select path="ftzInMsgCtl.result" disabled="true" class="forever">
-						<option value=""></option>
-						<form:options items="${FTZ_PROC_RESULT }" />
-					</form:select>
-				</td>
-			</tr>
-			<tr class="pboc" style="display: none;">	
-				<td class="label_td"><spring:message code="ftz.label.ADDWORD"/>：</td>
-				<td colspan="3">
-					<form:input path="ftzInMsgCtl.addWord" type="text" class="forever input-xxlarge" readonly="true"/>
-				</td>
-			</tr>
-		
+			
+			<c:if test="${ FTZ210206Form.actionFlag eq 'uptMsg'}">
+				<tr>
+					<td class="label_td"><spring:message
+							code="ftz.label.PBOC_STATUS" />：</td>
+					<td colspan="3"><form:select path="ftzInMsgCtl.result" disabled="true">
+							<form:option value=""></form:option>
+							<form:options items="${FTZ_PROC_RESULT}" />
+						</form:select></td>
+				</tr>
+				<tr>
+					<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
+					<td colspan="3"><form:input id="addWord"
+							path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
+				</tr>
+			</c:if>
 			
 			<tr><td colspan="4" align="center">
 				<input type="submit" id="save" name="btn" class="btn btn-primary" value='<spring:message code="ftz.label.SUBMIT_MSG"/>' onclick="javascript: $('#operFlag').val('updated');"/>
@@ -376,7 +370,8 @@ function accoutQry() {
 						
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.countryCode}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.valueDate}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.interestRate}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
+								type="label" value="${dto.interestRate}" dot="true" format="###,###,###,###.000000"/></td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto.msgId}</td>
@@ -389,11 +384,15 @@ function accoutQry() {
 	</div>
 </div>
 <!-- page and buttons -->
-<div class="pagination pull-right" style="margin-top: 5px; margin-bottom: 0px;">
-	<div class="leftPage">
-		<util:pagination page="${page }" query="msgId=${ftzInMsgCtl.msgId }" />
+
+<div class="pagination pull-right" style="margin-top: 10px;">
+	<div class="rightPage">
+		<util:pagination page="${page}"
+			query="ftzInMsgCtl.msgId=${FTZ210206Form.ftzInMsgCtl.msgId}"
+			 />
 	</div>
 </div>
+
 <div class="row">
 	<div class="navbar navbar-fixed-bottom text-right" id="footer" style="text-align:center; margin-bottom:0px; line-height:30px; background-color: #eee; opacity:0.9;">
 		<button id="add" name="btn" class="btn btn-primary"><spring:message code="ftz.label.ADD_DTL"/></button>

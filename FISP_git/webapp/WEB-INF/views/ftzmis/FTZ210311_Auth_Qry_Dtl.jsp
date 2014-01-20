@@ -60,10 +60,10 @@
 		}
 	}
 	
-	function queryFTZ210311() {
+	function queryFTZ210311Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210311/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210311/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	

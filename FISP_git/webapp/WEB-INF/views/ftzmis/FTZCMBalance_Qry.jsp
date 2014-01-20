@@ -153,11 +153,11 @@ $(function(){
 					<tr>
 						<td style="text-align: center; width: 20px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.oneTypeName}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.twoTypeName}</td>
+						<td class="vtip" style="text-align: center; width: 50px;">${dto.twoTypeName}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.threeTypeName}</td>
-						<td class="vtip" style="text-align: left; width: 80px;">${dto.balanceCode}</td>
+						<td class="vtip" style="text-align: center; width: 80px;">${dto.balanceCode}</td>
 						<td class="vtip" style="text-align: left; width: 150px;">${dto.fourTypeName}</td>
-						<td class="vtip" style="text-align: left; width: 30px;">${dto.sign}</td>
+						<td class="vtip" style="text-align: center; width: 30px;">${dto.sign}</td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.comments}</td>
 					</tr>
 				</c:forEach>

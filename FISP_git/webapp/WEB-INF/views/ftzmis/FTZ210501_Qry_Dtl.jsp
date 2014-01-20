@@ -31,7 +31,7 @@
 		class="form-horizontal">
 		<table class="tbl_search">
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.BRANCH"/>：</td>
+				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID"/>：</td>
 				<td>
 					<form:select path="ftzActMstr.branchId" disabled="true">
 						<option value=""></option>
@@ -168,10 +168,6 @@
 <div class="row" style="margin-bottom: 40px;">
 	<div class="navbar navbar-fixed-bottom text-center" id="footer"
 		style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
-		<input id="previous" type="button" class="btn btn-primary"
-			onclick="showPrev();" value="<spring:message code="ftz.label.PREVIOUS"/>">
-		<input id="next" type="button" class="btn btn-primary"
-			onclick="showNext();" value="<spring:message code="ftz.label.NEXT"/>"> 
 		<input type="button" class="btn btn-primary" onclick="javascript:window.close();"
 			value="<spring:message code="button.lable.close"/>">
 	</div>

@@ -234,7 +234,7 @@
 					</button></td>
 
 			</tr>
-
+	<tr><td colspan="4"><hr/></td></tr>
 
 			<tr>
 				<td class="label_td"><spring:message

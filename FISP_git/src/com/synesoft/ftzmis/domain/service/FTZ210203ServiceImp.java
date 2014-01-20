@@ -24,6 +24,8 @@ import com.synesoft.ftzmis.domain.repository.FTZ210203Repository;
 @Service
 public class FTZ210203ServiceImp implements FTZ210203Service {
 
+	protected static String funcId ="FTZ_Add_210203";
+	
 	@Override
 	public FtzInMsgCtl queryFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
 		return ftz210203Repos.queryFtzInMsgCtl(ftzInMsgCtl);
@@ -127,7 +129,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 		beforeData.append(ftzMsgCtl_tmp.getAckDatetime());
 		beforeData.append(",处理应答日期时间为：");
 		beforeData.append(ftzMsgCtl_tmp.getErrDatetime() + "的元素");
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210101", orgInfo.getOrgid(),
+		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
 				userInfo.getUserid(), userInfo.getUsername(), "D",
 				time.substring(0, 8), time.substring(8, 14),
 				beforeData.toString(), "");
@@ -203,7 +205,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 		afterData.append(ftzInMsgCtl.getAckDatetime());
 		afterData.append(",处理应答日期时间为：");
 		afterData.append(ftzInMsgCtl.getErrDatetime() + "的元素");
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210101", orgInfo.getOrgid(),
+		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
 				userInfo.getUserid(), userInfo.getUsername(), "A",
 				time.substring(0, 8), time.substring(8, 14), "",
 				afterData.toString());
@@ -348,7 +350,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 			afterData.append(",处理应答日期时间为：");
 			afterData.append(ftzInMsgCtl.getErrDatetime() + "的元素");
 
-			TlrLogPrint.tlrBizLogPrint("FTZ_Add_210101", orgInfo.getOrgid(),
+			TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
 					userInfo.getUserid(), userInfo.getUsername(), "M",
 					time.substring(0, 8), time.substring(8, 14),
 					beforeData.toString(), afterData.toString());
@@ -489,7 +491,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 			afterData.append(",处理应答日期时间为：");
 			afterData.append(ftzInMsgCtl.getErrDatetime() + "的元素");
 
-			TlrLogPrint.tlrBizLogPrint("FTZ_Add_210101", orgInfo.getOrgid(),
+			TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
 					userInfo.getUserid(), userInfo.getUsername(), "M",
 					time.substring(0, 8), time.substring(8, 14),
 					beforeData.toString(), afterData.toString());
@@ -731,7 +733,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 		afterData.append(",记录复核附言为：");
 		afterData.append(ftzInTxnDtl.getChkAddWord() + "的元素");
 
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210101", orgInfo.getOrgid(),
+		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
 				userInfo.getUserid(), userInfo.getUsername(), "M",
 				time.substring(0, 8), time.substring(8, 14),
 				beforeData.toString(), afterData.toString());

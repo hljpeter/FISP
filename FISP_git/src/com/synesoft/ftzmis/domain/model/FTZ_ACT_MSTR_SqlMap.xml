@@ -103,6 +103,51 @@
     	<isNotNull prepend="," property="documentNo">
     		DOCUMENT_NO = #documentNo:VARCHAR#
     	</isNotNull>
+    	<isNotNull prepend="," property="customType">
+    		CUSTOM_TYPE = #customType:CHAR#
+    	</isNotNull>
+    	<isNotNull prepend="," property="accOrgCode">
+    		ACC_ORG_CODE = #accOrgCode:VARCHAR#
+    	</isNotNull>
+    	<isNotNull prepend="," property="balance">
+    		BALANCE = #balance:DECIMAL#
+    	</isNotNull>
+    	<isNotNull prepend="," property="depositRate">
+    		DEPOSIT_RATE = #depositRate:DECIMAL#
+    	</isNotNull>
+    	<isNotNull prepend="," property="lastBalance">
+    		LAST_BALANCE = #lastBalance:DECIMAL#
+    	</isNotNull>
+    	<isNotNull prepend="," property="debitCount">
+    		DEBIT_COUNT = #debitCount:DECIMAL#
+    	</isNotNull>
+    	<isNotNull prepend="," property="debitAmount">
+    		DEBIT_AMOUNT = #debitAmount:DECIMAL#
+    	</isNotNull>
+    	<isNotNull prepend="," property="creditCount">
+    		CREDIT_COUNT = #creditCount:DECIMAL#
+    	</isNotNull>
+    	<isNotNull prepend="," property="creditAmount">
+    		CREDIT_AMOUNT = #creditAmount:DECIMAL#
+    	</isNotNull>
+    	<isNotNull prepend="," property="accStatus">
+    		ACC_STATUS = #accStatus:CHAR#
+    	</isNotNull>
+    	<isNotNull prepend="," property="makUserId">
+    		MAK_USER_ID = #makUserId:VARCHAR#
+    	</isNotNull>
+    	<isNotNull prepend="," property="makDatetime">
+    		MAK_DATETIME = #makDatetime:VARCHAR#
+    	</isNotNull>
+    	<isNotNull prepend="," property="chkUserId">
+    		CHK_USER_ID = #chkUserId:VARCHAR#
+    	</isNotNull>
+    	<isNotNull prepend="," property="chkDatetime">
+    		CHK_DATETIME = #chkDatetime:VARCHAR#
+    	</isNotNull>
+    	<isNotNull prepend="," property="chkAddWord">
+    		CHK_ADD_WORD = #chkAddWord:VARCHAR#
+    	</isNotNull>
     </dynamic>
     where ACCOUNT_NO = #accountNo:VARCHAR#
       and SUB_ACCOUNT_NO = #subAccountNo:VARCHAR#

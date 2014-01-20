@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
@@ -32,6 +34,7 @@ import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
 
 import com.synesoft.ftzmis.app.model.FTZ210101Form;
 import com.synesoft.ftzmis.app.model.FTZ210207Form;
@@ -192,7 +195,7 @@ public class FTZ210207Controller {
 		
 		FtzInMsgCtl ctl = new FtzInMsgCtl();
 		ctl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
-		ctl.setBranchId(ContextConst.getCurrentUser().getLoginorg());
+		//ctl.setBranchId(ContextConst.getCurrentUser().getLoginorg());
 		//ctl.setWorkDate(DateUtil.getNowOutputDate());
 		//ctl.setMsgId(numberService.getSysIDSequence(16));
 
@@ -238,6 +241,8 @@ public class FTZ210207Controller {
 			return "ftzmis/FTZ210207_Input_Qry_Dtl";
 		} catch (BusinessException e) {
 			log.error("Add FtzInMsgCtl failure!" + e.getMessage());
+			form.getFtzInMsgCtl().setSubmitDate(DateUtil
+					.getFormatDateAddSprit(form.getFtzInMsgCtl().getSubmitDate()));
 			model.addAttribute("infomsg", e.getResultMessages());
 			return "ftzmis/FTZ210207_Input_Qry_Dtl";
 		}
@@ -324,7 +329,7 @@ public class FTZ210207Controller {
 			
 			form.getFtzInMsgCtl().setSubmitDate(DateUtil
 					.getFormatDateAddSprit(form.getFtzInMsgCtl().getSubmitDate() ));//申报日格式化
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.sm.0002")));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Update.Msg.Ctl.Success")));
 			
 			return "forward:/FTZ210207/Input/Dtl/Init?actionFlag=" + CommonConst.ACTION_FLAG_UPT_MSG;
 			//return "forward:/FTZ210207/Input/Dtl/Refresh";
@@ -353,7 +358,7 @@ public class FTZ210207Controller {
 
 			log.info("Delete success");
 			form.setActionFlag(CommonConst.ACTION_FLAG_SUB_MSG);
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.sm.0003")));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Delete.Msg.Ctl.Success")));
 
 			return "forward:/FTZ210207/AddQry";
 		} catch (BusinessException e) {
@@ -377,11 +382,26 @@ public class FTZ210207Controller {
 		}
 		
 		try {
+			
+			FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+			query_FtzInTxnDtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
+			List<FtzInTxnDtl> ftzInTxnDtls = ftz210101Service
+					.queryFtzInTxnDtlList(query_FtzInTxnDtl);
+			if (null != ftzInTxnDtls && ftzInTxnDtls.size() > 0) {
+				for (FtzInTxnDtl dtl : ftzInTxnDtls) {
+					if (CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(dtl
+							.getChkStatus())) {
+						model.addAttribute(ResultMessages.error().add(
+								"e.ftzmis.210101.0030"));
+						return "forward:/FTZ210207/AddQry";
+					}
+				}
+			}
 			ftz210207Service.transUpdateSubmitMsgCtl(form.getFtzInMsgCtl());
 
 			log.info("Submit success");
 			form.setActionFlag(CommonConst.ACTION_FLAG_SUB_MSG);
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0002")));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Update.Msg.Ctl.Success")));
 
 			return "forward:/FTZ210207/AddQry";
 		} catch (BusinessException e) {
@@ -459,8 +479,8 @@ public class FTZ210207Controller {
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getOrgTranDate()));//原始格式化
 			form.getFtzInTxnDtl().setExpireDate(DateUtil
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getExpireDate()));//到期日式化
-			
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.sm.0001")));
+			form.getFtzInTxnDtl().setMakDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(form.getFtzInTxnDtl().getMakDatetime()));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Add.Txn.Dtl.Success")));
 
 			return "ftzmis/FTZ210207_Input_Qry_Dtl_Dtl";
 		} catch (BusinessException e) {
@@ -530,7 +550,15 @@ public class FTZ210207Controller {
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getOrgTranDate()));//原始格式化
 			form.getFtzInTxnDtl().setExpireDate(DateUtil
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getExpireDate()));//到期日式化
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.sm.0002")));
+			
+			FtzInTxnDtl ftzInTxnDtl=new FtzInTxnDtl();
+			ftzInTxnDtl.setMsgId(form.getFtzInTxnDtl().getMsgId());
+			ftzInTxnDtl.setSeqNo(form.getFtzInTxnDtl().getSeqNo());
+			ftzInTxnDtl=ftz210207Service.transQueryTxnById(ftzInTxnDtl);
+			form.getFtzInTxnDtl().setMakDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(ftzInTxnDtl.getMakDatetime()));
+			form.getFtzInTxnDtl().setChkDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(form.getFtzInTxnDtl().getChkDatetime()));//chkdatetime
+			form.getFtzInTxnDtl().setMakUserId(ftzInTxnDtl.getMakUserId());
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Update.Txn.Dtl.Success")));
 
 			return "ftzmis/FTZ210207_Input_Qry_Dtl_Dtl";
 		} catch (BusinessException e) {
@@ -544,6 +572,8 @@ public class FTZ210207Controller {
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getOrgTranDate()));//原始格式化
 			form.getFtzInTxnDtl().setExpireDate(DateUtil
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getExpireDate()));//到期日式化
+			form.getFtzInTxnDtl().setMakDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(form.getFtzInTxnDtl().getMakDatetime()));
+			form.getFtzInTxnDtl().setChkDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(form.getFtzInTxnDtl().getChkDatetime()));//chkdatetime
 			return "ftzmis/FTZ210207_Input_Qry_Dtl_Dtl";
 			//return "forward:/FTZ210207/Input/DtlTxn/Init?actionFlag=" + CommonConst.ACTION_FLAG_UPT_TXN;
 		}
@@ -588,7 +618,8 @@ public class FTZ210207Controller {
 			txn.setExpireDate(DateUtil
 					.getFormatDateAddSprit(txn.getExpireDate()));//到期日
 			}
-			
+			txn.setMakDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(txn.getMakDatetime()));//makdatetime
+			txn.setChkDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(txn.getChkDatetime()));//chkdatetime
 			form.setFtzInTxnDtl(txn);
 			
 			return "ftzmis/FTZ210207_Input_Qry_Dtl_Dtl";
@@ -620,7 +651,7 @@ public class FTZ210207Controller {
 					.getFormatDateTimeRemoveSpritAndColon(form.getFtzInTxnDtl().getChkDatetime()));//审核时间
 			
 			ftz210207Service.transUpdateDeleteTxnDtl(form.getFtzInTxnDtl());
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.sm.0003")));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Delete.Txn.Dtl.Success")));
 			
 			return "forward:/FTZ210207/Input/Dtl/Refresh";
 		} catch (BusinessException e) {
@@ -684,7 +715,28 @@ public class FTZ210207Controller {
 			Map<String, Object> map = ftz210207Service.transQueryMsgAndTxnDetail(pageable, form.getFtzInMsgCtl(), status);
 			
 			form.setActionFlag(CommonConst.ACTION_FLAG_DTL_MSG);
+			((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG)).setSubmitDate(DateUtil
+					.getFormatDateAddSprit(((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG)).getSubmitDate()));
+			((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG)).setSndDatetime(DateUtil
+					.getFormatDateTimeAddSpritAndColon(((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG))
+							.getSndDatetime()));
+			((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG)).setAckDatetime(DateUtil
+					.getFormatDateTimeAddSpritAndColon(((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG))
+							.getAckDatetime()));
+			((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG)).setBalanceCode(((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG))
+					.getBalanceCode().trim());
+			
 			form.setFtzInMsgCtl((FtzInMsgCtl) map.get(DTL_MAP_KEY_MSG));
+			
+			for (FtzInTxnDtl ftzInTxnDtl : (Page<FtzInTxnDtl>) map.get(DTL_MAP_KEY_TXN))
+			{
+			ftzInTxnDtl.setTranDate(DateUtil
+					.getFormatDateAddSprit(ftzInTxnDtl.getTranDate()));
+			ftzInTxnDtl.setValueDate(DateUtil
+					.getFormatDateAddSprit(ftzInTxnDtl.getValueDate()));
+			ftzInTxnDtl.setExpireDate(DateUtil
+					.getFormatDateAddSprit(ftzInTxnDtl.getExpireDate()));
+			}
 			model.addAttribute("page", (Page<FtzInTxnDtl>) map.get(DTL_MAP_KEY_TXN));
 			
 			return "ftzmis/FTZ210207_Auth_Qry_Dtl";
@@ -720,6 +772,10 @@ public class FTZ210207Controller {
 			
 			form.setFtzInTxnDtl(txn);
 
+			FtzInMsgCtl msg=new FtzInMsgCtl();
+			msg.setMsgId(txn.getMsgId());
+			msg=ftz210207Service.transQueryMsgById(msg);
+			form.setFtzInMsgCtl(msg);
 //			int ret = ftz210207Service.getAuthTxnCountById(form.getFtzInTxnDtl());
 //			if (ret == 1) {
 //				form.setMsg("i.ftzmis.210207.0006");
@@ -801,7 +857,8 @@ public class FTZ210207Controller {
 			
 			
 			ftz210207Service.authMsgCtl(form.getFtzInMsgCtl());
-
+			generateXml.writeXml(form.getFtzInMsgCtl().getMsgNo(),
+					form.getFtzInMsgCtl().getMsgId());
 			model.addAttribute(ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0005")));
 			return "forward:/FTZ210207/Auth/DtlMsg/Init";
 			}
@@ -915,6 +972,8 @@ public class FTZ210207Controller {
 				for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
 					ftzInTxnDtl.setTranDate(DateUtil
 							.getFormatDateAddSprit(ftzInTxnDtl.getTranDate()));
+					ftzInTxnDtl.setValueDate(DateUtil
+							.getFormatDateAddSprit(ftzInTxnDtl.getValueDate()));
 				}
 				model.addAttribute("page", page);
 				
@@ -947,6 +1006,8 @@ public class FTZ210207Controller {
 				.getFormatDateAddSprit(result_FtzInTxnDtl.getOrgTranDate()));
 		result_FtzInTxnDtl.setExpireDate(DateUtil
 				.getFormatDateAddSprit(result_FtzInTxnDtl.getExpireDate()));
+		result_FtzInTxnDtl.setValueDate(DateUtil
+				.getFormatDateAddSprit(result_FtzInTxnDtl.getValueDate()));
 		result_FtzInTxnDtl.setMakDatetime(DateUtil
 				.getFormatDateTimeAddSpritAndColon(result_FtzInTxnDtl
 						.getMakDatetime()));
@@ -976,4 +1037,7 @@ public class FTZ210207Controller {
 	
 	@Autowired
 	private FTZ210101Service ftz210101Service;
+	
+	@Resource
+	protected GenerateXml generateXml;
 }

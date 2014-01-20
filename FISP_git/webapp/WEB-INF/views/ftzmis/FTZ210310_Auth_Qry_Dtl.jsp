@@ -64,7 +64,7 @@
 	function queryFTZ210310Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210310/QryAuthDtl";
+		form.action = "${pageContext.request.contextPath}/FTZ210310/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	
