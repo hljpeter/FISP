@@ -22,7 +22,7 @@ import com.synesoft.ftzmis.domain.repository.FtzInTxnDtlRepository;
 
 @Service
 public class FTZ210212ServiceImp implements FTZ210212Service {
-
+	protected static String funcId ="FTZ_Add_210212";
 	@Override
 	public FtzInMsgCtl queryFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
 		return ftz210212Repos.queryFtzInMsgCtl(ftzInMsgCtl);
@@ -190,7 +190,7 @@ public class FTZ210212ServiceImp implements FTZ210212Service {
 	private void BizLog(String operType, String beforeData, String afterData) {
 		OrgInf orgInfo = ContextConst.getOrgInfByUser();
 		UserInf userInfo = ContextConst.getCurrentUser();
-		TlrLogPrint.tlrBizLogPrint(CommonConst.MSG_NO_210212, orgInfo.getOrgid(), userInfo.getUserid(), userInfo.getUsername(), operType, 
+		TlrLogPrint.tlrBizLogPrint(funcId, orgInfo.getOrgid(), userInfo.getUserid(), userInfo.getUsername(), operType, 
 				DateUtil.getNowInputDate(), DateUtil.getNowInputTime(), beforeData, afterData);
 	}
 

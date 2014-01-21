@@ -4,6 +4,7 @@
 package com.synesoft.ftzmis.app.controller;
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefaults;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -24,9 +26,10 @@ import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.common.util.Validator;
-import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
 import com.synesoft.ftzmis.app.model.FTZ210210Form;
 import com.synesoft.ftzmis.app.model.FTZ210210Form.FTZ210210FormAddDtl;
 import com.synesoft.ftzmis.app.model.FTZ210210Form.FTZ210210FormAddDtlDtl;
@@ -167,6 +170,24 @@ public class FTZ210210Controller {
 	@RequestMapping("InputDel")
 	public String delDtl(Model model, FTZ210210Form form) {
 		logger.info("系统内资金往来查询批量删除开始...");
+		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+		query_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
+		List<FtzInTxnDtl> ftzInTxnDtls = ftz210210Serv
+				.queryFtzInTxnDtlList(query_FtzInTxnDtl);
+		if (null != ftzInTxnDtls) {
+			for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
+				if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl
+						.getChkStatus())) {
+					model.addAttribute(ResultMessages.error().add(
+							"e.ftzmis.210101.0035"));
+					form.setSelected_msgId("");
+					logger.info("单位存款查询批量删除结束...");
+					return "forward:/FTZ210210/AddQry";
+				}
+			}
+		}
+		FtzInMsgCtl ftzInMsgCtl = new FtzInMsgCtl();
+		ftzInMsgCtl.setMsgId(form.getSelected_msgId());
 		FtzInMsgCtl del_FtzInMsgCtl = new FtzInMsgCtl();
 		del_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
 		//删除系统内资金往来批量信息
@@ -259,52 +280,8 @@ public class FTZ210210Controller {
 		FtzInMsgCtl insert_FtzInMsgCtl = form.getFtzInMsgCtl();
 
 		// 开始校验
-		ResultMessages resultMessages = ResultMessages.error();
-		// 申请日期
-		if (null == insert_FtzInMsgCtl.getSubmitDate()
-				|| "".equals(insert_FtzInMsgCtl.getSubmitDate().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0012");
-			resultMessages.add(resultMessage);
-		}
-		// 账号
-		if (null == insert_FtzInMsgCtl.getAccountNo()
-				|| "".equals(insert_FtzInMsgCtl.getAccountNo().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0033");
-			resultMessages.add(resultMessage);
-		}
-
-		// 资产负债指标代码
-		if (null == insert_FtzInMsgCtl.getBalanceCode()
-				|| "".equals(insert_FtzInMsgCtl.getBalanceCode().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0007");
-			resultMessages.add(resultMessage);
-		}
-
-		// 货币
-		if (null == insert_FtzInMsgCtl.getCurrency()
-				|| "".equals(insert_FtzInMsgCtl.getCurrency().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0009");
-			resultMessages.add(resultMessage);
-		}
-
-		// 日终余额
-		if (null == insert_FtzInMsgCtl.getBalance()) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0010");
-			resultMessages.add(resultMessage);
-		}
-
-		// 开户机构代码
-		if (null == insert_FtzInMsgCtl.getAccOrgCode()
-				|| "".equals(insert_FtzInMsgCtl.getAccOrgCode().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0011");
-			resultMessages.add(resultMessage);
-		}
+		ResultMessages resultMessages = validMsgCtl(insert_FtzInMsgCtl);
+		
 		if (resultMessages.isNotEmpty()) {
 			model.addAttribute(resultMessages);
 			return "ftzmis/FTZ210210_Input_Dtl";
@@ -315,7 +292,7 @@ public class FTZ210210Controller {
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
 
 		// 设置批量头信息
-		MsgHead mh = MsgHead.getMsgHead();
+		FtzMsgHead mh = FtzMsgHead.getMsgHead();
 		insert_FtzInMsgCtl.setVer(mh.getVER());
 		insert_FtzInMsgCtl.setSrc(mh.getSRC());
 		insert_FtzInMsgCtl.setDes(mh.getDES());
@@ -451,52 +428,7 @@ public class FTZ210210Controller {
 		FtzInMsgCtl update_FtzInMsgCtl = form.getFtzInMsgCtl();
 
 		// 开始校验
-		ResultMessages resultMessages = ResultMessages.error();
-		// 申请日期
-		if (null == update_FtzInMsgCtl.getSubmitDate()
-				|| "".equals(update_FtzInMsgCtl.getSubmitDate().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0012");
-			resultMessages.add(resultMessage);
-		}
-		// 账号
-		if (null == update_FtzInMsgCtl.getAccountNo()
-				|| "".equals(update_FtzInMsgCtl.getAccountNo().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0033");
-			resultMessages.add(resultMessage);
-		}
-
-		// 资产负债指标代码
-		if (null == update_FtzInMsgCtl.getBalanceCode()
-				|| "".equals(update_FtzInMsgCtl.getBalanceCode().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0007");
-			resultMessages.add(resultMessage);
-		}
-
-		// 货币
-		if (null == update_FtzInMsgCtl.getCurrency()
-				|| "".equals(update_FtzInMsgCtl.getCurrency().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0009");
-			resultMessages.add(resultMessage);
-		}
-
-		// 日终余额
-		if (null == update_FtzInMsgCtl.getBalance()) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0010");
-			resultMessages.add(resultMessage);
-		}
-
-		// 开户机构代码
-		if (null == update_FtzInMsgCtl.getAccOrgCode()
-				|| "".equals(update_FtzInMsgCtl.getAccOrgCode().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0011");
-			resultMessages.add(resultMessage);
-		}
+		ResultMessages resultMessages = validMsgCtl(update_FtzInMsgCtl);
 		if (resultMessages.isNotEmpty()) {
 			model.addAttribute(resultMessages);
 			// 清空页面列表选择Key
@@ -650,79 +582,8 @@ public class FTZ210210Controller {
 			return "ftzmis/FTZ210210_Input_Dtl_Dtl";
 		}
 		FtzInTxnDtl insert_FtzInTxnDtl = form.getFtzInTxnDtl();
-
-		// 开始校验
-		ResultMessages resultMessages = ResultMessages.error();
-
-		// 出/入账标志
-		if (null == insert_FtzInTxnDtl.getCdFlag()
-				|| "".equals(insert_FtzInTxnDtl.getCdFlag().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0013");
-			resultMessages.add(resultMessage);
-		}
-		//当出入账标志为3或4时，本栏位为强制项，且栏位值小于等于记账日期
-		if ("3".equals(insert_FtzInTxnDtl.getCdFlag().trim())
-				|| "4".equals(insert_FtzInTxnDtl.getCdFlag().trim())) {
-			if (null == insert_FtzInTxnDtl.getOrgTranDate()
-					|| "".equals(insert_FtzInTxnDtl.getOrgTranDate().trim())
-					|| ((null != insert_FtzInTxnDtl.getTranDate()) && DateUtil
-							.getFormatDateRemoveSprit(
-									insert_FtzInTxnDtl.getTranDate())
-							.compareToIgnoreCase(
-									DateUtil.getFormatDateRemoveSprit(insert_FtzInTxnDtl
-											.getOrgTranDate())) < 0)) {
-				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210101.0027");
-				resultMessages.add(resultMessage);
-			}
-		}
-
-		// 记帐日期
-		if (null == insert_FtzInTxnDtl.getTranDate()
-				|| "".equals(insert_FtzInTxnDtl.getTranDate().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0014");
-			resultMessages.add(resultMessage);
-		}
-
-		// 金额
-		if (null == insert_FtzInTxnDtl.getAmount()) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0015");
-			resultMessages.add(resultMessage);
-		}
-		
-		if (!Validator.CheckAmount(insert_FtzInTxnDtl.getAmount())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210303.0013");
-			resultMessages.add(resultMessage);
-		}
-
-		// 国别代码
-		if (null == insert_FtzInTxnDtl.getCountryCode()
-				|| "".equals(insert_FtzInTxnDtl.getCountryCode().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0016");
-			resultMessages.add(resultMessage);
-		}
-
-		// 交易性质
-		if (null == insert_FtzInTxnDtl.getTranType()
-				|| "".equals(insert_FtzInTxnDtl.getTranType().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0017");
-			resultMessages.add(resultMessage);
-		}
-
-		// 对方机构
-		if (null == insert_FtzInTxnDtl.getOppName()
-				|| "".equals(insert_FtzInTxnDtl.getOppName().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0034");
-			resultMessages.add(resultMessage);
-		}
-
+		//效验输入
+		ResultMessages resultMessages = validTxnDtl(insert_FtzInTxnDtl);
 		if (resultMessages.isNotEmpty()) {
 			model.addAttribute(resultMessages);
 			return "ftzmis/FTZ210210_Input_Dtl_Dtl";
@@ -838,8 +699,9 @@ public class FTZ210210Controller {
 		query_FtzInTxnDtl.setSeqNo(update_FtzInTxnDtl.getSeqNo());
 		FtzInTxnDtl result_FtzInTxnDtl = ftz210210Serv
 				.queryFtzInTxnDtl(query_FtzInTxnDtl);
+		
 		// 开始校验
-		ResultMessages resultMessages = ResultMessages.error();
+		ResultMessages resultMessages = validTxnDtl(update_FtzInTxnDtl);
 		if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(result_FtzInTxnDtl.getChkStatus())){
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210210.0001");
@@ -847,76 +709,6 @@ public class FTZ210210Controller {
 			model.addAttribute(resultMessages);
 			return "ftzmis/FTZ210210_Input_Dtl_Dtl";
 		}
-		
-		// 出/入账标志
-		if (null == update_FtzInTxnDtl.getCdFlag()
-				|| "".equals(update_FtzInTxnDtl.getCdFlag().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0013");
-			resultMessages.add(resultMessage);
-		}
-
-		if ("3".equals(update_FtzInTxnDtl.getCdFlag().trim())
-				|| "4".equals(update_FtzInTxnDtl.getCdFlag().trim())) {
-			if (null == update_FtzInTxnDtl.getOrgTranDate()
-					|| "".equals(update_FtzInTxnDtl.getOrgTranDate().trim())
-					|| ((null != update_FtzInTxnDtl.getTranDate()) && DateUtil
-							.getFormatDateRemoveSprit(
-									update_FtzInTxnDtl.getTranDate())
-							.compareToIgnoreCase(
-									DateUtil.getFormatDateRemoveSprit(update_FtzInTxnDtl
-											.getOrgTranDate())) < 0)) {
-				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210101.0027");
-				resultMessages.add(resultMessage);
-			}
-		}
-
-		// 记帐日期
-		if (null == update_FtzInTxnDtl.getTranDate()
-				|| "".equals(update_FtzInTxnDtl.getTranDate().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0014");
-			resultMessages.add(resultMessage);
-		}
-
-		// 金额
-		if (null == update_FtzInTxnDtl.getAmount()) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0015");
-			resultMessages.add(resultMessage);
-		}
-		
-		if (!Validator.CheckAmount(update_FtzInTxnDtl.getAmount())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210303.0013");
-			resultMessages.add(resultMessage);
-		}
-
-		// 国别代码
-		if (null == update_FtzInTxnDtl.getCountryCode()
-				|| "".equals(update_FtzInTxnDtl.getCountryCode().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0016");
-			resultMessages.add(resultMessage);
-		}
-
-		// 交易性质
-		if (null == update_FtzInTxnDtl.getTranType()
-				|| "".equals(update_FtzInTxnDtl.getTranType().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0017");
-			resultMessages.add(resultMessage);
-		}
-
-		// 对方机构
-		if (null == update_FtzInTxnDtl.getOppName()
-				|| "".equals(update_FtzInTxnDtl.getOppName().trim())) {
-			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0034");
-			resultMessages.add(resultMessage);
-		}
-		
 		if (resultMessages.isNotEmpty()) {
 			model.addAttribute(resultMessages);
 			return "ftzmis/FTZ210210_Input_Dtl_Dtl";
@@ -1032,6 +824,7 @@ public class FTZ210210Controller {
 	 * @return forward:/FTZ210210/QryAuthDtl
 	 */
 	@RequestMapping("AuthDtlSubmit")
+	@Transactional
 	public String AuthDtlSubmit(Model model, FTZ210210Form form) {
 		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
 		query_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
@@ -1065,6 +858,8 @@ public class FTZ210210Controller {
 				model.addAttribute(ResultMessages.error().add(
 						"e.ftzmis.210301.0008"));
 			} else {
+				//提交报文信息
+				ftzMsgProcService.submitMsg(result_FtzInMsgCtl.getMsgNo(),result_FtzInMsgCtl.getMsgId());
 				model.addAttribute(ResultMessages.success().add(
 						"i.ftzmis.210301.0005"));
 				form.setAuthFinishFlag("1");
@@ -1093,13 +888,14 @@ public class FTZ210210Controller {
 				model.addAttribute(ResultMessages.error().add(
 						"e.ftzmis.210301.0008"));
 			} else {
+				//提交报文信息
+				ftzMsgProcService.submitMsg(result_FtzInMsgCtl.getMsgNo(),result_FtzInMsgCtl.getMsgId());
 				model.addAttribute(ResultMessages.success().add(
 						"i.ftzmis.210210.0010"));
 				form.setAuthFinishFlag("1");
 				return "forward:/FTZ210210/QryAuthDtl";
 			}
 		}
-
 		return "ftzmis/FTZ210210_Auth_Qry_Dtl";
 	}
 
@@ -1214,6 +1010,142 @@ public class FTZ210210Controller {
 				+ form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
 				+ form.getFtzInTxnDtl().getSeqNo();
 	}
+	
+	/**
+	 * 效验批量输入
+	 * @param ftzInTxnDtl
+	 * @return ResultMessages
+	 */
+	private ResultMessages validMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
+		// 开始校验
+		ResultMessages resultMessages = ResultMessages.error();
+		// 申请日期
+		if (null == ftzInMsgCtl.getSubmitDate()
+				|| "".equals(ftzInMsgCtl.getSubmitDate().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0012");
+			resultMessages.add(resultMessage);
+		}
+		// 账号
+		if (null == ftzInMsgCtl.getAccountNo()
+				|| "".equals(ftzInMsgCtl.getAccountNo().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0033");
+			resultMessages.add(resultMessage);
+		}
+
+		// 资产负债指标代码
+		if (null == ftzInMsgCtl.getBalanceCode()
+				|| "".equals(ftzInMsgCtl.getBalanceCode().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0007");
+			resultMessages.add(resultMessage);
+		}
+
+		// 货币
+		if (null == ftzInMsgCtl.getCurrency()
+				|| "".equals(ftzInMsgCtl.getCurrency().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0009");
+			resultMessages.add(resultMessage);
+		}
+
+		// 日终余额
+		if (null == ftzInMsgCtl.getBalance()) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0010");
+			resultMessages.add(resultMessage);
+		}
+
+		// 开户机构代码
+		if (null == ftzInMsgCtl.getAccOrgCode()
+				|| "".equals(ftzInMsgCtl.getAccOrgCode().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0011");
+			resultMessages.add(resultMessage);
+		}
+		return resultMessages;
+	}
+	
+	/**
+	 * 效验交易明细输入
+	 * @param ftzInTxnDtl
+	 * @return ResultMessages
+	 */
+	private ResultMessages validTxnDtl(FtzInTxnDtl ftzInTxnDtl) {
+		// 开始校验
+		ResultMessages resultMessages = ResultMessages.error();
+
+		// 出/入账标志
+		if (null == ftzInTxnDtl.getCdFlag()
+				|| "".equals(ftzInTxnDtl.getCdFlag().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0013");
+			resultMessages.add(resultMessage);
+		}
+		// 当出入账标志为3或4时，本栏位为强制项，且栏位值小于等于记账日期
+		if ("3".equals(ftzInTxnDtl.getCdFlag().trim())
+				|| "4".equals(ftzInTxnDtl.getCdFlag().trim())) {
+			if (null == ftzInTxnDtl.getOrgTranDate()
+					|| "".equals(ftzInTxnDtl.getOrgTranDate().trim())
+					|| ((null != ftzInTxnDtl.getTranDate()) && DateUtil
+							.getFormatDateRemoveSprit(
+									ftzInTxnDtl.getTranDate())
+							.compareToIgnoreCase(
+									DateUtil.getFormatDateRemoveSprit(ftzInTxnDtl
+											.getOrgTranDate())) < 0)) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210101.0027");
+				resultMessages.add(resultMessage);
+			}
+		}
+
+		// 记帐日期
+		if (null == ftzInTxnDtl.getTranDate()
+				|| "".equals(ftzInTxnDtl.getTranDate().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0014");
+			resultMessages.add(resultMessage);
+		}
+
+		// 金额
+		if (null == ftzInTxnDtl.getAmount()) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0015");
+			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(ftzInTxnDtl.getAmount())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
+		}
+
+		// 国别代码
+		if (null == ftzInTxnDtl.getCountryCode()
+				|| "".equals(ftzInTxnDtl.getCountryCode().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0016");
+			resultMessages.add(resultMessage);
+		}
+
+		// 交易性质
+		if (null == ftzInTxnDtl.getTranType()
+				|| "".equals(ftzInTxnDtl.getTranType().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0017");
+			resultMessages.add(resultMessage);
+		}
+
+		// 对方机构
+		if (null == ftzInTxnDtl.getOppName()
+				|| "".equals(ftzInTxnDtl.getOppName().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210101.0034");
+			resultMessages.add(resultMessage);
+		}
+		return resultMessages;
+	}
 
 	@Autowired
 	protected FTZ210210Service ftz210210Serv;
@@ -1221,4 +1153,6 @@ public class FTZ210210Controller {
 	@Autowired
 	protected NumberService numberService;
 
+	@Autowired
+	private FtzMsgProcService ftzMsgProcService;
 }

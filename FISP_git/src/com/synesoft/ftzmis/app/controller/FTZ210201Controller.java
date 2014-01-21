@@ -24,12 +24,10 @@ import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
-import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
-import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
-import com.synesoft.ftzmis.app.model.FTZ210101Form;
 import com.synesoft.ftzmis.app.model.FTZ210201Form;
-import com.synesoft.ftzmis.app.model.FTZ210102Form.FTZ210102FormAddDtlDtl;
 import com.synesoft.ftzmis.app.model.FTZ210201Form.FTZ210201FormAddDtlDtl;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
@@ -652,6 +650,43 @@ public class FTZ210201Controller {
 		logger.info("各项贷款批量删除开始...");
 		FtzInMsgCtl del_FtzInMsgCtl = new FtzInMsgCtl();
 		del_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
+		FtzInMsgCtl ftzInMsgCtl = new FtzInMsgCtl();
+		ftzInMsgCtl.setMsgId(form.getSelected_msgId());
+		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+		query_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
+		List<FtzInTxnDtl> ftzInTxnDtls = ftz210201Serv
+				.queryFtzInTxnDtlList(query_FtzInTxnDtl);
+
+		if (null != ftzInTxnDtls) {
+			for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
+				if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl
+						.getChkStatus())) {
+					model.addAttribute(ResultMessages.error().add(
+							"e.ftzmis.210101.0035"));
+					form.setSelected_msgId("");
+					logger.info("各项贷款查询批量删除结束...");
+					return "forward:/FTZ210201/AddQry";
+				}
+			}
+		}
+
+		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
+		query_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
+		// 查询数据
+		FtzInMsgCtl result_FtzInMsgCtl = ftz210201Serv
+				.queryFtzInMsgCtl(query_FtzInMsgCtl);
+		if (!CommonConst.FTZ_MSG_STATUS_INPUTING.equals(result_FtzInMsgCtl
+				.getMsgStatus())
+				&& !CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED
+						.equals(result_FtzInMsgCtl.getMsgStatus())
+				&& !CommonConst.FTZ_MSG_STATUS_AUTH_FAIL
+						.equals(result_FtzInMsgCtl.getMsgStatus())) {
+			model.addAttribute(ResultMessages.error().add(
+					"e.ftzmis.210101.0036"));
+			form.setSelected_msgId("");
+			logger.info("各项贷款查询批量删除结束...");
+			return "forward:/FTZ210201/AddQry";
+		}
 
 		int i = ftz210201Serv.deleteFtzInMsgCtl(del_FtzInMsgCtl);
 
@@ -980,7 +1015,7 @@ public class FTZ210201Controller {
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
 		
 		// 设置批量头信息
-		MsgHead mh = MsgHead.getMsgHead();
+		FtzMsgHead mh = FtzMsgHead.getMsgHead();
 		insert_FtzInMsgCtl.setVer(mh.getVER());
 		insert_FtzInMsgCtl.setSrc(mh.getSRC());
 		insert_FtzInMsgCtl.setDes(mh.getDES());
@@ -1192,9 +1227,10 @@ public class FTZ210201Controller {
 				}
 			}
 			if (count_unAuth > 0) {
-				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0024",
-						sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+				//model.addAttribute(ResultMessages.error().add(
+				//		"e.ftzmis.210101.0024",
+				//		sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+				model.addAttribute(ResultMessages.info().add("i.ftzmis.210210.0009"));
 				return "forward:/FTZ210201/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
@@ -1222,7 +1258,7 @@ public class FTZ210201Controller {
 			} else {
 				if (update_FtzInMsgCtl.getMsgStatus().equals(
 						CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-					generateXml.writeXml(update_FtzInMsgCtl.getMsgNo(),
+					generateXml.submitMsg(update_FtzInMsgCtl.getMsgNo(),
 							update_FtzInMsgCtl.getMsgId());
 				}
 				model.addAttribute(ResultMessages.success().add(
@@ -1330,7 +1366,7 @@ public class FTZ210201Controller {
 	protected FTZ210201Service ftz210201Serv;
 
 	@Resource
-	protected GenerateXml generateXml;
+	protected FtzMsgProcService generateXml;
 
 	@Resource
 	protected NumberService numberService;

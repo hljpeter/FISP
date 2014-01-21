@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -23,10 +22,9 @@ import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
-import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
-import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
-import com.synesoft.ftzmis.app.model.FTZ210101Form;
 import com.synesoft.ftzmis.app.model.FTZ210202Form;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
@@ -456,7 +454,43 @@ public class FTZ210202Controller {
 		logger.info("有价证券批量删除开始...");
 		FtzInMsgCtl del_FtzInMsgCtl = new FtzInMsgCtl();
 		del_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
+		FtzInMsgCtl ftzInMsgCtl = new FtzInMsgCtl();
+		ftzInMsgCtl.setMsgId(form.getSelected_msgId());
+		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+		query_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
+		List<FtzInTxnDtl> ftzInTxnDtls = ftz210202Serv
+				.queryFtzInTxnDtlList(query_FtzInTxnDtl);
 
+		if (null != ftzInTxnDtls) {
+			for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
+				if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl
+						.getChkStatus())) {
+					model.addAttribute(ResultMessages.error().add(
+							"e.ftzmis.210101.0035"));
+					form.setSelected_msgId("");
+					logger.info("有价证券查询批量删除结束...");
+					return "forward:/FTZ210202/AddQry";
+				}
+			}
+		}
+
+		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
+		query_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
+		// 查询数据
+		FtzInMsgCtl result_FtzInMsgCtl = ftz210202Serv
+				.queryFtzInMsgCtl(query_FtzInMsgCtl);
+		if (!CommonConst.FTZ_MSG_STATUS_INPUTING.equals(result_FtzInMsgCtl
+				.getMsgStatus())
+				&& !CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED
+						.equals(result_FtzInMsgCtl.getMsgStatus())
+				&& !CommonConst.FTZ_MSG_STATUS_AUTH_FAIL
+						.equals(result_FtzInMsgCtl.getMsgStatus())) {
+			model.addAttribute(ResultMessages.error().add(
+					"e.ftzmis.210101.0036"));
+			form.setSelected_msgId("");
+			logger.info("有价证券查询批量删除结束...");
+			return "forward:/FTZ210202/AddQry";
+		}
 		int i = ftz210202Serv.deleteFtzInMsgCtl(del_FtzInMsgCtl);
 
 		if (i < 1) {
@@ -782,7 +816,7 @@ public class FTZ210202Controller {
 		insert_FtzInMsgCtl.setSubmitDate(DateUtil
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
 		// 设置批量头信息
-		MsgHead mh = MsgHead.getMsgHead();
+		FtzMsgHead mh = FtzMsgHead.getMsgHead();
 		insert_FtzInMsgCtl.setVer(mh.getVER());
 		insert_FtzInMsgCtl.setSrc(mh.getSRC());
 		insert_FtzInMsgCtl.setDes(mh.getDES());
@@ -1079,9 +1113,10 @@ public class FTZ210202Controller {
 				}
 			}
 			if (count_unAuth > 0) {
-				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0024",
-						sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+				//model.addAttribute(ResultMessages.error().add(
+				//		"e.ftzmis.210101.0024",
+				//		sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+				model.addAttribute(ResultMessages.info().add("i.ftzmis.210210.0009"));
 				return "forward:/FTZ210202/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
@@ -1109,7 +1144,7 @@ public class FTZ210202Controller {
 			} else {
 				if (update_FtzInMsgCtl.getMsgStatus().equals(
 						CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-					generateXml.writeXml(update_FtzInMsgCtl.getMsgNo(),
+					ftzMsgProcService.submitMsg(update_FtzInMsgCtl.getMsgNo(),
 							update_FtzInMsgCtl.getMsgId());
 				}
 				model.addAttribute(ResultMessages.success().add(
@@ -1125,7 +1160,7 @@ public class FTZ210202Controller {
 	protected FTZ210202Service ftz210202Serv;
 
 	@Resource
-	protected GenerateXml generateXml;
+	protected FtzMsgProcService ftzMsgProcService;
 
 	@Resource
 	protected NumberService numberService;

@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefaults;
@@ -26,9 +27,9 @@ import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
-import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
-import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
 import com.synesoft.ftzmis.app.model.FTZ210401Form;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
@@ -348,7 +349,7 @@ public class FTZ210401Controller {
 		insert_FtzInMsgCtl.setSubmitDate(DateUtil
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
 		// 设置批量头信息
-		MsgHead mh = MsgHead.getMsgHead();
+		FtzMsgHead mh = FtzMsgHead.getMsgHead();
 		insert_FtzInMsgCtl.setVer(mh.getVER());
 		insert_FtzInMsgCtl.setSrc(mh.getSRC());
 		insert_FtzInMsgCtl.setDes(mh.getDES());
@@ -672,6 +673,17 @@ public class FTZ210401Controller {
 		del_FtzInTxnDtl.setMsgId(form.getSelected_msgId());
 		del_FtzInTxnDtl.setSeqNo(form.getSelected_seqNo());
 
+		FtzInTxnDtl result_FtzInTxnDtl = ftz210401Serv.queryFtzInTxnDtl(del_FtzInTxnDtl);
+
+		if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(result_FtzInTxnDtl.getChkStatus())){
+			model.addAttribute(ResultMessages.error().add(
+					"e.ftzmis.210101.0037"));
+			form.setSelected_msgId("");
+			form.setSelected_seqNo(null);
+			return "forward:/FTZ210401/UptDtlInit";
+			
+		}
+		
 		int i = ftz210401Serv.deleteFtzInTxnDtl(del_FtzInTxnDtl);
 
 		if (i < 1) {
@@ -1212,14 +1224,16 @@ public class FTZ210401Controller {
 			}
 			if (count_unAuth > 0) {
 				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0024",
+						"e.ftzmis.210310.0012",
 						sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+				form.setAuthFinishFlag("");
 				return "forward:/FTZ210401/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
 				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0031",
+						"e.ftzmis.210310.0012",
 						sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
+				form.setAuthFinishFlag("");
 				return "forward:/FTZ210401/QryAuthDtl";
 			}
 
@@ -1239,7 +1253,7 @@ public class FTZ210401Controller {
 			} else {
 				if (update_FtzInMsgCtl.getMsgStatus().equals(
 						CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-					generateXml.writeXml(update_FtzInMsgCtl.getMsgNo(),
+					ftzMsgProcService.submitMsg(update_FtzInMsgCtl.getMsgNo(),
 							update_FtzInMsgCtl.getMsgId());
 				}
 				model.addAttribute(ResultMessages.success().add(
@@ -1344,8 +1358,8 @@ public class FTZ210401Controller {
 	@Resource
 	protected FTZ210401Service ftz210401Serv;
 
-	@Resource
-	protected GenerateXml generateXml;
+	@Autowired
+	protected FtzMsgProcService ftzMsgProcService;
 
 	@Resource
 	protected NumberService numberService;

@@ -396,7 +396,7 @@
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<div class="rightPage">
 		<util:pagination page="${page}"
-			query="selected_msgId=${FTZ210505Form.ftzInMsgCtl.msgId}"
+			query="selected_msgId=${FTZ210205Form.ftzInMsgCtl.msgId}"
 			action="${pageUrl}" />
 	</div>
 </div>

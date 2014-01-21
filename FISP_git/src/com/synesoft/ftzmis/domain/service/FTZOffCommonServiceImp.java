@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.domain.model.FtzOffMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzOffTxnDtl;
@@ -516,6 +519,10 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		}
 
 		BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK, result.toString(), ftzOffMsgCtl.toString());
+		if (ftzOffMsgCtlVO.getMsgStatus().equals(
+				CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
+			generateXml.submitMsg(ftzOffMsgCtlVO.getMsgNo(), ftzOffMsgCtlVO.getMsgId());
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -935,4 +942,6 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 	protected FtzOffTxnDtlRepository ftzOffTxnDtlRepository;
 	@Autowired
 	private NumberService numberService;
+	@Resource
+	protected FtzMsgProcService generateXml;
 }

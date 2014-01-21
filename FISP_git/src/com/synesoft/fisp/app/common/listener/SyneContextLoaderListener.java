@@ -15,6 +15,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import cn.com.synesoft.jsynframe.batch.batmonitor.BatchMonitor;
 import cn.com.synesoft.jsynframe.util.ExceptionBase;
 
+import com.synesoft.dataproc.common.util.AppCtxUtil;
 import com.synesoft.fisp.app.common.constants.SQLMap;
 import com.synesoft.fisp.app.common.constants.Table;
 import com.synesoft.fisp.app.common.context.MemoryContextHolder;
@@ -25,6 +26,8 @@ import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.SysParam;
 import com.synesoft.fisp.domain.model.TipsAcctInf;
 import com.synesoft.fisp.domain.model.TipsBaCInf;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcTrd;
 
 /**
  * Web App启动事件
@@ -55,6 +58,10 @@ public class SyneContextLoaderListener extends ContextLoaderListener {
 		initMemoryResourceAll(event.getServletContext());// 初始化内存数据
 
 //		startBatMonitor();// 启动批量框架
+		
+		log.info("开启处理MQ信息队列");
+		FtzMsgProcTrd ftzSendMsg = new FtzMsgProcTrd();
+		new Thread(ftzSendMsg).start();
 	}
 	
 	/**

@@ -129,7 +129,7 @@
 			</tr>
 			<tr>
 				<td class="label_td" colspan="2"><font color="red">* </font> <spring:message
-						code="ftz.label.BALANCE_CODE" /><form:hidden
+						code="ftz.label.BALANCE_CODE" />：<form:hidden
 						path="ftzInMsgCtl.balanceCode" id="balanceCode1" /> <form:select
 						id="balanceCode" path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
@@ -140,7 +140,7 @@
 						class=".input-large" readonly="true" /></td>	
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" /></td>
+				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_PROC_RESULT}" />
@@ -148,7 +148,7 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.CHK_ADD_WORD" /></td>
+						code="ftz.label.addWord" />：</td>
 				<td colspan="3"><form:input id="chkAddWord"
 						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
 						readonly="true" /></td>

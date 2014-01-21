@@ -63,6 +63,9 @@ public interface FtzInMsgCtlRepository {
 	
 	//更新审核状态
 	public int updateAuth(FtzInMsgCtl ftzInMsgCtl) ;
+	
+	//更新报文通讯和反馈状态,通讯功能使用
+	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl);
 
 }
 

@@ -101,7 +101,7 @@
 			alert('<spring:message code="ftz.validate.choose.data" />');
 			return;
 		} else {
-			if ("01" == selected_msgType) {
+			if ("03" == selected_msgType) {
 				alert('<spring:message code="ftz.validate.chk.success"/>');
 				return;
 			}
@@ -224,14 +224,14 @@
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<table class="text-center">
 		<tr>
-			<td width="70%" align="center">
+			<td width="50%" align="center">
 			<input id="add" type="button" class="btn btn-primary" onclick="addDetail();" value="<spring:message code="ftz.label.ADD_MSG" />"> 
 			<input id="upd" type="button" class="btn btn-primary" onclick="updDetail();" value="<spring:message code="ftz.label.UPT_MSG" />"> 
 			<input id="del" type="button" class="btn btn-primary" onclick="delDetail();" value="<spring:message code="ftz.label.DEL_MSG" />">
 			<input id="submit" type="button" class="btn btn-primary" onclick="sbDetail();" value="<spring:message code="ftz.label.FINISH_MSG" />"> 
 			<input id="detail" type="button" class="btn btn-primary" onclick="showDetail();" value="<spring:message code="ftz.label.MSG_Dtl" />">
 			</td>
-			<td width="30%" align="right">
+			<td width="50%" align="right">
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"

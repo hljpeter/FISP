@@ -15,7 +15,6 @@ import com.synesoft.fisp.domain.component.PageHandler;
 import com.synesoft.ftzmis.app.common.constants.SQLMap;
 import com.synesoft.ftzmis.app.common.constants.Table;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.model.vo.FtzInMsgCtlVO;
 
 @Repository
@@ -87,6 +86,12 @@ public class FtzInMsgCtlRepositoryImp implements FtzInMsgCtlRepository {
 	public int updateAuth(FtzInMsgCtl ftzInMsgCtl) {
 		log.debug("FtzInTxnDtlRepositoryImp.update() start ...");
 		return updateDAO.execute(Table.FTZIN_MSG_CTL + "." + SQLMap.UPDATE_BY_CONDITION_SELECTIVE, ftzInMsgCtl);
+	}
+	
+	//更新报文通讯和反馈状态,通讯功能使用
+	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl){
+		log.debug("FtzInTxnDtlRepositoryImp.updateFtzInMsgCtl() start ...");
+		return updateDAO.execute(Table.FTZ_IN_MSG_CTL + "." + SQLMap.UPDATE_PRIMARY_KEY_SELECTIVE, ftzInMsgCtl);
 	}
 }
 

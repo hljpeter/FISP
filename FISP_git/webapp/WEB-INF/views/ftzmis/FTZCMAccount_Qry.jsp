@@ -168,14 +168,14 @@
 						<td style="text-align: center; width: 20px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 70px;"><t:codeValue
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
-						<td class="vtip" style="text-align: center; width: 150px;">${dto.accountName}</td>
-						<td class="vtip" style="text-align: center; width: 150px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: center; width: 100px;">${dto.subAccountNo}</td>
-						<td class="vtip" style="text-align: center; width: 80px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 150px;">${dto.accountName}</td>
+						<td class="vtip" style="text-align: left; width: 150px;">${dto.accountNo}</td>
+						<td class="vtip" style="text-align: left; width: 100px;">${dto.subAccountNo}</td>
+						<td class="vtip" style="text-align: left; width: 80px;"><t:codeValue
 								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>
-						<td class="vtip" style="text-align: center; width: 40px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
 								items="${FTZ_ACC_TYPE}" key="${dto.accType}" type="label" /></td>
-						<td class="vtip" style="text-align: center; width: 50px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
 								items="${FTZ_ACC_STATUS}" key="${dto.accStatus}" type="label" /></td>
 					</tr>
 				</c:forEach>

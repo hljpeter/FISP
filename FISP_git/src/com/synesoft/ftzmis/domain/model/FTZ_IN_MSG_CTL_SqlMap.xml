@@ -94,8 +94,9 @@
 		#errDatetime:VARCHAR#,
 		#rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#)
 	</insert>
+	
+	
 	<update id="updateByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
-
 		update FTZ_IN_MSG_CTL
 		set BRANCH_ID = #branchId:VARCHAR#,
 		VER = #ver:CHAR#,
@@ -137,6 +138,7 @@
 		RSV3 = #rsv3:VARCHAR#
 		where MSG_ID = #msgId:VARCHAR#
 	</update>
+	
 	<update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl">
 
 		update FTZ_IN_MSG_CTL

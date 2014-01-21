@@ -20,18 +20,10 @@ import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
-import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.vo.FtzInMsgCtlVO;
 import com.synesoft.ftzmis.domain.model.vo.FtzInMsgCtlVO;
 import com.synesoft.ftzmis.domain.repository.FtzInMsgCtlRepository;
 import com.synesoft.ftzmis.domain.repository.FtzInTxnDtlRepository;
@@ -177,7 +169,7 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 		ftzInMsgCtl.setMsgNo(msgNo);
 		
 		// 设置批量头信息
-		MsgHead mh = MsgHead.getMsgHead();
+		FtzMsgHead mh = FtzMsgHead.getMsgHead();
 		ftzInMsgCtl.setVer(mh.getVER());
 		ftzInMsgCtl.setSrc(mh.getSRC());
 		ftzInMsgCtl.setDes(mh.getDES());

@@ -130,10 +130,10 @@
 						code="ftz.label.OPP_BANK_CODE1" />：</td>
 				<td><form:input id="oppBankCode" path="ftzInTxnDtl.oppBankCode"
 						class=".input-large" />
-					<button type="button" class="btn btn-small"
-						onclick="queryBankCode()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small"
+						onclick="queryBankCode()" value="<spring:message code="button.label.Search" />" />
+						
+					</td>
 				<td class="label_td"><spring:message
 						code="ftz.label.OPP_BANK_NAME" />：</td>
 				<td><form:input id="oppBankName" path="ftzInTxnDtl.oppBankName"
@@ -157,10 +157,10 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_COUNTRY_CODE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querycountryCode()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small"
+						onclick="querycountryCode()" value="<spring:message code="button.label.Search" />" />
+						
+					</td>
 				<td class="label_td"><spring:message
 						code="ftz.label.DISITRICT_CODE" />：</td>
 				<td><form:select path="ftzInTxnDtl.disitrictCode"
@@ -168,9 +168,9 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>
-					<button type="button" class="btn btn-small" onclick="queryRegion()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small" onclick="queryRegion()" value="<spring:message code="button.label.Search" />" />
+						
+					</td>
 
 			</tr>
 			<tr>
@@ -223,10 +223,10 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TRAN_TYPE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querytranType()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small"
+						onclick="querytranType()" value="<spring:message code="button.label.Search" />" />
+						
+					</td>
 			</tr>
 	<tr><td colspan="4"><hr/></td></tr>
 			<tr>

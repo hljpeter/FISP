@@ -70,5 +70,8 @@ public interface FtzOffMsgCtlRepository {
 	 * 		int - 受影响的行数
 	 */
 	public int updateMsgStatus(FtzOffMsgCtlVO ftzOffMsgCtlVO);
+	
+	//更新表外表头状态(发送报文使用)
+	public int updateFtzOffMsgCtl(FtzOffMsgCtl ftzOffMsgCtl);
 
 }

@@ -27,10 +27,9 @@ import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
-import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
-import com.synesoft.ftzmis.app.common.xmlproc.MsgHead;
-import com.synesoft.ftzmis.app.model.FTZ210101Form;
 import com.synesoft.ftzmis.app.model.FTZ210112Form;
 import com.synesoft.ftzmis.app.model.FTZ210112Form.FTZ210112FormAddDtlDtl;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
@@ -175,7 +174,7 @@ public class FTZ210112Controller {
 						"e.ftzmis.210301.0008"));
 			} else {
 				if(update_FtzInMsgCtl.getMsgStatus().equals(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)){
-					generateXml.writeXml(update_FtzInMsgCtl.getMsgNo(),update_FtzInMsgCtl.getMsgId());
+					generateXml.submitMsg(update_FtzInMsgCtl.getMsgNo(),update_FtzInMsgCtl.getMsgId());
 				}
 				model.addAttribute(ResultMessages.success().add(
 						"i.ftzmis.210301.0005"));
@@ -187,7 +186,7 @@ public class FTZ210112Controller {
 		return "ftzmis/FTZ210112_Auth_Qry_Dtl";
 	}
 	@Resource
-	protected GenerateXml generateXml;
+	protected FtzMsgProcService generateXml;
 	@RequestMapping("QryAuthDtl")
 	public String queryAuthDtl(Model model, FTZ210112Form form,
 			@PageableDefaults Pageable pageable) {
@@ -622,7 +621,7 @@ public class FTZ210112Controller {
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
 		
 		// 设置批量头信息
-		MsgHead mh = MsgHead.getMsgHead();
+		FtzMsgHead mh = FtzMsgHead.getMsgHead();
 		insert_FtzInMsgCtl.setVer(mh.getVER());
 		insert_FtzInMsgCtl.setSrc(mh.getSRC());
 		insert_FtzInMsgCtl.setDes(mh.getDES());

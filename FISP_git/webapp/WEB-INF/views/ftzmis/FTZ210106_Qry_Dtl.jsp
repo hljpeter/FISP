@@ -142,7 +142,7 @@
 						class=".input-large" readonly="true" /></td>	
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" /></td>
+				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_PROC_RESULT}" />
@@ -150,7 +150,7 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.CHK_ADD_WORD" /></td>
+						code="ftz.label.addWord" />：</td>
 				<td colspan="3"><form:input id="chkAddWord"
 						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
 						readonly="true" /></td>

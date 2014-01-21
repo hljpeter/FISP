@@ -394,4 +394,75 @@
 	    	WORK_DATE DESC
 	</select>
 	
+	
+	<update id="updateByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzOffMsgCtl">
+		update FTZ_OFF_MSG_CTL
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="branchId">
+				BRANCH_ID = #branchId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="ver">
+				VER = #ver:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="src">
+				SRC = #src:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="des">
+				DES = #des:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="app">
+				APP = #app:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgNo">
+				MSG_NO = #msgNo:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgRef">
+				MSG_REF = #msgRef:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="workDate">
+				WORK_DATE = #workDate:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="editFlag">
+				EDIT_FLAG = #editFlag:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="reserve">
+				RESERVE = #reserve:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="result">
+				RESULT = #result:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="addWord">
+				ADD_WORD = #addWord:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgStatus">
+				MSG_STATUS = #msgStatus:CHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makUserId">
+				MAK_USER_ID = #makUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="makDatetime">
+				MAK_DATETIME = #makDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkUserId">
+				CHK_USER_ID = #chkUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="chkDatetime">
+				CHK_DATETIME = #chkDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="sndUserId">
+				SND_USER_ID = #sndUserId:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="sndDatetime">
+				SND_DATETIME = #sndDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="ackDatetime">
+				ACK_DATETIME = #ackDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="errDatetime">
+				ERR_DATETIME = #errDatetime:VARCHAR#
+			</isNotNull>
+		</dynamic>
+		where MSG_ID = #msgId:VARCHAR#
+	</update>
+	
 </sqlMap>

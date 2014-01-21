@@ -14,6 +14,7 @@ import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
@@ -23,8 +24,8 @@ import com.synesoft.ftzmis.domain.repository.FTZ210101Repository;
 
 @Service
 public class FTZ210104ServiceImp implements FTZ210104Service {
-	
-	protected static String funcId ="FTZ_Add_210104";
+
+	protected static String funcId = "FTZ_Add_210104";
 
 	@Override
 	public FtzInMsgCtl queryFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
@@ -239,6 +240,7 @@ public class FTZ210104ServiceImp implements FTZ210104Service {
 	@Transactional
 	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl,
 			List<FtzInTxnDtl> ftzInTxnDtls) {
+		int i = 0;
 		if (null == ftzInTxnDtls) {
 			FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
 			query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
@@ -400,7 +402,7 @@ public class FTZ210104ServiceImp implements FTZ210104Service {
 					time.substring(0, 8), time.substring(8, 14),
 					beforeData.toString(), afterData.toString());
 
-			return ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+			i = ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
 		} else {
 			for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
 				this.updateFtzInTxnDtlSelective(ftzInTxnDtl);
@@ -564,9 +566,15 @@ public class FTZ210104ServiceImp implements FTZ210104Service {
 					userInfo.getUserid(), userInfo.getUsername(), "M",
 					time.substring(0, 8), time.substring(8, 14),
 					beforeData.toString(), afterData.toString());
-			return ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+			i = ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
 		}
 
+		if (ftzInMsgCtl.getMsgStatus().equals(
+				CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
+			generateXml.submitMsg(ftzInMsgCtl.getMsgNo(),
+					ftzInMsgCtl.getMsgId());
+		}
+		return i;
 	}
 
 	@Override
@@ -1018,4 +1026,8 @@ public class FTZ210104ServiceImp implements FTZ210104Service {
 
 	@Resource
 	protected FTZ210101Repository ftz210101Repos;
+
+	@Resource
+	protected FtzMsgProcService generateXml;
+
 }

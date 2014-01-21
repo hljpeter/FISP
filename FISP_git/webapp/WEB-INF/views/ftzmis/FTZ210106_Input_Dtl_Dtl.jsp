@@ -163,10 +163,10 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TRAN_TYPE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querytranType()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small"
+						onclick="querytranType()" value="<spring:message code="button.label.Search" />" />
+						
+				</td>
 			</tr>
 			
 			<tr>

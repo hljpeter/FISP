@@ -31,7 +31,7 @@ public class FTZ210203RepositoryImp implements FTZ210203Repository {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.synesoft.ftzmis.domain.repository.FTZ210101Repository#
+	 * @see com.synesoft.ftzmis.domain.repository.FTZ210203Repository#
 	 * queryFtzInMsgCtlPageInput(org.springframework.data.domain.Pageable,
 	 * com.synesoft.ftzmis.domain.model.FtzInMsgCtl)
 	 */
@@ -99,7 +99,7 @@ public class FTZ210203RepositoryImp implements FTZ210203Repository {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.synesoft.ftzmis.domain.repository.FTZ210101Repository#queryFtzActMstrs
+	 * com.synesoft.ftzmis.domain.repository.FTZ210203Repository#queryFtzActMstrs
 	 * (com.synesoft.ftzmis.domain.model.FtzActMstr)
 	 */
 	@Override

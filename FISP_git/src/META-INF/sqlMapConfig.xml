@@ -97,8 +97,8 @@
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_ACT_MSTR_TMP_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_BALANCE_CODE_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_BANK_CODE_SqlMap.xml"/>
-	
-	
-		<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_MSG_CTL.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_MSG_CTL.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_TXN_DTL.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_MSG_PROC_SqlMap.xml"/>
+	
 </sqlMapConfig>

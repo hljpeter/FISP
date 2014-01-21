@@ -2039,38 +2039,6 @@
 		</property>
 	</bean>
 
-	<bean id="BM_0013"
-		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
-		<property name="rowsByCodeList">
-			<util:map>
-				<entry key="en_US" value-ref="BM_0013_EN" />
-				<entry key="zh_CN" value-ref="BM_0013_ZH" />
-			</util:map>
-		</property>
-	</bean>
-
-	<bean id="BM_0013_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
-		lazy-init="true">
-		<property name="dataSource" ref="dataSource" />
-		<property name="querySql"
-			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='00001' and META_LAN='en_US'" />
-		<property name="valueColumn" value="META_VAL" />
-		<property name="labelColumn" value="META_NAME" />
-		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
-
-	</bean>
-
-	<bean id="BM_0013_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
-		lazy-init="true">
-		<property name="dataSource" ref="dataSource" />
-		<property name="querySql"
-			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='00001' and META_LAN='zh_CN'" />
-		<property name="valueColumn" value="META_VAL" />
-		<property name="labelColumn" value="META_NAME" />
-		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
-
-	</bean>
-
 	<!--数据转换- 处理类型 -->
 	<bean id="DP_0020"
 		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">

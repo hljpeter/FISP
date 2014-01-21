@@ -383,6 +383,10 @@ public class FTZ210501Controller {
 			model.addAttribute("errmsg", e.getResultMessages());
 			return "ftzmis/FTZ210501_Input_Upd";
 		}
+		form.getFtzActMstr().setMakDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(form
+				.getFtzActMstr().getMakDatetime()));
+		form.getFtzActMstr().setChkDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(
+				form.getFtzActMstr().getChkDatetime()));
 		model.addAttribute("successmsg", ResultMessages.success().add("i.sm.0002"));
 		model.addAttribute("updFlag", "1");
 		logger.info("账户信息修改提交结束...");

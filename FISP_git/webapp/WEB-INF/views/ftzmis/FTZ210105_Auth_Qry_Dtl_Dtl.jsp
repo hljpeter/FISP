@@ -154,7 +154,6 @@
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.ASSETS_VALUE1" />：</td>
 				<td><t:moneyFormat type="text" id="assetsValue"
-						name="ftzInTxnDtl.assetsValue"
 						value="${FTZ210105Form.ftzInTxnDtl.assetsValue}"
 						format="###,###,###,###.00" dot="true" readonly="true" /></td>
 			</tr>

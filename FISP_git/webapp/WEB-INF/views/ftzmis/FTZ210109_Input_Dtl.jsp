@@ -347,7 +347,7 @@
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.OPP_BANK_CODE1" /></th>
 					<th style="vertical-align: middle; text-align: center"
-						width="150px"><spring:message code="ftz.label.OPP_NAME1" /></th>
+						width="100px"><spring:message code="ftz.label.OPP_NAME1" /></th>
 					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
 							code="ftz.label.DTL_STATUS" /></th>
 				</tr>

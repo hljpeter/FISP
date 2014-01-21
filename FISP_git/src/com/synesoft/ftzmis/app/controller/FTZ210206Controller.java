@@ -1,6 +1,5 @@
 package com.synesoft.ftzmis.app.controller;
 
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -31,25 +30,16 @@ import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
-import com.synesoft.ftzmis.app.common.xmlproc.GenerateXml;
-
-import com.synesoft.ftzmis.app.model.FTZ210101Form;
-import com.synesoft.ftzmis.app.model.FTZ210206Form;
-import com.synesoft.ftzmis.app.model.FTZ210206Form;
 import com.synesoft.ftzmis.app.model.FTZ210206Form;
 import com.synesoft.ftzmis.app.model.FTZ210206Form.FTZInFormMsgKey;
-import com.synesoft.ftzmis.app.model.FTZ210206Form.FTZInFormMsgQry;
 import com.synesoft.ftzmis.app.model.FTZ210206Form.FTZInFormTxnKey;
-
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.model.vo.FtzInMsgCtlVO;
-import com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO;
 import com.synesoft.ftzmis.domain.service.FTZ210101Service;
 import com.synesoft.ftzmis.domain.service.FTZInCommonService;
 
@@ -856,7 +846,7 @@ public class FTZ210206Controller {
 			
 			
 			ftz210206Service.authMsgCtl(form.getFtzInMsgCtl());
-			generateXml.writeXml(form.getFtzInMsgCtl().getMsgNo(),
+			ftzMsgProcService.submitMsg(form.getFtzInMsgCtl().getMsgNo(),
 					form.getFtzInMsgCtl().getMsgId());
 			model.addAttribute(ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0005")));
 			return "forward:/FTZ210206/Auth/DtlMsg/Init";
@@ -1043,5 +1033,5 @@ public class FTZ210206Controller {
 	private FTZ210101Service ftz210101Service;
 	
 	@Resource
-	protected GenerateXml generateXml;
+	private FtzMsgProcService ftzMsgProcService;
 }

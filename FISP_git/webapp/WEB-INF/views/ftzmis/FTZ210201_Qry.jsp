@@ -205,7 +205,7 @@
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZ210201Form.query_branchId}&query_submitDate_start=${FTZ210201Form.query_submitDate_start}&query_submitDate_end=${FTZ210201Form.query_submitDate_end}&query_msgId=${FTZ210201Form.query_msgId}&query_accountName=${FTZ210201Form.query_accountName}&query_accountNo=${FTZ210201Form.query_accountNo}&query_msgStatus=${FTZ210201Form.query_msgStatus}"
+								query="query_branchId=${FTZ210201Form.query_branchId}&query_submitDate_start=${FTZ210201Form.query_submitDate_start}&query_submitDate_end=${FTZ210201Form.query_submitDate_end}&query_msgId=${FTZ210201Form.query_msgId}&query_accountName=${FTZ210201Form.query_accountName}&query_accountNo=${FTZ210201Form.query_accountNo}&query_subAccountNo=${FTZ210201Form.query_subAccountNo}&query_msgStatus=${FTZ210201Form.query_msgStatus}&query_msgNo=${FTZ210201Form.query_msgNo}"
 								action="/FTZ210201/Qry" /></td>
 					</tr>
 				</table>

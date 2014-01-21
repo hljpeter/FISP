@@ -82,6 +82,14 @@ public class FtzOffMsgCtlRepositoryImp implements FtzOffMsgCtlRepository {
 		return updateDAO.execute(Table.FTZ_OFF_MSG_CTL + "." + SQLMap.DELETE_PRIMARY_KEY, ftzOffMsgCtlVO);
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see com.synesoft.ftzmis.domain.repository.FtzOffMsgCtlRepository#updateMsg(com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO)
+	 */
+	public int updateFtzOffMsgCtl(FtzOffMsgCtl ftzOffMsgCtl) {
+		log.debug("FtzOffMsgCtlRepositoryImp.updateFtzOffMsgCtl() start ...");
+		return updateDAO.execute(Table.FTZ_OFF_MSG_CTL + "." + SQLMap.UPDATE_PRIMARY_KEY, ftzOffMsgCtl);
+	}
 	@Resource
 	private UpdateDAO updateDAO;
 	@Resource

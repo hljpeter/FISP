@@ -6,10 +6,10 @@ import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 
 public class FTZ210205Form {
 
-	public static interface FTZ210101FormAddDtl {
+	public static interface FTZ210205FormAddDtl {
 	}
 
-	public static interface FTZ210101FormAddDtlDtl {
+	public static interface FTZ210205FormAddDtlDtl {
 	}
 
 	private FtzInMsgCtl ftzInMsgCtl;

@@ -13,9 +13,6 @@ $(function() {
 	if (updFlag == '1') {
 		$("input:not([id='selected_msgId'])").attr("disabled", true);
 		$("select").attr("disabled", true);
-		$("#bankCode").hide();
-		$("#country").hide();
-		$("#district").hide();
 		if ('addTxn' == actionFlag) {
 			$("#add").removeAttr("disabled");
 		}

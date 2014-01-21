@@ -81,4 +81,17 @@ public class Validator {
 		Matcher matcher = pattern.matcher(rate.toString());
 		return matcher.find();
 	}
+	
+	/**
+	 * 匹配利率，符号1位，整数2位，小数6位
+	 * @param amount
+	 * @return
+	 * <p>&nbsp;&nbsp;TRUE - 校验通过，是</p>
+	 * <p>&nbsp;&nbsp;FALSE - 校验不通过，否</p>
+	 */
+	public static Boolean CheckInterestRate(BigDecimal rate) {
+		Pattern pattern = Pattern.compile("^-?[0-9]{1,2}(.[0-9]{6})?$");
+		Matcher matcher = pattern.matcher(rate.toString());
+		return matcher.find();
+	}
 }

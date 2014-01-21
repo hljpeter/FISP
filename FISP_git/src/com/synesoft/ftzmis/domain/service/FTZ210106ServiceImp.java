@@ -683,7 +683,7 @@ public class FTZ210106ServiceImp implements FTZ210106Service {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.synesoft.ftzmis.domain.service.FTZ210101Service#queryFtzActMstrs(
+	 * com.synesoft.ftzmis.domain.service.FTZ210106Service#queryFtzActMstrs(
 	 * com.synesoft.ftzmis.domain.model.FtzActMstr)
 	 */
 	@Override
@@ -1008,7 +1008,7 @@ public class FTZ210106ServiceImp implements FTZ210106Service {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.synesoft.ftzmis.domain.service.FTZ210101Service#queryFtzBankCode(
+	 * com.synesoft.ftzmis.domain.service.FTZ210106Service#queryFtzBankCode(
 	 * com.synesoft.ftzmis.domain.model.FtzBankCode)
 	 */
 	@Override

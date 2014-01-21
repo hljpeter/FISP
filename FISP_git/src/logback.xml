@@ -24,7 +24,9 @@
     <logger name="com.synesoft">
         <level value="debug" />
     </logger>
-    
+    <logger name="com.synesoft.ftzmis.app.common">
+        <level value="info" />
+    </logger>
     <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core">
         <level value="warn" />
@@ -52,7 +54,7 @@
     </logger>
 
     <logger name="org.springframework.security.core.userdetails">
-        <level value="debug" />
+        <level value="warn" />
     </logger>
     
     <!-- for ibatis -->
