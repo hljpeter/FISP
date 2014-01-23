@@ -1,34 +1,53 @@
 <script type="text/javascript">
 	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if ("01" == msgStatus || "04" == msgStatus) {
-			$("#authPass").attr("disabled", "disabled");
-			$("#authRefuse").attr("disabled", "disabled");
-		}else if("03" == msgStatus){
-			$("#authPass").attr("disabled", "disabled");
-		}else {
-			$("#authPass").removeAttr("disabled");
-			$("#authRefuse").removeAttr("disabled");
-		}
+		$("#pageTable").find("tr").bind('click', function() {
+			var selected_msgId = $(this).find("td:eq(8)").text();
+			var selected_seqNo = $(this).find("td:eq(9)").text();
+			var old_selected_msgId = $("#selected_msgId").val();
+			var old_selected_seqNo = $("#selected_seqNo").val();
+			if (null == old_selected_seqNo) {
+				$("#selected_msgId").val(selected_msgId);
+				$("#selected_seqNo").val(selected_seqNo);
+				return;
+			}
+			if (old_selected_seqNo == selected_seqNo) {
+				$("#selected_msgId").val("");
+				$("#selected_seqNo").val("");
+				return;
+			}
+			if (old_selected_seqNo != selected_seqNo) {
+				$("#selected_msgId").val(selected_msgId);
+				$("#selected_seqNo").val(selected_seqNo);
+				return;
+			}
+
+		});
+		$("#pageTable")
+				.find("tr")
+				.bind(
+						'dblclick',
+						function() {
+							var selected_msgId = $(this).find("td:eq(8)")
+									.text();
+							var selected_seqNo = $(this).find("td:eq(9)")
+									.text();
+							showDialog('${pageContext.request.contextPath}/FTZ210112/QryDtlDtl?selected_msgId='
+									+ selected_msgId
+									+ "&selected_seqNo="
+									+ selected_seqNo,'500','1024');
+						});
 	});
-	function authPass() {
-		$("#amount").val($("#amount").val().replaceAll(",", ""));
-		$("#balance").val($("#balance").val().replaceAll(",", ""));
-		$("#selected_msgId").val($("#msgId").val());
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210112/AuthDtlSubmit?authStat=1";
-		form.submit();
-	
-	}
-	function authRefuse() {
-		$("#amount").val($("#amount").val().replaceAll(",", ""));
-		$("#balance").val($("#balance").val().replaceAll(",", ""));
-		$("#selected_msgId").val($("#msgId").val());
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210112/AuthDtlSubmit?authStat=0";
-		form.submit();
-		$("#authPass").attr("disabled", "disabled");
-		$("#authRefuse").attr("disabled", "disabled");
+	function showDetaildetail() {
+		var selected_msgId = $("#selected_msgId").val();
+		var selected_seqNo = $("#selected_seqNo").val();
+		if (null == selected_seqNo || "" == selected_seqNo) {
+			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
+			return;
+		} else {
+			showDialog('${pageContext.request.contextPath}/FTZ210112/QryDtlDtl?selected_msgId='
+					+ selected_msgId + "&selected_seqNo="
+					+ selected_seqNo,'500','1024');
+		}
 	}
 </script>
 
@@ -49,7 +68,7 @@
 </div>
 
 <div class="page_title">
-	<spring:message code="ftzmis.title.210112.auth.dtl" />
+	<spring:message code="ftzmis.title.210211.qry.dtl" />
 </div>
 
 <div class="row">
@@ -58,9 +77,6 @@
 		method="post" modelAttribute="FTZ210112Form" class="form-horizontal">
 		<form:hidden path="selected_msgId" id="selected_msgId" />
 		<form:hidden path="selected_seqNo" id="selected_seqNo" />
-		<form:hidden path="ftzInMsgCtl.makDatetime" id="makDatetime" />
-		<form:hidden path="ftzInMsgCtl.chkDatetime" id="chkDatetime" />
-		<form:hidden path="unAuthFlag" id="unAuthFlag" />
 		<table class="tbl_search">
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID" />：</td>
@@ -79,7 +95,7 @@
 						class=".input-large" readonly="true" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUS" />：</td>
-				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true" id="msgStatus">
+				<td><form:select path="ftzInMsgCtl.msgStatus" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>
@@ -95,24 +111,25 @@
 						class=".input-large" readonly="true" /></td>
 			</tr>
 			<tr>
+				<td class="label_td"><spring:message code="ftz.label.CURRENCY" />：</td>
+				<td><form:select path="ftzInMsgCtl.currency" disabled="true">
+						<form:option value=""></form:option>
+						<form:options items="${SYS_CURRENCY}" />
+					</form:select></td>
+				<td class="label_td"><spring:message
+						code="ftz.label.DAILY_BALANCE" />：</td>
+				<td><t:moneyFormat type="text"
+						value="${FTZ210112Form.ftzInMsgCtl.balance}"
+						format="###,###,###,###.00" dot="true" readonly="true" />
+			</tr>
+			<tr>
 				<td colspan="2" class="label_td"><spring:message
 						code="ftz.label.BALANCE_CODE" />：<form:select
 						path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_BALANCE_INDEX_CODE}" />
 					</form:select></td>
-				<td class="label_td"><spring:message code="ftz.label.CURRENCY" />：</td>
-				<td><form:select path="ftzInMsgCtl.currency" disabled="true">
-						<form:option value=""></form:option>
-						<form:options items="${SYS_CURRENCY}" />
-					</form:select></td>
-			</tr>
-			<tr>
-				<td class="label_td"><spring:message
-						code="ftz.label.DAILY_BALANCE" />：</td>
-				<td><t:moneyFormat type="text"
-						value="${FTZ210112Form.ftzInMsgCtl.balance}"
-						format="###,###,###,###.00" dot="true" readonly="true" id="balance"/>
+
 				<td class="label_td"><spring:message
 						code="ftz.label.ACC_ORG_CODE" />：</td>
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
@@ -133,12 +150,9 @@
 				<td><t:moneyFormat type="text" id="amount"
 						name="ftzInTxnDtl.amount"
 						value="${FTZ210112Form.ftzInTxnDtl.amount}"
-						format="###,###,###,###.00" dot="true"  readonly="true" /></td>
+						format="###,###,###,###.00" dot="true"  readonly="true"/></td>
 			</tr>
-
-		</table>
-
-		<table class="tbl_search">
+			<tr class="dtl"><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.PBOC_STATUS" />：</td>
@@ -177,36 +191,20 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.CHK_ADD_WORD" />：</td>
 				<td colspan="3"><form:input id="chkAddWord"
-						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge" /></td>
+						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge" readonly="true" /></td>
 			</tr>
 		</table>
+
 	</form:form>
 </div>
+
 
 <div class="row" style="margin-bottom: 40px;">
 	<div class="navbar navbar-fixed-bottom text-center" id="footer"
 		style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
-		<input id=authPass type="button" class="btn btn-primary"
-			onclick="authPass()" value="<spring:message code="ftz.label.AUTH" />">
-		<input id="authRefuse" type="button" class="btn btn-primary"
-			onclick="authRefuse()"
-			value="<spring:message code="ftz.label.UNAUTH" />"> <input
-			type="button" class="btn btn-primary" id="clswin"
+		<input
+			type="button" class="btn btn-primary"
 			onclick="javascript:window.close();"
 			value="<spring:message code="button.lable.close"/>">
 	</div>
 </div>
-<script type="text/javascript">
-	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if ("01" == msgStatus || "04" == msgStatus) {
-			$("#authPass").attr("disabled", "disabled");
-			$("#authRefuse").attr("disabled", "disabled");
-		}else if("03" == msgStatus){
-			$("#authPass").attr("disabled", "disabled");
-		}else {
-			$("#authPass").removeAttr("disabled");
-			$("#authRefuse").removeAttr("disabled");
-		}
-	});
-</script>

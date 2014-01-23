@@ -136,8 +136,10 @@
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.OPP_ACCOUNT" />：</td>
-				<td><form:input id="oppAccount" path="ftzInTxnDtl.oppAccount"
-						class=".input-large" /></td>
+				<td>
+					<form:input path="ftzInTxnDtl.oppAccount" type="text" class="input-large" maxlength="35"
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
+				</td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName"
 						class=".input-large" /></td>

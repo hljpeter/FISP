@@ -83,8 +83,10 @@ public class FtzInController {
 		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
 		query_FtzInMsgCtl.setMsgId(form.getQuery_msgId());
 		query_FtzInMsgCtl.setBranchId(form.getQuery_branchId().trim());
-		query_FtzInMsgCtl.setRsv1(form.getQuery_workDate_start());
-		query_FtzInMsgCtl.setRsv2(form.getQuery_workDate_end());
+		query_FtzInMsgCtl.setRsv1(DateUtil
+				.getFormatDateRemoveSprit(form.getQuery_workDate_start()));
+		query_FtzInMsgCtl.setRsv2(DateUtil
+				.getFormatDateRemoveSprit(form.getQuery_workDate_end()));
 		query_FtzInMsgCtl.setMsgStatuss(new String[] {
 				CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED,
 				CommonConst.FTZ_MSG_STATUS_INPUTING,

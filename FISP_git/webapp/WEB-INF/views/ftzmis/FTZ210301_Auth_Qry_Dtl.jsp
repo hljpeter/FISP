@@ -69,10 +69,11 @@ $("#dtl").click(function() {
 <div class="row">
 	<form:form id="form" action="${pageContext.request.contextPath}/FTZ210301/Auth/DtlMsg/Auth" method="post" modelAttribute="FTZ210301Form" class="form-horizontal">
 		<form:hidden path="ftzOffMsgCtl.msgId" id="msgId" value="${FTZ210301Form.ftzOffMsgCtl.msgId }"/>
-		<form:hidden path="ftzOffMsgCtl.makUserId"/>
 		<form:hidden path="ftzOffMsgCtl.makDatetime"/>
 		<form:hidden path="ftzOffMsgCtl.editFlag"/>
 		<form:hidden path="operFlag" id="operFlag"/>
+		<form:hidden path="ftzOffMsgCtl.msgStatus"/>
+		<form:hidden path="ftzOffMsgCtl.chkDatetime" id="msg_chkDatetime"/>
 		<table class="tbl_search">
 			<tr>
 	    		<td class="label_td"><spring:message code="ftz.label.New_BRANCH_ID"/>：</td>
@@ -124,7 +125,7 @@ $("#dtl").click(function() {
 			<tbody>
 			<form:form id="FTZ210301Form" action="${pageContext.request.contextPath}" modelAttribute="FTZ210301Form">
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id="${dto.seqNo }">
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
 		          	<td class="tbl_page_td_left vtip" width="20px">${(page.number * page.size) + (i.index + 1)}</td>
 				  	<td class="tbl_page_td_left vtip" width="100px"><t:dateTimeFormat type="label" value="${dto.submitDate}" format="date"/></td>
 		            <td class="tbl_page_td_left vtip" width="80px">${dto.accountNo}</td>
@@ -151,7 +152,7 @@ $("#dtl").click(function() {
 <div class="row">
 	<div class="navbar navbar-fixed-bottom text-right" id="footer" style="text-align:center; margin-bottom:0px; line-height:30px; background-color: #eee; opacity:0.9;">
 		<button id="dtl" name="btnDtl" class="btn btn-primary"><spring:message code="ftz.label.DTL_DTL"/></button>
-		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.MSG_CHK_SUBMIT"/></button>
+		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.AUTH_MSG"/></button>
 		<button id="cls" name="btnClose" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

@@ -40,11 +40,11 @@
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_DATE" />：</td>
 				<td><form:input id="tranDate" path="ftzInTxnDtl.tranDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						 class="input-large" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						 class="input-large" /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -102,9 +102,9 @@
 						code="ftz.label.TERM_LENGTH"  />：</td>
 				<td><form:input id="termLength" path="ftzInTxnDtl.termLength" readonly="true"
 						class=".input-large"  onkeyup="numberStringFormat(this);" onbeforepaste="numberStringFormatCopy(this);"/></td>
-				<td class="label_td"><spring:message
+				<td class="label_td"><font color="red">*</font><spring:message
 						code="ftz.label.TERM_UNIT" />：</td>
-				<td><font color="red">*</font><form:select path="ftzInTxnDtl.termUnit" disabled="true"
+				<td><form:select path="ftzInTxnDtl.termUnit" disabled="true"
 						id="termUnit">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TERM_UNIT}" />
@@ -115,12 +115,12 @@
 				<td class="label_td"><font color="red">*</font><spring:message
 						code="210207ftz.label.VALUE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.valueDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						 class="input-large" /></td>
 						
 						<td class="label_td"><spring:message
 						code="ftz.label.EXPIRE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.expireDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						 class="input-large" /></td>
 			</tr>
 			
 			<tr>

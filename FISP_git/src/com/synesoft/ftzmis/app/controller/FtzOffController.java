@@ -171,7 +171,7 @@ public class FtzOffController {
 		if (CommonConst.MSG_NO_210301.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210301/Auth/DtlMsg/Init?operFlag=2&FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210302.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210302/QryAuthDtl?selected_msgId="+ form.getSelected_msgId()+"&unAuthFlag=1";
+			return "redirect:/FTZ210302/Auth/DtlMsg/Init?operFlag=2&FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210303.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210303/Auth/DtlMsg/Init?operFlag=2&FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210304.equals(form.getSelected_msgNo())) {
@@ -207,7 +207,7 @@ public class FtzOffController {
 		if (CommonConst.MSG_NO_210301.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210301/Auth/DtlMsg/Init?operFlag=1&FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210302.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210302/QryAuthDtl?selected_msgId="+ form.getSelected_msgId();
+			return "redirect:/FTZ210302/Auth/DtlMsg/Init?operFlag=1&FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210303.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210303/Auth/DtlMsg/Init?operFlag=1&FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210304.equals(form.getSelected_msgNo())) {

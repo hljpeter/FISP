@@ -1,40 +1,42 @@
 <script type="text/javascript">
-	function updateDetail() {
-		$("#amount").val($("#amount").val().replaceAll(",", ""));
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210302/UpdDtlDtlSubmit";
-		form.submit();
-	}
+$(function() {
+var success = '${successmsg }';
+if (success && success != "") {
+	$("button[name=btnChk]").attr("disabled", true);
+	$("input").attr("readonly", true);
+}
+var error = '${errmsg }';
+if (error && error != "") {
+	$("button[name=btnChk]").attr("disabled", true);
+	$("input").attr("readonly", true);
+}
+var msg = '${FTZ210302Form.msg }';
+if (msg && msg != "") {
+	//$("#notice").css("display", "");
+	//$("#next").attr("disabled", true);
+}
 	
+var status= '${FTZ210302Form.ftzOffTxnDtl.chkStatus }';
+if (status && status == '03') {
+	$("#chkPass").attr("disabled", true);
+	$("#chkRej").attr("disabled", false);
+	$("#chkAddWord").attr("readonly", false);
+}
+	
+$("button[name=btnChk]").click(function() {
+	$("#amount").val($("#amount").val().replaceAll(",", ""));
+	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210302/Auth/DtlTxn/Auth");
+	$("#form").submit();
+});
 
-	function queryShowSelReg() {
-		showSelReg([ {
-			"districtCode" : "param1"
-		} ]);
-	};
-	
-	function queryShowAllOrg1(){
-		showAllOrg([{"accOrgCode":"param1"}]);
-	}
-	
-	function queryShowAllOrg2(){
-		showAllOrg([{"institutionCode":"param1"}]);
-	}
-	
-	function authPass() {
-		$("#amount").val($("#amount").val().replaceAll(",",""));
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210302/AuthDtlDtlSubmit?authStat=1";
-		form.submit();
-	}
+$("#next").click(function() {
+	$("#amount").val($("#amount").val().replaceAll(",", ""));
+	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210302/Auth/DtlTxn/Next");
+	$("#form").submit();
+});
 
-	function authRefuse() {
-		$("#amount").val($("#amount").val().replaceAll(",",""));
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210302/AuthDtlDtlSubmit?authStat=0";
-		form.submit();
-	}
-	
+});
+
 </script>
 <div id="id_showMsg" style="display: none">
 	<br /> <br />
@@ -55,10 +57,11 @@
 <div class="page_title"><spring:message code="ftzmis.title.210302.input.txn" /><!-- 应付信用证录入/修改 - 批量明细 - 明细详情 --></div>
 
 <div class="row">
-	<form:form id="form"
-		action="${pageContext.request.contextPath}/BMG_TASK_Qry/Qry"
-		method="post" modelAttribute="FTZ210302Form" class="form-horizontal">
+	<form:form id="form" action="${pageContext.request.contextPath}" method="post" modelAttribute="FTZ210302Form" class="form-horizontal">
 		<form:hidden path="ftzOffTxnDtl.msgId" id="msgId"/>
+		<form:hidden path="operFlag" id="operFlag"/>
+		<form:hidden path="msg"/>
+		<form:hidden path="ftzOffTxnDtl.chkStatus"/>
 		<table class="tbl_search">
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.SEQ_NO" /><!-- 明细序号 -->：</td>
@@ -186,8 +189,9 @@
 <div class="row" style="margin-bottom: 40px;">
 	<div class="navbar navbar-fixed-bottom text-center" id="footer"
 		style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
-		<input id=authPass type="button" class="btn btn-primary" onclick="authPass()" value="<spring:message code="ftz.label.AUTH" />"> 
-		<input id="authRefuse" type="button" class="btn btn-primary" onclick="authRefuse()" value="<spring:message code="ftz.label.UNAUTH" />">
-		<input type="button" class="btn btn-primary" onclick="javascript:window.close();" value="<spring:message code="button.lable.close"/>">
+		<button id="chkPass" name="btnChk" class="btn btn-primary" onclick='javascript: $("#operFlag").val("03");'><spring:message code="ftz.label.AUTH"/></button>
+		<button id="chkRej" name="btnChk" class="btn btn-primary" onclick='javascript: $("#operFlag").val("04");'><spring:message code="ftz.label.UNAUTH"/></button>
+		<!--<button id="next" name="btn" class="btn btn-primary"><spring:message code="ftz.label.NEXT"/></button>-->
+		<button id="cls" name="btn" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

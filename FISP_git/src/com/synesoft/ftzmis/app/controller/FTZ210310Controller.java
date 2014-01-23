@@ -24,6 +24,7 @@ import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.common.util.Validator;
 import com.synesoft.ftzmis.app.model.FTZ210310Form;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzOffMsgCtl;
@@ -248,26 +249,38 @@ public class FTZ210310Controller {
 		}
 		
 		//买入金额
-		if ("".equals(ftzOffTxnDtl.getBuyAmt()) || null == ftzOffTxnDtl.getBuyAmt()) {
+		if (null == ftzOffTxnDtl.getBuyAmt()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0004");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(ftzOffTxnDtl.getBuyAmt())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0001");
 			resultMessages.add(resultMessage);
 		}
 		
 		//卖出金额
-		if ("".equals(ftzOffTxnDtl.getSellAmt()) || null == ftzOffTxnDtl.getSellAmt()) {
+		if (null == ftzOffTxnDtl.getSellAmt()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0005");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(ftzOffTxnDtl.getSellAmt())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0003");
 			resultMessages.add(resultMessage);
 		}
 		
 		//买入牌价
-		if ("".equals(ftzOffTxnDtl.getBuyRate()) || null == ftzOffTxnDtl.getBuyRate()) {
+		if (null == ftzOffTxnDtl.getBuyRate()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0006");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckRate(ftzOffTxnDtl.getBuyRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0002");
 			resultMessages.add(resultMessage);
 		}
 		
 		//卖出牌价
-		if ("".equals(ftzOffTxnDtl.getSellRate()) || null == ftzOffTxnDtl.getSellRate()) {
+		if (null == ftzOffTxnDtl.getSellRate()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0007");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckRate(ftzOffTxnDtl.getSellRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0004");
 			resultMessages.add(resultMessage);
 		}
 		
@@ -561,26 +574,38 @@ public class FTZ210310Controller {
 		}
 		
 		//买入金额
-		if ("".equals(ftzOffTxnDtl.getBuyAmt()) || null == ftzOffTxnDtl.getBuyAmt()) {
+		if (null == ftzOffTxnDtl.getBuyAmt()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0004");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(ftzOffTxnDtl.getBuyAmt())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0001");
 			resultMessages.add(resultMessage);
 		}
 		
 		//卖出金额
-		if ("".equals(ftzOffTxnDtl.getSellAmt()) || null == ftzOffTxnDtl.getSellAmt()) {
+		if (null == ftzOffTxnDtl.getSellAmt()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0005");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(ftzOffTxnDtl.getSellAmt())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0003");
 			resultMessages.add(resultMessage);
 		}
 		
 		//买入牌价
-		if ("".equals(ftzOffTxnDtl.getBuyRate()) || null == ftzOffTxnDtl.getBuyRate()) {
+		if (null == ftzOffTxnDtl.getBuyRate()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0006");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckRate(ftzOffTxnDtl.getBuyRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0002");
 			resultMessages.add(resultMessage);
 		}
 		
 		//卖出牌价
-		if ("".equals(ftzOffTxnDtl.getSellRate()) || null == ftzOffTxnDtl.getSellRate()) {
+		if (null == ftzOffTxnDtl.getSellRate()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210310.0007");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckRate(ftzOffTxnDtl.getSellRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210212.0004");
 			resultMessages.add(resultMessage);
 		}
 		

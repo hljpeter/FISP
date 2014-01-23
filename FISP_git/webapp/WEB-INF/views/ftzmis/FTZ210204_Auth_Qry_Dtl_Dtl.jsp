@@ -104,10 +104,9 @@
 						code="ftz.label.OPP_BANK_CODE" />：</td>
 				<td><form:input id="oppBankCode" path="ftzInTxnDtl.oppBankCode" disabled="true"
 						class=".input-large" />
-					<button type="button" class="btn btn-small"
-						onclick="queryBankCode()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small"
+						onclick="queryBankCode()" value="<spring:message code="button.label.Search" />" />
+				</td>
 				<td class="label_td"><spring:message
 						code="ftz.label.OPP_BANK_NAME" />：</td>
 				<td><form:input id="oppBankName" path="ftzInTxnDtl.oppBankName"
@@ -116,7 +115,7 @@
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.COUNTRY_CODE1" />：</td>
-				<td><form:input id="oppAccount" path="ftzInTxnDtl.countryCode" disabled="true"
+				<td><form:input id="countryCode" path="ftzInTxnDtl.countryCode" disabled="true"
 						class=".input-large" /></td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAMES" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName" disabled="true"
@@ -130,19 +129,19 @@
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>
-					<button type="button" class="btn btn-small" onclick="queryRegion()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small"
+						onclick="queryRegion()" value="<spring:message code="button.label.Search" />" />
+				
+					</td>
 					<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>
 				<td><form:select path="ftzInTxnDtl.tranType" id="tranType" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TRAN_TYPE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querytranType()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					<input type="button" class="btn btn-small"
+						onclick="querytranType()" value="<spring:message code="button.label.Search" />" />
+				</td>
 			</tr>			
 			<tr>
 				<td class="label_td"><spring:message
@@ -178,7 +177,7 @@
 						code="ftz.label.CHK_ADD_WORD" />：</td>
 				<td colspan="3"><form:input id="chkAddWord"
 						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
-						readonly="true" /></td>
+						 /></td>
 			</tr>
 		</table>
 	</form:form>

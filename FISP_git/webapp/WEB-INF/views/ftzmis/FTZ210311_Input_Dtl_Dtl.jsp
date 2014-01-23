@@ -180,9 +180,8 @@ function clearName() {
 				
 					<form:input id="oppBankCode" path="ftzOffTxnDtl.institutionCode" type="text" class="input-large"
 						maxlength="12" onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
-					<button id="bankCode" type="button" class="btn btn-small" onclick="queryOppBankCode()">
-						<spring:message code="button.label.Search" />
-					</button>
+					<input id="bankCode" type="button" class="btn btn-small" onclick="queryOppBankCode()"
+						value="<spring:message code="button.label.Search" />"/>
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_BANK_NAME"/>：</td><!-- 对方银行名称 -->
 				<td><form:input id="oppBankName" path="ftzOffTxnDtl.oppBankName" type="text" class="input-xlarge" readonly="true"/></td>
@@ -206,9 +205,8 @@ function clearName() {
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_COUNTRY_CODE }" />
 					</form:select>
-					<button id="country" type="button" class="btn btn-small" onclick="queryCountryCode()">
-						<spring:message code="button.label.Search" />
-					</button>
+					<input id="country" type="button" class="btn btn-small" onclick="queryCountryCode()"
+						value="<spring:message code="button.label.Search" />"/>
 				</td>
 				
 				<td class="label_td"><spring:message code="ftz.label.disitrictCode"/>：</td><!-- 国内地区代码 -->
@@ -217,9 +215,8 @@ function clearName() {
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE }" />
 					</form:select>
-					<button id="district" type="button" class="btn btn-small" onclick="queryDistrictCode()">
-						<spring:message code="button.label.Search" />
-					</button>
+					<input id="district" type="button" class="btn btn-small" onclick="queryDistrictCode()"
+						value="<spring:message code="button.label.Search" />"/>
 				</td>
 			</tr>
 			<tr>	

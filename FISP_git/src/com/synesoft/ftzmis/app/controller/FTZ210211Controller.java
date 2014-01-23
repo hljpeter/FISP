@@ -603,7 +603,7 @@ public class FTZ210211Controller {
 		// 轧差金额
 		if (null == ftzInTxnDtl.getAmount()) {
 			ResultMessage resultMessage = ResultMessage
-					.fromCode("i.ftzmis.210211.0001");
+					.fromCode("e.ftzmis.210112.0001");
 			resultMessages.add(resultMessage);
 		}else{
 			if (!Validator.CheckAmount(ftzInTxnDtl.getAmount())) {

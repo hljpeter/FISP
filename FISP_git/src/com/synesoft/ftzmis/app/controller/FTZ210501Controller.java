@@ -21,6 +21,7 @@ import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.common.util.Validator;
 import com.synesoft.ftzmis.app.model.FTZ210501Form;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzActMstrTmp;
@@ -216,8 +217,11 @@ public class FTZ210501Controller {
 		}
 		
 		//余额
-		if ("".equals(ftzActMstrTmp.getBalance()) || null== ftzActMstrTmp.getBalance()) {
+		if (null== ftzActMstrTmp.getBalance()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0024");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(ftzActMstrTmp.getBalance())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0025");
 			resultMessages.add(resultMessage);
 		}
 		
@@ -366,6 +370,9 @@ public class FTZ210501Controller {
 		if ("".equals(ftzActMstr.getBalance()) || null== ftzActMstr.getBalance()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0024");
 			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(ftzActMstr.getBalance())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0025");
+			resultMessages.add(resultMessage);
 		}
 		
 		if (resultMessages.isNotEmpty()) {
@@ -407,7 +414,7 @@ public class FTZ210501Controller {
 			ftz210501Service.deleteFtzActMstr(delete_FtzActMstr);
 		} catch (BusinessException e) {
 			model.addAttribute("errmsg", e.getResultMessages());
-			return "ftzmis/FTZ210501_Input_Qry";
+			return "forward:/FTZ210501/InputQry";
 		}
 		model.addAttribute(ResultMessages.success().add("i.sm.0003"));
 		logger.info("账户信息删除结束...");
@@ -505,7 +512,7 @@ public class FTZ210501Controller {
 		return "ftzmis/FTZ210501_Auth_Qry_Dtl";
 	}
 	
-	//审核通过
+	//审核
 	@RequestMapping("AuthSubmit")
 	public String authSubmit(Model model, FTZ210501Form form) {
 		logger.info("审核通过开始...");
@@ -520,6 +527,7 @@ public class FTZ210501Controller {
 			try {
 				ftz210501Service.authFtzActMstr(form.getFtzActMstrTmp());
 			} catch (BusinessException e) {
+				form.setFtzActMstrTmp(result_FtzActMstrTmp);
 				model.addAttribute("errmsg", e.getResultMessages());
 				return "ftzmis/FTZ210501_Auth_Qry_Dtl";
 			}
@@ -540,6 +548,7 @@ public class FTZ210501Controller {
 			try {
 				ftz210501Service.refuseFtzActMstr(form.getFtzActMstrTmp());
 			} catch (BusinessException e) {
+				form.setFtzActMstrTmp(result_FtzActMstrTmp);
 				model.addAttribute("errmsg", e.getResultMessages());
 				return "ftzmis/FTZ210501_Auth_Qry_Dtl";
 			}

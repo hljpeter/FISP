@@ -638,7 +638,7 @@ public class FTZ210111Controller {
 			return "forward:/FTZ210111/AddQry";
 		}
 
-		model.addAttribute(ResultMessages.success().add("i.ftzmis.210101.0001"));
+		model.addAttribute(ResultMessages.success().add("ftzmis.Submit.Msg.Ctl.Success"));
 		return "forward:/FTZ210111/AddQry";
 	}
 
@@ -1222,8 +1222,7 @@ public class FTZ210111Controller {
 			}
 			if (count_unAuth > 0) {
 				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0024",
-						sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+						"e.ftzmis.210310.0012"));
 				return "forward:/FTZ210111/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
@@ -1336,7 +1335,7 @@ public class FTZ210111Controller {
 		if (userInfo.getUserid().equals(form.getFtzInTxnDtl().getMakUserId())) {
 			model.addAttribute(ResultMessages.error().add(
 					"e.ftzmis.210101.0025"));
-			return "forward:/FTZ210102/QryAuthDtlDtl?selected_msgId="
+			return "forward:/FTZ210111/QryAuthDtlDtl?selected_msgId="
 					+ form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
 					+ form.getFtzInTxnDtl().getSeqNo();
 		}
@@ -1358,7 +1357,7 @@ public class FTZ210111Controller {
 					"i.ftzmis.210301.0005"));
 			form.setAuthFinishFlag("1");
 		}
-		return "forward:/FTZ210102/QryAuthDtlDtl?selected_msgId="
+		return "forward:/FTZ210111/QryAuthDtlDtl?selected_msgId="
 				+ form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
 				+ form.getFtzInTxnDtl().getSeqNo();
 	}

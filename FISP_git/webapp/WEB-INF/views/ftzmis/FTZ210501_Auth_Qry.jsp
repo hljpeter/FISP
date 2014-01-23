@@ -20,6 +20,7 @@
 			var selected_subActNo = $(this).find("td:eq(4)").text();
 			showDialog('${pageContext.request.contextPath}/FTZ210501/AuthDtl?selected_actNo='
 					+ selected_actNo +'&selected_subActNo='+ selected_subActNo,'500','1024');
+			search();
 		});
 	});
 	

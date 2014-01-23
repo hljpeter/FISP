@@ -517,7 +517,7 @@ public class FTZ210305Controller {
 			log.error("Init FtzOffTxnDtl failure, the MsgId is invalid!" + e.getMessage());
 			model.addAttribute("errmsg", e.getResultMessages());
 //			return "ftzmis/FTZ210305_Auth_Qry_Dtl";
-			return "forward:/FTZ210305/Auth/DtlMsg/Init?operFlag=" + CommonConst.PAGE_SEARCH_NEED_CHK_DTL;
+			return "forward:/FTZ210305/Auth/DtlMsg/Init?operFlag=" + CommonConst.PAGE_SEARCH_ALL_DTL;
 		}
 	}
 

@@ -205,7 +205,7 @@ $("#add").click(function() {
 				<button id="add" name="btn" class="btn btn-primary"><spring:message code="ftz.label.ADD_MSG"/></button>
 				<button id="upt" name="btn" class="btn btn-primary"><spring:message code="ftz.label.UPT_MSG"/></button>
 				<button id="del" name="btn" class="btn btn-primary"><spring:message code="ftz.label.DEL_MSG"/></button>
-				<button id="sbm" name="btn" class="btn btn-primary"><spring:message code="ftz.label.SUBMIT_MSG"/></button>
+				<button id="sbm" name="btn" class="btn btn-primary"><spring:message code="ftz.label.FINISH_MSG"/></button>
 				<button id="dtl" name="btn" class="btn btn-primary"><spring:message code="ftz.label.MSG_Dtl"/></button>
 			</td>
 			<td width="50%" align="right">

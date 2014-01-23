@@ -15,6 +15,7 @@
 		var uptFlag = '${uptFlag }';
 		if (uptFlag == '1') {
 			$("input:not([id='selected_msgId'])").attr("disabled", true);
+			$("button:not([id='close'])").attr("disabled", true);
 			$("select").attr("disabled", true);
 			if ('add' == input_Dtl_flag) {
 				$("#add").removeAttr("disabled");
@@ -213,7 +214,7 @@
 		<input id="add" type="button" class="btn btn-primary"
 			onclick="addDetail();"
 			value="<spring:message code="ftz.label.SUBMIT_MSG_DTL"/>">
-		<button name="btn" class="btn btn-primary"
+		<button id="close" name="btn" class="btn btn-primary"
 			onclick="javascript: window.close();">
 			<spring:message code="button.lable.close" />
 		</button>

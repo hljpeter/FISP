@@ -119,7 +119,7 @@
 				<td class="label_td"><spring:message code="fisp.la.personIdTypeS"/>：</td>
 					<td><form:select path="ftzInTxnDtl.documentType" id="documentType"  disabled="true" >
 					<form:option value=""></form:option>
-					<form:options items="${DP_0013}" />
+					<form:options items="${FTZ_DOCUMENT_TYPE}" />
 				</form:select></td>
 	
 				<td class="label_td"><spring:message code="fisp.la.personIdNoS"/>：</td>
@@ -139,7 +139,7 @@
 				<td>
 					<form:select path="ftzInTxnDtl.overdue" id="overdue" disabled="true">
 						<form:option value=""></form:option>
-						<form:options items="${FTZ_TRAN_GENRE}" />
+						<form:options items="${FTZ_IS_OVERDUE}" />
 					</form:select>
 				</td>
 			</tr>

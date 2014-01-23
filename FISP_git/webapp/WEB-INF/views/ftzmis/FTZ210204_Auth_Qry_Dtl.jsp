@@ -130,11 +130,8 @@
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
-				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo" disabled="true"
-						class=".input-large" onblur="accountFill()"/>
-					<button type="button" class="btn btn-small" onclick="queryAct()">  
-						<spring:message code="button.label.Search" />
-					</button></td>				
+				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo"
+						class=".input-large" readonly="true" /></td>			
 				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NAME" />：</td>
 				<td><form:input id="accountName" path="ftzInMsgCtl.accountName"
 						class=".input-large" readonly="true" /></td>

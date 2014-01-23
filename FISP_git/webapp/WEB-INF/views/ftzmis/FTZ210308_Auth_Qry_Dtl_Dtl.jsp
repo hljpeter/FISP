@@ -13,8 +13,8 @@ if (error && error != "") {
 }
 var msg = '${FTZ210308Form.msg }';
 if (msg && msg != "") {
-	$("#notice").css("display", "");
-	$("#next").attr("disabled", true);
+	//$("#notice").css("display", "");
+	//$("#next").attr("disabled", true);
 }
 	
 var status= '${FTZ210308Form.ftzOffTxnDtl.chkStatus }';
@@ -62,6 +62,7 @@ $("#next").click(function() {
 		<form:hidden path="ftzOffTxnDtl.msgId" id="msgId"/>
 		<form:hidden path="operFlag" id="operFlag"/>
 		<form:hidden path="msg"/>
+		<form:hidden path="ftzOffTxnDtl.chkStatus"/>
 		<table class="tbl_search">
 			<tr>
 				<!-- 申报序号 -->

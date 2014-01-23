@@ -784,7 +784,7 @@ public class FTZ210101Controller {
 			return "forward:/FTZ210101/AddQry";
 		}
 
-		model.addAttribute(ResultMessages.success().add("i.ftzmis.210101.0001"));
+		model.addAttribute(ResultMessages.success().add("ftzmis.Submit.Msg.Ctl.Success"));
 		return "forward:/FTZ210101/AddQry";
 	}
 
@@ -1445,8 +1445,7 @@ public class FTZ210101Controller {
 			}
 			if (count_unAuth > 0) {
 				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0024",
-						sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+						"e.ftzmis.210310.0012"));
 				return "forward:/FTZ210101/QryAuthDtl";
 			}
 			if (count_authFail > 0) {

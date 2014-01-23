@@ -3,8 +3,8 @@
 $(function() {
 var success = '${successmsg }';
 if (success && success != "") {
-	$("button[name=btnChk]").attr("disabled", true);
-	$("input").attr("readonly", true);
+	//$("button[name=btnChk]").attr("disabled", true);
+	//$("input").attr("readonly", true);
 }
 var error = '${errmsg }';
 if (error && error != "") {
@@ -97,11 +97,11 @@ $("#next").click(function() {
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_DATE" />：</td>
 				<td><form:input id="tranDate" path="ftzInTxnDtl.tranDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						 class="input-large" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						class="input-large" /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -174,12 +174,12 @@ $("#next").click(function() {
 				<td class="label_td"><font color="red">*</font><spring:message
 						code="210207ftz.label.VALUE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.valueDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						class="input-large" /></td>
 						
 						<td class="label_td"><spring:message
 						code="ftz.label.EXPIRE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.expireDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						class="input-large" /></td>
 			</tr>
 			
 			<tr>

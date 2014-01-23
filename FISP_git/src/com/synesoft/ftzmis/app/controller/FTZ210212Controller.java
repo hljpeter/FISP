@@ -877,7 +877,7 @@ public class FTZ210212Controller {
 						chkStatus.equals(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL)) {
 					model.addAttribute(ResultMessages.error().add(
 							"i.ftzmis.210210.0009"));
-					return "forward:/FTZ210210/QryAuthDtl";
+					return "forward:/FTZ210212/QryAuthDtl";
 				}
 			}
 			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();

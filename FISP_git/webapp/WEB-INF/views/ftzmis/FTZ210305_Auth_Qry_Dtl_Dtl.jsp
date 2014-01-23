@@ -13,8 +13,8 @@ if (error && error != "") {
 }
 var msg = '${FTZ210305Form.msg }';
 if (msg && msg != "") {
-	$("#notice").css("display", "");
-	$("#next").attr("disabled", true);
+	//$("#notice").css("display", "");
+	//$("#next").attr("disabled", true);
 }
 	
 var status= '${FTZ210305Form.ftzOffTxnDtl.chkStatus }';

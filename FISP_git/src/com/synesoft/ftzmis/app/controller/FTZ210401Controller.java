@@ -30,6 +30,7 @@ import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.common.util.Validator;
 import com.synesoft.ftzmis.app.model.FTZ210401Form;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
@@ -38,7 +39,7 @@ import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.service.FTZ210401Service;
 
 @Controller
-@RequestMapping(value = "FTZ210401")
+@RequestMapping(value="FTZ210401")
 public class FTZ210401Controller {
 
 	public Logger logger = LoggerFactory.getLogger(getClass());
@@ -751,6 +752,9 @@ public class FTZ210401Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0015");
 			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(issert_FtzInTxnDtl.getAmount())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210401.0002");
+			resultMessages.add(resultMessage);
 		}
 		
 		//期限长度
@@ -779,6 +783,9 @@ public class FTZ210401Controller {
 		if(null == issert_FtzInTxnDtl.getInterestRate()) {
 			ResultMessage resultMessage = ResultMessage
 			.fromCode("e.ftzmis.210401.0001");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckInterestRate(issert_FtzInTxnDtl.getInterestRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210401.0003");
 			resultMessages.add(resultMessage);
 		}
 
@@ -939,6 +946,9 @@ public class FTZ210401Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0015");
 			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckAmount(update_FtzInTxnDtl.getAmount())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210401.0002");
+			resultMessages.add(resultMessage);
 		}
 		
 		//期限长度
@@ -968,6 +978,9 @@ public class FTZ210401Controller {
 				"".equals(update_FtzInTxnDtl.getInterestRate())) {
 			ResultMessage resultMessage = ResultMessage
 			.fromCode("e.ftzmis.210401.0001");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckInterestRate(update_FtzInTxnDtl.getInterestRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210401.0003");
 			resultMessages.add(resultMessage);
 		}
 

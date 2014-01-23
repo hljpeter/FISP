@@ -241,6 +241,7 @@ public class FTZ210208Controller {
 			log.error("Add FtzInMsgCtl failure!" + e.getMessage());
 			form.getFtzInMsgCtl().setSubmitDate(DateUtil
 					.getFormatDateAddSprit(form.getFtzInMsgCtl().getSubmitDate()));
+			form.getFtzInMsgCtl().setMsgId("");
 			model.addAttribute("infomsg", e.getResultMessages());
 			return "ftzmis/FTZ210208_Input_Qry_Dtl";
 		}
@@ -352,6 +353,22 @@ public class FTZ210208Controller {
 		}
 		
 		try {
+			
+			FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+			query_FtzInTxnDtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
+			List<FtzInTxnDtl> ftzInTxnDtls = ftz210101Service
+			.queryFtzInTxnDtlList(query_FtzInTxnDtl);
+			if (null != ftzInTxnDtls) {
+				for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
+					if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl
+							.getChkStatus())) {
+						model.addAttribute(ResultMessages.error().add(
+								"e.ftzmis.210101.0035"));
+						return "forward:/FTZ210208/AddQry";
+					}
+				}
+			}
+			
 			ftz210208Service.transDeleteMsgCtl(form.getFtzInMsgCtl());
 
 			log.info("Delete success");
@@ -492,6 +509,7 @@ public class FTZ210208Controller {
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getOrgTranDate()));//原始格式化
 			form.getFtzInTxnDtl().setExpireDate(DateUtil
 					.getFormatDateAddSprit(form.getFtzInTxnDtl().getExpireDate()));//到期日式化
+			form.getFtzInTxnDtl().setSeqNo("");
 			return "ftzmis/FTZ210208_Input_Qry_Dtl_Dtl";
 		}
 	}

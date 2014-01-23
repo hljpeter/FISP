@@ -2,7 +2,7 @@
 $(function(){
 	var success = "${successmsg}";
 	if ("" != success && null != success) {
-		$("input").attr("readonly", true);
+		$("input").attr("disabled", true);
 		$("select").attr("disabled", true);
 		$("#actSubmit").val('<spring:message
 				code="button.lable.AddMore" />');
@@ -84,7 +84,7 @@ $(function(){
 						<form:options items="${FTZ_BALANCE_INDEX_CODE}"/>
 					</form:select>
 					<input id="detail" type="button" class="btn btn-primary" 
-						onclick="balCodeQry();" value="<spring:message code="button.label.Search"/>">
+						onclick="qryBalCode();" value="<spring:message code="button.label.Search"/>">
 				</td>
 			</tr>
 			<tr>
@@ -201,8 +201,8 @@ $(function(){
 		style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
 		<input id="actSubmit" type="button" class="btn btn-primary"
 			onclick="actSubmit();" value="<spring:message code="button.lable.Submit"/>">
-		<input type="button" class="btn btn-primary" onclick="javascript:window.close();"
-			value="<spring:message code="button.lable.close"/>">
+		<button name="btn" class="btn btn-primary" onclick="javascript: window.close();">
+		<spring:message code="button.lable.close"/></button>
 	</div>
 </div>
 <form:form id="form1" modelAttribute="FTZ210501Form">

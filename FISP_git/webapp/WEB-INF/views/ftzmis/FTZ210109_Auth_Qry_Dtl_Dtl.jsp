@@ -117,13 +117,11 @@
 				<td class="label_td"><spring:message
 						code="210212ftz.label.BUY_AMT" />：</td>
 				<td><t:moneyFormat type="text" id="buyAmt"
-						name="ftzInTxnDtl.buyAmt"
 						value="${FTZ210109Form.ftzInTxnDtl.buyAmt}"
 						format="###,###,###,###.00" dot="true" readonly="true" /></td>
 				<td class="label_td"><spring:message
 						code="210212ftz.label.SELL_AMT" />：</td>
 				<td><t:moneyFormat type="text" id="sellAmt"
-						name="ftzInTxnDtl.sellAmt"
 						value="${FTZ210109Form.ftzInTxnDtl.sellAmt}"
 						format="###,###,###,###.00" dot="true" readonly="true" /></td>
 			</tr>
@@ -131,13 +129,11 @@
 				<td class="label_td"><spring:message
 						code="210212ftz.label.BUY_RATE" />：</td>
 				<td><t:moneyFormat type="text" id="buyRate"
-						name="ftzInTxnDtl.buyRate"
 						value="${FTZ210109Form.ftzInTxnDtl.buyRate}"
 						format="###,###,###,###.000000" dot="true" readonly="true" /></td>
 				<td class="label_td"><spring:message
 						code="210212ftz.label.SELL_RATE" />：</td>
 				<td><t:moneyFormat type="text" id="sellRate"
-						name="ftzInTxnDtl.sellRate"
 						value="${FTZ210109Form.ftzInTxnDtl.sellRate}"
 						format="###,###,###,###.000000" dot="true" readonly="true" /></td>
 			</tr>

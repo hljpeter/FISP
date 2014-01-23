@@ -14,7 +14,7 @@
 					var selected_msgId = $(this).find("td:eq(4)").text();
 					var selected_msgNo = $(this).attr("id").substr(2);
 					window.showModalDialog(
-									'${pageContext.request.contextPath}/FTZOFF/QryRedirectAuthAll?selected_msgId='+ selected_msgId+'&selected_msgNo='+selected_msgNo,
+							'${pageContext.request.contextPath}/FTZOFF/QryRedirectAuthAll?selected_msgId='+ selected_msgId+'&selected_msgNo='+selected_msgNo,
 									window,
 									'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
 

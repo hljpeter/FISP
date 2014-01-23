@@ -1,34 +1,41 @@
 <script type="text/javascript">
 $(function() {
-	var chkStatus = $("#chkStatus").val();
-	var authFinishFlag = $("#authFinishFlag").val();
-	if("1"==authFinishFlag || "03"==chkStatus|| "04"==chkStatus){
-		$("#authPass").attr("disabled","disabled");
-		if( "04"==chkStatus){
-			$("#authRefuse").attr("disabled","disabled");
+		var chkStatus = $("#chkStatus").val();
+		var authFinishFlag = $("#authFinishFlag").val();
+		if ("1" == authFinishFlag || "03" == chkStatus || "04" == chkStatus) {
+			$("#authPass").attr("disabled", "disabled");
+			if ("04" == chkStatus) {
+				$("#authRefuse").attr("disabled", "disabled");
+				$("#chkAddWord").attr("readonly", "true");
+			}
+			
+		} else if ("" == authFinishFlag) {
+			$("#authPass").removeAttr("disabled");
+			$("#authRefuse").removeAttr("disabled");
+			$("#chkAddWord").removeAttr("readonly");
 		}
-		$("#chkAddWord").attr("readonly","true");
-		
-	}else if(""==authFinishFlag){
-		$("#authPass").removeAttr("disabled");
-		$("#authRefuse").removeAttr("disabled");
-		$("#chkAddWord").removeAttr("readonly");
+
+		var fatherStatus = '${fatherStatus }';
+		if ('03' == fatherStatus) {
+			$("input").attr("disabled", true);
+			$("select").attr("disabled", true);
+			$("#clswin").removeAttr("disabled");
+		}
+	});
+
+	function authPass() {
+		$("#amount").val($("#amount").val().replaceAll(",", ""));
+		var form = document.getElementById("form");
+		form.action = "${pageContext.request.contextPath}/FTZ210201/AuthDtlDtlSubmit?authStat=1";
+		form.submit();
 	}
-});
 
-function authPass() {
-	$("#amount").val($("#amount").val().replaceAll(",",""));
-	var form = document.getElementById("form");
-	form.action = "${pageContext.request.contextPath}/FTZ210201/AuthDtlDtlSubmit?authStat=1";
-	form.submit();
-}
-
-function authRefuse() {
-	$("#amount").val($("#amount").val().replaceAll(",",""));
-	var form = document.getElementById("form");
-	form.action = "${pageContext.request.contextPath}/FTZ210201/AuthDtlDtlSubmit?authStat=0";
-	form.submit();
-}
+	function authRefuse() {
+		$("#amount").val($("#amount").val().replaceAll(",", ""));
+		var form = document.getElementById("form");
+		form.action = "${pageContext.request.contextPath}/FTZ210201/AuthDtlDtlSubmit?authStat=0";
+		form.submit();
+	}
 	
 </script>
 
@@ -77,11 +84,11 @@ function authRefuse() {
 				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.TRAN_DATE" />：</td>
 				<td><form:input id="tranDate" path="ftzInTxnDtl.tranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readonly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readonly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -108,10 +115,9 @@ function authRefuse() {
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_COUNTRY_CODE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querycountryCode()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					
+					
+				</td>
 				<td class="label_td"><spring:message
 						code="ftz.label.DISITRICT_CODE" />：</td>
 				<td><form:select path="ftzInTxnDtl.disitrictCode" disabled="true"
@@ -119,9 +125,8 @@ function authRefuse() {
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>
-					<button type="button" class="btn btn-small" onclick="queryRegion()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+					
+				</td>
 			</tr>
 			<tr>
 				
@@ -143,10 +148,7 @@ function authRefuse() {
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_TRAN_TYPE}" />
 					</form:select>
-					<button type="button" class="btn btn-small"
-						onclick="querytranType()">
-						<spring:message code="button.label.Search" />
-					</button></td>
+							</td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message
@@ -164,7 +166,7 @@ function authRefuse() {
 				<td>
 					<form:select id="documentType" path="ftzInTxnDtl.documentType" disabled="true"><!-- wpp -->
 						<form:option value="" />
-						<form:options items="${DP_0013}" />
+						<form:options items="${FTZ_DOCUMENT_TYPE}" />
 					</form:select>
 				</td>
 				<td class="label_td"><spring:message code="fisp.la.personIdNoS"/>：</td>
@@ -184,7 +186,7 @@ function authRefuse() {
 				<td>
 					<form:select path="ftzInTxnDtl.overdue" id="overdue" disabled="true">
 						<form:option value=""></form:option>
-						<form:options items="${FTZ_TRAN_GENRE}" />
+						<form:options items="${FTZ_IS_OVERDUE}" />
 					</form:select>
 				</td>
 			</tr>
@@ -222,7 +224,7 @@ function authRefuse() {
 						code="ftz.label.CHK_ADD_WORD" />：</td>
 				<td colspan="3"><form:input id="chkAddWord"
 						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
-						readonly="true" /></td>
+						 /></td>
 			</tr>
 		</table>
 

@@ -151,7 +151,7 @@ $("#dtl").click(function() {
 <div class="row" style="margin-top: 40px;">
 	<div class=" navbar-fixed-bottom text-right" id="footer" style="text-align:center; margin-bottom:0px; line-height:30px; background-color: #eee; opacity:0.9;">
 		<button id="dtl" name="btnDtl" class="btn btn-primary"><spring:message code="ftz.label.DTL_DTL"/></button>
-		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.MSG_CHK_SUBMIT"/></button>
+		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.AUTH_MSG"/></button>
 		<button id="cls" name="btnClose" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

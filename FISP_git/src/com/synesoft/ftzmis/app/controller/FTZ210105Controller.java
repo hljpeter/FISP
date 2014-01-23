@@ -635,7 +635,7 @@ public class FTZ210105Controller {
 			return "forward:/FTZ210105/AddQry";
 		}
 
-		model.addAttribute(ResultMessages.success().add("i.ftzmis.210101.0001"));
+		model.addAttribute(ResultMessages.success().add("ftzmis.Submit.Msg.Ctl.Success"));
 		return "forward:/FTZ210105/AddQry";
 	}
 
@@ -726,21 +726,21 @@ public class FTZ210105Controller {
 			if (null == issert_FtzInTxnDtl.getOppAccount()
 					|| "".equals(issert_FtzInTxnDtl.getOppAccount().trim())) {
 				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210310.0010");
+						.fromCode("e.ftzmis.210101.0038");
 				resultMessages.add(resultMessage);
 			}
 			// 对方户名
 			if (null == issert_FtzInTxnDtl.getOppName()
 					|| "".equals(issert_FtzInTxnDtl.getOppName().trim())) {
 				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210310.0011");
+						.fromCode("e.ftzmis.210101.0039");
 				resultMessages.add(resultMessage);
 			}
 			// 对方银行或机构代码
 			if (null == issert_FtzInTxnDtl.getOppBankCode()
 					|| "".equals(issert_FtzInTxnDtl.getOppBankCode().trim())) {
 				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210101.0029");
+						.fromCode("e.ftzmis.210101.0040");
 				resultMessages.add(resultMessage);
 			}
 		}
@@ -942,21 +942,21 @@ public class FTZ210105Controller {
 			if (null == update_FtzInTxnDtl.getOppAccount()
 					|| "".equals(update_FtzInTxnDtl.getOppAccount().trim())) {
 				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210310.0010");
+						.fromCode("e.ftzmis.210101.0038");
 				resultMessages.add(resultMessage);
 			}
 			// 对方户名
 			if (null == update_FtzInTxnDtl.getOppName()
 					|| "".equals(update_FtzInTxnDtl.getOppName().trim())) {
 				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210310.0011");
+						.fromCode("e.ftzmis.210101.0039");
 				resultMessages.add(resultMessage);
 			}
 			// 对方银行或机构代码
 			if (null == update_FtzInTxnDtl.getOppBankCode()
 					|| "".equals(update_FtzInTxnDtl.getOppBankCode().trim())) {
 				ResultMessage resultMessage = ResultMessage
-						.fromCode("e.ftzmis.210101.0029");
+						.fromCode("e.ftzmis.210101.0040");
 				resultMessages.add(resultMessage);
 			}
 		}
@@ -1226,8 +1226,7 @@ public class FTZ210105Controller {
 			}
 			if (count_unAuth > 0) {
 				model.addAttribute(ResultMessages.error().add(
-						"e.ftzmis.210101.0024",
-						sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+						"e.ftzmis.210310.0012"));
 				return "forward:/FTZ210105/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
@@ -1340,7 +1339,7 @@ public class FTZ210105Controller {
 		if (userInfo.getUserid().equals(form.getFtzInTxnDtl().getMakUserId())) {
 			model.addAttribute(ResultMessages.error().add(
 					"e.ftzmis.210101.0025"));
-			return "forward:/FTZ210102/QryAuthDtlDtl?selected_msgId="
+			return "forward:/FTZ210105/QryAuthDtlDtl?selected_msgId="
 					+ form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
 					+ form.getFtzInTxnDtl().getSeqNo();
 		}
@@ -1362,7 +1361,7 @@ public class FTZ210105Controller {
 					"i.ftzmis.210301.0005"));
 			form.setAuthFinishFlag("1");
 		}
-		return "forward:/FTZ210102/QryAuthDtlDtl?selected_msgId="
+		return "forward:/FTZ210105/QryAuthDtlDtl?selected_msgId="
 				+ form.getFtzInTxnDtl().getMsgId() + "&selected_seqNo="
 				+ form.getFtzInTxnDtl().getSeqNo();
 	}

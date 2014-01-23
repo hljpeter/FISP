@@ -69,7 +69,7 @@
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.COUNTRY_CODE1" />：</td>
-				<td><form:input id="oppAccount" path="ftzInTxnDtl.countryCode" disabled="true"
+				<td><form:input id="countryCode" path="ftzInTxnDtl.countryCode" disabled="true"
 						class=".input-large" /></td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAMES" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName" disabled="true"

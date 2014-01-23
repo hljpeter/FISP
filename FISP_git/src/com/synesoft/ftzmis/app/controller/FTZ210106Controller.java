@@ -279,20 +279,31 @@ public class FTZ210106Controller {
 					sb_authFail.append(ftzInTxnDtl.getSeqNo().toString() + ",");
 				}
 			}
+			
 			if (count_unAuth > 0) {
-				//model.addAttribute(ResultMessages.error().add(
-				//		"e.ftzmis.210101.0024",
-				//		sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
-				model.addAttribute(ResultMessages.info().add("i.ftzmis.210210.0009"));
+				model.addAttribute(ResultMessages.error().add(
+						"i.ftzmis.210210.0009"));
 				return "forward:/FTZ210106/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
-				///model.addAttribute(ResultMessages.error().add(
-				//		"e.ftzmis.210101.0031",
-				//		sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
-				model.addAttribute(ResultMessages.info().add("e.ftzmis.audit.not.detail"));
+				model.addAttribute(ResultMessages.error().add(
+						"i.ftzmis.210210.0009"));
 				return "forward:/FTZ210106/QryAuthDtl";
 			}
+//			if (count_unAuth > 0) {
+//				//model.addAttribute(ResultMessages.error().add(
+//				//		"e.ftzmis.210101.0024",
+//				//		sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
+//				model.addAttribute(ResultMessages.info().add("i.ftzmis.210210.0009"));
+//				return "forward:/FTZ210106/QryAuthDtl";
+//			}
+//			if (count_authFail > 0) {
+//				///model.addAttribute(ResultMessages.error().add(
+//				//		"e.ftzmis.210101.0031",
+//				//		sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
+//				model.addAttribute(ResultMessages.info().add("e.ftzmis.audit.not.detail"));
+//				return "forward:/FTZ210106/QryAuthDtl";
+//			}
 
 			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
 			update_FtzInMsgCtl

@@ -1,11 +1,5 @@
 <script type="text/javascript">
 	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if("02" != msgStatus){
-			$("#sbdetail").attr("disabled", "disabled");
-		}else{
-			$("#sbdetail").removeAttr("disabled");
-		}
 		$("#pageTable").find("tr").bind('click', function() {
 			var selected_msgId = $(this).find("td:eq(8)").text();
 			var selected_seqNo = $(this).find("td:eq(9)").text();
@@ -26,7 +20,6 @@
 				$("#selected_seqNo").val(selected_seqNo);
 				return;
 			}
-
 		});
 		$("#pageTable")
 		.find("tr")
@@ -68,6 +61,10 @@
 	}
 	
 	function sbDtl() {
+		var msgStatus = $("#msgStatus").val();
+		if ("02" != msgStatus) {
+			alert('<spring:message code="ftz.validate.auth.msg"/>');
+		}
 		$("#selected_msgId").val($("#msgId").val());
 		$("#selected_msgNo").val($("#msgNo").val());
 		var form = document.getElementById("form");

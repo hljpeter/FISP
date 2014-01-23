@@ -163,7 +163,7 @@ function queryShowAllOrg3(){
 				<td colspan="3">
 					<form:select path="ftzOffTxnDtl.tranType">
 						<option value=""></option>
-						<form:options items="${FTZ_FUND_TRANSFER_TYPE }" />
+						<form:options items="${FTZ_TRAN_TYPE }" />
 					</form:select>
 				</td>
 			</tr>

@@ -129,8 +129,10 @@
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.OPP_ACCOUNT" />：</td>
-				<td><form:input id="oppAccount" path="ftzInTxnDtl.oppAccount" maxlength="35"
-						class=".input-large" /></td>
+				<td>
+					<form:input path="ftzInTxnDtl.oppAccount" type="text" class="input-large" maxlength="35"
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
+				</td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName" maxlength="128"
 						class=".input-large" /></td>
@@ -205,7 +207,7 @@
 				<td>
 					<form:select path="ftzInTxnDtl.documentType" >
 						<form:option value="" />
-						<form:options items="${DP_0013}" />
+						<form:options items="${FTZ_DOCUMENT_TYPE}" />
 					</form:select>
 				</td>
 				<td class="label_td"><spring:message code="fisp.la.personIdNoS"/>：</td>
@@ -224,7 +226,7 @@
 				<td>
 					<form:select path="ftzInTxnDtl.overdue" id="overdue">
 						<form:option value=""></form:option>
-						<form:options items="${FTZ_TRAN_GENRE}" />
+						<form:options items="${FTZ_IS_OVERDUE}" />
 					</form:select>
 				</td>
 			</tr>

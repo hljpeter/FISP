@@ -1,11 +1,5 @@
 <script type="text/javascript">
 	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if ("02" != msgStatus) {
-			$("#sbdetail").attr("disabled", "disabled");
-		} else {
-			$("#sbdetail").removeAttr("disabled");
-		}
 		$("#pageTable").find("tr").bind('click', function() {
 			var selected_msgId = $(this).find("td:eq(8)").text();
 			var selected_seqNo = $(this).find("td:eq(9)").text();
@@ -58,16 +52,16 @@
 	function queryFTZ210104Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210104/QryAuthDtl?page.page="
-				+ $
-		{
-			page.number + 1
-		}
-		;
+		form.action = "${pageContext.request.contextPath}/FTZ210104/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	function sbDtl() {
 		$("#selected_msgId").val($("#msgId").val());
+		$("#selected_msgNo").val($("#msgNo").val());
+		var msgStatus = $("#msgStatus").val();
+		if ("02" != msgStatus) {
+			alert('<spring:message code="ftz.validate.auth.msg"/>');
+		}
 		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZ210104/AuthDtlSubmit";
 		form.submit();

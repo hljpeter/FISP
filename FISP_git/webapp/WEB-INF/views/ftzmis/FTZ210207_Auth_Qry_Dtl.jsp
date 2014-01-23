@@ -108,7 +108,7 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 				<td class="label_td"><font color="red">*</font>
 				<spring:message code="ftz.label.SUBMIT_DATE" />：</td>
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate" readonly="true"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						 class="input-large" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUS" />：</td>
 				<td><form:hidden path="ftzInMsgCtl.msgStatus" /> <form:select

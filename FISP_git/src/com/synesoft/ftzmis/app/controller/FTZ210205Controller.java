@@ -25,6 +25,7 @@ import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.model.FTZ210201Form;
 import com.synesoft.ftzmis.app.model.FTZ210205Form;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
@@ -1006,11 +1007,7 @@ public class FTZ210205Controller {
 				.queryFtzInTxnDtlList(query_FtzInTxnDtl);
 		if (null == ftzInTxnDtls || ftzInTxnDtls.size() < 1) {
 			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
-			if(form.getFtzInMsgCtl().getMsgId()==null || form.getFtzInMsgCtl().getMsgId().equals("")){
-				update_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
-			}else{
-				update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());				
-			}
+			update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
 			update_FtzInMsgCtl
 					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
 			update_FtzInMsgCtl.setChkUserId(userInfo.getUserid());
@@ -1053,7 +1050,7 @@ public class FTZ210205Controller {
 				//		"e.ftzmis.210101.0024",
 				//		sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
 				model.addAttribute(ResultMessages.info().add("i.ftzmis.210210.0009"));
-				return "forward:/FTZ210205/QryAuthDtl";
+				return "forward:/FTZ210201/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
 				//model.addAttribute(ResultMessages.error().add(
@@ -1066,7 +1063,12 @@ public class FTZ210205Controller {
 			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
 			update_FtzInMsgCtl
 					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
-			update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
+			if(form.getFtzInMsgCtl().getMsgId()!=null && !"".equals(form.getFtzInMsgCtl().getMsgId())){
+				update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
+				
+			}else{
+				update_FtzInMsgCtl.setMsgId(form.getSelected_msgId());
+			}
 			update_FtzInMsgCtl.setMsgNo(form.getSelected_msgNo());
 
 			update_FtzInMsgCtl.setChkUserId(userInfo.getUserid());
@@ -1080,7 +1082,7 @@ public class FTZ210205Controller {
 			} else {
 				if (update_FtzInMsgCtl.getMsgStatus().equals(
 						CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-					ftzMsgProcService.submitMsg(update_FtzInMsgCtl.getMsgNo(),
+					generateXml.submitMsg(update_FtzInMsgCtl.getMsgNo(),
 							update_FtzInMsgCtl.getMsgId());
 				}
 				model.addAttribute(ResultMessages.success().add(
@@ -1182,6 +1184,9 @@ public class FTZ210205Controller {
 
 	@Resource
 	protected FtzMsgProcService ftzMsgProcService;
+	
+	@Resource
+	protected FtzMsgProcService generateXml;
 
 	@Resource
 	protected NumberService numberService;

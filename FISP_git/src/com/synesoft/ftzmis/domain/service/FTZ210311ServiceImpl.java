@@ -22,13 +22,13 @@ import com.synesoft.ftzmis.domain.repository.FTZ210310Repository;
 
 /**
  * @author hb_huang
- * @system FTZMIS(远期结售汇)
- * @date 2014-1-3上午10:07:36
+ * @system FTZMIS(汇率掉期业务)
+ * @date 2014-1-7上午11:15:36
  */
 @Service
-public class FTZ210310ServiceImpl implements FTZ210310Service {
+public class FTZ210311ServiceImpl implements FTZ210311Service {
 	
-	protected static String funcId = "FTZ_Add_210310";
+	protected static String funcId = "FTZ_Add_210311";
 
 	@Resource
 	protected FTZ210310Repository ftz210310Repo;
@@ -44,7 +44,6 @@ public class FTZ210310ServiceImpl implements FTZ210310Service {
 	public int insertFtzOffMsgCtl(FtzOffMsgCtl insert_FtzOffMsgCtl) {
 		//添加日志
 		BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD,"", insert_FtzOffMsgCtl.toString());
-		
 		return ftz210310Repo.insertFtzOffMsgCtl(insert_FtzOffMsgCtl);
 	}
 
@@ -87,7 +86,7 @@ public class FTZ210310ServiceImpl implements FTZ210310Service {
 			FtzOffMsgCtl query_FtzOffMsgCtl = new FtzOffMsgCtl();
 			query_FtzOffMsgCtl.setMsgId(update_FtzOffMsgCtl.getMsgId());
 			FtzOffMsgCtl ftzOffMsgCtl_tmp = this.queryFtzOffMsgCtl(query_FtzOffMsgCtl);
-			//
+			//添加日志
 			if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(update_FtzOffMsgCtl.getMsgStatus())){
 				BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,ftzOffMsgCtl_tmp.toString(), update_FtzOffMsgCtl.toString());
 			}else if(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(update_FtzOffMsgCtl.getMsgStatus())){

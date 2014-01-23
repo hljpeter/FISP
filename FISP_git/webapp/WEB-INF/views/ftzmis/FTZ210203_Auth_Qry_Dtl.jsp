@@ -121,7 +121,7 @@
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.SUBMIT_DATE" />：</td>
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" readOnly="true"/></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" disabled="true"/></td>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUSS" />：</td>
 				<td><form:select path="ftzInMsgCtl.msgStatus" id="msgStatus" disabled="true">
 						<form:option value=""></form:option>
@@ -131,10 +131,7 @@
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo"
-						class=".input-large" onblur="accountFill()" readOnly="true"/>
-					<button type="button" class="btn btn-small" onclick="queryAct()">  
-						<spring:message code="button.label.Search" />
-					</button></td>				
+						class=".input-large" readonly="true" /></td>		
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.ACCOUNT_NAME" />：</td>
 				<td><form:input id="accountName" path="ftzInMsgCtl.accountName"
 						class=".input-large" readonly="true" /></td>

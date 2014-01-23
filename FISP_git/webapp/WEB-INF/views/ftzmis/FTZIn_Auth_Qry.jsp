@@ -207,15 +207,15 @@
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<table class="text-center">
 		<tr>
-			<td width="70%" align="center">
+			<td width="50%" align="center">
 			<input id="detail" type="button" class="btn btn-primary" onclick="showAllDetail();" value="<spring:message code="ftz.label.MSG_ALL_Dtl" />">
 			<input id="detail" type="button" class="btn btn-primary" onclick="showDetail();" value="<spring:message code="ftz.label.MSG_UNAUTH_Dtl" />">
 			</td>
-			<td width="30%" align="right">
+			<td width="50%" align="right">
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZINForm.query_branchId}&query_submitDate_start=${FTZINForm.query_workDate_start}&query_submitDate_end=${FTZINForm.query_workDate_end}&query_msgId=${FTZINForm.query_msgId}&query_msgNo=${FTZINForm.query_msgNo}" action="/FTZ2102/AuthQry"/></td>
+								query="query_branchId=${FTZINForm.query_branchId}&query_workDate_start=${FTZINForm.query_workDate_start}&query_workDate_end=${FTZINForm.query_workDate_end}&query_msgId=${FTZINForm.query_msgId}&query_msgNo=${FTZINForm.query_msgNo}" action="/FTZ2102/AuthQry"/></td>
 					</tr>
 				</table>
 			</td>

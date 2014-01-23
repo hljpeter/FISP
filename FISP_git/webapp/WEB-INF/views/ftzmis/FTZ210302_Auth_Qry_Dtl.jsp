@@ -1,133 +1,48 @@
 <script type="text/javascript">
-	$(function() {
-		var msgId = $("#msgId").val();
-		$("#pageTable").find("tr").bind('click', function() {
-			var selected_msgId =  $("#msgId").val();
-			var selected_seqNo = $(this).attr("id").substr(2);
-			$("#selected_msgId").val(selected_msgId);
-			$("#selected_seqNo").val(selected_seqNo);
-		});
-		$("#pageTable")
-		.find("tr")
-		.bind(
-				'dblclick',
-				function() {
-					var selected_msgId = $("#msgId").val();
-					var selected_seqNo = $(this).attr("id").substr(2);
-					window
-							.showModalDialog(
-									'${pageContext.request.contextPath}/FTZ210302/QryDtlDtl?selected_msgId='
-											+ selected_msgId
-											+ "&selected_seqNo="
-											+ selected_seqNo,
-									window,
-									'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-				});
+$(function() {
+var checkSelected = function() {
+	var id = '';
+	$(".tbl_page_body table tr ").each(function(i, obj) {
+		var v = $(obj).hasClass("table-color-click");
+		if(v){
+			id = $(obj).attr("id");
+			return;
+		} 
 	});
+	return id;
+};
 
-	function accoutQry() {
-		var accountNo = $("#accountNo").val();
-		var subAccountNo = $("#subAccountNo").val();
-		$.ajax({
-			url : contextPath + "/FTZ210302/DtlAccountQry",
-			type : "post",
-			dataType : "json",
-			async : false,
-			data : {
-				accountNo : accountNo,
-				subAccountNo : subAccountNo
-			},
-			success : function(rs) {
-				dtlExist = rs.dtlExist;
-				if (null == dtlExist || false == dtlExist) {
-					alert('<spring:message code="w.cm.1007"/>');
-				} else {
-					$("#branchId").val(rs.branchId);
-					$("#accType").val(rs.accType);
-					$("#accountName").val(rs.accountName);
-					$("#depositRate").val(rs.depositRate);
-					$("#customType").val(rs.customType);
-					$("#customType1").val(rs.customType);
-					$("#balanceCode").val(rs.balanceCode);
-					$("#documentType").val(rs.documentType);
-					$("#balanceCode1").val(rs.balanceCode);
-					$("#documentType1").val(rs.documentType);
-					$("#currency").val(rs.currency);
-					$("#currency1").val(rs.currency);
-					$("#documentNo").val(rs.documentNo);
-					$("#balance").val(rs.balance);
-					$("#accOrgCode").val(rs.accOrgCode);
-				}
-			}
-		});
-	}
+var success = '${successmsg }';
+if (success && success != "") {
+	$("button[name=btn]").attr("disabled", true);
+}
 
-	function accountFill() {
-		var accountNo = $("#accountNo").val();
-		var subAccountNo = $("#subAccountNo").val();
-		if ("" != accountNo && "" != subAccountNo) {
-			accoutQry();
-		}
-	}
+$("#msgChk").click(function() {
+	$("#form").submit();
+});
 
-	function DtlSubmit() {
-		
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210302/UpdDtlSubmit";
-		form.submit();
-	}
+$(".tbl_page_body table tr").dblclick(function() {
+	var selectedRow = eval("(" + $(this).attr("id") + ")"); 
+	showDialog('${pageContext.request.contextPath}/FTZ210302/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
+			+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
+});
 
-	function queryAct() {
-		showSelAct([ {
-			"accountNo" : "param1",
-			"subAccountNo" : "param2"
-		} ]);
-	};
+//detail
+$("#dtl").click(function() {
+	var selectedRow = checkSelected();
+	if (!selectedRow || selectedRow == "") {
+		alert('<spring:message code="ftz.validate.choose.data"/>');
+	} else {
+		selectedRow = eval("(" + selectedRow + ")"); alert(selectedRow.seqNo);
+		showDialog('${pageContext.request.contextPath}/FTZ210302/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
+				+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
+				
+		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210302/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId="+ ${FTZ210302Form.ftzOffMsgCtl.msgId });
+		$("#form").submit();
+	}
+});
 
-	function showDetailDtl() {
-		var selected_msgId = $("#msgId").val();
-		var selected_seqNo = $("#selected_seqNo").val();
-		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data" />');
-			return;
-		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210302/QryDtlDtl?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
-									+ selected_seqNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-			queryFTZ210302();
-		}
-	}
-	function showDetaildetail() {
-		var selected_msgId = $("#selected_msgId").val();
-		var selected_seqNo = $("#selected_seqNo").val();
-		if (null == selected_seqNo || "" == selected_seqNo) {
-			alert('<spring:message code="ftz.validate.choose.data" />');
-			return;
-		} else {
-			window
-					.showModalDialog(
-							'${pageContext.request.contextPath}/FTZ210302/QryAuthDtlDtl?selected_msgId='
-									+ selected_msgId + "&selected_seqNo="
-									+ selected_seqNo,
-							window,
-							'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-			queryFTZ210302();
-		}
-	}
-	function queryFTZ210302() {
-		window.location.href='${pageContext.request.contextPath}/FTZ210302/QryAuthDtl?selected_msgId='+ $("#msgId").val();
-	}
-	
-	function sbDtl() {
-		$("#selected_msgId").val($("#msgId").val());
-		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210302/AuthDtlSubmit";
-		form.submit();
-	}
+});
 </script>
 
 <div id="id_showMsg" style="display: none">
@@ -150,10 +65,12 @@
 
 <div class="row">
 	<form:form id="form"
-		action="${pageContext.request.contextPath}/FTZ210302/UpdDtlSubmit"
+		action="${pageContext.request.contextPath}/FTZ210302/Auth/DtlMsg/Auth"
 		method="post" modelAttribute="FTZ210302Form" class="form-horizontal">
-		<form:hidden path="selected_msgId" id="selected_msgId" />
-		<form:hidden path="selected_seqNo" id="selected_seqNo" />
+		<form:hidden path="ftzOffMsgCtl.makDatetime" id="msg_makDatetime"/>
+		<form:hidden path="ftzOffMsgCtl.chkDatetime" id="msg_chkDatetime"/>
+		<form:hidden path="ftzOffMsgCtl.msgStatus"/>
+		<form:hidden path="operFlag" id="operFlag"/>
 		<table class="tbl_search">
 			<tr>
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.common.branchId" />：</td>
@@ -216,19 +133,19 @@
 			class="table table-striped table-bordered table-condensed tbl_page"
 			style="border: 0">
 			<tbody>
-				<c:forEach var="dto1" items="${page.content}" varStatus="i">
-					<tr id="tr${dto1.seqNo}">
+			<c:forEach var="dto" items="${page.content}" varStatus="i">
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
 						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
-						<td class="vtip" style="text-align: left; width: 40px;">${dto1.submitDate}</td>
-						<td class="vtip" style="text-align: left; width: 80px;">${dto1.institutionCode}</td>
+						<td class="vtip" style="text-align: left; width: 40px;">${dto.submitDate}</td>
+						<td class="vtip" style="text-align: left; width: 80px;">${dto.institutionCode}</td>
 						<td class="vtip" style="text-align: right; width: 50px;">
-						<t:codeValue items="${SYS_CURRENCY}" key="${dto1.currency}" type="label" />
+						<t:codeValue items="${SYS_CURRENCY}" key="${dto.currency}" type="label" />
 						</td>
-						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat type="label" value="${dto1.amount}" /></td>
-						<td class="vtip" style="text-align: left; width: 60px;">${dto1.countryCode}</td>
-						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${FTZ_DISITRICT_CODE}" key="${dto1.districtCode}" type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat type="label" value="${dto.amount}" /></td>
+						<td class="vtip" style="text-align: left; width: 60px;">${dto.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${FTZ_DISITRICT_CODE}" key="${dto.districtCode}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
-								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
+								items="${FTZ_MSG_STATUS}" key="${dto.chkStatus}" type="label" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -238,15 +155,14 @@
 
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<div class="rightPage">
-		<util:pagination page="${page}"
-			query="selected_msgId=${FTZ210302Form.ftzOffMsgCtl.msgId}" />
-	</div>
+		<util:pagination page="${page }" action="/FTZ210302/Auth/DtlMsg/Init" query="operFlag=${FTZ210302Form.operFlag }&ftzOffMsgCtl.msgId=${FTZ210302Form.ftzOffMsgCtl.msgId }" />
+		</div>
 </div>
 
 <div class="row" style="margin-bottom: 40px;">
 	<div class="navbar navbar-fixed-bottom text-center" id="footer" style="margin-bottom: 0px; line-height: 30px; background-color: #eee; opacity: 0.9;">
-		<input id="detaildetail" type="button" class="btn btn-primary" onclick="showDetaildetail();" value="<spring:message code="ftz.label.DTL_DTL"/>"> 
-		<input id="detaildetail" type="button" class="btn btn-primary" onclick="sbDtl()" value="<spring:message code="ftz.label.AUTH_MSG"/>">
-		<input type="button" class="btn btn-primary" onclick="javascript:window.close();" value="<spring:message code="button.lable.close"/>">
+		<button id="dtl" name="btnDtl" class="btn btn-primary"><spring:message code="ftz.label.DTL_DTL"/></button>
+		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.AUTH_MSG"/></button>
+		<button id="cls" name="btnClose" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

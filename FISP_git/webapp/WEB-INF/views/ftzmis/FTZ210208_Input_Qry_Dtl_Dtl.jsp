@@ -7,12 +7,14 @@ if (actionFlag == "addTxn") {
 	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210208/Input/AddTxn/Submit");
 	var success = '${successmsg }';
 	if (success && success != "") {
+		$("button[type=button]").attr("disabled", true);
 		$("input").attr("readonly", true);
 		$("select").attr("disabled", true);
 		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210208/Input/AddTxn/Init");
 		$("#sbm").html('<spring:message code="ftz.label.GOON_KEY_IN"/>');
 	}
 } else if (actionFlag == "dtlTxn") {
+	$("button[type=button]").attr("disabled", true);
 	$(".btn-small").css("display", "none");
 	$("input").attr("readonly", true);
 	$("select").attr("disabled", true);
@@ -23,6 +25,7 @@ if (actionFlag == "addTxn") {
 	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210208/Input/UptTxn/Submit");
 	var success = '${successmsg }';
 	if (success && success != "") {
+		$("button[type=button]").attr("disabled", true);
 		$("input").attr("readonly", true);
 		$("select").attr("disabled", true);
 		$("#sbm").attr("disabled", true);

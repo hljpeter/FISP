@@ -230,9 +230,6 @@
       		<isNotEmpty property="interestRate" prepend=",">
       		INTEREST_RATE = #interestRate:DECIMAL#
       		</isNotEmpty>
-      		<isNotEmpty property="interestRate" prepend=",">
-	    	INTEREST_RATE = #interestRate:DECIMAL#
-	    	</isNotEmpty>
       		<isNotEmpty property="bondsCode" prepend=",">
 	    	BONDS_CODE = #bondsCode:VARCHAR#
 	    	</isNotEmpty>

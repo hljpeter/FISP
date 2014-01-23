@@ -25,6 +25,7 @@ import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.common.util.Validator;
 import com.synesoft.ftzmis.domain.model.FtzOffMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzOffTxnDtl;
 import com.synesoft.ftzmis.domain.model.vo.FtzOffMsgCtlVO;
@@ -370,6 +371,17 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 			throw new BusinessException(messages);
 		}
 
+		// 查询所有交易 - 有审核通过的交易，不能删除
+		FtzOffTxnDtl txnDtl = new FtzOffTxnDtl();
+		txnDtl.setMsgId(ftzOffMsgCtl.getMsgId());
+		txnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
+		int count = ftzOffTxnDtlRepository.queryCount(txnDtl);
+		if (0 != count) {
+			log.error("[e.ftzmis.2103.0031] There is not any TxnDtl!");
+			messages.add("e.ftzmis.2103.0031");					
+			throw new BusinessException(messages);
+		}
+		
 		// 如果接收应答报文处理结果为成功，表示报文发送过，不能删除
 		if (CommonConst.MSG_PROCESS_RESULT_SUCCESS.equals(result.getResult())) {
 			log.error("[e.ftzmis.2103.0012] The msg was sent to PBOC successfully, cannot be deleted!"); 
@@ -427,12 +439,12 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		// 是否存在交易明细
 		FtzOffTxnDtl ftzOffTxnDtl = new FtzOffTxnDtl();
 		ftzOffTxnDtl.setMsgId(result.getMsgId());
-		int count = ftzOffTxnDtlRepository.queryCount(ftzOffTxnDtl);
-		if (count == 0) {
-			log.error("[e.ftzmis.2103.0028] The MsgCtl has not any TxnDtl!"); 
-			messages.add("e.ftzmis.2103.0028");								
-			throw new BusinessException(messages);
-		}
+//		int count = ftzOffTxnDtlRepository.queryCount(ftzOffTxnDtl);
+//		if (count == 0) {
+//			log.error("[e.ftzmis.2103.0028] The MsgCtl has not any TxnDtl!"); 
+//			messages.add("e.ftzmis.2103.0028");								
+//			throw new BusinessException(messages);
+//		}
 
 		// 是否存在审核失败的交易明细
 		ftzOffTxnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL);
@@ -484,15 +496,22 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 			throw new BusinessException(messages);
 		}
 
+		// 审核录入是否同一人
+		if (Validator.CheckSameUser(result.getMakUserId())) {
+			log.error("[e.ftzmis.2103.0030] The maker and checker cannot be the same person!"); 
+			messages.add("e.ftzmis.2103.0030");								
+			throw new BusinessException(messages);
+		}
+		
 		// 查询所有交易 - 无，不能审核通过批量
 		FtzOffTxnDtl txnDtl = new FtzOffTxnDtl();
 		txnDtl.setMsgId(ftzOffMsgCtl.getMsgId());
-		List<FtzOffTxnDtl> allList = ftzOffTxnDtlRepository.queryList(txnDtl);
-		if (null == allList || allList.isEmpty()) {
-			log.error("[e.ftzmis.2103.0020] There is not any TxnDtl!");
-			messages.add("e.ftzmis.2103.0020");					
-			throw new BusinessException(messages);
-		}
+//		List<FtzOffTxnDtl> allList = ftzOffTxnDtlRepository.queryList(txnDtl);
+//		if (null == allList || allList.isEmpty()) {
+//			log.error("[e.ftzmis.2103.0020] There is not any TxnDtl!");
+//			messages.add("e.ftzmis.2103.0020");					
+//			throw new BusinessException(messages);
+//		}
 		
 		// 查询未审核通过的交易 - 有，不能审核通过批量
 		txnDtl.setChkStatuss(new String[]{CommonConst.FTZ_MSG_STATUS_AUTH_FAIL, CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED, 
@@ -506,6 +525,7 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		
 		FtzOffMsgCtlVO ftzOffMsgCtlVO = new FtzOffMsgCtlVO();
 		ftzOffMsgCtlVO.setMsgId(ftzOffMsgCtl.getMsgId());
+		ftzOffMsgCtlVO.setMsgNo(result.getMsgNo());
 		ftzOffMsgCtlVO.setOldMsgStatus(ftzOffMsgCtl.getMsgStatus());
 		ftzOffMsgCtlVO.setMakDatetime(ftzOffMsgCtl.getMakDatetime());
 		ftzOffMsgCtlVO.setChkDatetime(ftzOffMsgCtl.getChkDatetime());
@@ -842,6 +862,13 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		if (null == txnDtlResult) {
 			log.error("[e.ftzmis.2103.0009] The TxnDtl is wrong!"); 
 			messages.add("e.ftzmis.2103.0009");								
+			throw new BusinessException(messages);
+		}
+		
+		// 审核录入是否同一人
+		if (Validator.CheckSameUser(txnDtlResult.getMakUserId())) {
+			log.error("[e.ftzmis.2103.0030] The maker and checker cannot be the same person!"); 
+			messages.add("e.ftzmis.2103.0030");								
 			throw new BusinessException(messages);
 		}
 		
