@@ -223,7 +223,9 @@
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 65px;">${dto.msgId}</td>
 						<td class="vtip" style="text-align: left; width: 100px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.currency}</td>
+						<td class="vtip" style="text-align: left; width: 50px;">
+							<t:codeValue items="${SYS_CURRENCY}" key="${dto.currency}" type="label" />
+						</td>
 						<td class="vtip" style="text-align: right; width: 100px;"><t:moneyFormat
 								type="label" value="${dto.balance}" dot="true"/></td>
 						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue

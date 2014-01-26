@@ -62,6 +62,7 @@
 					+ $("#confirmMsg2").val();
 			if (confirm(msg)) {
 				form.submit();
+				queryFTZ210310();
 			} else {
 				return false;
 			}

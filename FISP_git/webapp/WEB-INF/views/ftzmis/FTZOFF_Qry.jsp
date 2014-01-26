@@ -52,7 +52,9 @@
 	<br /> <br />
 	<div class="alert alert-error" id="errorMsg" style="display: none"></div>
 	<div id="id_result">
-		<t:messagePanel />
+		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
+		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
+		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />
 		<spring:hasBindErrors name="fTZOFFForm">
 			<form:form commandName="fTZOFFForm">
 				<div class="alert alert-error">
@@ -141,7 +143,7 @@
 					<tr id="tr${dto.msgNo}">
 						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${FTZ_OFF_TYPE}" key="${dto.msgNo}" type="label" /></td>
-						<td class="vtip" style="text-align: center; width: 40px;">${dto.workDate}</td>
+						<td class="vtip" style="text-align: center; width: 40px;"><t:dateTimeFormat type="label" value="${dto.workDate}" format="date"/></td>
 						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 65px;">${dto.msgId}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>
@@ -156,14 +158,14 @@
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<table class="text-center">
 		<tr>
-			<td width="70%" align="center">
+			<td width="50%" align="center">
 			<input id="detail" type="button" class="btn btn-primary" onclick="showDetail();" value="<spring:message code="ftz.label.MSG_Dtl" />">
 			</td>
-			<td width="30%" align="right">
+			<td width="50%" align="right">
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZOFFForm.query_branchId}&query_submitDate_start=${FTZOFFForm.query_workDate_start}&query_submitDate_end=${FTZOFFForm.query_workDate_end}&query_msgId=${FTZOFFForm.query_msgId}&query_msgStatus=${FTZOFFForm.query_msgStatus}&query_msgNo=${FTZOFFForm.query_msgNo}" action="/FTZOFF/Qry"/></td>
+								query="query_branchId=${FTZOFFForm.query_branchId}&query_workDate_start=${FTZOFFForm.query_workDate_start}&query_workDate_end=${FTZOFFForm.query_workDate_end}&query_msgId=${FTZOFFForm.query_msgId}&query_msgStatus=${FTZOFFForm.query_msgStatus}&query_msgNo=${FTZOFFForm.query_msgNo}" action="/FTZOFF/Qry"/></td>
 					</tr>
 				</table>
 			</td>

@@ -367,7 +367,9 @@
 						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
 						<td class="vtip" style="text-align: right; width: 150px;"><t:moneyFormat
 								type="label" value="${dto1.amount}" /></td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}"
+								type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.oppBankCode}</td>
 						<td class="vtip" style="text-align: left; width: 100px;">${dto1.oppName}</td>
 						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue

@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(function() {
+		$('input').popover('hide');
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
 			var seqNo = $("#seqNo").val();
@@ -153,8 +154,8 @@
 						
 					</td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAMES" />：</td>
-				<td><form:input id="oppName" path="ftzInTxnDtl.oppName"
-						class=".input-large" /></td>
+				<td><form:input id="oppName" path="ftzInTxnDtl.oppName" maxlength="128"
+						class=".input-large" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="银行内部的可为空，如果涉及外部客户则必输"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message
@@ -178,7 +179,8 @@
 						onclick="querytranType()" value="<spring:message code="button.label.Search" />" />
 						
 					</td>
-			</tr>			
+			</tr>		
+			<tr><td colspan="4"><hr/></td></tr>	
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUSSS" />：</td>

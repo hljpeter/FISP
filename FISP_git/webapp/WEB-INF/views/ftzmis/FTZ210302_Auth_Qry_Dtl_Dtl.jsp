@@ -4,23 +4,21 @@ var success = '${successmsg }';
 if (success && success != "") {
 	$("button[name=btnChk]").attr("disabled", true);
 	$("input").attr("readonly", true);
+	var status= '${FTZ210302Form.ftzOffTxnDtl.chkStatus }';
+	if (status && status == '03') {
+		$("#chkRej").attr("disabled", false);
+		$("#chkAddWord").attr("readonly", false);
+	}
 }
 var error = '${errmsg }';
 if (error && error != "") {
-	$("button[name=btnChk]").attr("disabled", true);
-	$("input").attr("readonly", true);
+	$("button[name=btnChk]").attr("disabled", false);
+	$("input:not('#chkAddWord')").attr("readonly", true);
 }
 var msg = '${FTZ210302Form.msg }';
 if (msg && msg != "") {
 	//$("#notice").css("display", "");
 	//$("#next").attr("disabled", true);
-}
-	
-var status= '${FTZ210302Form.ftzOffTxnDtl.chkStatus }';
-if (status && status == '03') {
-	$("#chkPass").attr("disabled", true);
-	$("#chkRej").attr("disabled", false);
-	$("#chkAddWord").attr("readonly", false);
 }
 	
 $("button[name=btnChk]").click(function() {

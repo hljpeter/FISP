@@ -152,7 +152,7 @@ $("#del").click(function() {
 				</td>
 				
 				<td class="label_td"><span style="color:red;">*</span><spring:message code="ftz.label.WORK_DATE"/>：</td>
-				<td><t:dateTimeFormat type="text" value="${FTZ210302Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large"/></td>
+				<td><t:dateTimeFormat type="text" value="${FTZ210302Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large" readonly="true"/></td>
 			</tr>
 			<tr>	
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID"/>：</td>

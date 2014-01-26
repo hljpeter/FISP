@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(function() {
+		$('input').popover('hide');
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
 			var seqNo = $("#seqNo").val();
@@ -24,6 +25,7 @@
 	});
 	function addDetail() {
 		$("#amount").val($("#amount").val().replaceAll(",", ""));
+			$("#interestRate").val($("#interestRate").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
@@ -116,7 +118,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large"  data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当出入账标志为出账业务冲正或入账业务冲正时，本栏位为强制项，且栏位值小于等于记账日期"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -131,11 +133,11 @@
 						code="ftz.label.OPP_ACCOUNT" />：</td>
 				<td>
 					<form:input path="ftzInTxnDtl.oppAccount" type="text" class="input-large" maxlength="35"
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当交易性质为外部经济活动引起时，本栏位为强制项"/>
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName" maxlength="128"
-						class=".input-large" /></td>
+						class=".input-large" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当交易性质为外部经济活动引起时，本栏位为强制项"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">* 	</font> <spring:message
@@ -152,7 +154,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.DISITRICT_CODE" />：</td>
 				<td><form:select path="ftzInTxnDtl.disitrictCode"
-						id="disitrictCode">
+						id="disitrictCode" >
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>
@@ -174,11 +176,9 @@
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.INTEREST_RATESS" />：</td>
-				<td><t:moneyFormat type="text" id="interestRate"
-						name="ftzInTxnDtl.interestRate"
+				<td><t:moneyFormat type="text" id="interestRate" name="ftzInTxnDtl.interestRate"
 						value="${FTZ210201Form.ftzInTxnDtl.interestRate}"
-						format="###.000000" dot="true" maxlength="9" /></td>
-				</td>
+						format="###.000000" dot="true" maxlength="15"/></td>
 				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>
 				<td><form:select path="ftzInTxnDtl.tranType" id="tranType">
@@ -195,7 +195,7 @@
 						code="ftz.label.TERM_LENGTH" />：</td>
 				<td><form:input id="termLength" path="ftzInTxnDtl.termLength" maxlength="4"
 						class=".input-large"  onkeyup="numberFormat(this);"
-						onbeforepaste="numberFormatCopy(this);"/></td>
+						onbeforepaste="numberFormatCopy(this);" data-trigger="focus" data-placement="right" data-content="定期存款时必填"/></td>
 				<td class="label_td"><spring:message code="ftz.label.TERM_UNIT" />：</td>
 				<td><form:select path="ftzInTxnDtl.termUnit">
 						<form:option value=""></form:option>
@@ -229,6 +229,9 @@
 						<form:options items="${FTZ_IS_OVERDUE}" />
 					</form:select>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message

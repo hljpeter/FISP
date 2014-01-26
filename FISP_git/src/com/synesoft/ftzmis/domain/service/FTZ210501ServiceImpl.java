@@ -15,7 +15,6 @@ import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.CommonUtil;
-import com.synesoft.fisp.app.common.utils.MessagesUtil;
 import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
@@ -33,10 +32,10 @@ import com.synesoft.ftzmis.domain.repository.FTZ210501Repository;
  */
 @Service
 public class FTZ210501ServiceImpl implements FTZ210501Service {
+	
+	protected static String funcId = "210501";
 
 	private static final Logger log = LoggerFactory.getLogger(FTZ210501ServiceImpl.class);
-	
-	private MessagesUtil message = MessagesUtil.getInstance();
 	
 	@Resource
 	protected FTZ210501Repository ftz210501repository;
@@ -111,7 +110,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 					throw new BusinessException(messages);
 				}
 				//记录操作日志
-				tlrBizLogPrintForFtzActMstrTmp("FTZ_Add_210501", "A", ftzActMstrTmp);
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD, "", ftzActMstrTmp.toString());
 			} else {
 				//账户信息临时表中存在相同的账户和子账户
 				log.error("账户信息临时表中存在相同的账号和子账号");
@@ -132,7 +131,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 					throw new BusinessException(messages);
 				}
 				//记录操作日志
-				tlrBizLogPrintForFtzActMstrTmp("FTZ_Add_210501", "A", ftzActMstrTmp);
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD, "", ftzActMstrTmp.toString());
 			} else {
 				//账户信息临时表中存在相同的账户和子账户
 				log.error("账户信息临时表中存在相同的账号和子账号");
@@ -156,6 +155,12 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 	public void updateFtzActMstr(FtzActMstr ftzActMstr) {
 		log.info("账户信息维护修改开始！");
 		ResultMessages messages = ResultMessages.error();
+		//用于记录日志
+		FtzActMstr query_ftzActMstr = new FtzActMstr();
+		query_ftzActMstr.setAccountNo(ftzActMstr.getAccountNo());
+		query_ftzActMstr.setSubAccountNo(ftzActMstr.getSubAccountNo());
+		FtzActMstr ftzActMstr_tmp = this.queryFtzActMstr(query_ftzActMstr);
+		//
 		FtzActMstrTmp ftzActMstrTmp = new FtzActMstrTmp();
 		setFtzActMstrTmp(ftzActMstr, ftzActMstrTmp);
 		if (null == ftz210501repository.queryFtzActMstrTmp(ftzActMstrTmp)) {
@@ -168,7 +173,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 				throw new BusinessException(messages);
 			}
 			//记录操作日志
-			tlrBizLogPrintForFtzActMstrTmp("FTZ_Add_210501", "M", ftzActMstrTmp);
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY, ftzActMstr_tmp.toString(), ftzActMstr.toString());
 		} else {
 			//账户信息临时表中存在相同的账户和子账户
 			log.error("账户信息临时表中存在相同的账号和子账号");
@@ -198,7 +203,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 					throw new BusinessException(messages);
 				}
 				//记录操作日志
-				tlrBizLogPrintForFtzActMstrTmp("210501", "D", ftzActMstrTmp);
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE, ftzActMstr.toString(), "");
 		} else {
 			//账户临时表中有数据待审核
 			log.error("账户信息临时表中有数据待审核");
@@ -216,6 +221,12 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 	public void authFtzActMstr(FtzActMstrTmp ftzActMstrTmp) {
 		log.info("账户审核成功开始");
 		ResultMessages messages = ResultMessages.error();
+		//用于记录日志
+		FtzActMstr query_ftzActMstr = new FtzActMstr();
+		query_ftzActMstr.setAccountNo(ftzActMstrTmp.getAccountNo());
+		query_ftzActMstr.setSubAccountNo(ftzActMstrTmp.getSubAccountNo());
+		FtzActMstr ftzActMstr_tmp = this.queryFtzActMstr(query_ftzActMstr);
+		//
 		FtzActMstr ftzActMstr = new FtzActMstr();
 		FtzActMstrTmp old_ftzActMstrTmp = ftz210501repository.queryFtzActMstrTmp(ftzActMstrTmp);
 		//判断临时表中是否存在该账户
@@ -236,7 +247,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 						throw new BusinessException(messages);
 					}
 					//记录操作日志
-					tlrBizLogPrintForFtzActMstrTmp("210501", "C", old_ftzActMstrTmp);
+					BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD, "", ftzActMstr.toString());
 					//删除临时表中的数据
 					ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 					//维护类型为修改
@@ -251,7 +262,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 						throw new BusinessException(messages);
 					}
 					//记录操作日志
-					tlrBizLogPrintForFtzActMstrTmp("210501", "M", old_ftzActMstrTmp);
+					BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK, ftzActMstr_tmp.toString(), ftzActMstr.toString());
 					//删除临时表中的数据
 					ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 					//维护类型为删除
@@ -269,7 +280,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 						throw new BusinessException(messages);
 					}
 					//记录操作日志
-					tlrBizLogPrintForFtzActMstrTmp("210501", "M", old_ftzActMstrTmp);
+					BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK, ftzActMstr_tmp.toString(), ftzActMstr.toString());
 					//删除临时表中的数据
 					ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 				} else {
@@ -301,6 +312,11 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 	public void refuseFtzActMstr(FtzActMstrTmp ftzActMstrTmp) {
 		log.info("账户审核拒绝开始");
 		ResultMessages messages = ResultMessages.error();
+		//用于记录日志
+		FtzActMstr query_ftzActMstr = new FtzActMstr();
+		query_ftzActMstr.setAccountNo(ftzActMstrTmp.getAccountNo());
+		query_ftzActMstr.setSubAccountNo(ftzActMstrTmp.getSubAccountNo());
+		FtzActMstr ftzActMstr_tmp = this.queryFtzActMstr(query_ftzActMstr);
 		FtzActMstrTmp old_ftzActMstrTmp = ftz210501repository.queryFtzActMstrTmp(ftzActMstrTmp);
 		//判断临时表中是否存在该账户
 		if (null != old_ftzActMstrTmp) {
@@ -308,7 +324,7 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 				//删除临时表中的数据
 				ftz210501repository.deleteFtzActMstrTmp(ftzActMstrTmp);
 				//记录操作日志
-				tlrBizLogPrintForFtzActMstrTmp("210501", "D", old_ftzActMstrTmp);
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT, ftzActMstr_tmp.toString(), ftzActMstrTmp.toString());
 			} else {
 				//录入和审核为同一人
 				log.error("录入操作员和审核操作员为同一人");
@@ -324,60 +340,11 @@ public class FTZ210501ServiceImpl implements FTZ210501Service {
 		log.info("账户审核拒绝结束");
 	}
 	
-	public void tlrBizLogPrintForFtzActMstrTmp(String funcId, String opType,
-			FtzActMstrTmp old_fFtzActMstrTmp) {
-			OrgInf orgInf = ContextConst.getOrgInfByUser();
-			UserInf userInf = ContextConst.getCurrentUser();
-			String time = DateUtil.getNowInputDateTime();
-			TlrLogPrint.tlrBizLogPrint(funcId, orgInf.getOrgid(), userInf.getUserid(), 
-				userInf.getUsername(), opType, time.substring(0, 8), time.substring(8, 14), 
-				generateFztActMstrTmp(old_fFtzActMstrTmp), "");
-	}
-	
-	private String generateFztActMstrTmp(FtzActMstrTmp ftzActMstrTmp) {
-		StringBuffer sb = new StringBuffer();
-		sb.append(message.getMessage("ftz.label.common.branchId"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getBranchId())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.ACCOUNT_NAME"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getAccountName())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.DEPT_TYPE"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getDeptType())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.BALANCE_CODE"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getBalanceCode())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.ACCOUNT_NO"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getAccountNo())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.SUB_ACCOUNT_NO"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getSubAccountNo())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.CURRENCY"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getCurrency())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.ACC_TYPE"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getAccType())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.DOCUMENT_TYPE"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getDocumentType())
-				.append(CommonConst.SEPARATE_TWO_FIELD)
-				.append(message.getMessage("ftz.label.DOCUMENT_NO"))
-				.append(CommonConst.SEPARATE_KEY_VALUE)
-				.append(ftzActMstrTmp.getDocumentNo())
-				.append(CommonConst.SEPARATE_TWO_FIELD);
-		
-		return sb.toString();
+	private void BizLog(String operType, String beforeData, String afterData) {
+		OrgInf orgInfo = ContextConst.getOrgInfByUser();
+		UserInf userInfo = ContextConst.getCurrentUser();
+		TlrLogPrint.tlrBizLogPrint(funcId, orgInfo.getOrgid(), userInfo.getUserid(), userInfo.getUsername(), operType, 
+				DateUtil.getNowInputDate(), DateUtil.getNowInputTime(), beforeData, afterData);
 	}
 	
 	private void setFtzActMstrTmp(FtzActMstr ftzActMstr, FtzActMstrTmp ftzActMstrTmp) {

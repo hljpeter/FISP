@@ -115,7 +115,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当出入账标志为出账业务冲正或入账业务冲正时，本栏位为强制项，且栏位值小于等于记账日期"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -231,7 +231,7 @@
 	<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.MSG_DTL_STATUS" />：</td>
+						code="ftz.label.OPER_STATUS" />：</td>
 				<td colspan="3"><form:select path="ftzInTxnDtl.chkStatus"
 						disabled="true">
 						<form:option value=""></form:option>
@@ -240,11 +240,11 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.MAK_USER_ID" />：</td>
+						code="ftz.label.MAK_USER_IDS" />：</td>
 				<td><form:input id="makUserId" path="ftzInTxnDtl.makUserId"
 						class=".input-large" readonly="true" /></td>
 				<td class="label_td"><spring:message
-						code="ftz.label.MAK_DATETIME" />：</td>
+						code="ftz.label.MAK_DATETIMES" />：</td>
 				<td><form:input id="makDatetime" path="ftzInTxnDtl.makDatetime"
 						class=".input-large" readonly="true" /></td>
 			</tr>

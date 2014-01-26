@@ -121,7 +121,7 @@
 				<td class="label_td"><font color="red">*</font>
 				<spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo" readonly="true"
-						class=".input-large" onblur="accountFill()" />
+						class=".input-large"  />
 					</td>
 				
 				<td class="label_td"><font color="red">*</font>
@@ -232,7 +232,9 @@
 						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
 						<td class="vtip" style="text-align: right; width: 50px;"><t:moneyFormat
 								type="label" value="${dto1.amount}" /></td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}"
+								type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.valueDate}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
 								type="label" value="${dto1.interestRate}" dot="true" format="###,###,###,###.000000"/></td>

@@ -1,11 +1,5 @@
 <script type="text/javascript">
 	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if ("02" != msgStatus) {
-			$("#sbdetail").attr("disabled", "disabled");
-		} else {
-			$("#sbdetail").removeAttr("disabled");
-		}
 		$("#pageTable").find("tr").bind('click', function() {
 			var selected_msgId = $(this).find("td:eq(7)").text();
 			var selected_seqNo = $(this).find("td:eq(8)").text();
@@ -59,12 +53,18 @@
 
 	function queryFTZ210210Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
+		$("#selected_seqNo").val(null);
 		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZ210210/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
 	function sbDtl() {
 		$("#selected_msgId").val($("#msgId").val());
+		var msgStatus = $("#msgStatus").val();
+		if ("02" != msgStatus) {
+			alert('<spring:message code="ftz.validate.auth.msg"/>');
+			return;
+		}
 		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZ210210/AuthDtlSubmit";
 		form.submit();
@@ -234,7 +234,8 @@
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<div class="rightPage">
 		<util:pagination page="${page}"
-			query="selected_msgId=${FTZ210210Form.ftzInMsgCtl.msgId}" />
+			query="selected_msgId=${FTZ210210Form.ftzInMsgCtl.msgId}" 
+			action="/FTZ210210/QryAuthDtl"/>
 	</div>
 </div>
 

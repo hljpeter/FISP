@@ -9,6 +9,7 @@ if (actionFlag == "addTxn") {
 	if (success && success != "") {
 		$("button[type=button]").attr("disabled", true);
 		$("input").attr("readonly", true);
+		$(".date").attr("disabled", true);
 		$("select").attr("disabled", true);
 		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Input/AddTxn/Init");
 		$("#sbm").html('<spring:message code="ftz.label.GOON_KEY_IN"/>');
@@ -27,6 +28,7 @@ if (actionFlag == "addTxn") {
 	if (success && success != "") {
 		$("button[type=button]").attr("disabled", true);
 		$("input").attr("readonly", true);
+		$(".date").attr("disabled", true);
 		$("select").attr("disabled", true);
 		$("#sbm").attr("disabled", true);
 		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210206/Input/UptTxn/Init");
@@ -37,6 +39,8 @@ $("#sbm").click(function() {
 	$("#amount").val($("#amount").val().replaceAll(",", ""));
 	$("#form").submit();
 });
+
+
 
 });
 
@@ -68,6 +72,10 @@ function querytranType() {
 	} ]);
 
 }
+
+
+
+
 
 </script>
 <!-- tips information -->
@@ -112,16 +120,16 @@ function querytranType() {
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_DATE" />：</td>
 				<td><form:input id="tranDate" path="ftzInTxnDtl.tranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large date" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large date" /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.AMOUNT" />：</td>
-				<td colspan="3"><t:moneyFormat type="text" id="amount"
+				<td colspan="3"><t:moneyFormat type="text" id="amount" 
 						name="ftzInTxnDtl.amount"
 						value="${FTZ210206Form.ftzInTxnDtl.amount}"
 						format="###,###,###,###.00" dot="true" maxlength="24"/></td>
@@ -156,7 +164,7 @@ function querytranType() {
 				<td class="label_td"><font color="red">*</font><spring:message
 						code="210206ftz.label.VALUE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.valueDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large date" /></td>
 						
 						<td class="label_td"><font color="red">*</font> <spring:message
 						code="210206ftz.label.INTERESTRATE" />：</td>

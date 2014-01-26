@@ -64,6 +64,7 @@ public class FTZ210101Controller {
 		query_FtzInMsgCtl.setMsgId(form.getQuery_msgId());
 		query_FtzInMsgCtl.setBranchId(form.getQuery_branchId().trim());
 		query_FtzInMsgCtl.setCurrency(form.getQuery_currency());
+		query_FtzInMsgCtl.setAccountNo(form.getQuery_accountNo());
 		query_FtzInMsgCtl.setRsv1(DateUtil.getFormatDateRemoveSprit(form
 				.getQuery_submitDate_start()));
 		query_FtzInMsgCtl.setRsv2(DateUtil.getFormatDateRemoveSprit(form
@@ -1355,8 +1356,7 @@ public class FTZ210101Controller {
 										.getTranDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
+					
 				}
 			}
 			// 查询全部数据
@@ -1371,11 +1371,10 @@ public class FTZ210101Controller {
 										.getTranDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
-
+			form.setSelected_msgId("");
+			form.setSelected_seqNo(null);
 			return "ftzmis/FTZ210101_Auth_Qry_Dtl";
 		}
 	}

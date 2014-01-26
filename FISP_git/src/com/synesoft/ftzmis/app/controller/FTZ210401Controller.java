@@ -511,6 +511,12 @@ public class FTZ210401Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0010");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(update_FtzInMsgCtl.getBalance())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 所属机构代码
@@ -777,6 +783,16 @@ public class FTZ210401Controller {
 			ResultMessage resultMessage = ResultMessage
 			.fromCode("e.ftzmis.210206.0013");
 			resultMessages.add(resultMessage);
+		}
+		
+		//到期日
+		if (issert_FtzInTxnDtl.getTermLength() != 0) {
+			if (null == issert_FtzInTxnDtl.getExpireDate() || 
+					"".equals(issert_FtzInTxnDtl.getExpireDate())) {
+				ResultMessage resultMessage = ResultMessage
+				.fromCode("e.ftzmis.210401.0004");
+				resultMessages.add(resultMessage);
+			}
 		}
 		
 		//潜在收益率
@@ -1276,7 +1292,7 @@ public class FTZ210401Controller {
 			}
 		}
 
-		return "ftzmis/FTZ210401_Auth_Qry_Dtl";
+		return "forward:/FTZ210401/QryAuthDtl";
 	}
 
 	@RequestMapping("QryAuthDtlDtl")

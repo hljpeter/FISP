@@ -141,7 +141,7 @@
 						onclick="querytranType()" value="<spring:message code="button.label.Search" />" />
 				 </td>
 			</tr>
-			
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.DTL_STATUS" />：</td>

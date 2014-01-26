@@ -60,6 +60,7 @@
 		var msgStatus = $("#msgStatus").val();
 		if ("02" != msgStatus) {
 			alert('<spring:message code="ftz.validate.auth.msg"/>');
+			return;
 		}
 		$("#selected_msgId").val($("#msgId").val());
 		$("#selected_msgNo").val($("#msgNo").val());

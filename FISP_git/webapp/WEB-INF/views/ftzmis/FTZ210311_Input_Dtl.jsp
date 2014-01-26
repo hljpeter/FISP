@@ -193,9 +193,11 @@
 						<form:options items="${FTZ_MSG_STATUS_INPUT}" />
 					</form:select></td>
 			</tr>
-			</table>
-			<table class="tbl_search">
+			
 			<c:if test="${ FTZ210311Form.actionFlag eq 'updMsg'}">
+				<tr>
+					<td colspan="4"><hr /></td>
+				</tr>
 				<tr>
 					<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 					<td><form:select path="ftzOffMsgCtl.result" disabled="true">

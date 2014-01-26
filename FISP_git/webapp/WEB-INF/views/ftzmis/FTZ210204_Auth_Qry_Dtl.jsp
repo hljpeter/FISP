@@ -1,11 +1,5 @@
 <script type="text/javascript">
 	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if ("02" != msgStatus) {
-			$("#sbdetail").attr("disabled", "disabled");
-		}else{
-			$("#sbdetail").removeAttr("disabled");
-		}
 		$("#pageTable").find("tr").bind('click', function() {
 			var selected_msgId = $(this).find("td:eq(8)").text();
 			var selected_seqNo = $(this).find("td:eq(9)").text();
@@ -24,24 +18,20 @@
 			if (old_selected_seqNo != selected_seqNo) {
 				$("#selected_msgId").val(selected_msgId);
 				$("#selected_seqNo").val(selected_seqNo);
-				
+
 				return;
 			}
 
 		});
-		$("#pageTable")
-		.find("tr")
-		.bind(
+		$("#pageTable").find("tr").bind(
 				'dblclick',
 				function() {
-					var selected_msgId = $(this).find("td:eq(8)")
-							.text();
-					var selected_seqNo = $(this).find("td:eq(9)")
-							.text();
-					showDialog('${pageContext.request.contextPath}/FTZ210204/QryAuthDtlDtl?selected_msgId='
-							+ selected_msgId
-							+ "&selected_seqNo="
-							+ selected_seqNo,'500','1024');
+					var selected_msgId = $(this).find("td:eq(8)").text();
+					var selected_seqNo = $(this).find("td:eq(9)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210204/QryAuthDtlDtl?selected_msgId='
+									+ selected_msgId + "&selected_seqNo="
+									+ selected_seqNo, '500', '1024');
 					queryFTZ210204Dtl();
 				});
 	});
@@ -52,9 +42,10 @@
 			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210204/QryAuthDtlDtl?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210204/QryAuthDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
 			queryFTZ210204Dtl();
 		}
 	}
@@ -63,10 +54,15 @@
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210204/QryAuthDtl?page.page="+${page.number+1};
+		form.action = "${pageContext.request.contextPath}/FTZ210204/QryAuthDtl?page.page="+ ${page.number + 1};
 		form.submit();
 	}
 	function sbDtl() {
+		var msgStatus = $("#msgStatus").val();
+		if ("02" != msgStatus) {
+			alert('<spring:message code="ftz.validate.auth.msg"/>');
+			return;
+		}
 		$("#selected_msgId").val($("#msgId").val());
 		$("#selected_msgNo").val($("#msgNo").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -74,7 +70,6 @@
 		form.action = "${pageContext.request.contextPath}/FTZ210204/AuthDtlSubmit";
 		form.submit();
 	}
-	
 </script>
 
 <div id="id_showMsg" style="display: none">
@@ -153,7 +148,7 @@
 			</tr>
 			<tr>
 			<td class="label_td" colspan="2"><font color="red">* </font>
-				<spring:message code="ftz.label.BALANCE_CODE" /><form:hidden
+				<spring:message code="ftz.label.BALANCE_CODE" />：<form:hidden
 						path="ftzInMsgCtl.balanceCode" id="balanceCode1" /> <form:select
 						id="balanceCode" path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
@@ -163,6 +158,7 @@
 				<spring:message code="ftz.label.ACCORGCODE" />：</td>
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode" class="input-large"  readonly="true"/></td>
 			</tr>
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">

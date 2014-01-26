@@ -177,7 +177,7 @@
 						class=".input-large" readonly="true" /></td>
 			</tr>
 			<tr>
-				<td class="label_td"><font color="red">*</font> <spring:message
+				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.SUBMIT_DATE" />：</td>
 				<td><form:input id="submitDate" path="ftzInMsgCtl.submitDate"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>

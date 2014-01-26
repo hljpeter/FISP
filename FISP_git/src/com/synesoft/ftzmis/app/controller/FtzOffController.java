@@ -80,7 +80,7 @@ public class FtzOffController {
 			
 			//Query
 			// query DpMppCfg page list
-			Page<FtzOffMsgCtlVO> page = ftz210302Service.getMsgPage(pageable, ftzOffMsgCtlVO);
+			Page<FtzOffMsgCtlVO> page = ftz210302Service.getMsgPageForAuth(pageable, ftzOffMsgCtlVO);
 
 			model.addAttribute(MODEL_KEY_PAGE, page);
 //		if (page.getContent().size() > 0) {
@@ -118,7 +118,7 @@ public class FtzOffController {
 			return "ftzmis/FTZOFF_Auth_Qry";
 		} catch (BusinessException e) {
 			log.info("[w.dp.0001] No data!");
-			model.addAttribute("errmsg", e.getResultMessages());
+			model.addAttribute("infomsg", e.getResultMessages());
 			return "ftzmis/FTZOFF_Auth_Qry";
 		}
 	

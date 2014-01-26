@@ -1,8 +1,8 @@
 <script type="text/javascript">
 	$(function() {
+		$('#oppBankCode').popover('hide');
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
-			$(".dtl").css("display", "none");
 			var seqNo = $("#seqNo").val();
 			if ("" != seqNo && null != seqNo) {
 				$("#add").val(
@@ -190,7 +190,8 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.OPP_BANK_CODE2" />：</td>
 				<td><form:input id="oppBankCode" path="ftzInTxnDtl.oppBankCode"
-						class=".input-large" />
+						class=".input-large" data-toggle="popover" data-trigger="focus" data-placement="right" 
+						data-content="如对方帐号为同业帐号，必输"/>
 					<button type="button" class="btn btn-small"
 						onclick="queryBankCode()">
 						<spring:message code="button.label.Search" />

@@ -22,6 +22,7 @@ import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.util.Validator;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
@@ -126,6 +127,15 @@ public class FTZ210206ServiceImp extends FTZInCommonServiceImp {
 			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.210206.0010");
 			messages.addAll(msg);
 		}
+		else{
+			if (!Validator.CheckAmount(ftzInTxnDtl.getAmount())) {
+				ResultMessage msg = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				messages.addAll(msg);
+			}
+		}
+		
+		
 			
 		// 国别代码不能为空
 		if (!StringUtil.isNotTrimEmpty(ftzInTxnDtl.getCountryCode())) {
@@ -147,6 +157,12 @@ public class FTZ210206ServiceImp extends FTZInCommonServiceImp {
 		if (ftzInTxnDtl.getInterestRate() == new BigDecimal(0)||ftzInTxnDtl.getInterestRate()==null) {
 			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.210206.0014");
 			messages.addAll(msg);
+		}else{
+			if (!Validator.CheckRate(ftzInTxnDtl.getInterestRate())) {
+				ResultMessage msg = ResultMessage
+						.fromCode("e.ftzmis.210101.0041");
+				messages.addAll(msg);
+			}
 		}
 		// 交易性质不能为空
 		if (!StringUtil.isNotTrimEmpty(ftzInTxnDtl.getTranType())) {
@@ -195,6 +211,14 @@ public class FTZ210206ServiceImp extends FTZInCommonServiceImp {
 		if (ftzInMsgCtl.getBalance() == new BigDecimal(0)||ftzInMsgCtl.getBalance()==null) {
 			ResultMessage msg = ResultMessage.fromCode("e.ftzmis.210206.0005");
 			messages.addAll(msg);
+		}
+		else
+		{
+			if (!Validator.CheckAmount(ftzInMsgCtl.getBalance())) {
+				ResultMessage msg = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				messages.addAll(msg);
+			}
 		}
 		
 		

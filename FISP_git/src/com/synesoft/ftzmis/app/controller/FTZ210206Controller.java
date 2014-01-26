@@ -1,5 +1,6 @@
 package com.synesoft.ftzmis.app.controller;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,10 @@ import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.StringUtil;
+import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
+import com.synesoft.fisp.domain.service.dp.DP_Mpp_Service;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
@@ -90,13 +93,22 @@ public class FTZ210206Controller {
 //		if (result.hasErrors()) {
 //			return "ftzmis/FTZ210206_Input_Qry";
 //		}
+		
+		
+		OrgInf orgInf = new OrgInf();
+		
+		UserInf userInfo = ContextConst.getCurrentUser();
+		orgInf.setRsv1(userInfo.getUserid());
+		List<OrgInf> orgList = dp_Mpp_Service.queryOrgInfPage(pageable, orgInf).getContent();
+		model.addAttribute("orgList", orgList);
+		
 		FtzInMsgCtlVO vo = new FtzInMsgCtlVO();
 		vo.setMsgNo(CommonConst.MSG_NO_210206);
 		// data ready
 		FtzInMsgCtlVO msgCtlVO = (FtzInMsgCtlVO)form.getFtzInMsgCtlVO();
 		if(null != msgCtlVO)
 		{
-			vo.setBranchId(msgCtlVO.getBranchId());
+			vo.setBranchId(msgCtlVO.getBranchId().trim());
 			vo.setStartDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getStartDate())));
 			vo.setEndDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getEndDate())));
 			vo.setMsgNo(CommonConst.MSG_NO_210206);
@@ -194,7 +206,7 @@ public class FTZ210206Controller {
 		log.info("FTZ210206Controller.inputAddMsgInit() start ...");
 		
 		FtzInMsgCtl ctl = new FtzInMsgCtl();
-		ctl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
+		//ctl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
 		//ctl.setBranchId(ContextConst.getCurrentUser().getLoginorg());
 		//ctl.setWorkDate(DateUtil.getNowOutputDate());
 		//ctl.setMsgId(numberService.getSysIDSequence(16));
@@ -241,6 +253,9 @@ public class FTZ210206Controller {
 			form.setActionFlag(CommonConst.ACTION_FLAG_UPT_MSG);
 			form.getFtzInMsgCtl().setSubmitDate(DateUtil
 					.getFormatDateAddSprit(form.getFtzInMsgCtl().getSubmitDate()));
+			
+//			DecimalFormat df_amt = new DecimalFormat("###,###,###,###.00");
+//			form.getFtzInMsgCtl().setBalance(df_amt.format(form.getFtzInMsgCtl().getBalance()));
 			return "ftzmis/FTZ210206_Input_Qry_Dtl";
 
 		} catch (BusinessException e) {
@@ -424,7 +439,7 @@ public class FTZ210206Controller {
 
 			log.info("Submit success");
 			form.setActionFlag(CommonConst.ACTION_FLAG_SUB_MSG);
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Update.Msg.Ctl.Success")));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Submit.Msg.Ctl.Success")));
 
 			return "forward:/FTZ210206/AddQry";
 		} catch (BusinessException e) {
@@ -623,6 +638,7 @@ public class FTZ210206Controller {
 			txn.setOrgTranDate(DateUtil
 					.getFormatDateAddSprit(txn.getOrgTranDate()));//原始交易日期
 			}
+			
 			txn.setMakDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(txn.getMakDatetime()));//makdatetime
 			txn.setChkDatetime(DateUtil.getFormatDateTimeAddSpritAndColon(txn.getChkDatetime()));//chkdatetime
 			form.setFtzInTxnDtl(txn);
@@ -677,7 +693,7 @@ public class FTZ210206Controller {
 //		}
 		List<FtzActMstr> result_FtzActMstrs = ftz210101Service
 				.queryFtzActMstrs(query_FtzActMstr);
-		//DecimalFormat df_amt = new DecimalFormat("###,###,###,###.00");
+		DecimalFormat df_amt = new DecimalFormat("###,###,###,###.00");
 		if (null == result_FtzActMstrs) {
 			jo.put("dtlExist", false);
 		} else {
@@ -694,7 +710,7 @@ public class FTZ210206Controller {
 			jo.put("documentType", result_FtzActMstr.getDocumentType());
 			jo.put("currency", result_FtzActMstr.getCurrency());
 			jo.put("documentNo", result_FtzActMstr.getDocumentNo());
-			jo.put("balance", result_FtzActMstr.getBalance());
+			jo.put("balance", df_amt.format(result_FtzActMstr.getBalance()));
 			jo.put("accOrgCode", result_FtzActMstr.getAccOrgCode());
 		}
 
@@ -829,7 +845,9 @@ public class FTZ210206Controller {
 			if (null == ftzInTxnDtls || ftzInTxnDtls.size() < 1) {
 				ftz210206Service.authMsgCtl(form.getFtzInMsgCtl());
 
-				model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0005")));
+				ftzMsgProcService.submitMsg(form.getFtzInMsgCtl().getMsgNo(),
+						form.getFtzInMsgCtl().getMsgId());
+				model.addAttribute(ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0005")));
 				return "forward:/FTZ210206/Auth/DtlMsg/Init";
 			} else {
 				int count_unAuth = 0;
@@ -1052,4 +1070,7 @@ public class FTZ210206Controller {
 	
 	@Resource
 	private FtzMsgProcService ftzMsgProcService;
+	
+	@Resource
+	private DP_Mpp_Service dp_Mpp_Service;
 }

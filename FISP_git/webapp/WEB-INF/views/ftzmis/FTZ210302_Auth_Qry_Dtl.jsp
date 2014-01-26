@@ -18,7 +18,11 @@ if (success && success != "") {
 }
 
 $("#msgChk").click(function() {
-	$("#form").submit();
+	if ($("#msgStatus").val() == "01") {
+		alert('<spring:message code="e.ftzmis.2103.0032"/>');
+	} else {
+		$("#form").submit();
+	}
 });
 
 $(".tbl_page_body table tr").dblclick(function() {
@@ -33,12 +37,16 @@ $("#dtl").click(function() {
 	if (!selectedRow || selectedRow == "") {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
-		selectedRow = eval("(" + selectedRow + ")"); alert(selectedRow.seqNo);
-		showDialog('${pageContext.request.contextPath}/FTZ210302/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
-				+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
-				
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210302/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId="+ ${FTZ210302Form.ftzOffMsgCtl.msgId });
-		$("#form").submit();
+		selectedRow = eval("(" + selectedRow + ")"); 
+		if (selectedRow.chkStatus == '04') {
+			alert('<spring:message code="e.ftzmis.2103.0033"/>');
+		} else {
+			showDialog('${pageContext.request.contextPath}/FTZ210302/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
+					+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
+					
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210302/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId="+ ${FTZ210302Form.ftzOffMsgCtl.msgId });
+			$("#form").submit();
+		}
 	}
 });
 
@@ -134,7 +142,7 @@ $("#dtl").click(function() {
 			style="border: 0">
 			<tbody>
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }",chkStatus:"${dto.chkStatus }"}'>
 						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 40px;">${dto.submitDate}</td>
 						<td class="vtip" style="text-align: left; width: 80px;">${dto.institutionCode}</td>

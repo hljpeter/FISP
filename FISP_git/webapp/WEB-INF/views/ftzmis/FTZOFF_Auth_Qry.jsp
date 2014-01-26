@@ -17,7 +17,7 @@
 							'${pageContext.request.contextPath}/FTZOFF/QryRedirectAuthAll?selected_msgId='+ selected_msgId+'&selected_msgNo='+selected_msgNo,
 									window,
 									'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
-
+					queryFTZOFF();
 				});
 	});
 
@@ -58,6 +58,13 @@
 		$("#selected_msgId").val("");
 		$("#selected_msgNo").val("");
 		var form = document.getElementById("form");
+		form.action = "${pageContext.request.contextPath}/FTZOFF/AuthQry?page.page=" + ${page.number + 1 };
+		form.submit();
+	}
+	function queryFTZOFF2() {
+		$("#selected_msgId").val("");
+		$("#selected_msgNo").val("");
+		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZOFF/AuthQry";
 		form.submit();
 	}
@@ -70,7 +77,9 @@
 	<br /> <br />
 	<div class="alert alert-error" id="errorMsg" style="display: none"></div>
 	<div id="id_result">
-		<t:messagePanel />
+		<t:messagePanel messagesAttributeName="errmsg" messagesType="error" />
+		<t:messagePanel messagesAttributeName="infomsg" messagesType="info" />
+		<t:messagePanel messagesAttributeName="successmsg" messagesType="success" />
 		<spring:hasBindErrors name="fTZOFFForm">
 			<form:form commandName="fTZOFFForm">
 				<div class="alert alert-error">
@@ -119,7 +128,7 @@
 			</tr>
 			<tr>	
 				<td class="label_td" colspan="4" style="text-align:right;">
-				<button type="button" class="btn btn-primary" id="qry" onclick="queryFTZOFF()">
+				<button type="button" class="btn btn-primary" id="qry" onclick="queryFTZOFF2()">
 						<spring:message code="ftz.label.SELECT_MSG" />
 				</button>
 				</td><!-- i18n -->
@@ -158,11 +167,11 @@
 					<tr id="tr${dto.msgNo}">
 						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${FTZ_OFF_TYPE}" key="${dto.msgNo}" type="label" /></td>
-						<td class="vtip" style="text-align: center; width: 40px;">${dto.workDate}</td>
+						<td class="vtip" style="text-align: center; width: 40px;"><t:dateTimeFormat type="label" value="${dto.workDate}" format="date"/></td>
 						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 65px;">${dto.msgId}</td>
-						<td class="vtip" style="text-align: right; width: 20px;">${dto.rsv1}</td>
-						<td class="vtip" style="text-align: right; width: 40px;">${dto.rsv2}</td>
+						<td class="vtip" style="text-align: right; width: 20px;">${dto.totalNum}</td>
+						<td class="vtip" style="text-align: right; width: 40px;">${dto.aprNum}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>
 					</tr>
 				</c:forEach>
@@ -171,22 +180,21 @@
 	</div>
 </div>
 
-
+<!-- page and buttons -->
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<table class="text-center">
 		<tr>
-			<td width="70%" align="center">
-			<input id="detail" type="button" class="btn btn-primary" onclick="showAllDetail();" value="<spring:message code="ftz.label.MSG_ALL_Dtl" />">
-			<input id="detail" type="button" class="btn btn-primary" onclick="showDetail();" value="<spring:message code="ftz.label.MSG_UNAUTH_Dtl" />">
+			<td width="50%" align="center">
+				<input id="allDtl" type="button" class="btn btn-primary" onclick="showAllDetail();" value="<spring:message code="ftz.label.MSG_ALL_Dtl" />">
+				<input id="unauthDtl" type="button" class="btn btn-primary" onclick="showDetail();" value="<spring:message code="ftz.label.MSG_UNAUTH_Dtl" />">
 			</td>
-			<td width="30%" align="right">
-				<table>
-					<tr>
-						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZOFFForm.query_branchId}&query_submitDate_start=${FTZOFFForm.query_workDate_start}&query_submitDate_end=${FTZOFFForm.query_workDate_end}&query_msgId=${FTZOFFForm.query_msgId}&query_msgNo=${FTZOFFForm.query_msgNo}" action="/FTZOFF/AuthQry"/></td>
-					</tr>
-				</table>
+			<td width="50%" align="right">
+				<table><tr><td>
+					<util:pagination page="${page}" action="/FTZOFF/AuthQry" query="query_branchId=${FTZOFFForm.query_branchId}&query_workDate_start=${FTZOFFForm.query_workDate_start}&query_workDate_end=${FTZOFFForm.query_workDate_end}&query_msgId=${FTZOFFForm.query_msgId}&query_msgNo=${FTZOFFForm.query_msgNo}"/>	
+				</td></tr></table>
 			</td>
 		</tr>
 	</table>
 </div>
+
+

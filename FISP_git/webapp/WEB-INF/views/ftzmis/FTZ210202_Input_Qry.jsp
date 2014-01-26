@@ -177,7 +177,7 @@
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUSS" />：</td>
 				<td><form:select path="query_msgStatus">
 						<form:option value=""></form:option>
-						<form:options items="${FTZ_MSG_STATUS}" />
+						<form:options items="${FTZ_MSG_STATUS_INPUT}" />
 					</form:select></td>
 				<td style="text-align: right;" colspan="2">
 					<button type="submit" class="btn btn-primary">
@@ -227,7 +227,7 @@
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: center; width: 65px;">${dto.msgId}</td>
 						<td class="vtip" style="text-align: left; width: 65px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: center; width: 65px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 65px;"><t:codeValue
 								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>   
 						<td class="vtip" style="text-align: right; width: 65px;"><t:moneyFormat
 								type="label" value="${dto.balance}" /></td>

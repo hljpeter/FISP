@@ -175,11 +175,14 @@ public class FTZ210501Controller {
 		}
 		
 		//子账号
-		if ("".equals(ftzActMstrTmp.getSubAccountNo()) || null== ftzActMstrTmp.getSubAccountNo()) {
-			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0006");
-			resultMessages.add(resultMessage);
+		if (ftzActMstrTmp.getAccType().trim().substring(0, 1).equals("0")) {
+			if ("".equals(ftzActMstrTmp.getSubAccountNo())
+					|| null == ftzActMstrTmp.getSubAccountNo()) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210501.0006");
+				resultMessages.add(resultMessage);
+			}
 		}
-		
 		//货币
 		if ("".equals(ftzActMstrTmp.getCurrency()) || null== ftzActMstrTmp.getCurrency()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0007");
@@ -223,6 +226,17 @@ public class FTZ210501Controller {
 		} else if (!Validator.CheckAmount(ftzActMstrTmp.getBalance())) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0025");
 			resultMessages.add(resultMessage);
+		}
+		
+		//存款利率
+		if(ftzActMstrTmp.getAccType().trim().substring(0, 1).equals("0")){
+			if (null== ftzActMstrTmp.getDepositRate()) {
+				ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0026");
+				resultMessages.add(resultMessage);
+			} else if (!Validator.CheckInterestRate(ftzActMstrTmp.getDepositRate())) {
+				ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0027");
+				resultMessages.add(resultMessage);
+			} 
 		}
 		
 		if (resultMessages.isNotEmpty()) {
@@ -325,11 +339,14 @@ public class FTZ210501Controller {
 		}
 		
 		//子账号
-		if ("".equals(ftzActMstr.getSubAccountNo()) || null== ftzActMstr.getSubAccountNo()) {
-			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0006");
-			resultMessages.add(resultMessage);
+		if (ftzActMstr.getAccType().trim().substring(0, 1).equals("0")) {
+			if ("".equals(ftzActMstr.getSubAccountNo())
+					|| null == ftzActMstr.getSubAccountNo()) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210501.0006");
+				resultMessages.add(resultMessage);
+			}
 		}
-		
 		//货币
 		if ("".equals(ftzActMstr.getCurrency()) || null== ftzActMstr.getCurrency()) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0007");
@@ -373,6 +390,17 @@ public class FTZ210501Controller {
 		} else if (!Validator.CheckAmount(ftzActMstr.getBalance())) {
 			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0025");
 			resultMessages.add(resultMessage);
+		}
+		
+		//存款利率
+		if(ftzActMstr.getAccType().trim().substring(0, 1).equals("0")){
+			if (null== ftzActMstr.getDepositRate()) {
+				ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0026");
+				resultMessages.add(resultMessage);
+			} else if (!Validator.CheckInterestRate(ftzActMstr.getDepositRate())) {
+				ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210501.0027");
+				resultMessages.add(resultMessage);
+			} 
 		}
 		
 		if (resultMessages.isNotEmpty()) {

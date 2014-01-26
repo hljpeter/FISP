@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(function() {
+		$('input').popover('hide');
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
 			var seqNo = $("#seqNo").val();
@@ -117,7 +118,9 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" 
+						data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当出入账标志为出账业务冲正或入账业务冲正时，本栏位为强制项，且栏位值小于等于记账日期"/>
+				</td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -144,7 +147,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.OPP_ACCOUNT" />：</td>
 				<td><form:input id="oppAccount" path="ftzInTxnDtl.oppAccount" class=".input-large" 
-						maxlength="35" onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/></td>
+						maxlength="35" onkeyup="numberStringFormat(this);" onbeforepaste="numberStringFormatCopy(this);"/></td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName"
 						class=".input-large" maxlength="128"/></td>
@@ -164,7 +167,8 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.DISITRICT_CODE" />：</td>
 				<td><form:select path="ftzInTxnDtl.disitrictCode"
-						id="disitrictCode">
+						id="disitrictCode" data-toggle="popover" data-trigger="hover" data-placement="right" 
+						data-content="对方机构为境外机构时，本栏位可空">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>
@@ -198,7 +202,7 @@
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.INTEREST_RATES1"/>：</td>
 				<td><t:moneyFormat type="text" id="interestRate" name="ftzInTxnDtl.interestRate"
 						value="${FTZ210401Form.ftzInTxnDtl.interestRate}"
-						format="###.000000" dot="true" maxlength="15"/></td>
+						format="###.000000" dot="true" maxlength="10"/></td>
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>
 				<td><form:select path="ftzInTxnDtl.tranType" id="tranType">
@@ -208,6 +212,9 @@
 					<input type="button" class="btn btn-small"
 						onclick="querytranType()" value="<spring:message code="button.label.Search" />"/>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message

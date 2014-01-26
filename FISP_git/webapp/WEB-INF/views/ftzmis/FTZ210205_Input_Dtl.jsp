@@ -66,13 +66,15 @@
 
 	function accoutQry() {
 		var accountNo = $("#accountNo").val();
+		var subAccountNo = $("#subAccountNo").val();
 		$.ajax({
-			url : contextPath + "/FTZ210106/DtlAccountQry",
+			url : contextPath + "/FTZ210101/DtlAccountQry",
 			type : "post",
 			dataType : "json",
 			async : false,
 			data : {
-				accountNo : accountNo
+				accountNo : accountNo,
+				subAccountNo : subAccountNo
 			},
 			success : function(rs) {
 				dtlExist = rs.dtlExist;
@@ -121,7 +123,7 @@
 	function accountFill() {
 		var accountNo = $("#accountNo").val();
 		var subAccountNo = $("#subAccountNo").val();
-		if ("" != accountNo ) {
+		if ("" != accountNo && "" != subAccountNo) {
 			accoutQry();
 		}
 	}
@@ -140,7 +142,8 @@
 
 	function queryAct() {
 		showSelAct([ {
-			"accountNo" : "param1"
+			"accountNo" : "param1",
+			"subAccountNo" : "param2"
 		} ]);
 		accountFill();
 	};
@@ -276,6 +279,7 @@
 					<button type="button" class="btn btn-small" onclick="queryAct()">  
 						<spring:message code="button.label.Search" />
 					</button></td>				
+					<form:hidden path="ftzInMsgCtl.subAccountNo" id="subAccountNo" /></td>	
 				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NAME" />：</td>
 				<td><form:input id="accountName" path="ftzInMsgCtl.accountName"
 						class=".input-large" readonly="true" /></td>
@@ -308,6 +312,7 @@
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode" class="input-large"  readonly="true"/></td>
 			</tr>
 			<c:if test="${ FTZ210205Form.input_flag eq 'upt'}">
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">
@@ -315,6 +320,7 @@
 						<form:options items="${FTZ_PROC_RESULT}" />
 					</form:select></td>
 			</tr>
+			
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
 				<td colspan="3"><form:input id="addWord"

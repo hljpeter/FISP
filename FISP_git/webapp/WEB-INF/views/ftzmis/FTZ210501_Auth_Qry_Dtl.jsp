@@ -127,15 +127,20 @@ function authRefuse() {
 				</td>
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.AMOUNT"/>：</td>
-				<td colspan="3">
+				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.DEPOSIT_RATE"/>：</td>
+				<td>
+					<t:moneyFormat type="text" id="depositRate" name="ftzActMstrTmp.depositRate"
+						value="${FTZ210501Form.ftzActMstrTmp.depositRate}" format="###.000000" dot="true" readonly="true"/>
+				</td>
+				<td class="label_td"><spring:message code="ftz.label.BALANCE"/>：</td>
+				<td>
 					<t:moneyFormat type="text" id="balance" name="ftzActMstrTmp.balance"
 						value="${FTZ210501Form.ftzActMstrTmp.balance}" format="###,###,###,###.00" dot="true" readonly="true"/>
 				</td>
 			</tr>		
-		</table>
-		
-		<table class="tbl_search">
+		<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.ACC_STATUS"/>：</td>
 				<td colspan="3">

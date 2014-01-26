@@ -30,7 +30,25 @@ public class FtzInMsgCtlVO extends FtzInMsgCtl {
     private String oldMsgStatus;
     
 
+    public String getDepartment() {
+		return department;
+	}
 
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getMakUser() {
+		return makUser;
+	}
+
+	public void setMakUser(String makUser) {
+		this.makUser = makUser;
+	}
+
+	private String department;
+    
+    private String makUser;
 
 	/**
 	 * @return the oldMsgStatus

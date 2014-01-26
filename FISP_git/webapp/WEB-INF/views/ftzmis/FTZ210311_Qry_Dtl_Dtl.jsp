@@ -152,6 +152,9 @@
 					</form:select>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
 			<tr class="dtl">	
 				<td class="label_td"><spring:message code="ftz.label.DTL_STATUS"/>：</td><!-- 明细状态 -->
 				<td colspan="3">

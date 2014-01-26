@@ -142,7 +142,8 @@
 					<input type="button" class="btn btn-small"
 						onclick="querytranType()" value="<spring:message code="button.label.Search" />" />
 				</td>
-			</tr>			
+			</tr>		
+			<tr><td colspan="4"><hr/></td></tr>	
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUSSS" />：</td>

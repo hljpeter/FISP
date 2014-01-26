@@ -54,7 +54,7 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.OPP_BANK_CODE1" />：</td>
 				<td><form:input id="oppBankCode"
-						path="ftzInTxnDtl.oppBankCode" class=".input-large" readonly="true"/></td>
+						path="ftzInTxnDtl.oppBankCode" class="input-xlarge" readonly="true"/></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.OPP_BANK_NAME" />：</td>
 				<td><form:input id="oppBankName" path="ftzInTxnDtl.oppBankName"
@@ -63,10 +63,10 @@
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.OPP_ACCOUNT" />：</td>
 				<td><form:input id="oppAccount"
-						path="ftzInTxnDtl.oppAccount" class=".input-large" readonly="true"/></td>
+						path="ftzInTxnDtl.oppAccount" class="input-large" readonly="true"/></td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
 				<td><form:input id="oppName"
-						path="ftzInTxnDtl.oppName" class=".input-large" readonly="true"/></td>
+						path="ftzInTxnDtl.oppName" class="input-large" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message

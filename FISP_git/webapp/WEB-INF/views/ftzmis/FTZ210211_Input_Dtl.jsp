@@ -249,49 +249,48 @@
 						format="###,###,###,###.00" dot="true" /></td>
 			</tr>
 			
-			<c:if test="${ FTZ210211Form.input_flag eq 'upt'}">
-				<tr><td colspan="4"><hr/></td></tr>
-				<tr>
-					<td class="label_td"><spring:message
-							code="ftz.label.PBOC_STATUS" />：</td>
-					<td><form:select path="ftzInMsgCtl.result" disabled="true">
-							<form:option value=""></form:option>
-							<form:options items="${FTZ_PROC_RESULT}" />
-						</form:select></td>
-				</tr>
-				<tr>
-					<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
-					<td colspan="3"><form:input id="addWord"
-							path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
-				</tr>
-				<tr class="dtl"><td colspan="4"><hr/></td></tr>
-				<tr>
-					<td class="label_td"><spring:message
-							code="ftz.label.MAK_USER_ID" />：</td>
-					<td><form:input id="makUserId" path="ftzInTxnDtl.makUserId"
-							class=".input-large" readonly="true" /></td>
-					<td class="label_td"><spring:message
-							code="ftz.label.MAK_DATETIME" />：</td>
-					<td><form:input id="makDatetime" path="ftzInTxnDtl.makDatetime"
-							class=".input-large" readonly="true" /></td>
-				</tr>
-				<tr>
-					<td class="label_td"><spring:message
-							code="ftz.label.CHK_USER_ID" />：</td>
-					<td><form:input id="chkUserId" path="ftzInTxnDtl.chkUserId"
-							class=".input-large" readonly="true" /></td>
-					<td class="label_td"><spring:message
-							code="ftz.label.CHK_DATETIME" />：</td>
-					<td><form:input id="chkDatetime" path="ftzInTxnDtl.chkDatetime"
-							class=".input-large" readonly="true" /></td>
-				</tr>
-				<tr>
-					<td class="label_td"><spring:message
-							code="ftz.label.CHK_ADD_WORD" />：</td>
-					<td colspan="3"><form:input id="chkAddWord"
-							path="ftzInTxnDtl.chkAddWord" class="input-xxlarge" readonly="true" /></td>
-				</tr>
-			</c:if>
+			<tr><td colspan="4"><hr/></td></tr>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.PBOC_STATUS" />：</td>
+				<td><form:select path="ftzInMsgCtl.result" disabled="true">
+						<form:option value=""></form:option>
+						<form:options items="${FTZ_PROC_RESULT}" />
+					</form:select></td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message code="ftz.label.ADDWORD" />：</td>
+				<td colspan="3"><form:input id="addWord"
+						path="ftzInMsgCtl.addWord" class="input-xxlarge" readonly="true" /></td>
+			</tr>
+			<tr class="dtl"><td colspan="4"><hr/></td></tr>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.MAK_USER_ID" />：</td>
+				<td><form:input id="makUserId" path="ftzInTxnDtl.makUserId"
+						class=".input-large" readonly="true" /></td>
+				<td class="label_td"><spring:message
+						code="ftz.label.MAK_DATETIME" />：</td>
+				<td><form:input id="makDatetime" path="ftzInTxnDtl.makDatetime"
+						class=".input-large" readonly="true" /></td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.CHK_USER_ID" />：</td>
+				<td><form:input id="chkUserId" path="ftzInTxnDtl.chkUserId"
+						class=".input-large" readonly="true" /></td>
+				<td class="label_td"><spring:message
+						code="ftz.label.CHK_DATETIME" />：</td>
+				<td><form:input id="chkDatetime" path="ftzInTxnDtl.chkDatetime"
+						class=".input-large" readonly="true" /></td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.CHK_ADD_WORD" />：</td>
+				<td colspan="3"><form:input id="chkAddWord"
+						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge" readonly="true" /></td>
+			</tr>
+
 			<tr>
 				<td style="text-align: center;" colspan="4">
 					<input id="dtlSub"

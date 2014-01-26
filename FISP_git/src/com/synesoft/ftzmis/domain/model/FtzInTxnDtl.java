@@ -163,7 +163,7 @@ public class FtzInTxnDtl extends FtzInTxnDtlKey {
 	 * 
 	 * @abatorgenerated Wed Dec 25 11:25:40 CST 2013
 	 */
-	@NotNull(groups = { FTZ210102FormAddDtlDtl.class, FTZ210106FormAddDtlDtl.class,FTZ210201FormAddDtlDtl.class,FTZ210103FormAddDtlDtl.class}, message = "{e.ftzmis.210101.0022}")
+	@NotNull(groups = { FTZ210102FormAddDtlDtl.class, FTZ210106FormAddDtlDtl.class,FTZ210103FormAddDtlDtl.class}, message = "{e.ftzmis.210101.0022}")
 	private BigDecimal interestRate;
 
 	/**

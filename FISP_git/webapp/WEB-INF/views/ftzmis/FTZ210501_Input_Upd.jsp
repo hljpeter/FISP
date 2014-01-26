@@ -16,6 +16,7 @@ function qryBalCode() {
 
 function actSubmit(){
 	$("#balance").val($("#balance").val().replaceAll(",", ""));
+	$("#depositRate").val($("#depositRate").val().replaceAll(",", ""));
 	var form = document.getElementById("form");
 	form.action = "${pageContext.request.contextPath}/FTZ210501/Update";
 	form.submit();
@@ -75,19 +76,19 @@ function actSubmit(){
 						<form:options items="${FTZ_BALANCE_INDEX_CODE}"/>
 					</form:select>
 					<input id="detail" type="button" class="btn btn-primary" 
-						onclick="qryBalCode();" value="<spring:message code="button.label.Search"/>">
+						onclick="qryBalCode()" value="<spring:message code="button.label.Search"/>">
 				</td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.ACCOUNT_NO"/>：</td>
 				<td>
 					<form:input id="accountNo" path="ftzActMstr.accountNo" class=".input-large" maxlength="35"
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);" readonly="true"/>
+						 readonly="true"/>
 				</td>
 				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.SUB_ACCOUNT_NO"/>：</td>
 				<td>
 					<form:input id="subAccountNo" path="ftzActMstr.subAccountNo" class=".input-large" maxlength="20"
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);" readonly="true"/>
+						readonly="true"/>
 				</td>
 			</tr>
 			<tr>
@@ -135,15 +136,20 @@ function actSubmit(){
 				</td>
 			</tr>
 			<tr>
-				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.AMOUNT"/>：</td>
-				<td colspan="3">
+				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.DEPOSIT_RATE"/>：</td>
+				<td>
+					<t:moneyFormat type="text" id="depositRate" name="ftzActMstr.depositRate"
+						value="${FTZ210501Form.ftzActMstr.depositRate}" format="###.000000" dot="true" maxlength="10"/>
+				</td>
+				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.BALANCE"/>：</td>
+				<td>
 					<t:moneyFormat type="text" id="balance" name="ftzActMstr.balance"
-						value="${FTZ210501Form.ftzActMstr.balance}" format="###,###,###,###.00" dot="true" />
+						value="${FTZ210501Form.ftzActMstr.balance}" format="###,###,###,###.00" dot="true" maxlength="24"/>
 				</td>
 			</tr>		
-		</table>
-		
-		<table class="tbl_search">
+		<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.ACC_STATUS"/>：</td>
 				<td colspan="3">

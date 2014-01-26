@@ -1,8 +1,12 @@
 package com.synesoft.ftzmis.domain.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.synesoft.ftzmis.app.common.constants.SQLMap;
+import com.synesoft.ftzmis.app.common.constants.Table;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.model.vo.FtzInMsgCtlVO;
@@ -66,6 +70,11 @@ public interface FtzInMsgCtlRepository {
 	
 	//更新报文通讯和反馈状态,通讯功能使用
 	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl);
+	
+	
+	public List<FtzInMsgCtl> queryFtzInMsgCtlList(FtzInMsgCtl ftzInMsgCtl);
+	
+	public List<FtzInTxnDtl> queryFtzInTxnDtlList(FtzInTxnDtl ftzInTxnDtl);
 
 }
 

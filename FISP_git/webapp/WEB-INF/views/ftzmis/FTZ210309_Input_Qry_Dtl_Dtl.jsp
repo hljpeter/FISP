@@ -153,7 +153,7 @@ function queryShowAllOrg3(){
 				<!-- 国内地区码 -->
 				<td class="label_td"><spring:message code="ftz.label.DISITRICT_CODE"/>：</td>
 				<td>
-					 <form:select path="ftzOffTxnDtl.districtCode" id="districtCode" class="disCode">
+					 <form:select path="ftzOffTxnDtl.districtCode" id="districtCode" class="disCode" >
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE }" />
 					</form:select>

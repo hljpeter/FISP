@@ -136,10 +136,12 @@
 	    	FTZ_OFF_MSG_CTL.MSG_ID = A.MSG_ID
 	    LEFT JOIN
 	    	(
-	    		<![CDATA[SELECT MSG_ID, COUNT(*) APRNUM FROM FTZ_OFF_TXN_DTL WHERE CHK_STATUS = '01' GROUP BY MSG_ID]]>
+	    		<![CDATA[SELECT MSG_ID, COUNT(*) APRNUM FROM FTZ_OFF_TXN_DTL WHERE CHK_STATUS = '02' GROUP BY MSG_ID]]>
 	    	) B ON
 	    	FTZ_OFF_MSG_CTL.MSG_ID = B.MSG_ID
 		<include refid="FTZ_OFF_MSG_CTL.where_condition" />
+	    ORDER BY
+	    	FTZ_OFF_MSG_CTL.WORK_DATE DESC
 	</select>
   
   	<!-- 根据主键查询数据，返回一条记录 -->

@@ -152,7 +152,7 @@ $("#del").click(function() {
 				</td>
 				
 				<td class="label_td"><span style="color:red;">*</span><spring:message code="ftz.label.WORK_DATE"/>：</td>
-				<td><t:dateTimeFormat type="text" value="${FTZ210301Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large"/></td>
+				<td><t:dateTimeFormat type="text" value="${FTZ210301Form.ftzOffMsgCtl.workDate }" format="date" name="ftzOffMsgCtl.workDate" cssClass="input-large" readonly="true"/></td>
 			</tr>
 			<tr>	
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID"/>：</td>
@@ -211,14 +211,14 @@ $("#del").click(function() {
 			<tbody>
 			<form:form id="FTZ210301Form" action="${pageContext.request.contextPath}" modelAttribute="FTZ210301Form">
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }",chkStatus:"${dto.chkStatus }"}'>
 		          	<td class="tbl_page_td_left vtip" width="20px">${(page.number * page.size) + (i.index + 1)}</td>
 				  	<td class="tbl_page_td_left vtip" width="80px"><t:dateTimeFormat type="label" value="${dto.submitDate}" format="date"/></td>
 		            <td class="tbl_page_td_left vtip" width="100px">${dto.accountNo}</td>
-		            <td class="tbl_page_td_left vtip" width="100px">${dto.currency}</td>
+		            <td class="tbl_page_td_left vtip" width="100px"><t:codeValue items="${SYS_CURRENCY }" key="${dto.currency }" type="label" /></td>
 		            <td class="tbl_page_td_right vtip" width="120px"><t:moneyFormat type="label" value="${dto.amount }" format="###,###,###,###.00" dot="true"/></td>
 		            <td class="tbl_page_td_left vtip" width="120px">${dto.countryCode}</td>
-		            <td class="tbl_page_td_left vtip" width="160px">${dto.districtCode}</td>
+		            <td class="tbl_page_td_left vtip" width="160px"><t:codeValue items="${FTZ_DISITRICT_CODE }" key="${dto.districtCode }" type="label" /></td>
 		            <td class="tbl_page_td_left vtip" width="80px"><t:codeValue items="${FTZ_MSG_STATUS }" key="${dto.chkStatus }" type="label" /></td>
 				</tr>
 	        </c:forEach>

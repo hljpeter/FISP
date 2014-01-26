@@ -1,5 +1,6 @@
 <script type="text/javascript">
 $(function() {
+	$('input').popover('hide');
 	var actionFlag = "${FTZ210310Form.actionFlag}";
 	if ('addTxn' == actionFlag) {
 		var seqNo = $("#seqNo").val();
@@ -187,7 +188,8 @@ function clearName() {
 				<td class="label_td"><span style="color:red;">*</span><spring:message code="ftz.label.OPP_ACCOUNT"/>：</td><!-- 对方账号 -->
 				<td>
 					<form:input path="ftzOffTxnDtl.accountNo" type="text" class="input-large" maxlength="35"
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
+						onkeyup="numberStringFormat(this);" onbeforepaste="numberStringFormatCopy(this);" data-toggle="popover" data-trigger="focus"
+						data-placement="bottom" content="客户账号、银行自身内部账号、同业账号"/>
 				</td>
 				
 				<td class="label_td"><span style="color:red;">*</span><spring:message code="ftz.label.OPP_NAME1"/>：</td><!-- 对方户名 -->
@@ -198,7 +200,8 @@ function clearName() {
 			<tr>	
 				<td class="label_td"><spring:message code="ftz.label.countryCode"/>：</td><!-- 国别代码 -->
 				<td>
-					<form:select id="countryCode" path="ftzOffTxnDtl.countryCode">
+					<form:select id="countryCode" path="ftzOffTxnDtl.countryCode" data-toggle="popover" data-trigger="focus"
+						data-placement="bottom" content="当交易性质对应为外部经济活动引起时，本栏位为强制项。">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_COUNTRY_CODE }" />
 					</form:select>
@@ -208,7 +211,8 @@ function clearName() {
 				
 				<td class="label_td"><spring:message code="ftz.label.disitrictCode"/>：</td><!-- 国内地区代码 -->
 				<td>
-					<form:select id="disitrictCode" path="ftzOffTxnDtl.districtCode">
+					<form:select id="disitrictCode" path="ftzOffTxnDtl.districtCode" data-toggle="popover" data-trigger="focus"
+						data-placement="bottom" content="当交易性质对应为外部经济活动引起时，本栏位为强制项。">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE }" />
 					</form:select>
@@ -224,6 +228,9 @@ function clearName() {
 						<form:options items="${FTZ_TRAN_TYPE }" />
 					</form:select>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><hr /></td>
 			</tr>
 			<tr class="dtl">	
 				<td class="label_td"><spring:message code="ftz.label.DTL_STATUS"/>：</td><!-- 明细状态 -->

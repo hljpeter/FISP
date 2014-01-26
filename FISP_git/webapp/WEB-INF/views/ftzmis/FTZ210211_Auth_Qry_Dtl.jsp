@@ -1,17 +1,10 @@
 <script type="text/javascript">
-	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if ("01" == msgStatus || "04" == msgStatus) {
-			$("#authPass").attr("disabled", "disabled");
-			$("#authRefuse").attr("disabled", "disabled");
-		}else if("03" == msgStatus){
-			$("#authPass").attr("disabled", "disabled");
-		}else {
-			$("#authPass").removeAttr("disabled");
-			$("#authRefuse").removeAttr("disabled");
-		}
-	});
 	function authPass() {
+		var msgStatus = $("#msgStatus").val();
+		if ("02" != msgStatus) {
+			alert('<spring:message code="ftz.validate.auth.msg"/>');
+			return;
+		}
 		$("#amount").val($("#amount").val().replaceAll(",", ""));
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		$("#selected_msgId").val($("#msgId").val());
@@ -21,6 +14,11 @@
 	
 	}
 	function authRefuse() {
+		var msgStatus = $("#msgStatus").val();
+		if ("02" != msgStatus) {
+			alert('<spring:message code="ftz.validate.auth.msg"/>');
+			return;
+		}
 		$("#amount").val($("#amount").val().replaceAll(",", ""));
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
 		$("#selected_msgId").val($("#msgId").val());
@@ -196,17 +194,3 @@
 			value="<spring:message code="button.lable.close"/>">
 	</div>
 </div>
-<script type="text/javascript">
-	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if ("01" == msgStatus || "04" == msgStatus) {
-			$("#authPass").attr("disabled", "disabled");
-			$("#authRefuse").attr("disabled", "disabled");
-		}else if("03" == msgStatus){
-			$("#authPass").attr("disabled", "disabled");
-		}else {
-			$("#authPass").removeAttr("disabled");
-			$("#authRefuse").removeAttr("disabled");
-		}
-	});
-</script>

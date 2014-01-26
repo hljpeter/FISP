@@ -1,5 +1,6 @@
 package com.synesoft.ftzmis.domain.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -162,6 +163,11 @@ public interface FTZInCommonService {
 	 * 		FtzInTxnDtl - 结果列表
 	 */
 	public FtzInTxnDtl getNextAuthTxnById(FtzInTxnDtl ftzInTxnDtl);
+	
+	
+	public List<FtzInMsgCtl> queryFtzInMsgCtlList(FtzInMsgCtl ftzInMsgCtl);
+	
+	public List<FtzInTxnDtl> queryFtzInTxnDtlList(FtzInTxnDtl ftzInTxnDtl);
 
 
 }

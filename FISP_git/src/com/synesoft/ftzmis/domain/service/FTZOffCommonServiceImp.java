@@ -23,6 +23,7 @@ import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.common.util.Validator;
@@ -142,6 +143,33 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		return page;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.synesoft.ftzmis.domain.service.FTZOffCommonService#getMsgPageForAuth(org.springframework.data.domain.Pageable, com.synesoft.ftzmis.domain.model.FtzOffMsgCtl)
+	 */
+	public Page<FtzOffMsgCtlVO> getMsgPageForAuth(Pageable pageable, FtzOffMsgCtlVO ftzOffMsgCtlVO) {
+		log.debug("FTZOffCommonService.getMsgPage() start ...");
+		
+		ResultMessages messages = ResultMessages.error();
+		
+		log.debug("Searching record, param[branchId=" + ftzOffMsgCtlVO.getBranchId() 
+				+ ", startDate=" + ftzOffMsgCtlVO.getStartDate() 
+				+ ", endDate=" + ftzOffMsgCtlVO.getEndDate() 
+				+ ", msgId=" + ftzOffMsgCtlVO.getMsgId() 
+				+ ", msgStatus=" + ftzOffMsgCtlVO.getMsgStatus() 
+				+ ", msgNo=" + ftzOffMsgCtlVO.getMsgNo() 
+				+ ", editFlag=" + ftzOffMsgCtlVO.getEditFlag() 
+				+ ", pageNubmer=" + pageable.getPageNumber() + ", pagesize=" + pageable.getPageSize() + "]");
+
+		Page<FtzOffMsgCtlVO> page = ftzOffMsgCtlRepository.queryPageForApr(pageable, ftzOffMsgCtlVO);
+		if (null == page || page.getContent().isEmpty()) {
+			log.error("[w.dp.0001] No data!");
+			messages.add("w.dp.0001");
+			throw new BusinessException(messages);
+		}
+		
+		return page;
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.synesoft.ftzmis.domain.service.FTZOffCommonService#getMsgById(com.synesoft.ftzmis.domain.model.FtzOffMsgCtl)
 	 */
@@ -300,11 +328,11 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		
 		ftzOffMsgCtl.setMsgId(numberService.getSysIDSequence(16));
 		ftzOffMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
-		ftzOffMsgCtl.setEditFlag(CommonConst.FTZ_MSG_EDIT_FLAG_ADD);
-		ftzOffMsgCtl.setApp(CommonConst.FTZ_MSG_APP_DEFAULT);
-		ftzOffMsgCtl.setVer(CommonConst.FTZ_MSG_VER_DEFAULT);
-		ftzOffMsgCtl.setDes(CommonConst.FTZ_MSG_DES_DEFAULT);
-		ftzOffMsgCtl.setSrc(ContextConst.getOrgInfByUser().getBankid()); // TODO
+		ftzOffMsgCtl.setEditFlag(FtzMsgHead.getMsgHead().getEditFlag());
+		ftzOffMsgCtl.setApp(FtzMsgHead.getMsgHead().getAPP());
+		ftzOffMsgCtl.setVer(FtzMsgHead.getMsgHead().getVER());
+		ftzOffMsgCtl.setDes(FtzMsgHead.getMsgHead().getDES());
+		ftzOffMsgCtl.setSrc(FtzMsgHead.getMsgHead().getSRC()); 
 		ftzOffMsgCtl.setMsgRef(ftzOffMsgCtl.getMsgId());
 		
 		int ret = ftzOffMsgCtlRepository.insert(ftzOffMsgCtl);
@@ -343,6 +371,7 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		ftzOffMsgCtlVO.setMakDatetime(ftzOffMsgCtl.getMakDatetime());
 		ftzOffMsgCtlVO.setMakUserId(ContextConst.getCurrentUser().getUserid());
 		ftzOffMsgCtlVO.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
+		ftzOffMsgCtlVO.setBranchId(ftzOffMsgCtl.getBranchId());
 		int ret = ftzOffMsgCtlRepository.updateMsg(ftzOffMsgCtlVO);
 		if (ret != 1) {
 			log.error("[e.ftzmis.2103.0001] Update FtzOffMsgCtl information failure!");
@@ -460,6 +489,7 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		ftzOffMsgCtlVO.setMsgId(ftzOffMsgCtl.getMsgId());
 		ftzOffMsgCtlVO.setOldMsgStatus(ftzOffMsgCtl.getMsgStatus());
 		ftzOffMsgCtlVO.setMakDatetime(ftzOffMsgCtl.getMakDatetime());
+		ftzOffMsgCtlVO.setChkDatetime(ftzOffMsgCtl.getChkDatetime());
 		ftzOffMsgCtlVO.setMakUserId(ContextConst.getCurrentUser().getUserid());
 		ftzOffMsgCtlVO.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
 		int ret = ftzOffMsgCtlRepository.updateMsgStatus(ftzOffMsgCtlVO);

@@ -21,7 +21,8 @@
 	src="${pageContext.request.contextPath}/resources/vendor/js/jquery-1.7.2.js"></script>
 <script type="text/javascript" 
 	src="${pageContext.request.contextPath}/resources/vendor/bootstrap-2.2.1/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" 
+	src="${pageContext.request.contextPath}/resources/vendor/bootstrap-2.2.1/js/bootstrap-popover.js"></script>
 <script type="text/javascript">
 
 <!--

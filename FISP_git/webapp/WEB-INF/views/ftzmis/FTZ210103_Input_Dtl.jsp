@@ -353,7 +353,7 @@
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.EXPIRE_DATE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
-							code="ftz.label.INTEREST_RATE" /></th>
+							code="ftz.label.INTEREST_RATES" /></th>
 					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
 							code="ftz.label.DTL_STATUS" /></th>
 				</tr>

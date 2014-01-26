@@ -26,6 +26,16 @@ public interface FTZOffCommonService {
 	 * 		Page<FtzOffMsgCtlVO> - 分页对象
 	 */
 	public Page<FtzOffMsgCtlVO> getMsgPage(Pageable pageable, FtzOffMsgCtlVO ftzOffMsgCtlVO);
+	
+	/**
+	 * <p>表外通用方法</p>
+	 * 查询一页数据(DAT_OFF_MSG_CTL - 表外报文控制表)为审核
+	 * @param pageable - 分页参数
+	 * @param ftzOffMsgCtl - 封装了条件值的对象(BRANCH_ID,MSG_ID,MSG_STATUS,WORK_DATE,MSG_NO(default),EDIT_FLAG)
+	 * @return
+	 * 		Page<FtzOffMsgCtlVO> - 分页对象
+	 */
+	public Page<FtzOffMsgCtlVO> getMsgPageForAuth(Pageable pageable, FtzOffMsgCtlVO ftzOffMsgCtlVO);
 
 	/**
 	 * <p>表外通用方法</p>

@@ -34,6 +34,7 @@ $("#del").click(function() {
 		if (confirm(msg)) {
 			$("#msgId").val(selectedRow.msgId);
 			$("#makDatetime").val(selectedRow.makDatetime);
+			$("#chkDatetime").val(selectedRow.chkDatetime);
 			$("#msgStatus").val(selectedRow.msgStatus);
 			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210303/Input/DelMsg?page.page=" + ${page.number + 1 });
 			$("#form").submit();

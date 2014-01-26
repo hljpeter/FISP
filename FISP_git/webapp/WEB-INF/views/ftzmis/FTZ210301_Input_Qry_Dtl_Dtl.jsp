@@ -195,11 +195,11 @@ function queryShowAllOrg3(){
 					</form:select>
 				</td>
 				
-				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.FIXED_INTEREST_RATES"/>：</td>
+				<td class="label_td"><spring:message code="ftz.label.FIXED_INTEREST_RATES"/>：</td>
 				<td><form:input path="ftzOffTxnDtl.interestRate" type="text" class="input-large" onkeyup="numberFormat(this);"/></td>
 			</tr>
 			<tr>	
-				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.BENCHMARK"/>：</td>
+				<td class="label_td"><spring:message code="ftz.label.BENCHMARK"/>：</td>
 				<td>
 					<form:select path="ftzOffTxnDtl.benchmark">
 						<option value=""></option>
@@ -207,7 +207,7 @@ function queryShowAllOrg3(){
 					</form:select>
 				</td>
 				
-				<td class="label_td"><font color="red">*</font><spring:message code="ftz.label.FLOAT_RATE"/>：</td>
+				<td class="label_td"><spring:message code="ftz.label.FLOAT_RATE"/>：</td>
 				<td><form:input path="ftzOffTxnDtl.floatRate" type="text" class="input-large" onkeyup="numberFormat(this);"/></td>
 			</tr>
 			<tr class="dtl"><td colspan="4"><hr/></td><td>

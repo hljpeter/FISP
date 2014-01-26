@@ -5,11 +5,16 @@ var success = '${successmsg }';
 if (success && success != "") {
 	$("button[name=btnChk]").attr("disabled", true);
 	$("input").attr("readonly", true);
+	var status= '${FTZ210301Form.ftzOffTxnDtl.chkStatus }';
+	if (status && status == '03') {
+		$("#chkRej").attr("disabled", false);
+		$("#chkAddWord").attr("readonly", false);
+	}
 }
 var error = '${errmsg }';
 if (error && error != "") {
-	$("button[name=btnChk]").attr("disabled", true);
-	$("input").attr("readonly", true);
+	$("button[name=btnChk]").attr("disabled", false);
+	$("input:not('#chkAddWord')").attr("readonly", true);
 }
 var msg = '${FTZ210301Form.msg }';
 if (msg && msg != "") {
@@ -17,11 +22,6 @@ if (msg && msg != "") {
 	//$("#next").attr("disabled", true);
 }
 	
-var status= '${FTZ210301Form.ftzOffTxnDtl.chkStatus }';
-if (status && status == '03') {
-	$("#chkPass").attr("disabled", true);
-}
-
 $("button[name=btnChk]").click(function() {
 	$("#amount").val($("#amount").val().replaceAll(",", ""));
 	$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210301/Auth/DtlTxn/Auth");
@@ -172,7 +172,7 @@ $("#next").click(function() {
 			</tr>
 			<tr class="dtl">	
 				<td class="label_td"><spring:message code="ftz.label.CHK_ADD_WORD"/>：</td>
-				<td colspan="3"><form:input path="ftzOffTxnDtl.chkAddWord" type="text" class="input-xxlarge"/></td>
+				<td colspan="3"><form:input path="ftzOffTxnDtl.chkAddWord" id="chkAddWord" type="text" class="input-xxlarge"/></td>
 			</tr>
 	    </table>											
 	</form:form>

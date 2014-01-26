@@ -4198,6 +4198,37 @@
 		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
 	</bean>
 	
+	
+	
+	<!-- 部门 -->
+	<bean id="FTZ_DEPARTMENT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="FTZ_DEPARTMENT_EN" />
+				<entry key="zh_CN" value-ref="FTZ_DEPARTMENT_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="FTZ_DEPARTMENT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DEPARTMENT' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="FTZ_DEPARTMENT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='FTZ_DEPARTMENT' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	
 </beans>
 
 

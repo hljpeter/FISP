@@ -1,8 +1,8 @@
 <script type="text/javascript">
 	$(function() {
+		$('#disitrictCode').popover('hide');
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
-			$(".dtl").css("display", "none");
 			var seqNo = $("#seqNo").val();
 			if ("" != seqNo && null != seqNo) {
 				$("#add").val(
@@ -145,7 +145,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.DISITRICT_CODE" />：</td>
 				<td><form:select path="ftzInTxnDtl.disitrictCode"
-						id="disitrictCode">
+						id="disitrictCode" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="对方机构为境外机构时，本栏位可空">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_DISITRICT_CODE}" />
 					</form:select>

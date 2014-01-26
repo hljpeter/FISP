@@ -195,6 +195,9 @@
 			</tr>
 			<c:if test="${ FTZ210310Form.actionFlag eq 'updMsg'}">
 				<tr>
+					<td colspan="4"><hr /></td>
+				</tr>
+				<tr>
 					<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 					<td colspan="3"><form:select path="ftzOffMsgCtl.result" disabled="true">
 							<form:option value=""></form:option>

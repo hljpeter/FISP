@@ -121,10 +121,10 @@
 				<td class="label_td"><font color="red">*</font>
 				<spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo" readonly="true"
-						class=".input-large" onblur="accountFill()" />
+						class=".input-large"  />
 					</td>
 				
-				<td class="label_td"><font color="red">*</font>
+				<td class="label_td">
 				<spring:message code="ftz.label.ACCOUNT_NAME" />：</td>
 				<td><form:input id="accountName" path="ftzInMsgCtl.accountName"
 						class=".input-large" readonly="true" /></td>
@@ -239,7 +239,9 @@
 						<td class="vtip" style="text-align: right; width: 50px;"><t:moneyFormat
 								type="label" value="${dto.amount}" /></td>
 						
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_COUNTRY_CODE}" key="${dto.countryCode}"
+								type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.termLength}</td>
 						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
 								items="${FTZ_REBUY_TERM_UNIT}" key="${dto.termUnit}"

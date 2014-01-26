@@ -28,18 +28,12 @@ public class FTZ210401RepositoryImp implements FTZ210401Repository {
 				+ SQLMap.SELECT_PRIMARY_KEY, ftzInMsgCtl, FtzInMsgCtl.class);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.synesoft.ftzmis.domain.repository.FTZ210101Repository#
-	 * queryFtzInMsgCtlPageInput(org.springframework.data.domain.Pageable,
-	 * com.synesoft.ftzmis.domain.model.FtzInMsgCtl)
-	 */
+	
 	@Override
 	public Page<FtzInMsgCtl> queryFtzInMsgCtlPageInput(Pageable pageable,
 			FtzInMsgCtl ftzInMsgCtl) {
 		return pageFtzInMsgCtl.getPage(Table.FTZ_IN_MSG_CTL,
-				SQLMap.SELECT_Input_COUNTS, SQLMap.SELECT_Input_LIST,
+				SQLMap.SELECT_COUNTS, SQLMap.SELECT_LIST,
 				ftzInMsgCtl, pageable);
 	}
 

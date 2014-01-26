@@ -51,7 +51,7 @@
 						code="ftz.label.AMOUNT" />：</td>
 				<td colspan="3"><t:moneyFormat type="text" id="amount" readonly="true"
 						name="ftzInTxnDtl.amount"
-						value="${FTZ210206Form.ftzInTxnDtl.amount}"
+						value="${FTZ210209Form.ftzInTxnDtl.amount}"
 						format="###,###,###,###.00" dot="true" /></td>
 			</tr>
 			
@@ -128,7 +128,7 @@
 						code="210207ftz.label.INTERESTRATE" />：</td>
 				<td><t:moneyFormat type="text" id="interestRate" readonly="true"
 						name="ftzInTxnDtl.interestRate"
-						value="${FTZ210206Form.ftzInTxnDtl.interestRate}"
+						value="${FTZ210209Form.ftzInTxnDtl.interestRate}"
 						format="###.000000" dot="true"  /></td>
 						
 						<td class="label_td"><font color="red">*</font> <spring:message

@@ -60,6 +60,7 @@
 
 	function queryFTZ210212Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
+		$("#selected_seqNo").val(null);
 		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZ210212/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
@@ -221,8 +222,13 @@
 						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
 						<td class="vtip" style="text-align: right; width: 120px;"><t:moneyFormat
 								type="label" value="${dto1.buyAmt}" /></td>
-						<td class="vtip" style="text-align: left; width: 30px;">${dto1.buyCurr}</td>
-						<td class="vtip" style="text-align: left; width: 50px;">${dto1.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 30px;">
+							<t:codeValue items="${SYS_CURRENCY}" key="${dto1.buyCurr}" type="label" />
+						</td>
+						<td class="vtip" style="text-align: left; width: 50px;">
+							<t:codeValue items="${FTZ_COUNTRY_CODE}" key="${dto1.countryCode}"
+								type="label" />
+						</td>
 						<td class="vtip" style="text-align: left; width: 150px;">${dto1.oppName}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
@@ -238,7 +244,8 @@
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<div class="rightPage">
 		<util:pagination page="${page}"
-			query="selected_msgId=${FTZ210212Form.ftzInMsgCtl.msgId}" />
+			query="selected_msgId=${FTZ210212Form.ftzInMsgCtl.msgId}" 
+			action="/FTZ210212/QryAuthDtl"/>
 	</div>
 </div>
 

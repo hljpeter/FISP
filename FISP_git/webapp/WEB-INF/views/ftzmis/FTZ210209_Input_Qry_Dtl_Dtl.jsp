@@ -9,6 +9,7 @@ if (actionFlag == "addTxn") {
 	if (success && success != "") {
 		$("button[type=button]").attr("disabled", true);
 		$("input").attr("readonly", true);
+		$(".date").attr("disabled", true);
 		$("select").attr("disabled", true);
 		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210209/Input/AddTxn/Init");
 		$("#sbm").html('<spring:message code="ftz.label.GOON_KEY_IN"/>');
@@ -27,6 +28,7 @@ if (actionFlag == "addTxn") {
 	if (success && success != "") {
 		$("button[type=button]").attr("disabled", true);
 		$("input").attr("readonly", true);
+		$(".date").attr("disabled", true);
 		$("select").attr("disabled", true);
 		$("#sbm").attr("disabled", true);
 		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210209/Input/UptTxn/Init");
@@ -119,11 +121,11 @@ function queryBankCode() {
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TRAN_DATE" />：</td>
 				<td><form:input id="tranDate" path="ftzInTxnDtl.tranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large date" /></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large date" /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -187,7 +189,7 @@ function queryBankCode() {
 				<td class="label_td"><font color="red">*</font> <spring:message
 						code="ftz.label.TERM_LENGTH" />：</td>
 				<td><form:input id="termLength" path="ftzInTxnDtl.termLength"
-						class=".input-large"  onkeyup="numberFormat(this);"
+						class=".input-large"  onkeyup="numberFormat(this);" maxlength="4"
 						onbeforepaste="numberFormatCopy(this);"/></td>
 				<td class="label_td"><font color="red">*</font><spring:message
 						code="ftz.label.TERM_UNIT" />：</td>
@@ -202,12 +204,12 @@ function queryBankCode() {
 				<td class="label_td"><font color="red">*</font><spring:message
 						code="210207ftz.label.VALUE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.valueDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large date" /></td>
 						
 						<td class="label_td"><spring:message
 						code="ftz.label.EXPIRE_DATE" />：</td>
 				<td><form:input id="valueDate" path="ftzInTxnDtl.expireDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large date" /></td>
 			</tr>
 			
 			<tr>

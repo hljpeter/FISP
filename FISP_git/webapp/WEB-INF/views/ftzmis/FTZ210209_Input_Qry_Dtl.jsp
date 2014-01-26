@@ -1,7 +1,7 @@
 <!-- 6.3.3　应付保函/备用证（210209） / 录入新增页面 -->
 <script type="text/javascript">
 $(function() {
-	$("#balance").val($("#balance").val().replaceAll(",", ""));
+
 	
 var checkSelected = function() {
 	var id = '';
@@ -266,7 +266,7 @@ function accoutQry() {
 						<spring:message code="button.label.Search" />
 					</button></td>
 				
-				<td class="label_td"><font color="red">*</font>
+				<td class="label_td">
 				<spring:message code="ftz.label.ACCOUNT_NAME" />：</td>
 				<td><form:input id="accountName" path="ftzInMsgCtl.accountName"
 						class=".input-large" readonly="true" /></td>
@@ -319,7 +319,7 @@ function accoutQry() {
 				</tr>
 			</c:if>
 			<tr><td colspan="4" align="center">
-				<input type="submit" id="save" name="btn" class="btn btn-primary" value='<spring:message code="ftz.label.SUBMIT_MSG"/>' onclick="javascript: $('#operFlag').val('updated');"/>
+				<input type="submit" id="save" name="btn" class="btn btn-primary" value='<spring:message code="ftz.label.SUBMIT_MSG"/>' onclick="javascript: $('#operFlag').val('updated');$('#balance').val($('#balance').val().replaceAll(',',''));"/>
 			</td></tr>
 	    </table>											
 	</form:form>
@@ -371,7 +371,9 @@ function accoutQry() {
 						<td class="vtip" style="text-align: right; width: 50px;"><t:moneyFormat
 								type="label" value="${dto.amount}" /></td>
 						
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_COUNTRY_CODE}" key="${dto.countryCode}"
+								type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.termLength}</td>
 						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
 								items="${FTZ_REBUY_TERM_UNIT}" key="${dto.termUnit}"

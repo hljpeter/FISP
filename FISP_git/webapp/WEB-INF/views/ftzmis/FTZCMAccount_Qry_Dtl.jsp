@@ -110,9 +110,9 @@
 						value="${FTZCMAccountQryForm.ftzActMstr.balance}" format="###,###,###,###.00" dot="true" readonly="true"/>
 				</td>
 			</tr>			
-		</table>
-		
-		<table class="tbl_search">
+			<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.ACC_STATUS"/>：</td>
 				<td colspan="3">

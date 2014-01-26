@@ -782,12 +782,24 @@ public class FTZ210109Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210310.0006");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckRate(issert_FtzInTxnDtl.getBuyRate())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210212.0002");
+				resultMessages.add(resultMessage);
+			}
 		}
 		// 卖出牌价
 		if (null == issert_FtzInTxnDtl.getSellRate()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210310.0007");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckRate(issert_FtzInTxnDtl.getSellRate())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210212.0004");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 交易性质
@@ -1014,12 +1026,24 @@ public class FTZ210109Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210310.0006");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckRate(update_FtzInTxnDtl.getBuyRate())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210212.0002");
+				resultMessages.add(resultMessage);
+			}
 		}
 		// 卖出牌价
 		if (null == update_FtzInTxnDtl.getSellRate()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210310.0007");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckRate(update_FtzInTxnDtl.getSellRate())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210212.0004");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 交易性质
@@ -1163,8 +1187,6 @@ public class FTZ210109Controller {
 										.getExpireDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
 			// 查询全部数据
@@ -1185,11 +1207,10 @@ public class FTZ210109Controller {
 										.getExpireDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
-
+			form.setSelected_msgId("");
+			form.setSelected_seqNo(null);
 			return "ftzmis/FTZ210109_Auth_Qry_Dtl";
 		}
 	}

@@ -27,6 +27,7 @@ import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.common.util.Validator;
 import com.synesoft.ftzmis.app.model.FTZ210201Form;
 import com.synesoft.ftzmis.app.model.FTZ210201Form.FTZ210201FormAddDtlDtl;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
@@ -62,6 +63,7 @@ public class FTZ210201Controller {
 				.getQuery_submitDate_end()));
 		query_FtzInMsgCtl.setMsgStatus(form.getQuery_msgStatus());
 		query_FtzInMsgCtl.setMsgNo(form.getQuery_msgNo());
+		query_FtzInMsgCtl.setAccountNo(form.getQuery_accountNo());
 		query_FtzInMsgCtl.setMsgNos(new String[] { CommonConst.MSG_NO_210201,
 				CommonConst.MSG_NO_210202, CommonConst.MSG_NO_210203,
 				CommonConst.MSG_NO_210204, CommonConst.MSG_NO_210205,
@@ -190,6 +192,8 @@ public class FTZ210201Controller {
 				.getFormatDateAddSprit(result_FtzInTxnDtl.getOrgTranDate()));
 		result_FtzInTxnDtl.setExpireDate(DateUtil
 				.getFormatDateAddSprit(result_FtzInTxnDtl.getExpireDate()));
+		result_FtzInTxnDtl.setValueDate(DateUtil
+				.getFormatDateAddSprit(result_FtzInTxnDtl.getValueDate()));
 		result_FtzInTxnDtl.setMakDatetime(DateUtil
 				.getFormatDateTimeAddSpritAndColon(result_FtzInTxnDtl
 						.getMakDatetime()));
@@ -260,13 +264,17 @@ public class FTZ210201Controller {
 					.fromCode("e.ftzmis.210101.0014");
 			resultMessages.add(resultMessage);
 		}
-
 		// 金额
-		if (null == update_FtzInTxnDtl.getAmount()
-				|| update_FtzInTxnDtl.getAmount().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == update_FtzInTxnDtl.getAmount()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0015");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(update_FtzInTxnDtl.getAmount())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 国别代码
@@ -285,10 +293,12 @@ public class FTZ210201Controller {
 			resultMessages.add(resultMessage);
 		}
 		//利率
-		if (null == update_FtzInTxnDtl.getInterestRate()
-				|| "".equals(update_FtzInTxnDtl.getInterestRate().compareTo(BigDecimal.ZERO) != 1)) {
+		if(null == update_FtzInTxnDtl.getInterestRate()) {
 			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0022");
+			.fromCode("e.ftzmis.210205.0003");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckInterestRate(update_FtzInTxnDtl.getInterestRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210205.0004");
 			resultMessages.add(resultMessage);
 		}
 		
@@ -299,7 +309,13 @@ public class FTZ210201Controller {
 					.fromCode("e.ftzmis.210201.0001");
 			resultMessages.add(resultMessage);
 		}
-
+		//是否逾期
+		if (null == update_FtzInTxnDtl.getOverdue()
+				|| "".equals(update_FtzInTxnDtl.getOverdue().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210201.0004");
+			resultMessages.add(resultMessage);
+		}
 		
 		if (resultMessages.isNotEmpty()) {
 			model.addAttribute(resultMessages);
@@ -428,11 +444,11 @@ public class FTZ210201Controller {
 	}
 	//新增批量明细-详细信息
 	@RequestMapping("AddDtlDtlSubmit")
-	public String AddDtlDtlSubmit(Model model,@Validated({ FTZ210201FormAddDtlDtl.class }) 
+	public String AddDtlDtlSubmit(Model model,//@Validated({ FTZ210201FormAddDtlDtl.class }) 
 			FTZ210201Form form,BindingResult result) {
-		if (result.hasErrors()) {
-			return "ftzmis/FTZ210201_Input_Dtl_Dtl";
-		}
+//		if (result.hasErrors()) {
+//			return "ftzmis/FTZ210201_Input_Dtl_Dtl";
+//		}
 		FtzInTxnDtl issert_FtzInTxnDtl = form.getFtzInTxnDtl();
 		 
 		// 开始校验
@@ -468,13 +484,17 @@ public class FTZ210201Controller {
 					.fromCode("e.ftzmis.210101.0014");
 			resultMessages.add(resultMessage);
 		}
-
 		// 金额
-		if (null == issert_FtzInTxnDtl.getAmount()
-				|| issert_FtzInTxnDtl.getAmount().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == issert_FtzInTxnDtl.getAmount()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0015");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(issert_FtzInTxnDtl.getAmount())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 国别代码
@@ -493,10 +513,12 @@ public class FTZ210201Controller {
 			resultMessages.add(resultMessage);
 		}
 		//利率
-		if (null == issert_FtzInTxnDtl.getInterestRate()
-				|| "".equals(issert_FtzInTxnDtl.getInterestRate().compareTo(BigDecimal.ZERO) != 1)) {
+		if(null == issert_FtzInTxnDtl.getInterestRate()) {
 			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0022");
+			.fromCode("e.ftzmis.210205.0003");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckInterestRate(issert_FtzInTxnDtl.getInterestRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210205.0004");
 			resultMessages.add(resultMessage);
 		}
 		// 贷款类型
@@ -506,7 +528,13 @@ public class FTZ210201Controller {
 					.fromCode("e.ftzmis.210201.0001");
 			resultMessages.add(resultMessage);
 		}
-
+		//是否逾期
+		if (null == issert_FtzInTxnDtl.getOverdue()
+				|| "".equals(issert_FtzInTxnDtl.getOverdue().trim())) {
+			ResultMessage resultMessage = ResultMessage
+					.fromCode("e.ftzmis.210201.0004");
+			resultMessages.add(resultMessage);
+		}
 		
 		if (resultMessages.isNotEmpty()) {
 			model.addAttribute(resultMessages);
@@ -784,18 +812,23 @@ public class FTZ210201Controller {
 		}
 
 		// 日终余额
-		if (null == insert_FtzInMsgCtl.getBalance()
-				|| insert_FtzInMsgCtl.getBalance().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == insert_FtzInMsgCtl.getBalance()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0010");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(insert_FtzInMsgCtl.getBalance())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 开户机构代码
 		if (null == insert_FtzInMsgCtl.getAccOrgCode()
 				|| "".equals(insert_FtzInMsgCtl.getAccOrgCode().trim())) {
 			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0011");
+					.fromCode("e.ftzmis.210106.0003");
 			resultMessages.add(resultMessage);
 		}
 		if (resultMessages.isNotEmpty()) {
@@ -991,18 +1024,23 @@ public class FTZ210201Controller {
 		}
 
 		// 日终余额
-		if (null == insert_FtzInMsgCtl.getBalance()
-				|| insert_FtzInMsgCtl.getBalance().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == insert_FtzInMsgCtl.getBalance()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0010");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(insert_FtzInMsgCtl.getBalance())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 开户机构代码
 		if (null == insert_FtzInMsgCtl.getAccOrgCode()
 				|| "".equals(insert_FtzInMsgCtl.getAccOrgCode().trim())) {
 			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210101.0011");
+					.fromCode("e.ftzmis.210106.0003");
 			resultMessages.add(resultMessage);
 		}
 		if (resultMessages.isNotEmpty()) {
@@ -1010,7 +1048,8 @@ public class FTZ210201Controller {
 			return "ftzmis/FTZ210201_Input_Dtl";
 		}
 
-		insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence(16));
+	//	insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence(16));
+		insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence("", 8));
 		insert_FtzInMsgCtl.setSubmitDate(DateUtil
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
 		
@@ -1139,8 +1178,6 @@ public class FTZ210201Controller {
 										.getTranDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
 			// 查询全部数据
@@ -1155,11 +1192,11 @@ public class FTZ210201Controller {
 										.getTranDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
+					
 				}
 			}
-
+			form.setSelected_msgId("");
+			form.setSelected_seqNo(null);
 			return "ftzmis/FTZ210201_Auth_Qry_Dtl";
 		}
 	}
@@ -1189,6 +1226,7 @@ public class FTZ210201Controller {
 		if (null == ftzInTxnDtls || ftzInTxnDtls.size() < 1) {
 			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
 			update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
+			update_FtzInMsgCtl.setMsgNo(CommonConst.MSG_NO_210201);
 			update_FtzInMsgCtl
 					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
 			update_FtzInMsgCtl.setChkUserId(userInfo.getUserid());
@@ -1227,17 +1265,14 @@ public class FTZ210201Controller {
 				}
 			}
 			if (count_unAuth > 0) {
-				//model.addAttribute(ResultMessages.error().add(
-				//		"e.ftzmis.210101.0024",
-				//		sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
-				model.addAttribute(ResultMessages.info().add("i.ftzmis.210210.0009"));
+				model.addAttribute(ResultMessages.error().add(
+						"e.ftzmis.210310.0012"));
 				return "forward:/FTZ210201/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
-				//model.addAttribute(ResultMessages.error().add(
-				//		"e.ftzmis.210101.0031",
-				//		sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
-				model.addAttribute(ResultMessages.info().add("e.ftzmis.audit.not.detail"));
+				model.addAttribute(ResultMessages.error().add(
+						"e.ftzmis.210101.0031",
+						sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
 				return "forward:/FTZ210201/QryAuthDtl";
 			}
 
@@ -1245,7 +1280,7 @@ public class FTZ210201Controller {
 			update_FtzInMsgCtl
 					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
 			update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
-			update_FtzInMsgCtl.setMsgNo(form.getSelected_msgNo());
+			update_FtzInMsgCtl.setMsgNo(CommonConst.MSG_NO_210201);
 
 			update_FtzInMsgCtl.setChkUserId(userInfo.getUserid());
 			update_FtzInMsgCtl.setRsv2(update_FtzInMsgCtl.getChkDatetime());
@@ -1256,11 +1291,6 @@ public class FTZ210201Controller {
 				model.addAttribute(ResultMessages.error().add(
 						"e.ftzmis.210301.0008"));
 			} else {
-				if (update_FtzInMsgCtl.getMsgStatus().equals(
-						CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-					generateXml.submitMsg(update_FtzInMsgCtl.getMsgNo(),
-							update_FtzInMsgCtl.getMsgId());
-				}
 				model.addAttribute(ResultMessages.success().add(
 						"i.ftzmis.210301.0005"));
 				form.setAuthFinishFlag("1");
@@ -1268,7 +1298,7 @@ public class FTZ210201Controller {
 			}
 		}
 
-		return "ftzmis/FTZ210201_Auth_Qry_Dtl";
+		return "forward:/FTZ210201/QryAuthDtl";
 	}
 
 	@RequestMapping("QryAuthDtlDtl")

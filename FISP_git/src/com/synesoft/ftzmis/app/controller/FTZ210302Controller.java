@@ -139,7 +139,7 @@ public class FTZ210302Controller {
 		FtzOffMsgCtl ctl = new FtzOffMsgCtl();
 		ctl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
 		ctl.setBranchId(ContextConst.getCurrentUser().getLoginorg());
-		ctl.setWorkDate(DateUtil.getNowOutputDate());
+		ctl.setWorkDate(DateUtil.getNowInputDate());
 
 		form.setFtzOffMsgCtl(ctl);
 		form.setActionFlag(CommonConst.ACTION_FLAG_ADD_MSG);
@@ -541,8 +541,8 @@ public class FTZ210302Controller {
 
 			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210302.0005")));
 
-			return "forward:/FTZ210302/Auth/DtlMsg/Init";
 //			return "ftzmis/FTZ210302_Auth_Qry_Dtl";
+			return "forward:/FTZ210302/Auth/DtlMsg/Init?operFlag=" + CommonConst.PAGE_SEARCH_ALL_DTL;
 		} catch (BusinessException e) {
 			log.error("Init FtzOffTxnDtl failure, the MsgId is invalid!" + e.getMessage());
 			model.addAttribute("errmsg", e.getResultMessages());

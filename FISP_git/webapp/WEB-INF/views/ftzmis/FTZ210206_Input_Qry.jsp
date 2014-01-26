@@ -157,7 +157,7 @@ function queryFTZ210206() {
 				<td class="label_td"><spring:message code="ftz.label.New_BRANCH_ID" />：</td>
 				<td><form:select path="ftzInMsgCtlVO.branchId">
 						<option value=""></option>
-						<form:options items="${SM_0002 }" />
+						<form:options items="${orgList }" itemLabel="orgname" itemValue="orgid"/>
 					</form:select></td>
 				<td class="label_td"><spring:message
 						code="ftz.label.SUBMIT_DATE" />：</td>
@@ -188,6 +188,21 @@ function queryFTZ210206() {
 						<spring:message code="ftz.label.SELECT_MSG" />
 					</button>
 				</td>
+			</tr>
+			
+			
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.DEPARTMENT" />：</td>
+				<td><form:select path="ftzInMsgCtlVO.department">
+						<option value=""></option>
+						<form:options items="${FTZ_DEPARTMENT }" />
+					</form:select></td>
+				
+				<td class="label_td"><spring:message
+						code="ftz.label.MAKUSER" />：</td>
+				<td><form:input  path="ftzInMsgCtlVO.makUser" type="text"
+						class=".input-large" /></td>
 			</tr>
 	    </table>											
 	</form:form>

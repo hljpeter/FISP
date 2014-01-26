@@ -32,6 +32,7 @@ import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
+import com.synesoft.ftzmis.app.common.util.Validator;
 import com.synesoft.ftzmis.app.model.FTZ210106Form;
 import com.synesoft.ftzmis.app.model.FTZ210106Form.FTZ210106FormAddDtlDtl;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
@@ -188,11 +189,15 @@ public class FTZ210106Controller {
 						ftzInTxnDtl.setTranDate(DateUtil
 								.getFormatDateAddSprit(ftzInTxnDtl
 										.getTranDate()));
+						ftzInTxnDtl.setValueDate(DateUtil
+								.getFormatDateAddSprit(ftzInTxnDtl
+										.getValueDate()));
+						ftzInTxnDtl.setExpireDate(DateUtil
+								.getFormatDateAddSprit(ftzInTxnDtl
+										.getExpireDate()));
 						
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
 			// 查询全部数据
@@ -205,14 +210,20 @@ public class FTZ210106Controller {
 						ftzInTxnDtl.setTranDate(DateUtil
 								.getFormatDateAddSprit(ftzInTxnDtl
 										.getTranDate()));
+						ftzInTxnDtl.setValueDate(DateUtil
+								.getFormatDateAddSprit(ftzInTxnDtl
+										.getValueDate()));
+						ftzInTxnDtl.setExpireDate(DateUtil
+								.getFormatDateAddSprit(ftzInTxnDtl
+										.getExpireDate()));
 					
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
 
+			form.setSelected_msgId("");
+			form.setSelected_seqNo(null);
 			return "ftzmis/FTZ210106_Auth_Qry_Dtl";
 		}
 	}
@@ -242,6 +253,7 @@ public class FTZ210106Controller {
 		if (null == ftzInTxnDtls || ftzInTxnDtls.size() < 1) {
 			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
 			update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
+			update_FtzInMsgCtl.setMsgNo(CommonConst.MSG_NO_210106);
 			update_FtzInMsgCtl
 					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
 			update_FtzInMsgCtl.setChkUserId(userInfo.getUserid());
@@ -279,37 +291,23 @@ public class FTZ210106Controller {
 					sb_authFail.append(ftzInTxnDtl.getSeqNo().toString() + ",");
 				}
 			}
-			
 			if (count_unAuth > 0) {
 				model.addAttribute(ResultMessages.error().add(
-						"i.ftzmis.210210.0009"));
+						"e.ftzmis.210310.0012"));
 				return "forward:/FTZ210106/QryAuthDtl";
 			}
 			if (count_authFail > 0) {
 				model.addAttribute(ResultMessages.error().add(
-						"i.ftzmis.210210.0009"));
+						"e.ftzmis.210101.0031",
+						sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
 				return "forward:/FTZ210106/QryAuthDtl";
 			}
-//			if (count_unAuth > 0) {
-//				//model.addAttribute(ResultMessages.error().add(
-//				//		"e.ftzmis.210101.0024",
-//				//		sb_unAuth.subSequence(0, sb_unAuth.length() - 1)));
-//				model.addAttribute(ResultMessages.info().add("i.ftzmis.210210.0009"));
-//				return "forward:/FTZ210106/QryAuthDtl";
-//			}
-//			if (count_authFail > 0) {
-//				///model.addAttribute(ResultMessages.error().add(
-//				//		"e.ftzmis.210101.0031",
-//				//		sb_unAuth.subSequence(0, sb_authFail.length() - 1)));
-//				model.addAttribute(ResultMessages.info().add("e.ftzmis.audit.not.detail"));
-//				return "forward:/FTZ210106/QryAuthDtl";
-//			}
 
 			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
 			update_FtzInMsgCtl
 					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC);
 			update_FtzInMsgCtl.setMsgId(form.getFtzInMsgCtl().getMsgId());
-			update_FtzInMsgCtl.setMsgNo(form.getSelected_msgNo());
+			update_FtzInMsgCtl.setMsgNo(CommonConst.MSG_NO_210106);
 
 			update_FtzInMsgCtl.setChkUserId(userInfo.getUserid());
 			update_FtzInMsgCtl.setRsv2(update_FtzInMsgCtl.getChkDatetime());
@@ -320,11 +318,6 @@ public class FTZ210106Controller {
 				model.addAttribute(ResultMessages.error().add(
 						"e.ftzmis.210301.0008"));
 			} else {
-				if (update_FtzInMsgCtl.getMsgStatus().equals(
-						CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-					generateXml.submitMsg(update_FtzInMsgCtl.getMsgNo(),
-							update_FtzInMsgCtl.getMsgId());
-				}
 				model.addAttribute(ResultMessages.success().add(
 						"i.ftzmis.210301.0005"));
 				form.setAuthFinishFlag("1");
@@ -332,7 +325,7 @@ public class FTZ210106Controller {
 			}
 		}
 
-		return "ftzmis/FTZ210106_Auth_Qry_Dtl";
+		return "forward:/FTZ210106/QryAuthDtl";
 	}
 	@Resource
 	protected FtzMsgProcService generateXml;
@@ -412,11 +405,16 @@ public class FTZ210106Controller {
 		}
 
 		// 金额
-		if (null == update_FtzInTxnDtl.getAmount()
-				|| update_FtzInTxnDtl.getAmount().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == update_FtzInTxnDtl.getAmount()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0015");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(update_FtzInTxnDtl.getAmount())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 		
 		// 对方户名
@@ -704,11 +702,16 @@ public class FTZ210106Controller {
 		}
 
 		// 日终余额
-		if (null == insert_FtzInMsgCtl.getBalance()
-				|| insert_FtzInMsgCtl.getBalance().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == insert_FtzInMsgCtl.getBalance()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0010");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(insert_FtzInMsgCtl.getBalance())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 		// 资产负债指标代码
 		if (null == insert_FtzInMsgCtl.getBalanceCode()
@@ -834,11 +837,16 @@ public class FTZ210106Controller {
 		}
 
 		// 日终余额
-		if (null == insert_FtzInMsgCtl.getBalance()
-				|| insert_FtzInMsgCtl.getBalance().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == insert_FtzInMsgCtl.getBalance()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0010");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(insert_FtzInMsgCtl.getBalance())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 		// 资产负债指标代码
 		if (null == insert_FtzInMsgCtl.getBalanceCode()
@@ -860,7 +868,8 @@ public class FTZ210106Controller {
 		}
 
 		
-		insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence(16));
+	//	insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence(16));
+		insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence("", 8));
 		insert_FtzInMsgCtl.setSubmitDate(DateUtil
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
 		
@@ -1164,13 +1173,17 @@ public class FTZ210106Controller {
 					.fromCode("e.ftzmis.210101.0014");
 			resultMessages.add(resultMessage);
 		}
-
 		// 金额
-		if (null == issert_FtzInTxnDtl.getAmount()
-				|| issert_FtzInTxnDtl.getAmount().compareTo(BigDecimal.ZERO) != 1) {
+		if (null == issert_FtzInTxnDtl.getAmount()) {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0015");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckAmount(issert_FtzInTxnDtl.getAmount())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210303.0013");
+				resultMessages.add(resultMessage);
+			}
 		}
 		// 对方户名
 		if (null == issert_FtzInTxnDtl.getOppName()
@@ -1186,12 +1199,22 @@ public class FTZ210106Controller {
 					.fromCode("e.ftzmis.210106.0001");
 			resultMessages.add(resultMessage);
 		}
-		if (null == issert_FtzInTxnDtl.getInterestRate()
-				|| "".equals(issert_FtzInTxnDtl.getInterestRate())) {
+//		if (null == issert_FtzInTxnDtl.getInterestRate()
+//				|| "".equals(issert_FtzInTxnDtl.getInterestRate())) {
+//			ResultMessage resultMessage = ResultMessage
+//					.fromCode("e.ftzmis.210106.0002");
+//			resultMessages.add(resultMessage);
+//		}
+		//利率
+		if(null == issert_FtzInTxnDtl.getInterestRate()) {
 			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210106.0002");
+			.fromCode("e.ftzmis.210205.0003");
+			resultMessages.add(resultMessage);
+		} else if (!Validator.CheckInterestRate(issert_FtzInTxnDtl.getInterestRate())) {
+			ResultMessage resultMessage = ResultMessage.fromCode("e.ftzmis.210205.0005");
 			resultMessages.add(resultMessage);
 		}
+		
 		//到息日
 		if (null == issert_FtzInTxnDtl.getExpireDate()
 				|| "".equals(issert_FtzInTxnDtl.getExpireDate().trim())) {
@@ -1272,8 +1295,7 @@ public class FTZ210106Controller {
 				.getFormatDateRemoveSprit(issert_FtzInTxnDtl.getExpireDate()));
 		UserInf userInfo = ContextConst.getCurrentUser();
 		issert_FtzInTxnDtl.setMakUserId(userInfo.getUserid());
-		issert_FtzInTxnDtl.setMakDatetime(DateUtil
-				.getFormatDateRemoveSprit(DateUtil.getNowInputDateTime().substring(0, 8)));
+		issert_FtzInTxnDtl.setMakDatetime(DateUtil.getNowInputDateTime());
 		issert_FtzInTxnDtl.setChkStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
 		int i = ftz210106Serv.insertFtzInTxnDtl(issert_FtzInTxnDtl);
 		if (i < 1) {

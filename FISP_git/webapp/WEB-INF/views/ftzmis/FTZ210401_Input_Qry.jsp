@@ -61,6 +61,7 @@
 			var msg = $("#confirmMsg1").val() + "提交" + $("#confirmMsg2").val();
 			if (confirm(msg)) {
 				form.submit();
+				queryFTZ210401();
 			} else {
 				return false;
 			}
@@ -171,7 +172,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="query_accountNo" path="query_accountNo" class=".input-large" 
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/></td>
+						onkeyup="numberStringFormat(this);" onbeforepaste="numberStringFormatCopy(this);"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message

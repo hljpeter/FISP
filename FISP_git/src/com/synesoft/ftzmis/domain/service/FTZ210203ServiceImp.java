@@ -14,6 +14,7 @@ import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
@@ -23,9 +24,9 @@ import com.synesoft.ftzmis.domain.repository.FTZ210203Repository;
 
 @Service
 public class FTZ210203ServiceImp implements FTZ210203Service {
-
-	protected static String funcId ="FTZ_Add_210203";
 	
+	protected static String funcId ="FTZ_Add_210203";
+
 	@Override
 	public FtzInMsgCtl queryFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
 		return ftz210203Repos.queryFtzInMsgCtl(ftzInMsgCtl);
@@ -64,76 +65,8 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
 		query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
 		FtzInMsgCtl ftzMsgCtl_tmp = this.queryFtzInMsgCtl(query_FtzInMsgCtl);
-		OrgInf orgInfo = ContextConst.getOrgInfByUser();
-		UserInf userInfo = ContextConst.getCurrentUser();
-		String time = DateUtil.getNowInputDateTime();
-		StringBuffer beforeData = new StringBuffer();
-		beforeData.append("删除了报文标识号为：");
-		beforeData.append(ftzMsgCtl_tmp.getMsgId());
-		beforeData.append(",机构ID为：");
-		beforeData.append(ftzMsgCtl_tmp.getBranchId());
-		beforeData.append(",版本号为：");
-		beforeData.append(ftzMsgCtl_tmp.getVer());
-		beforeData.append(",发起节点代码为：");
-		beforeData.append(ftzMsgCtl_tmp.getSrc());
-		beforeData.append(",接收节点代码为：");
-		beforeData.append(ftzMsgCtl_tmp.getDes());
-		beforeData.append(",应用名称为：");
-		beforeData.append(ftzMsgCtl_tmp.getApp());
-		beforeData.append(",报文编号为：");
-		beforeData.append(ftzMsgCtl_tmp.getMsgNo());
-		beforeData.append(",报文参考号为：");
-		beforeData.append(ftzMsgCtl_tmp.getMsgRef());
-		beforeData.append(",工作日期为：");
-		beforeData.append(ftzMsgCtl_tmp.getWorkDate());
-		beforeData.append(",操作标识为：");
-		beforeData.append(ftzMsgCtl_tmp.getEditFlag());
-		beforeData.append(",预留字段为：");
-		beforeData.append(ftzMsgCtl_tmp.getReserve());
-		beforeData.append(",主帐号/账号为：");
-		beforeData.append(ftzMsgCtl_tmp.getAccountNo());
-		beforeData.append(",货币为：");
-		beforeData.append(ftzMsgCtl_tmp.getCurrency());
-		beforeData.append(",日终余额为：");
-		beforeData.append(ftzMsgCtl_tmp.getBalance());
-		beforeData.append(",资产负债指标代码为：");
-		beforeData.append(ftzMsgCtl_tmp.getBalanceCode());
-		beforeData.append(",申报日期为：");
-		beforeData.append(ftzMsgCtl_tmp.getSubmitDate());
-		beforeData.append(",总记录条数为：");
-		beforeData.append(ftzMsgCtl_tmp.getTotalCount());
-		beforeData.append(",所属机构代码为：");
-		beforeData.append(ftzMsgCtl_tmp.getAccOrgCode());
-		beforeData.append(",户名为：");
-		beforeData.append(ftzMsgCtl_tmp.getAccountName());
-		beforeData.append(",类别为：");
-		beforeData.append(",接收应答报文·处理结果为：");
-		beforeData.append(ftzMsgCtl_tmp.getResult());
-		beforeData.append(",接收应答报文·附言为：");
-		beforeData.append(ftzMsgCtl_tmp.getAddWord());
-		beforeData.append(",报文状态为：");
-		beforeData.append(ftzMsgCtl_tmp.getMsgStatus());
-		beforeData.append(",录入操作员为：");
-		beforeData.append(ftzMsgCtl_tmp.getMakUserId());
-		beforeData.append(",录入日期时间为：");
-		beforeData.append(ftzMsgCtl_tmp.getMakDatetime());
-		beforeData.append(",复核操作员为：");
-		beforeData.append(ftzMsgCtl_tmp.getChkUserId());
-		beforeData.append(",复核日期时间为：");
-		beforeData.append(ftzMsgCtl_tmp.getChkDatetime());
-		beforeData.append(",发送操作员为：");
-		beforeData.append(ftzMsgCtl_tmp.getSndUserId());
-		beforeData.append(",发送日期时间：");
-		beforeData.append(ftzMsgCtl_tmp.getSndDatetime());
-		beforeData.append(",接收应答日期时间为：");
-		beforeData.append(ftzMsgCtl_tmp.getAckDatetime());
-		beforeData.append(",处理应答日期时间为：");
-		beforeData.append(ftzMsgCtl_tmp.getErrDatetime() + "的元素");
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
-				userInfo.getUserid(), userInfo.getUsername(), "D",
-				time.substring(0, 8), time.substring(8, 14),
-				beforeData.toString(), "");
-
+		BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE,ftzMsgCtl_tmp.toString(), "");
+		
 		int i = ftz210203Repos.deleteFtzInMsgCtl(ftzInMsgCtl);
 		return i;
 	}
@@ -141,74 +74,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 	@Override
 	@Transactional
 	public int insertFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
-		OrgInf orgInfo = ContextConst.getOrgInfByUser();
-		UserInf userInfo = ContextConst.getCurrentUser();
-		String time = DateUtil.getNowInputDateTime();
-		StringBuffer afterData = new StringBuffer();
-		afterData.append("新增了报文标识号为：");
-		afterData.append(ftzInMsgCtl.getMsgId());
-		afterData.append(",机构ID为：");
-		afterData.append(ftzInMsgCtl.getBranchId());
-		afterData.append(",版本号为：");
-		afterData.append(ftzInMsgCtl.getVer());
-		afterData.append(",发起节点代码为：");
-		afterData.append(ftzInMsgCtl.getSrc());
-		afterData.append(",接收节点代码为：");
-		afterData.append(ftzInMsgCtl.getDes());
-		afterData.append(",应用名称为：");
-		afterData.append(ftzInMsgCtl.getApp());
-		afterData.append(",报文编号为：");
-		afterData.append(ftzInMsgCtl.getMsgNo());
-		afterData.append(",报文参考号为：");
-		afterData.append(ftzInMsgCtl.getMsgRef());
-		afterData.append(",工作日期为：");
-		afterData.append(ftzInMsgCtl.getWorkDate());
-		afterData.append(",操作标识为：");
-		afterData.append(ftzInMsgCtl.getEditFlag());
-		afterData.append(",预留字段为：");
-		afterData.append(ftzInMsgCtl.getReserve());
-		afterData.append(",主帐号/账号为：");
-		afterData.append(ftzInMsgCtl.getAccountNo());
-		afterData.append(",货币为：");
-		afterData.append(ftzInMsgCtl.getCurrency());
-		afterData.append(",日终余额为：");
-		afterData.append(ftzInMsgCtl.getBalance());
-		afterData.append(",资产负债指标代码为：");
-		afterData.append(ftzInMsgCtl.getBalanceCode());
-		afterData.append(",申报日期为：");
-		afterData.append(ftzInMsgCtl.getSubmitDate());
-		afterData.append(",总记录条数为：");
-		afterData.append(ftzInMsgCtl.getTotalCount());
-		afterData.append(",所属机构代码为：");
-		afterData.append(ftzInMsgCtl.getAccOrgCode());
-		afterData.append(",户名为：");
-		afterData.append(ftzInMsgCtl.getAccountName());
-		afterData.append(",接收应答报文·处理结果为：");
-		afterData.append(ftzInMsgCtl.getResult());
-		afterData.append(",接收应答报文·附言为：");
-		afterData.append(ftzInMsgCtl.getAddWord());
-		afterData.append(",报文状态为：");
-		afterData.append(ftzInMsgCtl.getMsgStatus());
-		afterData.append(",录入操作员为：");
-		afterData.append(ftzInMsgCtl.getMakUserId());
-		afterData.append(",录入日期时间为：");
-		afterData.append(ftzInMsgCtl.getMakDatetime());
-		afterData.append(",复核操作员为：");
-		afterData.append(ftzInMsgCtl.getChkUserId());
-		afterData.append(",复核日期时间为：");
-		afterData.append(ftzInMsgCtl.getChkDatetime());
-		afterData.append(",发送操作员为：");
-		afterData.append(ftzInMsgCtl.getSndUserId());
-		afterData.append(",发送日期时间：");
-		afterData.append(ftzInMsgCtl.getSndDatetime());
-		afterData.append(",接收应答日期时间为：");
-		afterData.append(ftzInMsgCtl.getAckDatetime());
-		afterData.append(",处理应答日期时间为：");
-		afterData.append(ftzInMsgCtl.getErrDatetime() + "的元素");
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
-				userInfo.getUserid(), userInfo.getUsername(), "A",
-				time.substring(0, 8), time.substring(8, 14), "",
-				afterData.toString());
+		BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD,"", ftzInMsgCtl.toString());
 		return ftz210203Repos.insertFtzInMsgCtl(ftzInMsgCtl);
 	}
 
@@ -216,146 +82,21 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 	@Transactional
 	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl,
 			List<FtzInTxnDtl> ftzInTxnDtls) {
+		int i = 0;
 		if (null == ftzInTxnDtls) {
 			FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
 			query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
 			FtzInMsgCtl ftzMsgCtl_tmp = this
 					.queryFtzInMsgCtl(query_FtzInMsgCtl);
-			OrgInf orgInfo = ContextConst.getOrgInfByUser();
-			UserInf userInfo = ContextConst.getCurrentUser();
-			String time = DateUtil.getNowInputDateTime();
-			StringBuffer beforeData = new StringBuffer();
-			beforeData.append("将报文标识号为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgId());
-			beforeData.append(",机构ID为：");
-			beforeData.append(ftzMsgCtl_tmp.getBranchId());
-			beforeData.append(",版本号为：");
-			beforeData.append(ftzMsgCtl_tmp.getVer());
-			beforeData.append(",发起节点代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getSrc());
-			beforeData.append(",接收节点代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getDes());
-			beforeData.append(",应用名称为：");
-			beforeData.append(ftzMsgCtl_tmp.getApp());
-			beforeData.append(",报文编号为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgNo());
-			beforeData.append(",报文参考号为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgRef());
-			beforeData.append(",工作日期为：");
-			beforeData.append(ftzMsgCtl_tmp.getWorkDate());
-			beforeData.append(",操作标识为：");
-			beforeData.append(ftzMsgCtl_tmp.getEditFlag());
-			beforeData.append(",预留字段为：");
-			beforeData.append(ftzMsgCtl_tmp.getReserve());
-			beforeData.append(",主帐号/账号为：");
-			beforeData.append(ftzMsgCtl_tmp.getAccountNo());
-			beforeData.append(",货币为：");
-			beforeData.append(ftzMsgCtl_tmp.getCurrency());
-			beforeData.append(",日终余额为：");
-			beforeData.append(ftzMsgCtl_tmp.getBalance());
-			beforeData.append(",资产负债指标代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getBalanceCode());
-			beforeData.append(",申报日期为：");
-			beforeData.append(ftzMsgCtl_tmp.getSubmitDate());
-			beforeData.append(",总记录条数为：");
-			beforeData.append(ftzMsgCtl_tmp.getTotalCount());
-			beforeData.append(",所属机构代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getAccOrgCode());
-			beforeData.append(",户名为：");
-			beforeData.append(ftzMsgCtl_tmp.getAccountName());
-			beforeData.append(",类别为：");
-			beforeData.append(ftzMsgCtl_tmp.getAccType());;
-			beforeData.append(",接收应答报文·处理结果为：");
-			beforeData.append(ftzMsgCtl_tmp.getResult());
-			beforeData.append(",接收应答报文·附言为：");
-			beforeData.append(ftzMsgCtl_tmp.getAddWord());
-			beforeData.append(",报文状态为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgStatus());
-			beforeData.append(",录入操作员为：");
-			beforeData.append(ftzMsgCtl_tmp.getMakUserId());
-			beforeData.append(",录入日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getMakDatetime());
-			beforeData.append(",复核操作员为：");
-			beforeData.append(ftzMsgCtl_tmp.getChkUserId());
-			beforeData.append(",复核日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getChkDatetime());
-			beforeData.append(",发送操作员为：");
-			beforeData.append(ftzMsgCtl_tmp.getSndUserId());
-			beforeData.append(",发送日期时间：");
-			beforeData.append(ftzMsgCtl_tmp.getSndDatetime());
-			beforeData.append(",接收应答日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getAckDatetime());
-			beforeData.append(",处理应答日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getErrDatetime() + "的元素");
-
-			StringBuffer afterData = new StringBuffer();
-			afterData.append("更新了报文标识号为：");
-			afterData.append(ftzInMsgCtl.getMsgId());
-			afterData.append(",机构ID为：");
-			afterData.append(ftzInMsgCtl.getBranchId());
-			afterData.append(",版本号为：");
-			afterData.append(ftzInMsgCtl.getVer());
-			afterData.append(",发起节点代码为：");
-			afterData.append(ftzInMsgCtl.getSrc());
-			afterData.append(",接收节点代码为：");
-			afterData.append(ftzInMsgCtl.getDes());
-			afterData.append(",应用名称为：");
-			afterData.append(ftzInMsgCtl.getApp());
-			afterData.append(",报文编号为：");
-			afterData.append(ftzInMsgCtl.getMsgNo());
-			afterData.append(",报文参考号为：");
-			afterData.append(ftzInMsgCtl.getMsgRef());
-			afterData.append(",工作日期为：");
-			afterData.append(ftzInMsgCtl.getWorkDate());
-			afterData.append(",操作标识为：");
-			afterData.append(ftzInMsgCtl.getEditFlag());
-			afterData.append(",预留字段为：");
-			afterData.append(ftzInMsgCtl.getReserve());
-			afterData.append(",主帐号/账号为：");
-			afterData.append(ftzInMsgCtl.getAccountNo());
-			afterData.append(",货币为：");
-			afterData.append(ftzInMsgCtl.getCurrency());
-			afterData.append(",日终余额为：");
-			afterData.append(ftzInMsgCtl.getBalance());
-			afterData.append(",资产负债指标代码为：");
-			afterData.append(ftzInMsgCtl.getBalanceCode());
-			afterData.append(",申报日期为：");
-			afterData.append(ftzInMsgCtl.getSubmitDate());
-			afterData.append(",总记录条数为：");
-			afterData.append(ftzInMsgCtl.getTotalCount());
-			afterData.append(",所属机构代码为：");
-			afterData.append(ftzInMsgCtl.getAccOrgCode());
-			afterData.append(",户名为：");
-			afterData.append(ftzInMsgCtl.getAccountName());
-			afterData.append(",接收应答报文·处理结果为：");
-			afterData.append(ftzInMsgCtl.getResult());
-			afterData.append(",接收应答报文·附言为：");
-			afterData.append(ftzInMsgCtl.getAddWord());
-			afterData.append(",报文状态为：");
-			afterData.append(ftzInMsgCtl.getMsgStatus());
-			afterData.append(",录入操作员为：");
-			afterData.append(ftzInMsgCtl.getMakUserId());
-			afterData.append(",录入日期时间为：");
-			afterData.append(ftzInMsgCtl.getMakDatetime());
-			afterData.append(",复核操作员为：");
-			afterData.append(ftzInMsgCtl.getChkUserId());
-			afterData.append(",复核日期时间为：");
-			afterData.append(ftzInMsgCtl.getChkDatetime());
-			afterData.append(",发送操作员为：");
-			afterData.append(ftzInMsgCtl.getSndUserId());
-			afterData.append(",发送日期时间：");
-			afterData.append(ftzInMsgCtl.getSndDatetime());
-			afterData.append(",接收应答日期时间为：");
-			afterData.append(ftzInMsgCtl.getAckDatetime());
-			afterData.append(",处理应答日期时间为：");
-			afterData.append(ftzInMsgCtl.getErrDatetime() + "的元素");
-
-			TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
-					userInfo.getUserid(), userInfo.getUsername(), "M",
-					time.substring(0, 8), time.substring(8, 14),
-					beforeData.toString(), afterData.toString());
-
-			return ftz210203Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+			if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInMsgCtl.getMsgStatus())){
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			}else if(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInMsgCtl.getMsgStatus())){
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			}else{
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			}
+			
+			i=ftz210203Repos.updateFtzInMsgCtl(ftzInMsgCtl);
 		} else {
 			for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
 				this.updateFtzInTxnDtlSelective(ftzInTxnDtl);
@@ -364,140 +105,21 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 			query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
 			FtzInMsgCtl ftzMsgCtl_tmp = this
 					.queryFtzInMsgCtl(query_FtzInMsgCtl);
-			OrgInf orgInfo = ContextConst.getOrgInfByUser();
-			UserInf userInfo = ContextConst.getCurrentUser();
-			String time = DateUtil.getNowInputDateTime();
-			StringBuffer beforeData = new StringBuffer();
-			beforeData.append("将报文标识号为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgId());
-			beforeData.append(",机构ID为：");
-			beforeData.append(ftzMsgCtl_tmp.getBranchId());
-			beforeData.append(",版本号为：");
-			beforeData.append(ftzMsgCtl_tmp.getVer());
-			beforeData.append(",发起节点代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getSrc());
-			beforeData.append(",接收节点代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getDes());
-			beforeData.append(",应用名称为：");
-			beforeData.append(ftzMsgCtl_tmp.getApp());
-			beforeData.append(",报文编号为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgNo());
-			beforeData.append(",报文参考号为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgRef());
-			beforeData.append(",工作日期为：");
-			beforeData.append(ftzMsgCtl_tmp.getWorkDate());
-			beforeData.append(",操作标识为：");
-			beforeData.append(ftzMsgCtl_tmp.getEditFlag());
-			beforeData.append(",预留字段为：");
-			beforeData.append(ftzMsgCtl_tmp.getReserve());
-			beforeData.append(",主帐号/账号为：");
-			beforeData.append(ftzMsgCtl_tmp.getAccountNo());
-			beforeData.append(",货币为：");
-			beforeData.append(ftzMsgCtl_tmp.getCurrency());
-			beforeData.append(",日终余额为：");
-			beforeData.append(ftzMsgCtl_tmp.getBalance());
-			beforeData.append(",资产负债指标代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getBalanceCode());
-			beforeData.append(",申报日期为：");
-			beforeData.append(ftzMsgCtl_tmp.getSubmitDate());
-			beforeData.append(",总记录条数为：");
-			beforeData.append(ftzMsgCtl_tmp.getTotalCount());
-			beforeData.append(",所属机构代码为：");
-			beforeData.append(ftzMsgCtl_tmp.getAccOrgCode());
-			beforeData.append(",户名为：");
-			beforeData.append(ftzMsgCtl_tmp.getAccountName());
-			beforeData.append(",接收应答报文·处理结果为：");
-			beforeData.append(ftzMsgCtl_tmp.getResult());
-			beforeData.append(",接收应答报文·附言为：");
-			beforeData.append(ftzMsgCtl_tmp.getAddWord());
-			beforeData.append(",报文状态为：");
-			beforeData.append(ftzMsgCtl_tmp.getMsgStatus());
-			beforeData.append(",录入操作员为：");
-			beforeData.append(ftzMsgCtl_tmp.getMakUserId());
-			beforeData.append(",录入日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getMakDatetime());
-			beforeData.append(",复核操作员为：");
-			beforeData.append(ftzMsgCtl_tmp.getChkUserId());
-			beforeData.append(",复核日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getChkDatetime());
-			beforeData.append(",发送操作员为：");
-			beforeData.append(ftzMsgCtl_tmp.getSndUserId());
-			beforeData.append(",发送日期时间：");
-			beforeData.append(ftzMsgCtl_tmp.getSndDatetime());
-			beforeData.append(",接收应答日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getAckDatetime());
-			beforeData.append(",处理应答日期时间为：");
-			beforeData.append(ftzMsgCtl_tmp.getErrDatetime() + "的元素");
-
-			StringBuffer afterData = new StringBuffer();
-			afterData.append("更新了报文标识号为：");
-			afterData.append(ftzInMsgCtl.getMsgId());
-			afterData.append(",机构ID为：");
-			afterData.append(ftzInMsgCtl.getBranchId());
-			afterData.append(",版本号为：");
-			afterData.append(ftzInMsgCtl.getVer());
-			afterData.append(",发起节点代码为：");
-			afterData.append(ftzInMsgCtl.getSrc());
-			afterData.append(",接收节点代码为：");
-			afterData.append(ftzInMsgCtl.getDes());
-			afterData.append(",应用名称为：");
-			afterData.append(ftzInMsgCtl.getApp());
-			afterData.append(",报文编号为：");
-			afterData.append(ftzInMsgCtl.getMsgNo());
-			afterData.append(",报文参考号为：");
-			afterData.append(ftzInMsgCtl.getMsgRef());
-			afterData.append(",工作日期为：");
-			afterData.append(ftzInMsgCtl.getWorkDate());
-			afterData.append(",操作标识为：");
-			afterData.append(ftzInMsgCtl.getEditFlag());
-			afterData.append(",预留字段为：");
-			afterData.append(ftzInMsgCtl.getReserve());
-			afterData.append(",主帐号/账号为：");
-			afterData.append(ftzInMsgCtl.getAccountNo());
-			afterData.append(",货币为：");
-			afterData.append(ftzInMsgCtl.getCurrency());
-			afterData.append(",日终余额为：");
-			afterData.append(ftzInMsgCtl.getBalance());
-			afterData.append(",资产负债指标代码为：");
-			afterData.append(ftzInMsgCtl.getBalanceCode());
-			afterData.append(",申报日期为：");
-			afterData.append(ftzInMsgCtl.getSubmitDate());
-			afterData.append(",总记录条数为：");
-			afterData.append(ftzInMsgCtl.getTotalCount());
-			afterData.append(",所属机构代码为：");
-			afterData.append(ftzInMsgCtl.getAccOrgCode());
-			afterData.append(",户名为：");
-			afterData.append(ftzInMsgCtl.getAccountName());
-			afterData.append(",接收应答报文·处理结果为：");
-			afterData.append(ftzInMsgCtl.getResult());
-			afterData.append(",接收应答报文·附言为：");
-			afterData.append(ftzInMsgCtl.getAddWord());
-			afterData.append(",报文状态为：");
-			afterData.append(ftzInMsgCtl.getMsgStatus());
-			afterData.append(",录入操作员为：");
-			afterData.append(ftzInMsgCtl.getMakUserId());
-			afterData.append(",录入日期时间为：");
-			afterData.append(ftzInMsgCtl.getMakDatetime());
-			afterData.append(",复核操作员为：");
-			afterData.append(ftzInMsgCtl.getChkUserId());
-			afterData.append(",复核日期时间为：");
-			afterData.append(ftzInMsgCtl.getChkDatetime());
-			afterData.append(",发送操作员为：");
-			afterData.append(ftzInMsgCtl.getSndUserId());
-			afterData.append(",发送日期时间：");
-			afterData.append(ftzInMsgCtl.getSndDatetime());
-			afterData.append(",接收应答日期时间为：");
-			afterData.append(ftzInMsgCtl.getAckDatetime());
-			afterData.append(",处理应答日期时间为：");
-			afterData.append(ftzInMsgCtl.getErrDatetime() + "的元素");
-
-			TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
-					userInfo.getUserid(), userInfo.getUsername(), "M",
-					time.substring(0, 8), time.substring(8, 14),
-					beforeData.toString(), afterData.toString());
-			return ftz210203Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+			if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInMsgCtl.getMsgStatus())){
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			}else if(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInMsgCtl.getMsgStatus())){
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			}else{
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			}
+			i= ftz210203Repos.updateFtzInMsgCtl(ftzInMsgCtl);
 		}
-
+		if (ftzInMsgCtl.getMsgStatus().equals(
+				CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
+			generateXml.submitMsg(ftzInMsgCtl.getMsgNo(),
+					ftzInMsgCtl.getMsgId());
+		}
+		return i;
 	}
 
 	@Override
@@ -518,48 +140,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 		query_FtzInTxnDtl.setMsgId(ftzInTxnDtl.getMsgId());
 		query_FtzInTxnDtl.setSeqNo(ftzInTxnDtl.getSeqNo());
 		FtzInTxnDtl ftzInTxnDtl_tmp = this.queryFtzInTxnDtl(query_FtzInTxnDtl);
-		OrgInf orgInfo = ContextConst.getOrgInfByUser();
-		UserInf userInfo = ContextConst.getCurrentUser();
-		String time = DateUtil.getNowInputDateTime();
-		StringBuffer beforeData = new StringBuffer();
-		beforeData.append("删除了报文标识号为：");
-		beforeData.append(ftzInTxnDtl_tmp.getMsgId());
-		beforeData.append(",明细序号为：");
-		beforeData.append(ftzInTxnDtl_tmp.getSeqNo());
-		beforeData.append(",出/入账标志为：");
-		beforeData.append(ftzInTxnDtl_tmp.getCdFlag());
-		beforeData.append(",记帐日期为：");
-		beforeData.append(ftzInTxnDtl_tmp.getTranDate());
-		beforeData.append(",原始交易日期为：");
-		beforeData.append(ftzInTxnDtl_tmp.getOrgTranDate());
-		beforeData.append(",金额为：");
-		beforeData.append(ftzInTxnDtl_tmp.getAmount());
-		beforeData.append(",对方账号为：");
-		beforeData.append(ftzInTxnDtl_tmp.getOppAccount());
-		beforeData.append(",对方户名/对方机构为：");
-		beforeData.append(ftzInTxnDtl_tmp.getOppName());
-		beforeData.append(",国别代码为：");
-		beforeData.append(ftzInTxnDtl_tmp.getCountryCode());
-		beforeData.append(",国内地区码为：");
-		beforeData.append(ftzInTxnDtl_tmp.getDisitrictCode());
-		beforeData.append(",交易性质为：");
-		beforeData.append(ftzInTxnDtl_tmp.getTranType());
-		beforeData.append(",记录复核状态为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkStatus());
-		beforeData.append(",录入操作员为：");
-		beforeData.append(ftzInTxnDtl_tmp.getMakUserId());
-		beforeData.append(",录入日期时间为：");
-		beforeData.append(ftzInTxnDtl_tmp.getMakDatetime());
-		beforeData.append(",复核操作员为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkUserId());
-		beforeData.append(",复核日期时间为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkDatetime());
-		beforeData.append(",记录复核附言为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkAddWord() + "的元素");
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
-				userInfo.getUserid(), userInfo.getUsername(), "D",
-				time.substring(0, 8), time.substring(8, 14),
-				beforeData.toString(), "");
+		BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE,ftzInTxnDtl_tmp.toString(), "");
 
 		return ftz210203Repos.deleteFtzInTxnDtl(ftzInTxnDtl);
 	}
@@ -568,7 +149,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.synesoft.ftzmis.domain.service.FTZ210203Service#queryFtzActMstrs(
+	 * com.synesoft.ftzmis.domain.service.FTZ210101Service#queryFtzActMstrs(
 	 * com.synesoft.ftzmis.domain.model.FtzActMstr)
 	 */
 	@Override
@@ -597,47 +178,7 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 		update_FtzInMsgCtl.setMakDatetime(DateUtil.getNowInputDateTime());
 		ftz210203Repos.updateFtzInMsgCtl(update_FtzInMsgCtl);
 
-		OrgInf orgInfo = ContextConst.getOrgInfByUser();
-		String time = DateUtil.getNowInputDateTime();
-		StringBuffer afterData = new StringBuffer();
-		afterData.append("新增了报文标识号为：");
-		afterData.append(ftzInTxnDtl.getMsgId());
-		afterData.append(",明细序号为：");
-		afterData.append(ftzInTxnDtl.getSeqNo());
-		afterData.append(",出/入账标志为：");
-		afterData.append(ftzInTxnDtl.getCdFlag());
-		afterData.append(",记帐日期为：");
-		afterData.append(ftzInTxnDtl.getTranDate());
-		afterData.append(",原始交易日期为：");
-		afterData.append(ftzInTxnDtl.getOrgTranDate());
-		afterData.append(",金额为：");
-		afterData.append(ftzInTxnDtl.getAmount());
-		afterData.append(",对方账号为：");
-		afterData.append(ftzInTxnDtl.getOppAccount());
-		afterData.append(",对方户名/对方机构为：");
-		afterData.append(ftzInTxnDtl.getOppName());
-		afterData.append(",国别代码为：");
-		afterData.append(ftzInTxnDtl.getCountryCode());
-		afterData.append(",国内地区码为：");
-		afterData.append(ftzInTxnDtl.getDisitrictCode());
-		afterData.append(",交易性质为：");
-		afterData.append(ftzInTxnDtl.getTranType());		
-		afterData.append(",记录复核状态为：");
-		afterData.append(ftzInTxnDtl.getChkStatus());
-		afterData.append(",录入操作员为：");
-		afterData.append(ftzInTxnDtl.getMakUserId());
-		afterData.append(",录入日期时间为：");
-		afterData.append(ftzInTxnDtl.getMakDatetime());
-		afterData.append(",复核操作员为：");
-		afterData.append(ftzInTxnDtl.getChkUserId());
-		afterData.append(",复核日期时间为：");
-		afterData.append(ftzInTxnDtl.getChkDatetime());
-		afterData.append(",记录复核附言为：");
-		afterData.append(ftzInTxnDtl.getChkAddWord() + "的元素");
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
-				userInfo.getUserid(), userInfo.getUsername(), "A",
-				time.substring(0, 8), time.substring(8, 14), "",
-				afterData.toString());
+		BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD,"",ftzInTxnDtl.toString());
 
 		return ftz210203Repos.insertFtzInTxnDtl(ftzInTxnDtl);
 	}
@@ -660,84 +201,13 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 		query_FtzInTxnDtl.setMsgId(ftzInTxnDtl.getMsgId());
 		query_FtzInTxnDtl.setSeqNo(ftzInTxnDtl.getSeqNo());
 		FtzInTxnDtl ftzInTxnDtl_tmp = this.queryFtzInTxnDtl(query_FtzInTxnDtl);
-		OrgInf orgInfo = ContextConst.getOrgInfByUser();
-		UserInf userInfo = ContextConst.getCurrentUser();
-		String time = DateUtil.getNowInputDateTime();
-		StringBuffer beforeData = new StringBuffer();
-		beforeData.append("将报文标识号为：");
-		beforeData.append(ftzInTxnDtl_tmp.getMsgId());
-		beforeData.append(",明细序号为：");
-		beforeData.append(ftzInTxnDtl_tmp.getSeqNo());
-		beforeData.append(",出/入账标志为：");
-		beforeData.append(ftzInTxnDtl_tmp.getCdFlag());
-		beforeData.append(",记帐日期为：");
-		beforeData.append(ftzInTxnDtl_tmp.getTranDate());
-		beforeData.append(",原始交易日期为：");
-		beforeData.append(ftzInTxnDtl_tmp.getOrgTranDate());
-		beforeData.append(",金额为：");
-		beforeData.append(ftzInTxnDtl_tmp.getAmount());
-		beforeData.append(",对方账号为：");
-		beforeData.append(ftzInTxnDtl_tmp.getOppAccount());
-		beforeData.append(",对方户名/对方机构为：");
-		beforeData.append(ftzInTxnDtl_tmp.getOppName());
-		beforeData.append(",国别代码为：");
-		beforeData.append(ftzInTxnDtl_tmp.getCountryCode());
-		beforeData.append(",国内地区码为：");
-		beforeData.append(ftzInTxnDtl_tmp.getDisitrictCode());
-		beforeData.append(",交易性质为：");
-		beforeData.append(ftzInTxnDtl_tmp.getTranType());
-		beforeData.append(",记录复核状态为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkStatus());
-		beforeData.append(",录入操作员为：");
-		beforeData.append(ftzInTxnDtl_tmp.getMakUserId());
-		beforeData.append(",录入日期时间为：");
-		beforeData.append(ftzInTxnDtl_tmp.getMakDatetime());
-		beforeData.append(",复核操作员为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkUserId());
-		beforeData.append(",复核日期时间为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkDatetime());
-		beforeData.append(",记录复核附言为：");
-		beforeData.append(ftzInTxnDtl_tmp.getChkAddWord() + "的元素");
-
-		StringBuffer afterData = new StringBuffer();
-		afterData.append("更新为报文标识号为：");
-		afterData.append(ftzInTxnDtl.getMsgId());
-		afterData.append(",明细序号为：");
-		afterData.append(ftzInTxnDtl.getSeqNo());
-		afterData.append(",出/入账标志为：");
-		afterData.append(ftzInTxnDtl.getCdFlag());
-		afterData.append(",记帐日期为：");
-		afterData.append(ftzInTxnDtl.getTranDate());
-		afterData.append(",原始交易日期为：");
-		afterData.append(ftzInTxnDtl.getOrgTranDate());
-		afterData.append(",金额为：");
-		afterData.append(ftzInTxnDtl.getAmount());
-		afterData.append(",对方账号为：");
-		afterData.append(ftzInTxnDtl.getOppAccount());
-		afterData.append(",对方户名/对方机构为：");
-		afterData.append(ftzInTxnDtl.getOppName());
-		afterData.append(",国别代码为：");
-		afterData.append(ftzInTxnDtl.getCountryCode());
-		afterData.append(",国内地区码为：");
-		afterData.append(ftzInTxnDtl.getDisitrictCode());
-		afterData.append(",交易性质为：");
-		afterData.append(ftzInTxnDtl.getTranType());
-		afterData.append(",录入操作员为：");
-		afterData.append(ftzInTxnDtl.getMakUserId());
-		afterData.append(",录入日期时间为：");
-		afterData.append(ftzInTxnDtl.getMakDatetime());
-		afterData.append(",复核操作员为：");
-		afterData.append(ftzInTxnDtl.getChkUserId());
-		afterData.append(",复核日期时间为：");
-		afterData.append(ftzInTxnDtl.getChkDatetime());
-		afterData.append(",记录复核附言为：");
-		afterData.append(ftzInTxnDtl.getChkAddWord() + "的元素");
-
-		TlrLogPrint.tlrBizLogPrint("FTZ_Add_210203", orgInfo.getOrgid(),
-				userInfo.getUserid(), userInfo.getUsername(), "M",
-				time.substring(0, 8), time.substring(8, 14),
-				beforeData.toString(), afterData.toString());
-
+		if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl.getChkStatus())){
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
+		}else if(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInTxnDtl.getChkStatus())){
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
+		}else{
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
+		}
 		return ftz210203Repos.updateFtzInTxnDtlSelective(ftzInTxnDtl);
 	}
 
@@ -753,14 +223,24 @@ public class FTZ210203ServiceImp implements FTZ210203Service {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.synesoft.ftzmis.domain.service.FTZ210203Service#queryFtzBankCode(
+	 * com.synesoft.ftzmis.domain.service.FTZ210101Service#queryFtzBankCode(
 	 * com.synesoft.ftzmis.domain.model.FtzBankCode)
 	 */
 	@Override
 	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode) {
 		return ftz210203Repos.queryFtzBankCode(ftzBankCode);
 	}
+	
+	private void BizLog(String operType, String beforeData, String afterData) {
+		OrgInf orgInfo = ContextConst.getOrgInfByUser();
+		UserInf userInfo = ContextConst.getCurrentUser();
+		TlrLogPrint.tlrBizLogPrint(funcId, orgInfo.getOrgid(), userInfo.getUserid(), userInfo.getUsername(), operType, 
+				DateUtil.getNowInputDate(), DateUtil.getNowInputTime(), beforeData, afterData);
+	}
 
 	@Resource
 	protected FTZ210203Repository ftz210203Repos;
+	
+	@Resource
+	protected FtzMsgProcService generateXml;
 }

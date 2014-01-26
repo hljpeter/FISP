@@ -1067,8 +1067,6 @@ public class FTZ210108Controller {
 										.getExpireDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
 			// 查询全部数据
@@ -1089,11 +1087,10 @@ public class FTZ210108Controller {
 										.getExpireDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
-
+			form.setSelected_msgId("");
+			form.setSelected_seqNo(null);
 			return "ftzmis/FTZ210108_Auth_Qry_Dtl";
 		}
 	}

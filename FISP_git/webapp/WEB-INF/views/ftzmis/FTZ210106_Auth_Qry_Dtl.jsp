@@ -1,11 +1,5 @@
 <script type="text/javascript">
 	$(function() {
-		var msgStatus = $("#msgStatus").val();
-		if("03"==msgStatus || "04"==msgStatus){
-			$("#sbdetail").attr("disabled", "disabled");
-		}else{
-			$("#sbdetail").removeAttr("disabled");
-		}
 		$("#pageTable").find("tr").bind('click', function() {
 			var selected_msgId = $(this).find("td:eq(8)").text();
 			var selected_seqNo = $(this).find("td:eq(9)").text();
@@ -24,24 +18,20 @@
 			if (old_selected_seqNo != selected_seqNo) {
 				$("#selected_msgId").val(selected_msgId);
 				$("#selected_seqNo").val(selected_seqNo);
-				
+
 				return;
 			}
-	
+
 		});
-		$("#pageTable")
-		.find("tr")
-		.bind(
+		$("#pageTable").find("tr").bind(
 				'dblclick',
 				function() {
-					var selected_msgId = $(this).find("td:eq(8)")
-							.text();
-					var selected_seqNo = $(this).find("td:eq(9)")
-							.text();
-					showDialog('${pageContext.request.contextPath}/FTZ210106/QryAuthDtlDtl?selected_msgId='
-							+ selected_msgId
-							+ "&selected_seqNo="
-							+ selected_seqNo,'500','1024');
+					var selected_msgId = $(this).find("td:eq(8)").text();
+					var selected_seqNo = $(this).find("td:eq(9)").text();
+					showDialog(
+							'${pageContext.request.contextPath}/FTZ210106/QryAuthDtlDtl?selected_msgId='
+									+ selected_msgId + "&selected_seqNo="
+									+ selected_seqNo, '500', '1024');
 					queryFTZ210106Dtl();
 				});
 	});
@@ -52,29 +42,34 @@
 			alert('<spring:message code="ftz.validate.choose.dataTxn"/>');
 			return;
 		} else {
-			showDialog('${pageContext.request.contextPath}/FTZ210106/QryAuthDtlDtl?selected_msgId='
-					+ selected_msgId + "&selected_seqNo="
-					+ selected_seqNo,'500','1024');
+			showDialog(
+					'${pageContext.request.contextPath}/FTZ210106/QryAuthDtlDtl?selected_msgId='
+							+ selected_msgId + "&selected_seqNo="
+							+ selected_seqNo, '500', '1024');
 			queryFTZ210106Dtl();
 		}
 	}
-	
+
 	function queryFTZ210106Dtl() {
 		$("#selected_msgId").val($("#msgId").val());
-		$("#balance").val($("#balance").val().replaceAll(",", ""));
+			$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
-		form.action = "${pageContext.request.contextPath}/FTZ210106/QryAuthDtl?page.page="+${page.number+1};
+		form.action = "${pageContext.request.contextPath}/FTZ210106/QryAuthDtl?page.page="+ ${page.number + 1};
 		form.submit();
 	}
 	function sbDtl() {
+		var msgStatus = $("#msgStatus").val();
+		if ("02" != msgStatus) {
+			alert('<spring:message code="ftz.validate.auth.msg"/>');
+			return;
+		}
 		$("#selected_msgId").val($("#msgId").val());
 		$("#selected_msgNo").val($("#msgNo").val());
-		$("#balance").val($("#balance").val().replaceAll(",", ""));
+			$("#balance").val($("#balance").val().replaceAll(",", ""));
 		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZ210106/AuthDtlSubmit";
 		form.submit();
 	}
-	
 </script>
 
 <div id="id_showMsg" style="display: none">
@@ -153,7 +148,7 @@
 			</tr>
 			<tr>
 				<td class="label_td" colspan="2"><font color="red">* </font> <spring:message
-						code="ftz.label.BALANCE_CODE" /><form:hidden
+						code="ftz.label.BALANCE_CODE" />：<form:hidden
 						path="ftzInMsgCtl.balanceCode" id="balanceCode1" /> <form:select
 						id="balanceCode" path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
@@ -164,7 +159,10 @@
 						class=".input-large" readonly="true" /></td>	
 			</tr>
 			<tr>
-				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" /></td>
+				<td colspan="4"><hr /></td>
+			</tr>
+			<tr>
+				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_PROC_RESULT}" />
@@ -172,7 +170,7 @@
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.CHK_ADD_WORD" /></td>
+						code="ftz.label.CHK_ADD_WORD" />：</td>
 				<td colspan="3"><form:input id="chkAddWord"
 						path="ftzInTxnDtl.chkAddWord" class="input-xxlarge"
 						readonly="true" /></td>

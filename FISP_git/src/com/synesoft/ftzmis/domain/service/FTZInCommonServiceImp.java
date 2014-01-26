@@ -1,5 +1,6 @@
 package com.synesoft.ftzmis.domain.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -596,6 +597,7 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 	/* (non-Javadoc)
 	 * @see com.synesoft.ftzmis.domain.service.FTZInCommonService#getNextAuthTxnById(com.synesoft.ftzmis.domain.model.FtzInTxnDtl)
 	 */
+	@Transactional
 	public FtzInTxnDtl getNextAuthTxnById(FtzInTxnDtl ftzInTxnDtl) {
 //		log.debug("FTZInCommonService.getNextAuthTxnById() start ...");
 //
@@ -643,6 +645,18 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 			m.add("e.ftzmis.2103.0009");								
 			throw new BusinessException(m);
 		}
+	}
+	
+	@Transactional
+	public List<FtzInMsgCtl> queryFtzInMsgCtlList(FtzInMsgCtl ftzInMsgCtl)
+	{
+		return ftzInMsgCtlRepository.queryFtzInMsgCtlList(ftzInMsgCtl);
+	}
+	
+	@Transactional
+	public List<FtzInTxnDtl> queryFtzInTxnDtlList(FtzInTxnDtl ftzInTxnDtl)
+	{
+		return ftzInMsgCtlRepository.queryFtzInTxnDtlList(ftzInTxnDtl);
 	}
 	
 	@Autowired

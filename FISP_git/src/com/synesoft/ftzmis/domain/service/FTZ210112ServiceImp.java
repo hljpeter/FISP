@@ -13,6 +13,7 @@ import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
@@ -91,7 +92,6 @@ public class FTZ210112ServiceImp implements FTZ210112Service {
 		query_FtzInTxnDtl.setMsgId(ftzInTxnDtl.getMsgId());
 		query_FtzInTxnDtl.setSeqNo(ftzInTxnDtl.getSeqNo());
 		FtzInTxnDtl ftzInTxnDtl_tmp = this.queryFtzInTxnDtl(query_FtzInTxnDtl);
-		BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzInTxnDtl_tmp.toString(),ftzInTxnDtl.toString());
 		int ret = ftz210112Repos.updateFtzInTxnDtlSelective(ftzInTxnDtl);
 		if(ret > 0){
 			FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
@@ -99,6 +99,35 @@ public class FTZ210112ServiceImp implements FTZ210112Service {
 			FtzInMsgCtl ftzMsgCtl_tmp = this.queryFtzInMsgCtl(query_FtzInMsgCtl);
 			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
 			return ftz210112Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+		}
+		BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzInTxnDtl_tmp.toString(),ftzInTxnDtl.toString());
+		return ret;
+	}
+	
+	@Override
+	@Transactional
+	public int updateFtzInMsgForAudit(FtzInMsgCtl ftzInMsgCtl,
+			FtzInTxnDtl ftzInTxnDtl) {
+		// 修改交易明细
+		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+		query_FtzInTxnDtl.setMsgId(ftzInTxnDtl.getMsgId());
+		query_FtzInTxnDtl.setSeqNo(ftzInTxnDtl.getSeqNo());
+		FtzInTxnDtl ftzInTxnDtl_tmp = this.queryFtzInTxnDtl(query_FtzInTxnDtl);
+		int ret = ftz210112Repos.updateFtzInTxnDtlSelective(ftzInTxnDtl);
+		if (ret > 0) {
+			FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
+			query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
+			FtzInMsgCtl ftzMsgCtl_tmp = this
+					.queryFtzInMsgCtl(query_FtzInMsgCtl);
+			ret = ftz210112Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,
+					ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,
+					ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			// 提交报文信息
+			ftzMsgProcService.submitMsg(ftzInMsgCtl.getMsgNo(),
+					ftzInMsgCtl.getMsgId());
+			return ret;
 		}
 		return ret;
 	}
@@ -159,7 +188,8 @@ public class FTZ210112ServiceImp implements FTZ210112Service {
 
 	@Autowired
 	protected FTZ210112Repository ftz210112Repos;
-	
 	@Autowired
 	protected FtzInTxnDtlRepository ftzInTxnDtlRepository;
+	@Autowired
+	private FtzMsgProcService ftzMsgProcService;
 }

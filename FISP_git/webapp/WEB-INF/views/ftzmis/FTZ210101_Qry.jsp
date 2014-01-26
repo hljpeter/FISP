@@ -127,7 +127,7 @@
 						<form:options items="${SYS_CURRENCY}" />
 					</form:select></td>
 				<td style="text-align: right;" colspan="2">
-					<button type="submit" class="btn btn-primary">
+					<button type="submit" class="btn btn-primary" >
 						<spring:message code="ftz.label.SELECT_MSG" />
 					</button>
 				</td>
@@ -149,17 +149,17 @@
 							code="fisp.label.common.no" /></th>
 					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
 							code="ftz.label.SUBMIT_DATE" /></th>
-					<th style="vertical-align: middle; text-align: center" width="80px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="60px"><spring:message
 							code="ftz.label.BRANCH" /></th>
 					<th style="vertical-align: middle; text-align: center"
 						width="120px"><spring:message code="ftz.label.MSG_TYPE" /></th>
 					<th style="vertical-align: middle; text-align: center" width="70px"><spring:message
 							code="ftz.label.MSG_ID" /></th>
-					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="50px"><spring:message
 							code="ftz.label.CURRENCY" /></th>
 					<th style="vertical-align: middle; text-align: center"
 						width="120px"><spring:message code="ftz.label.ACCOUNT_NO1" /></th>
-					<th style="vertical-align: middle; text-align: center" width="40px"><spring:message
+					<th style="vertical-align: middle; text-align: center" width="30px"><spring:message
 							code="ftz.label.MSG_STATUS" /></th>
 				</tr>
 			</thead>
@@ -174,14 +174,15 @@
 					<tr>
 						<td style="text-align: center; width: 10px;">${(page.number*page.size)+(i.index+1)}</td>
 						<td class="vtip" style="text-align: center; width: 40px;">${dto.submitDate}</td>
-						<td class="vtip" style="text-align: left; width: 80px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue
 								items="${SM_0002}" key="${dto.branchId}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 120px;"><t:codeValue
 								items="${FTZ_2101_MSG}" key="${dto.msgNo}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 70px;">${dto.msgId}</td>
-						<td class="vtip" style="text-align: left; width: 30px;">${dto.currency}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${SYS_CURRENCY}" key="${dto.currency}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 120px;">${dto.accountNo}</td>
-						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue
+						<td class="vtip" style="text-align: left; width: 30px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto.msgStatus}" type="label" /></td>
 						<td style="display: none;">${dto.msgNo}</td>
 					</tr>
@@ -190,18 +191,17 @@
 		</table>
 	</div>
 </div>
-
 <div class="pagination pull-right" style="margin-top: 10px;">
 	<table class="text-center">
 		<tr>
 			<td width="50%" align="left"><input id="detail" type="button"
-				class="btn btn-primary" onclick="showDetail();"
+				class="btn btn-primary" onclick="showDetail();" 
 				value="<spring:message code="ftz.label.MSG_Dtl" />"></td>
 			<td width="50%" align="right">
 				<table>
 					<tr>
 						<td><util:pagination page="${page}"
-								query="query_branchId=${FTZ210101Form.query_branchId}&query_submitDate_start=${FTZ210101Form.query_submitDate_start}&query_submitDate_end=${FTZ210101Form.query_submitDate_end}&query_msgId=${FTZ210101Form.query_msgId}&query_accountName=${FTZ210101Form.query_accountName}&query_accountNo=${FTZ210101Form.query_accountNo}&query_subAccountNo=${FTZ210101Form.query_subAccountNo}&query_msgStatus=${FTZ210101Form.query_msgStatus}&query_msgNo=${FTZ210101Form.query_msgNo}"
+								query="query_branchId=${FTZ210101Form.query_branchId}&query_submitDate_start=${FTZ210101Form.query_submitDate_start}&query_submitDate_end=${FTZ210101Form.query_submitDate_end}&query_msgId=${FTZ210101Form.query_msgId}&query_accountName=${FTZ210101Form.query_accountName}&query_accountNo=${FTZ210101Form.query_accountNo}&query_subAccountNo=${FTZ210101Form.query_subAccountNo}&query_msgStatus=${FTZ210101Form.query_msgStatus}&query_msgNo=${FTZ210101Form.query_msgNo}&query_currency=${FTZ210101Form.query_currency}"
 								action="/FTZ210101/Qry" /></td>
 					</tr>
 				</table>

@@ -116,6 +116,9 @@
 					</form:select></td>
 			</tr>
 			<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
+			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_DTL_STATUS" />：</td>
 				<td colspan="3"><form:select path="ftzInTxnDtl.chkStatus" disabled="true">
 						<form:option value=""></form:option>

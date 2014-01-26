@@ -131,7 +131,7 @@ $("#dtl").click(function() {
 		          	<td class="tbl_page_td_left vtip" width="20px">${(page.number * page.size) + (i.index + 1)}</td>
 				  	<td class="tbl_page_td_left vtip" width="100px"><t:dateTimeFormat type="label" value="${dto.submitDate}" format="date"/></td>
 		            <td class="tbl_page_td_left vtip" width="100px">${dto.accountNo}</td>
-		            <td class="tbl_page_td_left vtip" width="80px">${dto.currency}</td>
+		            <td class="tbl_page_td_left vtip" width="80px"><t:codeValue items="${SYS_CURRENCY }" key="${dto.currency }" type="label" /></td>
 		            <td class="tbl_page_td_right vtip" width="120px"><t:moneyFormat type="label" value="${dto.amount }" format="###,###,###,###.00" dot="true"/></td>
 		            <td class="tbl_page_td_left vtip" width="120px">${dto.countryCode}</td>
 		            <td class="tbl_page_td_left vtip" width="160px">${dto.districtCode}</td>

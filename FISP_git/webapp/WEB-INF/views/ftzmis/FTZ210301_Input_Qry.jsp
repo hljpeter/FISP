@@ -55,6 +55,7 @@ $("#sbm").click(function() {
 		if (confirm(msg)) {
 			$("#msgId").val(selectedRow.msgId);
 			$("#makDatetime").val(selectedRow.makDatetime);
+			$("#chkDatetime").val(selectedRow.chkDatetime);
 			$("#msgStatus").val(selectedRow.msgStatus);
 			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210301/Input/SubmitMsg?page.page=" + ${page.number + 1 });
 			$("#form").submit();
@@ -146,7 +147,7 @@ $("#add").click(function() {
 			</tr>
 			<tr>	
 				<td class="label_td"><spring:message code="ftz.label.MSG_ID"/>：</td>
-				<td><form:input path="ftzOffMsgCtlVO.msgNo" type="text" class="input-large"/></td>
+				<td><form:input path="ftzOffMsgCtlVO.msgId" type="text" class="input-large"/></td>
 	
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS"/>：</td>
 				<td>

@@ -760,6 +760,12 @@ public class FTZ210103Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0028");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckRate(issert_FtzInTxnDtl.getInterestRate())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210101.0041");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 到期日
@@ -958,6 +964,12 @@ public class FTZ210103Controller {
 			ResultMessage resultMessage = ResultMessage
 					.fromCode("e.ftzmis.210101.0028");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckRate(update_FtzInTxnDtl.getInterestRate())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210101.0041");
+				resultMessages.add(resultMessage);
+			}
 		}
 
 		// 到期日
@@ -1091,8 +1103,6 @@ public class FTZ210103Controller {
 										.getExpireDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
 			// 查询全部数据
@@ -1113,11 +1123,10 @@ public class FTZ210103Controller {
 										.getExpireDate()));
 					}
 					model.addAttribute("page", page);
-					form.setSelected_msgId("");
-					form.setSelected_seqNo(null);
 				}
 			}
-
+			form.setSelected_msgId("");
+			form.setSelected_seqNo(null);
 			return "ftzmis/FTZ210103_Auth_Qry_Dtl";
 		}
 	}

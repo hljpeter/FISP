@@ -1,5 +1,7 @@
 package com.synesoft.ftzmis.domain.repository;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import jp.terasoluna.fw.dao.QueryDAO;
@@ -15,6 +17,7 @@ import com.synesoft.fisp.domain.component.PageHandler;
 import com.synesoft.ftzmis.app.common.constants.SQLMap;
 import com.synesoft.ftzmis.app.common.constants.Table;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
+import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 import com.synesoft.ftzmis.domain.model.vo.FtzInMsgCtlVO;
 
 @Repository
@@ -92,6 +95,17 @@ public class FtzInMsgCtlRepositoryImp implements FtzInMsgCtlRepository {
 	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl){
 		log.debug("FtzInTxnDtlRepositoryImp.updateFtzInMsgCtl() start ...");
 		return updateDAO.execute(Table.FTZ_IN_MSG_CTL + "." + SQLMap.UPDATE_PRIMARY_KEY_SELECTIVE, ftzInMsgCtl);
+	}
+	
+	
+	public List<FtzInMsgCtl> queryFtzInMsgCtlList(FtzInMsgCtl ftzInMsgCtl) {
+		return queryDAO.executeForObjectList(Table.FTZIN_MSG_CTL + "."
+				+ SQLMap.SELECT_LIST, ftzInMsgCtl);
+	}
+	
+	public List<FtzInTxnDtl> queryFtzInTxnDtlList(FtzInTxnDtl ftzInTxnDtl) {
+		return queryDAO.executeForObjectList(Table.FTZIN_TXN_DTL + "."
+				+ SQLMap.SELECT_LIST, ftzInTxnDtl);
 	}
 }
 

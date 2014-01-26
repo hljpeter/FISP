@@ -190,6 +190,7 @@ $(function() {
 					</form:select>
 				</td>
 			</tr>
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.DTL_STATUS" />：</td>

@@ -132,7 +132,7 @@ public class FTZ210311Controller {
 			model.addAttribute(resultMessages);
 			return "ftzmis/FTZ210311_Input_Dtl";
 		}
-		insert_FtzOffMsgCtl.setMsgId(numberService.getSysIDSequence(16));
+		insert_FtzOffMsgCtl.setMsgId(numberService.getSysIDSequence("", 8));
 		insert_FtzOffMsgCtl.setWorkDate(DateUtil
 				.getFormatDateRemoveSprit(insert_FtzOffMsgCtl.getWorkDate()));
 		
@@ -1010,7 +1010,7 @@ public class FTZ210311Controller {
 			}
 		}
 		
-		return "ftzmis/FTZ210311_Auth_Qry_Dtl";
+		return "forward:/FTZ210311/QryAuthDtl";
 	}
 	
 	//批量明细审核

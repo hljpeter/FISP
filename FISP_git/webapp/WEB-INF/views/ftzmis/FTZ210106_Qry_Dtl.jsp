@@ -131,16 +131,18 @@
 			</tr>
 			<tr>
 				<td class="label_td" colspan="2"><font color="red">* </font> <spring:message
-						code="ftz.label.BALANCE_CODE" /><form:hidden
+						code="ftz.label.BALANCE_CODE" />：<form:hidden
 						path="ftzInMsgCtl.balanceCode" id="balanceCode1" /> <form:select
 						id="balanceCode" path="ftzInMsgCtl.balanceCode" disabled="true">
 						<form:option value=""></form:option>
 						<form:options items="${FTZ_BALANCE_INDEX_CODE}" />
-					</form:select></td>
+					</form:select>
+				</td>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.ACC_ORG_CODE" />：</td>
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
 						class=".input-large" readonly="true" /></td>	
 			</tr>
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzInMsgCtl.result" disabled="true">

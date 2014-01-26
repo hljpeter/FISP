@@ -152,7 +152,7 @@ function authRefuse() {
 			
 			<tr>
 				<td class="label_td"><spring:message
-						code="ftz.label.INTEREST_RATE" />：</td>
+						code="ftz.label.INTEREST_RATES" />：</td>
 				<td><t:moneyFormat type="text"
 						value="${FTZ210103Form.ftzInTxnDtl.interestRate}"
 						format="###.000000" dot="true" readonly="true"

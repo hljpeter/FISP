@@ -188,7 +188,7 @@ public class FTZ210207Controller {
 		log.info("FTZ210207Controller.inputAddMsgInit() start ...");
 		
 		FtzInMsgCtl ctl = new FtzInMsgCtl();
-		ctl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
+		//ctl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
 		//ctl.setBranchId(ContextConst.getCurrentUser().getLoginorg());
 		//ctl.setWorkDate(DateUtil.getNowOutputDate());
 		//ctl.setMsgId(numberService.getSysIDSequence(16));
@@ -412,7 +412,7 @@ public class FTZ210207Controller {
 
 			log.info("Submit success");
 			form.setActionFlag(CommonConst.ACTION_FLAG_SUB_MSG);
-			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Update.Msg.Ctl.Success")));
+			model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("ftzmis.Submit.Msg.Ctl.Success")));
 
 			return "forward:/FTZ210207/AddQry";
 		} catch (BusinessException e) {
@@ -700,7 +700,7 @@ public class FTZ210207Controller {
 			jo.put("documentType", result_FtzActMstr.getDocumentType());
 			jo.put("currency", result_FtzActMstr.getCurrency());
 			jo.put("documentNo", result_FtzActMstr.getDocumentNo());
-			jo.put("balance", result_FtzActMstr.getBalance());
+			jo.put("balance", df_amt.format(result_FtzActMstr.getBalance()));
 			jo.put("accOrgCode", result_FtzActMstr.getAccOrgCode());
 		}
 
@@ -833,7 +833,9 @@ public class FTZ210207Controller {
 			if (null == ftzInTxnDtls || ftzInTxnDtls.size() < 1) {
 				ftz210207Service.authMsgCtl(form.getFtzInMsgCtl());
 
-				model.addAttribute("successmsg", ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0005")));
+				ftzMsgProcService.submitMsg(form.getFtzInMsgCtl().getMsgNo(),
+						form.getFtzInMsgCtl().getMsgId());
+				model.addAttribute(ResultMessages.success().add(ResultMessage.fromCode("i.ftzmis.210301.0005")));
 				return "forward:/FTZ210207/Auth/DtlMsg/Init";
 			} else {
 				int count_unAuth = 0;

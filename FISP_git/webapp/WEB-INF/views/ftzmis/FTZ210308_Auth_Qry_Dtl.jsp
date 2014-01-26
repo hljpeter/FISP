@@ -19,7 +19,11 @@ if (success && success != "") {
 }
 
 $("#msgChk").click(function() {
-	$("#form").submit();
+	if ($("#msgStatus").val() == "01") {
+		alert('<spring:message code="e.ftzmis.2103.0032"/>');
+	} else {
+		$("#form").submit();
+	}
 });
 
 $(".tbl_page_body table tr").dblclick(function() {
@@ -35,11 +39,15 @@ $("#dtl").click(function() {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
 		selectedRow = eval("(" + selectedRow + ")"); 
-		showDialog('${pageContext.request.contextPath}/FTZ210308/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
+		if (selectedRow.chkStatus == '04') {
+			alert('<spring:message code="e.ftzmis.2103.0033"/>');
+		} else {
+			showDialog('${pageContext.request.contextPath}/FTZ210308/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
 				+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
 				
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210308/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId="+ ${FTZ210308Form.ftzOffMsgCtl.msgId });
-		$("#form").submit();
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210308/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId="+ ${FTZ210308Form.ftzOffMsgCtl.msgId });
+			$("#form").submit();
+		}
 	}
 });
 
@@ -92,7 +100,7 @@ $("#dtl").click(function() {
 	
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS"/>：</td>
 				<td>
-					<form:select path="ftzOffMsgCtl.msgStatus" disabled="true">
+					<form:select path="ftzOffMsgCtl.msgStatus" id="msgStatus" disabled="true">
 						<option value=""></option>
 						<form:options items="${FTZ_MSG_STATUS }" />
 					</form:select>
@@ -124,7 +132,7 @@ $("#dtl").click(function() {
 			<tbody>
 			<form:form id="FTZ210308Form" action="${pageContext.request.contextPath}" modelAttribute="FTZ210308Form">
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }",chkStatus:"${dto.chkStatus }"}'>
 		          	<td class="tbl_page_td_left vtip" width="20px">${(page.number * page.size) + (i.index + 1)}</td>
 				  	<td class="tbl_page_td_left vtip" width="100px"><t:codeValue items="${SM_0002 }" key="${dto.accOrgCode }" type="label" /></td>
 				  	<td class="tbl_page_td_left vtip" width="80px"><t:dateTimeFormat type="label" value="${dto.submitDate }" format="date"/></td>

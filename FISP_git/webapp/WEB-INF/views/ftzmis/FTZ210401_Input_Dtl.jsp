@@ -292,7 +292,11 @@
 				<td><form:input id="accOrgCode" path="ftzInMsgCtl.accOrgCode"
 						class=".input-large" readonly="true" /></td>
 			</tr>
+			
 			<c:if test="${ FTZ210401Form.input_flag eq 'upt'}">
+				<tr>
+					<td colspan="4"><hr /></td>
+				</tr>
 				<tr>
 					<td class="label_td"><spring:message
 							code="ftz.label.PBOC_STATUS" />：</td>

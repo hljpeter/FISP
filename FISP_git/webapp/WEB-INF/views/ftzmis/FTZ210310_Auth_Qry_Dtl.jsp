@@ -66,6 +66,7 @@
 		var msgStatus = $("#msgStatus").val();
 		if ("02" != msgStatus) {
 			alert('<spring:message code="ftz.validate.auth.msg"/>');
+			return;
 		}
 		$("#selected_msgId").val($("#msgId").val());
 		$("#selected_msgNo").val($("#msgNo").val());
@@ -126,8 +127,9 @@
 						<form:options items="${FTZ_MSG_STATUS}" />
 					</form:select></td>
 			</tr>
-			</table>
-			<table class="tbl_search">
+			<tr>
+				<td colspan="4"><hr /></td>
+			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.PBOC_STATUS" />：</td>
 				<td><form:select path="ftzOffMsgCtl.result" disabled="true">

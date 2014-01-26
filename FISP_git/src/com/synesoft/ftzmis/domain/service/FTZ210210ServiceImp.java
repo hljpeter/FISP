@@ -12,6 +12,7 @@ import com.synesoft.fisp.app.common.utils.TlrLogPrint;
 import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
+import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
 import com.synesoft.ftzmis.domain.model.FtzBankCode;
@@ -82,6 +83,16 @@ public class FTZ210210ServiceImp implements FTZ210210Service {
 		FtzInMsgCtl ftzMsgCtl_tmp = this.queryFtzInMsgCtl(query_FtzInMsgCtl);
 		BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
 		return ftz210210Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+	}
+	
+	@Override
+	@Transactional
+	public int updateFtzInMsgCtlForAudit(FtzInMsgCtl ftzInMsgCtl) {
+		int ret = updateFtzInMsgCtl(ftzInMsgCtl);
+		// 提交报文信息
+		ftzMsgProcService.submitMsg(ftzInMsgCtl.getMsgNo(),
+				ftzInMsgCtl.getMsgId());
+		return ret;
 	}
 
 	@Override
@@ -196,7 +207,8 @@ public class FTZ210210ServiceImp implements FTZ210210Service {
 
 	@Autowired
 	protected FTZ210210Repository ftz210210Repos;
-	
 	@Autowired
 	protected FtzInTxnDtlRepository ftzInTxnDtlRepository;
+	@Autowired
+	private FtzMsgProcService ftzMsgProcService;
 }

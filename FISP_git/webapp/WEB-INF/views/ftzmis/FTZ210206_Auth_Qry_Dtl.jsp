@@ -94,6 +94,7 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 		<form:hidden path="ftzInMsgCtl.makUserId" id="makUserId"/>
 		<form:hidden path="ftzInMsgCtl.chkDatetime" id="msg_chkDatetime"/>
 		<form:hidden path="ftzInMsgCtl.msgStatus"/>
+		<form:hidden path="ftzInMsgCtl.msgNo"/>
 		<form:hidden path="operFlag" id="operFlag"/>
 		<table class="tbl_search">
 			<tr>
@@ -125,7 +126,7 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 				<td class="label_td"><font color="red">*</font>
 				<spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="accountNo" path="ftzInMsgCtl.accountNo" readonly="true"
-						class=".input-large" onblur="accountFill()" />
+						class=".input-large"  />
 					</td>
 				
 				<td class="label_td"><font color="red">*</font>
@@ -237,7 +238,9 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 						<td class="vtip" style="text-align: right; width: 50px;"><t:moneyFormat
 								type="label" value="${dto.amount}" /></td>
 						
-						<td class="vtip" style="text-align: left; width: 50px;">${dto.countryCode}</td>
+						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
+								items="${FTZ_COUNTRY_CODE}" key="${dto.countryCode}"
+								type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto.valueDate}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:moneyFormat
 								type="label" value="${dto.interestRate}" dot="true" format="###,###,###,###.000000"/></td>
@@ -265,7 +268,7 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 <div class="row" style="margin-top: 40px;">
 	<div class=" navbar-fixed-bottom text-right" id="footer" style="text-align:center; margin-bottom:0px; line-height:30px; background-color: #eee; opacity:0.9;">
 		<button id="dtl" name="btn" class="btn btn-primary"><spring:message code="ftz.label.DTL_DTL"/></button>
-		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.MSG_CHK_SUBMIT"/></button>
+		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.AUTH_MSG"/></button>
 		<button id="cls" name="btnClose" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

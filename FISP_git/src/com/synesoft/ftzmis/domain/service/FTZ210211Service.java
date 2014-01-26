@@ -30,6 +30,8 @@ public interface FTZ210211Service {
 	
 	public int updateFtzInMsgCtlAndTxnDtl(FtzInMsgCtl ftzInMsgCtl,FtzInTxnDtl ftzInTxnDtl);
 	
+	public int updateFtzInMsgForAudit(FtzInMsgCtl ftzInMsgCtl,FtzInTxnDtl ftzInTxnDtl);
+	
 	public List<FtzActMstr> queryFtzActMstrs(FtzActMstr ftzActMstr);
 	
 	public List<FtzInTxnDtl> queryFtzInTxnDtlList(FtzInTxnDtl ftzInTxnDtl);

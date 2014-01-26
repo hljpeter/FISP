@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(function() {
+		$('input').popover('hide');
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
 			var seqNo = $("#seqNo").val();
@@ -117,7 +118,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large"  data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当出入账标志为出账业务冲正或入账业务冲正时，本栏位为强制项，且栏位值小于等于记账日期"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -138,11 +139,11 @@
 						code="ftz.label.OPP_ACCOUNT" />：</td>
 				<td>
 					<form:input path="ftzInTxnDtl.oppAccount" type="text" class="input-large" maxlength="35"
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/>
+						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="正常出账或入账时，本项可为空!"/>
 				</td>
-				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
-				<td><form:input id="oppName" path="ftzInTxnDtl.oppName"
-						class=".input-large" /></td>
+				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
+				<td><form:input id="oppName" path="ftzInTxnDtl.oppName" maxlength="128"
+						class=".input-large" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="正常出账或入账时，本项可为空!"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">*</font> <spring:message
@@ -218,7 +219,7 @@
 					</td>
 				
 			</tr>
-			
+			<tr><td colspan="4"><hr/></td></tr>
 			<tr>
 				<td class="label_td"><spring:message
 						code="ftz.label.MSG_STATUSSS" />：</td>

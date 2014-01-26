@@ -19,7 +19,11 @@ if (success && success != "") {
 }
 
 $("#msgChk").click(function() {
-	$("#form").submit();
+	if ($("#msgStatus").val() == "01") {
+		alert('<spring:message code="e.ftzmis.2103.0032"/>');
+	} else {
+		$("#form").submit();
+	}
 });
 
 $(".tbl_page_body table tr").dblclick(function() {
@@ -35,11 +39,15 @@ $("#dtl").click(function() {
 		alert('<spring:message code="ftz.validate.choose.data"/>');
 	} else {
 		selectedRow = eval("(" + selectedRow + ")"); 
-		showDialog('${pageContext.request.contextPath}/FTZ210301/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
+		if (selectedRow.chkStatus == '04') {
+			alert('<spring:message code="e.ftzmis.2103.0033"/>');
+		} else {
+			showDialog('${pageContext.request.contextPath}/FTZ210301/Auth/DtlTxn/Init?ftzOffTxnDtl.msgId=' 
 				+ $("#msgId").val() + "&ftzOffTxnDtl.seqNo=" + selectedRow.seqNo, '600', '1040');
 				
-		$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210301/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId="+ ${FTZ210301Form.ftzOffMsgCtl.msgId });
-		$("#form").submit();
+			$("#form").attr("action", "${pageContext.request.contextPath}/FTZ210301/Auth/DtlMsg/Init?page.page=" + ${page.number + 1 } + "&FtzOffMsgCtl.msgId=" + ${FTZ210301Form.ftzOffMsgCtl.msgId });
+			$("#form").submit();
+		}
 	}
 });
 
@@ -93,7 +101,7 @@ $("#dtl").click(function() {
 	
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS"/>：</td>
 				<td>
-					<form:select path="ftzOffMsgCtl.msgStatus" disabled="true">
+					<form:select path="ftzOffMsgCtl.msgStatus" id="msgStatus" disabled="true">
 						<option value=""></option>
 						<form:options items="${FTZ_MSG_STATUS }" />
 					</form:select>
@@ -125,11 +133,11 @@ $("#dtl").click(function() {
 			<tbody>
 			<form:form id="FTZ210301Form" action="${pageContext.request.contextPath}" modelAttribute="FTZ210301Form">
 			<c:forEach var="dto" items="${page.content}" varStatus="i">
-				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }"}'>
+				<tr id='{seqNo:"${dto.seqNo }",makDatetime:"${dto.makDatetime }",chkDatetime:"${dto.chkDatetime }",chkStatus:"${dto.chkStatus }"}'>
 		          	<td class="tbl_page_td_left vtip" width="20px">${(page.number * page.size) + (i.index + 1)}</td>
 				  	<td class="tbl_page_td_left vtip" width="100px"><t:dateTimeFormat type="label" value="${dto.submitDate}" format="date"/></td>
 		            <td class="tbl_page_td_left vtip" width="80px">${dto.accountNo}</td>
-		            <td class="tbl_page_td_left vtip" width="100px">${dto.currency}</td>
+		            <td class="tbl_page_td_left vtip" width="100px"><t:codeValue items="${SYS_CURRENCY }" key="${dto.currency }" type="label" /></td>
 		            <td class="tbl_page_td_right vtip" width="120px"><t:moneyFormat type="label" value="${dto.amount }" format="###,###,###,###.00" dot="true"/></td>
 		            <td class="tbl_page_td_left vtip" width="120px">${dto.countryCode}</td>
 		            <td class="tbl_page_td_left vtip" width="160px">${dto.districtCode}</td>

@@ -90,7 +90,7 @@
 						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/></td>
 				<td class="label_td"><spring:message code="ftz.label.ACCOUNT_NO" />：</td>
 				<td><form:input id="query_accountNo" path="query_accountNo" class=".input-large" 
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);"/></td>
+						onkeyup="numberStringFormat(this);" onbeforepaste="numberStringFormatCopy(this);"/></td>
 			</tr>
 			<tr>
 				<td class="label_td"><spring:message code="ftz.label.MSG_STATUS" />：</td>
