@@ -179,5 +179,15 @@ public class Table {
 	public static final String SYS_ROLE_FUNC_TMP = "SYS_ROLE_FUNC_TMP";
 	
 	public static final String SYS_KEY = "SYS_KEY";
+	
+ 	/** 部门控件映射表 **/ 
+	public static final String SYS_CONTROL_DEPT = "SYS_CONTROL_DEPT";
 
+	public static final String SYS_LOGIN_LOG = "SYS_LOGIN_LOG";
+
+	
+	
+
+	/** 操作员信息表(为HSBC) */
+	public static final String HSBC_SYS_USER_INFO = "HSBC_SYS_USER_INFO";
 }

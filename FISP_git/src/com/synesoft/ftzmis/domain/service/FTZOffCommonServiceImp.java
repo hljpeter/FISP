@@ -23,7 +23,6 @@ import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
-import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
 import com.synesoft.ftzmis.app.common.util.DateUtil;
 import com.synesoft.ftzmis.app.common.util.Validator;
@@ -130,7 +129,6 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 				+ ", msgId=" + ftzOffMsgCtlVO.getMsgId() 
 				+ ", msgStatus=" + ftzOffMsgCtlVO.getMsgStatus() 
 				+ ", msgNo=" + ftzOffMsgCtlVO.getMsgNo() 
-				+ ", editFlag=" + ftzOffMsgCtlVO.getEditFlag() 
 				+ ", pageNubmer=" + pageable.getPageNumber() + ", pagesize=" + pageable.getPageSize() + "]");
 
 		Page<FtzOffMsgCtlVO> page = ftzOffMsgCtlRepository.queryPage(pageable, ftzOffMsgCtlVO);
@@ -157,7 +155,6 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 				+ ", msgId=" + ftzOffMsgCtlVO.getMsgId() 
 				+ ", msgStatus=" + ftzOffMsgCtlVO.getMsgStatus() 
 				+ ", msgNo=" + ftzOffMsgCtlVO.getMsgNo() 
-				+ ", editFlag=" + ftzOffMsgCtlVO.getEditFlag() 
 				+ ", pageNubmer=" + pageable.getPageNumber() + ", pagesize=" + pageable.getPageSize() + "]");
 
 		Page<FtzOffMsgCtlVO> page = ftzOffMsgCtlRepository.queryPageForApr(pageable, ftzOffMsgCtlVO);
@@ -328,12 +325,6 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		
 		ftzOffMsgCtl.setMsgId(numberService.getSysIDSequence(16));
 		ftzOffMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
-		ftzOffMsgCtl.setEditFlag(FtzMsgHead.getMsgHead().getEditFlag());
-		ftzOffMsgCtl.setApp(FtzMsgHead.getMsgHead().getAPP());
-		ftzOffMsgCtl.setVer(FtzMsgHead.getMsgHead().getVER());
-		ftzOffMsgCtl.setDes(FtzMsgHead.getMsgHead().getDES());
-		ftzOffMsgCtl.setSrc(FtzMsgHead.getMsgHead().getSRC()); 
-		ftzOffMsgCtl.setMsgRef(ftzOffMsgCtl.getMsgId());
 		
 		int ret = ftzOffMsgCtlRepository.insert(ftzOffMsgCtl);
 		if (ret != 1) {
@@ -640,13 +631,11 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		// 1) 如果接收应答报文处理结果为成功，表示报文发送过
 		// 2) 如果报文本次报送修改或者删除
 		// 以上两种情况下不能新增
-		if (CommonConst.MSG_PROCESS_RESULT_SUCCESS.equals(msgResult.getResult()) && 
-				(CommonConst.FTZ_MSG_EDIT_FLAG_UPDATE.equals(msgResult.getEditFlag()) || 
-				CommonConst.FTZ_MSG_EDIT_FLAG_DELETE.equals(msgResult.getEditFlag()))) {
-			log.error("[e.ftzmis.2103.0015] The MsgCtl need be sent 'update' or 'delete' to PBOC, so you cannot add new TxnDtl!"); 
-			messages.add("e.ftzmis.2103.0015");								
-			throw new BusinessException(messages);
-		}
+//		if (CommonConst.MSG_PROCESS_RESULT_SUCCESS.equals(msgResult.getResult())) {
+//			log.error("[e.ftzmis.2103.0015] The MsgCtl need be sent 'update' or 'delete' to PBOC, so you cannot add new TxnDtl!"); 
+//			messages.add("e.ftzmis.2103.0015");								
+//			throw new BusinessException(messages);
+//		}
 		
 		addTxnLogic(ftzOffTxnDtl);
 		
@@ -719,12 +708,12 @@ public abstract class FTZOffCommonServiceImp implements FTZOffCommonService {
 		// 1) 如果接收应答报文处理结果为成功，表示报文发送过
 		// 2) 如果报文本次报送删除
 		// 以上两种情况下不能修改
-		if (CommonConst.MSG_PROCESS_RESULT_SUCCESS.equals(msgResult.getResult()) && 
-				CommonConst.FTZ_MSG_EDIT_FLAG_DELETE.equals(msgResult.getEditFlag())) {
-			log.error("[e.ftzmis.2103.0016] The MsgCtl need be sent 'delete' to PBOC, so you cannot update TxnDtl!"); 
-			messages.add("e.ftzmis.2103.0016");								
-			throw new BusinessException(messages);
-		}
+//		if (CommonConst.MSG_PROCESS_RESULT_SUCCESS.equals(msgResult.getResult()) && 
+//				CommonConst.FTZ_MSG_EDIT_FLAG_DELETE.equals(msgResult.getEditFlag())) {
+//			log.error("[e.ftzmis.2103.0016] The MsgCtl need be sent 'delete' to PBOC, so you cannot update TxnDtl!"); 
+//			messages.add("e.ftzmis.2103.0016");								
+//			throw new BusinessException(messages);
+//		}
 		
 		updateTxnLogic(ftzOffTxnDtl);
 		

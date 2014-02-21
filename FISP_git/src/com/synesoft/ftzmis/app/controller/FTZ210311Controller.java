@@ -18,8 +18,10 @@ import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.StringUtil;
+import com.synesoft.fisp.domain.model.OrgInf;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.service.NumberService;
+import com.synesoft.fisp.domain.service.dp.DP_Mpp_Service;
 import com.synesoft.ftzmis.app.common.constants.CommonConst;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgHead;
 import com.synesoft.ftzmis.app.common.msgproc.FtzMsgProcService;
@@ -51,6 +53,9 @@ public class FTZ210311Controller {
 	@Resource
 	protected FtzMsgProcService generateXml;
 	
+	@Resource
+	protected DP_Mpp_Service dp_Mpp_Service;
+	
 	@ModelAttribute
 	public FTZ210311Form setForm() {
 		return new FTZ210311Form();
@@ -59,7 +64,15 @@ public class FTZ210311Controller {
 	@RequestMapping("AddQry")
 	public String addQuery(Model model, FTZ210311Form form, @PageableDefaults Pageable pageable) {
 		logger.info("汇率掉期业务查询开始");
+		//查询条件-机构
+		OrgInf orgInf = new OrgInf();
 		
+		UserInf userInfo = ContextConst.getCurrentUser();
+		orgInf.setRsv1(userInfo.getUserid());
+		List<OrgInf> orgList = dp_Mpp_Service.queryOrgInfPage(pageable, orgInf).getContent();
+		model.addAttribute("orgList", orgList);
+		
+		//查询
 		FtzOffMsgCtl query_FtzOffMsgCtl = new FtzOffMsgCtl();
 		query_FtzOffMsgCtl.setMsgId(form.getQuery_msgId());
 		query_FtzOffMsgCtl.setBranchId(form.getQuery_branchId().trim());
@@ -138,12 +151,12 @@ public class FTZ210311Controller {
 		
 		// 设置批量头信息
 		FtzMsgHead mh = FtzMsgHead.getMsgHead();
-		insert_FtzOffMsgCtl.setVer(mh.getVER());
-		insert_FtzOffMsgCtl.setSrc(mh.getSRC());
-		insert_FtzOffMsgCtl.setDes(mh.getDES());
-		insert_FtzOffMsgCtl.setApp(mh.getAPP());
-		insert_FtzOffMsgCtl.setEditFlag(mh.getEditFlag());
-		insert_FtzOffMsgCtl.setReserve(mh.getReserve());
+//		insert_FtzOffMsgCtl.setVer(mh.getVER());
+//		insert_FtzOffMsgCtl.setSrc(mh.getSRC());
+//		insert_FtzOffMsgCtl.setDes(mh.getDES());
+//		insert_FtzOffMsgCtl.setApp(mh.getAPP());
+//		insert_FtzOffMsgCtl.setEditFlag(mh.getEditFlag());
+//		insert_FtzOffMsgCtl.setReserve(mh.getReserve());
 		
 		
 		insert_FtzOffMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());

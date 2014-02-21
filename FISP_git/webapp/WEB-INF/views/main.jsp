@@ -9,7 +9,7 @@
 <frameset cols="230,*" id="mainFrame" frameborder="no" border="0">
 	<frame id="leftFrame" name="leftFrame" src="leftFrame" noresize="noresize" scrolling="no"/>
 	<!-- <frame id="hideBar" name="hideBar" src="hideBar" /> -->
-	<frame id="rightFrame" name="_menuTarget" src="rightFrame" />
+	<frame id="rightFrame" name="_menuTarget" src="${pageContext.request.contextPath}/main/init" />
 </frameset>
 <noframes>
 <body>

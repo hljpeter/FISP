@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FTZ_MSG_GENERATE">
+	<typeAlias alias="FtzMsgGenerate" type="com.synesoft.ftzmis.domain.model.FtzMsgGenerateParam"/>
+	<typeAlias alias="FtzMsgProc" type="com.synesoft.ftzmis.domain.model.FtzMsgProc"/>
+	<typeAlias alias="FtzMsgBatch" type="com.synesoft.ftzmis.domain.model.FtzMsgBatch"/>
+
+	<resultMap id="BranchMsgResult" class="FtzMsgGenerate" >
+	    <result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+	    <result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
+	    <result column="INPUTING" property="inputing" jdbcType="INTEGER" />
+	    <result column="COMPLETED" property="completed" jdbcType="INTEGER" />
+	    <result column="SUCC" property="succ" jdbcType="INTEGER" />
+	    <result column="FAIL" property="fail" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="MsgCntResult" class="FtzMsgGenerate" >
+	    <result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+	    <result column="CNT" property="cnt" jdbcType="INTEGER" />
+	    <result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+	    <result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
+	    <result column="WORK_DATE" property="workDate" jdbcType="CHAR" />
+	</resultMap>
+	<resultMap id="FtzMsgProcResult" class="FtzMsgProc">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+		<result column="MSG_NO" property="msgNo" jdbcType="VARCHAR" />
+		<result column="MSG_REF" property="msgRef" jdbcType="VARCHAR" />
+		<result column="WORK_DATE" property="workDate" jdbcType="VARCHAR" />
+		<result column="MSG_DIRECTION" property="msgDirection" jdbcType="VARCHAR" />
+		<result column="MSG_STATUS" property="msgStatus" jdbcType="VARCHAR" />
+		<result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="SEND_TIME" property="sendTime" jdbcType="VARCHAR" />
+		<result column="RECEIVE_TIME" property="receiveTime" jdbcType="VARCHAR" />
+		<result column="COMM_REPLY_TIME" property="commReplyTime" jdbcType="VARCHAR" />
+		<result column="PROC_REPLY_TIME" property="procReplyTime" jdbcType="VARCHAR" />
+		<result column="APP_PROC_TIME" property="appProcTime" jdbcType="VARCHAR" />
+		<result column="APP_PROC_COUNT" property="appProcCount" jdbcType="DECIMAL" />
+		<result column="FAIL_REASON" property="failReason" jdbcType="VARCHAR" />
+		<result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+		<result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+		<result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="MsgProcResult" class="FtzMsgGenerate" >
+	    <result column="SRC" property="src" jdbcType="VARCHAR" />
+	    <result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
+	    <result column="WAITING" property="waiting" jdbcType="INTEGER" />
+	    <result column="SUCC" property="succ" jdbcType="INTEGER" />
+	    <result column="FAIL" property="fail" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="selectMsgList" 
+			parameterClass="FtzMsgGenerate" 
+			resultMap="BranchMsgResult">
+		SELECT 
+			BRANCH_ID, 
+			MSG_NO, 
+			DECODE(INPUTING, NULL, 0, INPUTING) INPUTING, 
+			DECODE(COMPLETED, NULL, 0, COMPLETED) COMPLETED, 
+			DECODE(SUCC, NULL, 0, SUCC) SUCC, 
+			DECODE(FAIL, NULL, 0, FAIL) FAIL
+		FROM (
+			SELECT 
+				BRANCH_ID, 
+				MSG_NO, 
+				SUM(DECODE(MSG_STATUS, '01', CNT)) INPUTING, 
+				SUM(DECODE(MSG_STATUS, '02', CNT)) COMPLETED , 
+				SUM(DECODE(MSG_STATUS, '03', CNT)) SUCC, 
+				SUM(DECODE(MSG_STATUS, '04', CNT)) FAIL 
+			FROM (
+					SELECT 
+						COUNT(*) CNT, FTZ_IN_MSG_CTL.MSG_STATUS, FTZ_IN_MSG_CTL.MSG_NO, FTZ_IN_MSG_CTL.BRANCH_ID 
+					FROM 
+						FTZ_IN_MSG_CTL 
+					LEFT JOIN
+						FTZ_MSG_BATCH ON
+						FTZ_IN_MSG_CTL.MSG_ID = FTZ_MSG_BATCH.MSG_ID
+					WHERE 
+						FTZ_MSG_BATCH.MSG_ID IS NULL AND
+						FTZ_IN_MSG_CTL.BLANK_FLAG = #blankFlag# AND
+						FTZ_IN_MSG_CTL.MSG_STATUS IN ('01','02','03','04') 
+						<isNotEmpty property="branchs" prepend="AND">
+						<iterate property="branchs" open=" FTZ_IN_MSG_CTL.BRANCH_ID IN (" close=")" conjunction=",">
+						#branchs[]#
+						</iterate>
+						</isNotEmpty>
+						<isNotEmpty property="msgNos" prepend="AND">
+						<iterate property="msgNos" open=" FTZ_IN_MSG_CTL.MSG_NO IN (" close=")" conjunction=",">
+						#msgNos[]#
+						</iterate>
+						</isNotEmpty>
+					GROUP BY FTZ_IN_MSG_CTL.MSG_STATUS, FTZ_IN_MSG_CTL.MSG_NO, FTZ_IN_MSG_CTL.BRANCH_ID
+				UNION
+					SELECT 
+						COUNT(*) CNT, FTZ_OFF_MSG_CTL.MSG_STATUS, FTZ_OFF_MSG_CTL.MSG_NO, FTZ_OFF_MSG_CTL.BRANCH_ID 
+					FROM 
+						FTZ_OFF_MSG_CTL  
+					LEFT JOIN
+						FTZ_MSG_BATCH ON
+						FTZ_OFF_MSG_CTL.MSG_ID = FTZ_MSG_BATCH.MSG_ID
+					WHERE 
+						FTZ_MSG_BATCH.MSG_ID IS NULL AND
+						FTZ_OFF_MSG_CTL.MSG_STATUS IN ('01','02','03','04')
+						<isNotEmpty property="branchs" prepend="AND">
+						<iterate property="branchs" open=" FTZ_OFF_MSG_CTL.BRANCH_ID IN (" close=")" conjunction=",">
+						#branchs[]#
+						</iterate>
+						</isNotEmpty>
+						<isNotEmpty property="msgNos" prepend="AND">
+						<iterate property="msgNos" open=" FTZ_OFF_MSG_CTL.MSG_NO IN (" close=")" conjunction=",">
+						#msgNos[]#
+						</iterate>
+						</isNotEmpty>
+					GROUP BY FTZ_OFF_MSG_CTL.MSG_STATUS, FTZ_OFF_MSG_CTL.MSG_NO, FTZ_OFF_MSG_CTL.BRANCH_ID
+			) GROUP BY BRANCH_ID, MSG_NO
+		) ORDER BY BRANCH_ID, MSG_NO
+	</select>
+
+	<select id="selectSubmitDateList" 
+			parameterClass="FtzMsgGenerate" 
+			resultClass="java.lang.String">
+		SELECT DISTINCT 
+			WORK_DATE
+		FROM 
+			FTZ_IN_MSG_CTL 
+		WHERE 
+			BLANK_FLAG = #blankFlag# AND
+			MSG_STATUS = '03' AND
+			MSG_NO = #msgNo# AND
+			BRANCH_ID = #branchId#
+		UNION
+		SELECT DISTINCT 
+			WORK_DATE
+		FROM 
+			FTZ_OFF_MSG_CTL 
+		WHERE 
+			MSG_STATUS = '03' AND
+			MSG_NO = #msgNo# AND
+			BRANCH_ID = #branchId#
+	</select>
+
+	<select id="selectTxnList" 
+			parameterClass="FtzMsgGenerate" 
+			resultMap="MsgCntResult">
+   		SELECT 
+ 			FTZ_IN_MSG_CTL.MSG_ID,
+ 			FTZ_IN_MSG_CTL.BRANCH_ID,
+ 			FTZ_IN_MSG_CTL.MSG_NO,
+ 			FTZ_IN_MSG_CTL.WORK_DATE,
+ 			COUNT(FTZ_IN_TXN_DTL.MSG_ID) CNT
+ 		FROM 
+ 			FTZ_IN_MSG_CTL 
+ 		LEFT JOIN 
+ 			FTZ_IN_TXN_DTL ON 
+ 			FTZ_IN_MSG_CTL.MSG_ID = FTZ_IN_TXN_DTL.MSG_ID 
+ 		WHERE 
+ 			FTZ_IN_MSG_CTL.MSG_STATUS ='03' AND 
+ 			FTZ_IN_MSG_CTL.BRANCH_ID = #branchId# AND 
+ 			FTZ_IN_MSG_CTL.MSG_NO = #msgNo# AND 
+ 			FTZ_IN_MSG_CTL.WORK_DATE = #workDate# AND 
+ 			FTZ_IN_MSG_CTL.BLANK_FLAG = #blankFlag#
+ 			<isEqual property="blankFlag" compareValue="0" prepend="AND">
+ 			FTZ_IN_TXN_DTL.MSG_ID IS NOT NULL
+ 			<isEqual property="sendFlag" compareValue="A" prepend="AND">
+ 			FTZ_IN_TXN_DTL.DTL_SEND_STATUS IN ('0', '1')
+ 			</isEqual>
+ 			<isEqual property="sendFlag" compareValue="C" prepend="AND">
+ 			FTZ_IN_TXN_DTL.DTL_SEND_STATUS = '2'
+ 			</isEqual>
+ 			<isEqual property="sendFlag" compareValue="D" prepend="AND">
+ 			FTZ_IN_TXN_DTL.DTL_SEND_STATUS = '3'
+ 			</isEqual>
+ 			</isEqual>
+ 		GROUP BY 
+ 			FTZ_IN_MSG_CTL.MSG_ID,
+ 			FTZ_IN_MSG_CTL.BRANCH_ID,
+ 			FTZ_IN_MSG_CTL.MSG_NO,
+ 			FTZ_IN_MSG_CTL.WORK_DATE
+ 		UNION
+ 		SELECT 
+ 			FTZ_OFF_MSG_CTL.MSG_ID,
+ 			FTZ_OFF_MSG_CTL.BRANCH_ID,
+ 			FTZ_OFF_MSG_CTL.MSG_NO,
+ 			FTZ_OFF_MSG_CTL.WORK_DATE,
+ 			COUNT(*) CNT
+ 		FROM 
+ 			FTZ_OFF_MSG_CTL 
+ 		LEFT JOIN 
+ 			FTZ_OFF_TXN_DTL ON 
+ 			FTZ_OFF_MSG_CTL.MSG_ID = FTZ_OFF_TXN_DTL.MSG_ID 
+ 		WHERE 
+ 			FTZ_OFF_MSG_CTL.MSG_STATUS ='03' AND 
+ 			FTZ_OFF_MSG_CTL.BRANCH_ID = #branchId# AND 
+ 			FTZ_OFF_MSG_CTL.MSG_NO = #msgNo# AND 
+ 			FTZ_OFF_MSG_CTL.WORK_DATE = #workDate# AND 
+ 			FTZ_OFF_TXN_DTL.MSG_ID IS NOT NULL
+ 			<isEqual property="sendFlag" compareValue="A" prepend="AND">
+ 			FTZ_OFF_TXN_DTL.DTL_SEND_STATUS IN ('0', '1')
+ 			</isEqual>
+ 			<isEqual property="sendFlag" compareValue="C" prepend="AND">
+ 			FTZ_OFF_TXN_DTL.DTL_SEND_STATUS = '2'
+ 			</isEqual>
+ 			<isEqual property="sendFlag" compareValue="D" prepend="AND">
+ 			FTZ_OFF_TXN_DTL.DTL_SEND_STATUS = '3'
+ 			</isEqual>
+ 		GROUP BY 
+ 			FTZ_OFF_MSG_CTL.MSG_ID,
+ 			FTZ_OFF_MSG_CTL.BRANCH_ID,
+ 			FTZ_OFF_MSG_CTL.MSG_NO,
+ 			FTZ_OFF_MSG_CTL.WORK_DATE
+	</select>
+
+	<select id="selectTxn" 
+			parameterClass="FtzMsgGenerate" 
+			resultClass="java.lang.Integer">
+   		SELECT 
+ 			COUNT(*)
+ 		FROM 
+ 			FTZ_MSG_BATCH
+ 		WHERE 
+			MSG_ID = #msgId# AND
+			MSG_NO = #msgNo#
+	</select>
+
+	<select id="selectMsg" 
+			parameterClass="FtzMsgProc" 
+			resultMap="FtzMsgProcResult">
+   		SELECT 
+ 			*
+ 		FROM 
+ 			FTZ_MSG_PROC
+ 		WHERE 
+			MSG_ID = #msgId# AND
+			MSG_NO = #msgNo#
+	</select>
+
+	<insert id="insertMap" 
+			parameterClass="FtzMsgBatch">
+   		INSERT INTO 
+   			FTZ_MSG_BATCH
+ 		(
+ 			ID, MSG_ID, MSG_NO
+ 		) VALUES (
+ 			#id#, #msgId#, #msgNo#
+ 		) 
+	</insert>
+	
+	<select id="selectMsgProcResult"
+			parameterClass="FtzMsgGenerate"
+			resultMap="MsgProcResult">
+		SELECT 
+			SRC, 
+			MSG_NO, 
+			DECODE(SUM(DECODE(MSG_STATUS, '10', CNT)), NULL, '0', SUM(DECODE(MSG_STATUS, '10', CNT))) WAITING,  
+			DECODE(SUM(DECODE(MSG_STATUS, '11', CNT)), NULL, '0', SUM(DECODE(MSG_STATUS, '11', CNT))) SUCC,  
+			DECODE(SUM(DECODE(MSG_STATUS, '12', CNT)), NULL, '0', SUM(DECODE(MSG_STATUS, '12', CNT)))  FAIL 
+		FROM (
+				SELECT 
+					SRC, MSG_NO, MSG_STATUS, COUNT(*) CNT 
+				FROM 
+					FTZ_MSG_PROC 
+				WHERE 
+					WORK_DATE = #workDate#
+					<isNotEmpty property="branchs" prepend="AND">
+					<iterate property="branchs" open=" SRC IN (" close=")" conjunction=",">
+					#branchs[]#
+					</iterate>
+					</isNotEmpty>
+					<isNotEmpty property="msgNos" prepend="AND">
+					<iterate property="msgNos" open=" MSG_NO IN (" close=")" conjunction=",">
+					#msgNos[]#
+					</iterate>
+					</isNotEmpty>
+				GROUP BY 
+					SRC, MSG_NO, MSG_STATUS
+		) GROUP BY SRC,MSG_NO
+	</select>
+	
+	<insert id="insertMsg" parameterClass="FtzMsgProc">
+		insert into FTZ_MSG_PROC (ID, VER, SRC, APP, DES, MSG_ID, MSG_NO, MSG_REF, WORK_DATE, 
+		EDIT_FLAG, RESERVE,
+		MSG_DIRECTION, MSG_STATUS, FILE_NAME,
+		SEND_TIME, RECEIVE_TIME, COMM_REPLY_TIME, PROC_REPLY_TIME,
+		APP_PROC_TIME, APP_PROC_COUNT, FAIL_REASON, RSV1, RSV2, RSV3)
+		values
+		(#id:NUMBER#, #ver:VARCHAR#, #src:VARCHAR#, #app:VARCHAR#, #des:VARCHAR#, #msgId:VARCHAR#, #msgNo:VARCHAR#, #msgRef:VARCHAR#, #workDate:VARCHAR#,
+		#editFlag:CHAR#, #reserve:VARCHAR#,
+		#msgDirection:VARCHAR#, #msgStatus:VARCHAR#, #fileName:VARCHAR#,
+		#sendTime:VARCHAR#, #receiveTime:VARCHAR#, #commReplyTime:VARCHAR#,
+		#procReplyTime:VARCHAR#, #appProcTime:VARCHAR#, #appProcCount:DECIMAL#,
+		#failReason:VARCHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#)
+	</insert>
+	
+	<!-- select msgProc sequence -->  
+	<select id="selectMsgIdSeq" resultClass="java.lang.Long">
+	  	SELECT FTZ_MSG_PROC_SEQ.NEXTVAL FROM DUAL  
+	</select>  
+	
+	<!-- blank batch procedure -->
+	<parameterMap id="blankBatchProcParam" class="FtzMsgGenerate" >        
+		<parameter property="accountNo" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>      
+		<parameter property="subAccountNo" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>        
+		<parameter property="submitDate" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>         
+		<parameter property="workDate" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>        
+	</parameterMap>   
+	<procedure id="blankBatchProc" parameterMap="blankBatchProcParam">
+		{call BLANK_BATCH_PROC(?, ?, ?, ?)}       
+	</procedure>
+	
+</sqlMap>

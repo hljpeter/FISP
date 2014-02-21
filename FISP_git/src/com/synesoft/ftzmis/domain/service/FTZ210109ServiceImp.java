@@ -114,11 +114,6 @@ public class FTZ210109ServiceImp implements FTZ210109Service {
 			}
 			i= ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
 		}
-		if (ftzInMsgCtl.getMsgStatus().equals(
-				CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-			generateXml.submitMsg(ftzInMsgCtl.getMsgNo(),
-					ftzInMsgCtl.getMsgId());
-		}
 		return i;
 	}
 

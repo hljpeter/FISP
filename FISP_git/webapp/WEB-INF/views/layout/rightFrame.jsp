@@ -2,6 +2,9 @@
 <%@page import="com.synesoft.fisp.app.common.constants.ContextConst"%>
 <%@page import="com.synesoft.fisp.domain.model.UserInf"%>
 <%@page import="com.synesoft.fisp.domain.model.OrgInf"%>
+<%@page import="java.util.List"%>
+<%@page import="com.synesoft.fisp.domain.model.*"%>
+<%@page import="com.synesoft.fisp.app.common.model.*"%>
 <%@page import="com.synesoft.fisp.app.common.utils.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -33,6 +36,10 @@ body {
 	$(document).click(function() {
 		$(window.parent.parent.document).find("li.dropdown").removeClass('open');
 	});
+	
+	$("#loginLogDtl").click(function() {
+		showDialog('${pageContext.request.contextPath}/main/loginLogDtl', '500', '1040');
+	});
 }); 
 </script>
 </head>
@@ -61,7 +68,7 @@ body {
 	<div class="span4"></div>
 	<div class="span6">
 		<div class="text-right">
-			<small>上次登录时间：<%=DateUtil.formatStringToDatePattern(user_old.getLastlogintime())%> <i style="color: #ddd;"> | </i> 上次登录IP：<%=user_old.getIpaddress() %></small>
+			<small>上次登录时间：<%=DateUtil.formatStringToDatePattern(user_old.getLastlogintime())%> <i style="color: #ddd;"> | </i> 上次登录IP：<%=user_old.getIpaddress() %></small> <i style="color: #ddd;"> | </i> <a id="loginLogDtl" href="javascript: void(0);"><small>详情</small></a>
 		</div>
 	</div>
 </div>
@@ -72,7 +79,7 @@ body {
 	<div class="row">
 		<div class="span5">
 			<div class="alert alert-info text-center"><strong>一般待办事项</strong></div>
-			<ul>
+			<!-- <ul>
 				<c:if test="${user.userid=='admin' }">
 					<li>机构管理待审核：<a href="#"><span class="badge badge-info">1</span></a> 笔</li>
 					<li>操作员角色管理待审核：<a href="#"><span class="badge badge-info">0</span></a> 笔</li>
@@ -88,14 +95,34 @@ body {
 					<li>贷款发生额待审核：<a href="#"><span class="badge badge-info">9</span></a> 笔</li>
 					<li>存款余额待审核：<a href="#"><span class="badge badge-info">6</span></a> 笔</li>
 				</c:if>
-			</ul>
+			</ul> -->
+			<ul>
+			<%List<MainParam> generalList = (List<MainParam>)request.getAttribute("generalList");
+				for (int i = 0; i < generalList.size(); i++) {
+					MainParam param = generalList.get(i);
+					if (null == param.getFlag()) {
+			%>
+			<li><spring:message code="<%=param.getTabName() %>"/><a href="#"><span class="badge badge-info"><%=param.getCnt() %></span></a> <spring:message code="UNIT_MAIN"/></li>
+	        <%} else { %>
+			<li><spring:message code='<%=param.getTabName() + "_" + param.getFlag() %>'/><a href="#"><span class="badge badge-info"><%=param.getCnt() %></span></a> <spring:message code="UNIT_MAIN"/></li>
+	        <%}} %>
+	        </ul>
 		</div>
 		<div class="span5">
 			<div class="alert alert-error 	text-center"><strong>重要提醒事项</strong></div>
 			<ul>
-				<li>资金来源有3笔数据尚未审核！</li>
+			<%List<MainParam> importantList = (List<MainParam>)request.getAttribute("importantList");
+				for (int i = 0; i < importantList.size(); i++) {
+					MainParam param = importantList.get(i);
+					if (("ACT_MSTR_UNDO").equals(param.getTabName())) {
+			%>
+			<li><spring:message code="ACT_MSTR_UNDO_1"/><%=param.getFlag() %><spring:message code="ACT_MSTR_UNDO_2"/></li>
+	        <%} else { %>
+			<li><spring:message code='<%=param.getTabName() %>'/><a href="#"><span class="badge badge-info"><%=param.getCnt() %></span></a> <spring:message code="UNIT_MAIN"/></li>
+	        <%}} %>
+			<!-- 	<li>资金来源有3笔数据尚未审核！</li>
 				<li>有一个报文被人行拒绝,请及时处理！</li>
-			<!-- 
+			
 				<li>贷款发生额补录：<a href="#"><span class="badge badge-important">1</span></a> 笔</li>
 				<li>存款余额补录：<a href="#"><span class="badge badge-important">2</span></a> 笔</li>
 				<li>角色信息维护授权：<a href="#"><span class="badge badge-important">3</span></a> 笔</li>

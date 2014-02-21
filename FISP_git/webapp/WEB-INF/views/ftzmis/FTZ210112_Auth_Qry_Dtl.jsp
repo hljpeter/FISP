@@ -13,6 +13,21 @@
 		form.submit();
 	
 	}
+	function BalanceValidation(){
+		var submitDate = $("#submitDate").val();//申报日期
+		var accountNo = $("#accountNo").val();//账号		
+		var subAccountNo = $("#subAccountNo").val();//主账号
+		
+		if(null == subAccountNo || ""==subAccountNo){
+			subAccountNo = accountNo;
+		}				
+		showDialog(
+				'${pageContext.request.contextPath}/FTZINCOM/BalanceCheck?check_AccountNo='
+						+ accountNo + "&check_SubAccountNo="
+						+ subAccountNo+ "&check_SubmitDate="
+						+ submitDate, '500', '1024');
+		
+	}
 	function authRefuse() {
 		var msgStatus = $("#msgStatus").val();
 		if ("02" != msgStatus) {
@@ -188,7 +203,9 @@
 			onclick="authPass()" value="<spring:message code="ftz.label.AUTH" />">
 		<input id="authRefuse" type="button" class="btn btn-primary"
 			onclick="authRefuse()"
-			value="<spring:message code="ftz.label.UNAUTH" />"> <input
+			value="<spring:message code="ftz.label.UNAUTH" />"> <input id="balanceValidation" type="button" class="btn btn-primary"
+			onclick="BalanceValidation();"
+			value="<spring:message code="ftz.label.balanceValidation"/>"><input
 			type="button" class="btn btn-primary" id="clswin"
 			onclick="javascript:window.close();"
 			value="<spring:message code="button.lable.close"/>">

@@ -14,6 +14,8 @@ public class Table {
 	
 	public final static String FTZ_ACT_MSTR_TMP = "FTZ_ACT_MSTR_TMP";
 	
+	public final static String FTZ_ACT_MSTR_HISTORY = "FTZ_ACT_MSTR_HISTORY";
+	
 	public final static String FTZ_IN_MSG_CTL = "FTZ_IN_MSG_CTL";
 	
 	public final static String FTZ_IN_TXN_DTL = "FTZ_IN_TXN_DTL";
@@ -33,4 +35,8 @@ public class Table {
 	public final static String FTZ_BANK_CODE = "FTZ_BANK_CODE";
 	
 	public final static String FTZ_MSG_PROC = "FTZ_MSG_PROC";
+	
+	public final static String FTZ_MSG_BATCH = "FTZ_MSG_BATCH";
+
+	public final static String FTZ_MSG_GENERATE = "FTZ_MSG_GENERATE";
 }

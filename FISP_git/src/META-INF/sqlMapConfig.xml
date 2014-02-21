@@ -62,9 +62,12 @@
 	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_CURRENCY_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_REGION_INFO_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_ROLE_FUNC_TMP_SqlMap.xml"/>
-	<sqlMap resource="com/synesoft/ftzmis/domain/model/SYS_NATION_INFO_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_USER_ROLE_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_USER_ROLE_TMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_CONTROL_DEPT_SqlMap.xml"/>
+	
+	<sqlMap resource="com/synesoft/fisp/domain/model/MAIN_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/fisp/domain/model/SYS_LOGIN_LOG_SqlMap.xml"/>
 	
 	<sqlMap resource="com/synesoft/pisa/domain/model/BIZ_DRAFT_ACPT_LIST_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/pisa/domain/model/BIZ_DRAFT_DRAW_LIST_SqlMap.xml"/>
@@ -95,10 +98,14 @@
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_TXN_DTL_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_ACT_MSTR_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_ACT_MSTR_TMP_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_ACT_MSTR_HISTORY_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/SYS_NATION_INFO_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_BALANCE_CODE_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_BANK_CODE_SqlMap.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_MSG_CTL.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_IN_TXN_DTL.xml"/>
 	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_MSG_PROC_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_MSG_BATCH_SqlMap.xml"/>
+	<sqlMap resource="com/synesoft/ftzmis/domain/model/FTZ_MSG_GENERATE_SqlMap.xml"/>
 	
 </sqlMapConfig>

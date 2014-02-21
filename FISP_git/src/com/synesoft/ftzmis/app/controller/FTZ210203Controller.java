@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.terasoluna.fw.common.message.ResultMessage;
 import org.terasoluna.fw.common.message.ResultMessages;
 
+import com.synesoft.dataproc.service.ProcCommonService;
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.domain.model.UserInf;
@@ -163,15 +164,7 @@ public class FTZ210203Controller {
 		insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence("", 8));
 		insert_FtzInMsgCtl.setSubmitDate(DateUtil
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
-		
-		FtzMsgHead mh = FtzMsgHead.getMsgHead();
-		insert_FtzInMsgCtl.setVer(mh.getVER());
-		insert_FtzInMsgCtl.setSrc(mh.getSRC());
-		insert_FtzInMsgCtl.setDes(mh.getDES());
-		insert_FtzInMsgCtl.setApp(mh.getAPP());
-		insert_FtzInMsgCtl.setWorkDate(mh.getWorkDate());
-		insert_FtzInMsgCtl.setEditFlag(mh.getEditFlag());
-		insert_FtzInMsgCtl.setReserve(mh.getReserve());
+		insert_FtzInMsgCtl.setWorkDate(procCommonService.queryWorkDate());
 
 		UserInf userInfo = ContextConst.getCurrentUser();
 		insert_FtzInMsgCtl.setMakUserId(userInfo.getUserid());
@@ -1152,5 +1145,8 @@ public class FTZ210203Controller {
 
 	@Resource
 	protected NumberService numberService;
+	
+	@Resource
+	private ProcCommonService procCommonService;
 
 }

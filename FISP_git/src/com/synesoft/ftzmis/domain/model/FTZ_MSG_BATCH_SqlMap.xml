@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FTZ_MSG_BATCH">
+	<resultMap id="FtzMsgBatchResult" class="com.synesoft.ftzmis.domain.model.FtzMsgBatch">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+		<result column="MSG_NO" property="msgNo" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectByPrimaryKey" resultMap="FtzMsgBatchResult" parameterClass="java.lang.String">
+		select b.ID, b.MSG_ID, b.MSG_NO from FTZ_MSG_BATCH b,FTZ_MSG_PROC p  
+		where b.id=p.id and p.MSG_ID = #value:VARCHAR#
+	</select>
+</sqlMap>

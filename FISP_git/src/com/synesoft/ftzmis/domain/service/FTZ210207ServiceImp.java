@@ -20,6 +20,10 @@ import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 public class FTZ210207ServiceImp extends FTZInCommonServiceImp {
 	private static final Logger log = LoggerFactory.getLogger(FTZ210207ServiceImp.class);
 	
+	public FTZ210207ServiceImp() {
+		super.funcId = CommonConst.FTZ_Add_210207;
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.synesoft.ftzmis.domain.service.FTZInCommonService#addMsgLogic(com.synesoft.ftzmis.domain.model.FtzInMsgCtl)
 	 */

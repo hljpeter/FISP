@@ -71,7 +71,7 @@ public interface FtzOffMsgCtlRepository {
 	 */
 	public int updateMsgStatus(FtzOffMsgCtlVO ftzOffMsgCtlVO);
 	
-	//更新表外表头状态(发送报文使用)
-	public int updateFtzOffMsgCtl(FtzOffMsgCtl ftzOffMsgCtl);
+	//批量更新批量头状态(报文使用)
+	public int batchUpdateStatus(FtzOffMsgCtl ftzOffMsgCtl);
 
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
 <sqlMap namespace="FTZ_IN_TXN_DTL">
-	<resultMap id="FtzInTxnDtlResult" class="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
-
+	 <resultMap id="FtzInTxnDtlResult" class="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
 		<result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
 		<result column="SEQ_NO" property="seqNo" jdbcType="DECIMAL" />
 		<result column="CD_FLAG" property="cdFlag" jdbcType="CHAR" />
@@ -52,111 +51,201 @@
 		<result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
 		<result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
 		<result column="CHK_ADD_WORD" property="chkAddWord" jdbcType="VARCHAR" />
+		<result column="DTL_SEND_STATUS" property="dtlSendStatus"
+			jdbcType="CHAR" />
+	</resultMap>
 
+	<resultMap id="FtzInTxnDtlResult1" class="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
+		<result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+		<result column="SEQ_NO" property="seqNo" jdbcType="DECIMAL" />
+		<result column="CD_FLAG" property="cdFlag" jdbcType="CHAR" />
+		<result column="TRAN_DATE" property="tranDate" jdbcType="VARCHAR" />
+		<result column="ORG_TRAN_DATE" property="orgTranDate" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+		<result column="OPP_ACCOUNT" property="oppAccount" jdbcType="VARCHAR" />
+		<result column="OPP_NAME" property="oppName" jdbcType="VARCHAR" />
+		<result column="OPP_BANK_CODE" property="oppBankCode" jdbcType="VARCHAR" />
+		<result column="COUNTRY_CODE" property="countryCode" jdbcType="CHAR" />
+		<result column="DISITRICT_CODE" property="disitrictCode"
+			jdbcType="CHAR" />
+		<result column="TRAN_TYPE" property="tranType" jdbcType="CHAR" />
+		<result column="TERM_LENGTH" property="termLength" jdbcType="DECIMAL" />
+		<result column="TERM_UNIT" property="termUnit" jdbcType="CHAR" />
+		<result column="VALUE_DATE" property="valueDate" jdbcType="VARCHAR" />
+		<result column="EXPIRE_DATE" property="expireDate" jdbcType="VARCHAR" />
+		<result column="INTEREST_RATE" property="interestRate"
+			jdbcType="DECIMAL" />
+		<result column="ISSUE_AMOUNT" property="issueAmount" jdbcType="DECIMAL" />
+		<result column="ASSETS_TYPE" property="assetsType" jdbcType="CHAR" />
+		<result column="ASSETS_VALUE" property="assetsValue" jdbcType="DECIMAL" />
+		<result column="EXCHANGE_TYPE" property="exchangeType"
+			jdbcType="CHAR" />
+		<result column="BUY_CURR" property="buyCurr" jdbcType="CHAR" />
+		<result column="BUY_AMT" property="buyAmt" jdbcType="DECIMAL" />
+		<result column="BUY_RATE" property="buyRate" jdbcType="DECIMAL" />
+		<result column="SELL_CURR" property="sellCurr" jdbcType="CHAR" />
+		<result column="SELL_AMT" property="sellAmt" jdbcType="DECIMAL" />
+		<result column="SELL_RATE" property="sellRate" jdbcType="DECIMAL" />
+		<result column="DOCUMENT_TYPE" property="documentType"
+			jdbcType="CHAR" />
+		<result column="DOCUMENT_NO" property="documentNo" jdbcType="VARCHAR" />
+		<result column="LOAN_TYPE" property="loanType" jdbcType="CHAR" />
+		<result column="OVERDUE" property="overdue" jdbcType="CHAR" />
+		<result column="SECURITIES_TYPE" property="securitiesType"
+			jdbcType="CHAR" />
+		<result column="SECURITIES_CODE" property="securitiesCode"
+			jdbcType="VARCHAR" />
+		<result column="OPP_CUS_TYPE" property="oppCusType" jdbcType="CHAR" />
+		<result column="CHK_STATUS" property="chkStatus" jdbcType="CHAR" />
+		<result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+		<result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+		<result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+		<result column="MAK_USER_ID" property="makUserId" jdbcType="VARCHAR" />
+		<result column="MAK_DATETIME" property="makDatetime" jdbcType="VARCHAR" />
+		<result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
+		<result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
+		<result column="CHK_ADD_WORD" property="chkAddWord" jdbcType="VARCHAR" />
+		<result column="DTL_SEND_STATUS" property="dtlSendStatus"
+			jdbcType="CHAR" />
+		<result column="CD_SUM" property="cdSum" jdbcType="DECIMAL" />
+		<result column="CD_COUNT" property="cdCount" jdbcType="INT" />
 	</resultMap>
 
 	<select id="selectByPrimaryKey" resultMap="FtzInTxnDtlResult"
 		parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtlKey">
 
-		select MSG_ID, SEQ_NO, CD_FLAG, TRAN_DATE, ORG_TRAN_DATE, AMOUNT,
-		OPP_ACCOUNT, OPP_NAME,
-		OPP_BANK_CODE, COUNTRY_CODE, DISITRICT_CODE, TRAN_TYPE, TERM_LENGTH, TERM_UNIT,
-		VALUE_DATE,
-		EXPIRE_DATE, INTEREST_RATE, ISSUE_AMOUNT, ASSETS_TYPE, ASSETS_VALUE,
-		EXCHANGE_TYPE, BUY_CURR,
-		BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE, DOCUMENT_TYPE, DOCUMENT_NO,
-		LOAN_TYPE,
-		OVERDUE, SECURITIES_TYPE, SECURITIES_CODE, OPP_CUS_TYPE, CHK_STATUS, RSV1,
-		RSV2, RSV3, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
-		CHK_DATETIME,CHK_ADD_WORD
+		select *
 		from FTZ_IN_TXN_DTL
-		where MSG_ID = #msgId:VARCHAR#
+		where MSG_ID =
+		#msgId:VARCHAR#
 		and SEQ_NO = #seqNo:DECIMAL#
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtlKey">
 
-		delete from FTZ_IN_TXN_DTL
+		delete from
+		FTZ_IN_TXN_DTL
 		where MSG_ID = #msgId:VARCHAR#
-		and SEQ_NO = #seqNo:DECIMAL#
+		and SEQ_NO =
+		#seqNo:DECIMAL#
 	</delete>
 
 	<insert id="insert" parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
 
-		insert into FTZ_IN_TXN_DTL (MSG_ID, SEQ_NO, CD_FLAG, TRAN_DATE,
+		insert into FTZ_IN_TXN_DTL
+		(MSG_ID, SEQ_NO, CD_FLAG, TRAN_DATE,
 		ORG_TRAN_DATE, AMOUNT,
-		OPP_ACCOUNT, OPP_NAME, OPP_BANK_CODE, COUNTRY_CODE, DISITRICT_CODE, TRAN_TYPE,
+		OPP_ACCOUNT, OPP_NAME, OPP_BANK_CODE, COUNTRY_CODE, DISITRICT_CODE,
+		TRAN_TYPE,
 		TERM_LENGTH,
-		TERM_UNIT, VALUE_DATE, EXPIRE_DATE, INTEREST_RATE, ISSUE_AMOUNT, ASSETS_TYPE,
+		TERM_UNIT, VALUE_DATE, EXPIRE_DATE,
+		INTEREST_RATE, ISSUE_AMOUNT, ASSETS_TYPE,
 		ASSETS_VALUE,
-		EXCHANGE_TYPE, BUY_CURR, BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE,
+		EXCHANGE_TYPE,
+		BUY_CURR, BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE,
 		DOCUMENT_TYPE,
-		DOCUMENT_NO, LOAN_TYPE, OVERDUE, SECURITIES_TYPE, SECURITIES_CODE, OPP_CUS_TYPE,
+		DOCUMENT_NO, LOAN_TYPE, OVERDUE, SECURITIES_TYPE,
+		SECURITIES_CODE, OPP_CUS_TYPE,
 		CHK_STATUS,
-		RSV1, RSV2, RSV3, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
-		CHK_DATETIME,CHK_ADD_WORD)
-		values (#msgId:VARCHAR#, #seqNo:DECIMAL#, #cdFlag:CHAR#, #tranDate:VARCHAR#,
-		#orgTranDate:VARCHAR#, #amount:DECIMAL#, #oppAccount:VARCHAR#,
+		RSV1, RSV2, RSV3,
+		MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
+		CHK_DATETIME,CHK_ADD_WORD,DTL_SEND_STATUS)
+		values (#msgId:VARCHAR#,
+		#seqNo:DECIMAL#, #cdFlag:CHAR#,
+		#tranDate:VARCHAR#,
+		#orgTranDate:VARCHAR#, #amount:DECIMAL#,
+		#oppAccount:VARCHAR#,
 		#oppName:VARCHAR#,
-		#oppBankCode:VARCHAR#, #countryCode:CHAR#, #disitrictCode:CHAR#, #tranType:CHAR#,
-		#termLength:DECIMAL#, #termUnit:CHAR#, #valueDate:VARCHAR#,
+		#oppBankCode:VARCHAR#,
+		#countryCode:CHAR#,
+		#disitrictCode:CHAR#, #tranType:CHAR#,
+		#termLength:DECIMAL#,
+		#termUnit:CHAR#, #valueDate:VARCHAR#,
 		#expireDate:VARCHAR#,
-		#interestRate:DECIMAL#, #issueAmount:DECIMAL#, #assetsType:CHAR#, #assetsValue:DECIMAL#,
-		#exchangeType:CHAR#, #buyCurr:CHAR#, #buyAmt:DECIMAL#,
+		#interestRate:DECIMAL#, #issueAmount:DECIMAL#,
+		#assetsType:CHAR#,
+		#assetsValue:DECIMAL#,
+		#exchangeType:CHAR#,
+		#buyCurr:CHAR#,
+		#buyAmt:DECIMAL#,
 		#buyRate:DECIMAL#, #sellCurr:CHAR#,
-		#sellAmt:DECIMAL#, #sellRate:DECIMAL#, #documentType:CHAR#, #documentNo:VARCHAR#,
-		#loanType:CHAR#, #overdue:CHAR#, #securitiesType:CHAR#,
+		#sellAmt:DECIMAL#, #sellRate:DECIMAL#, #documentType:CHAR#,
+		#documentNo:VARCHAR#,
+		#loanType:CHAR#, #overdue:CHAR#,
+		#securitiesType:CHAR#,
 		#securitiesCode:VARCHAR#,
-		#oppCusType:CHAR#, #chkStatus:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#,
+		#oppCusType:CHAR#,
+		#chkStatus:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#,
 		#makUserId:VARCHAR#, #makDatetime:VARCHAR#, #chkUserId:VARCHAR#,
-		#chkDatetime:VARCHAR#, #chkAddWord:VARCHAR#)
+		#chkDatetime:VARCHAR#, #chkAddWord:VARCHAR#,#dtlSendStatus:CHAR#)
 	</insert>
 	<update id="updateByPrimaryKey" parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
 
-		update FTZ_IN_TXN_DTL
+		update
+		FTZ_IN_TXN_DTL
 		set CD_FLAG = #cdFlag:CHAR#,
-		TRAN_DATE = #tranDate:VARCHAR#,
+		TRAN_DATE =
+		#tranDate:VARCHAR#,
 		ORG_TRAN_DATE = #orgTranDate:VARCHAR#,
-		AMOUNT = #amount:DECIMAL#,
+		AMOUNT =
+		#amount:DECIMAL#,
 		OPP_ACCOUNT = #oppAccount:VARCHAR#,
-		OPP_NAME = #oppName:VARCHAR#,
+		OPP_NAME =
+		#oppName:VARCHAR#,
 		OPP_BANK_CODE = #oppBankCode:VARCHAR#,
-		COUNTRY_CODE = #countryCode:CHAR#,
+		COUNTRY_CODE =
+		#countryCode:CHAR#,
 		DISITRICT_CODE = #disitrictCode:CHAR#,
-		TRAN_TYPE = #tranType:CHAR#,
+		TRAN_TYPE =
+		#tranType:CHAR#,
 		TERM_LENGTH = #termLength:DECIMAL#,
-		TERM_UNIT = #termUnit:CHAR#,
+		TERM_UNIT =
+		#termUnit:CHAR#,
 		VALUE_DATE = #valueDate:VARCHAR#,
-		EXPIRE_DATE = #expireDate:VARCHAR#,
+		EXPIRE_DATE =
+		#expireDate:VARCHAR#,
 		INTEREST_RATE = #interestRate:DECIMAL#,
 		ISSUE_AMOUNT = #issueAmount:DECIMAL#,
 		ASSETS_TYPE = #assetsType:CHAR#,
 		ASSETS_VALUE = #assetsValue:DECIMAL#,
-		EXCHANGE_TYPE = #exchangeType:CHAR#,
+		EXCHANGE_TYPE =
+		#exchangeType:CHAR#,
 		BUY_CURR = #buyCurr:CHAR#,
-		BUY_AMT = #buyAmt:DECIMAL#,
+		BUY_AMT =
+		#buyAmt:DECIMAL#,
 		BUY_RATE = #buyRate:DECIMAL#,
-		SELL_CURR = #sellCurr:CHAR#,
+		SELL_CURR =
+		#sellCurr:CHAR#,
 		SELL_AMT = #sellAmt:DECIMAL#,
-		SELL_RATE = #sellRate:DECIMAL#,
+		SELL_RATE =
+		#sellRate:DECIMAL#,
 		DOCUMENT_TYPE = #documentType:CHAR#,
-		DOCUMENT_NO = #documentNo:VARCHAR#,
+		DOCUMENT_NO =
+		#documentNo:VARCHAR#,
 		LOAN_TYPE = #loanType:CHAR#,
-		OVERDUE = #overdue:CHAR#,
+		OVERDUE =
+		#overdue:CHAR#,
 		SECURITIES_TYPE = #securitiesType:CHAR#,
 		SECURITIES_CODE = #securitiesCode:VARCHAR#,
-		OPP_CUS_TYPE = #oppCusType:CHAR#,
+		OPP_CUS_TYPE =
+		#oppCusType:CHAR#,
 		CHK_STATUS = #chkStatus:CHAR#,
 		RSV1 = #rsv1:VARCHAR#,
 		RSV2 = #rsv2:VARCHAR#,
 		RSV3 = #rsv3:VARCHAR#,
-		MAK_USER_ID = #makUserId:VARCHAR#,
+		MAK_USER_ID =
+		#makUserId:VARCHAR#,
 		MAK_DATETIME = #makDatetime:VARCHAR#,
-		CHK_USER_ID = #chkUserId:VARCHAR#,
+		CHK_USER_ID =
+		#chkUserId:VARCHAR#,
 		CHK_DATETIME = #chkDatetime:VARCHAR#,
-		CHK_ADD_WORD = #chkAddWord:VARCHAR#
-		where MSG_ID = #msgId:VARCHAR#
-		and SEQ_NO = #seqNo:DECIMAL#
+		CHK_ADD_WORD
+		= #chkAddWord:VARCHAR#,DTL_SEND_STATUS
+		= #dtlSendStatus:VARCHAR#
+		where MSG_ID
+		= #msgId:VARCHAR#
+		and SEQ_NO =
+		#seqNo:DECIMAL#
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
 
@@ -166,58 +255,73 @@
 				CD_FLAG = #cdFlag:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="tranDate">
-				TRAN_DATE = #tranDate:VARCHAR#
+				TRAN_DATE =
+				#tranDate:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="orgTranDate">
-				ORG_TRAN_DATE = #orgTranDate:VARCHAR#
+				ORG_TRAN_DATE =
+				#orgTranDate:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="amount">
 				AMOUNT = #amount:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="oppAccount">
-				OPP_ACCOUNT = #oppAccount:VARCHAR#
+				OPP_ACCOUNT =
+				#oppAccount:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="oppName">
-				OPP_NAME = #oppName:VARCHAR#
+				OPP_NAME =
+				#oppName:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="oppBankCode">
-				OPP_BANK_CODE = #oppBankCode:VARCHAR#
+				OPP_BANK_CODE =
+				#oppBankCode:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="countryCode">
-				COUNTRY_CODE = #countryCode:CHAR#
+				COUNTRY_CODE =
+				#countryCode:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="disitrictCode">
-				DISITRICT_CODE = #disitrictCode:CHAR#
+				DISITRICT_CODE =
+				#disitrictCode:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="tranType">
 				TRAN_TYPE = #tranType:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="termLength">
-				TERM_LENGTH = #termLength:DECIMAL#
+				TERM_LENGTH =
+				#termLength:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="termUnit">
 				TERM_UNIT = #termUnit:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="valueDate">
-				VALUE_DATE = #valueDate:VARCHAR#
+				VALUE_DATE =
+				#valueDate:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="expireDate">
-				EXPIRE_DATE = #expireDate:VARCHAR#
+				EXPIRE_DATE =
+				#expireDate:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="interestRate">
-				INTEREST_RATE = #interestRate:DECIMAL#
+				INTEREST_RATE =
+				#interestRate:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="issueAmount">
-				ISSUE_AMOUNT = #issueAmount:DECIMAL#
+				ISSUE_AMOUNT =
+				#issueAmount:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="assetsType">
-				ASSETS_TYPE = #assetsType:CHAR#
+				ASSETS_TYPE =
+				#assetsType:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="assetsValue">
-				ASSETS_VALUE = #assetsValue:DECIMAL#
+				ASSETS_VALUE =
+				#assetsValue:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="exchangeType">
-				EXCHANGE_TYPE = #exchangeType:CHAR#
+				EXCHANGE_TYPE =
+				#exchangeType:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="buyCurr">
 				BUY_CURR = #buyCurr:CHAR#
@@ -226,22 +330,27 @@
 				BUY_AMT = #buyAmt:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="buyRate">
-				BUY_RATE = #buyRate:DECIMAL#
+				BUY_RATE =
+				#buyRate:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="sellCurr">
 				SELL_CURR = #sellCurr:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="sellAmt">
-				SELL_AMT = #sellAmt:DECIMAL#
+				SELL_AMT =
+				#sellAmt:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="sellRate">
-				SELL_RATE = #sellRate:DECIMAL#
+				SELL_RATE =
+				#sellRate:DECIMAL#
 			</isNotNull>
 			<isNotNull prepend="," property="documentType">
-				DOCUMENT_TYPE = #documentType:CHAR#
+				DOCUMENT_TYPE =
+				#documentType:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="documentNo">
-				DOCUMENT_NO = #documentNo:VARCHAR#
+				DOCUMENT_NO =
+				#documentNo:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="loanType">
 				LOAN_TYPE = #loanType:CHAR#
@@ -250,32 +359,46 @@
 				OVERDUE = #overdue:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="securitiesType">
-				SECURITIES_TYPE = #securitiesType:CHAR#
+				SECURITIES_TYPE =
+				#securitiesType:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="securitiesCode">
-				SECURITIES_CODE = #securitiesCode:VARCHAR#
+				SECURITIES_CODE =
+				#securitiesCode:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="oppCusType">
-				OPP_CUS_TYPE = #oppCusType:CHAR#
+				OPP_CUS_TYPE =
+				#oppCusType:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="chkStatus">
-				CHK_STATUS = #chkStatus:CHAR#
+				CHK_STATUS =
+				#chkStatus:CHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="makUserId">
-				MAK_USER_ID = #makUserId:VARCHAR#
+				MAK_USER_ID =
+				#makUserId:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="makDatetime">
-				MAK_DATETIME = #makDatetime:VARCHAR#
+				MAK_DATETIME =
+				#makDatetime:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="chkUserId">
-				CHK_USER_ID = #chkUserId:VARCHAR#
+				CHK_USER_ID =
+				#chkUserId:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="chkDatetime">
-				CHK_DATETIME = #chkDatetime:VARCHAR#
+				CHK_DATETIME =
+				#chkDatetime:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="chkAddWord">
-				CHK_ADD_WORD = #chkAddWord:VARCHAR#
+				CHK_ADD_WORD =
+				#chkAddWord:VARCHAR#
 			</isNotNull>
+			<isNotNull prepend="," property="dtlSendStatus">
+				DTL_SEND_STATUS =
+				#dtlSendStatus:CHAR#
+			</isNotNull>
+			
 		</dynamic>
 		where MSG_ID = #msgId:VARCHAR#
 		and SEQ_NO = #seqNo:DECIMAL#
@@ -315,8 +438,43 @@
 
 	<delete id="deleteByMsgId" parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtlKey">
 
-		delete from FTZ_IN_TXN_DTL
+		delete from
+		FTZ_IN_TXN_DTL
 		where MSG_ID = #msgId:VARCHAR#
 	</delete>
+
+	<select id="selectSumByCDFlag" resultMap="FtzInTxnDtlResult1"
+		parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
+
+		select SUM(a.AMOUNT) as cdSum, a.CD_FLAG 
+		from FTZ_IN_TXN_DTL a
+		LEFT JOIN
+		FTZ_IN_MSG_CTL b ON a.MSG_ID=b.MSG_ID
+		where a.MSG_ID=b.MSG_ID
+		and
+		b.SUBMIT_DATE=#rsv1:VARCHAR#
+		and b.ACCOUNT_NO=#rsv2:VARCHAR#
+		and
+		b.SUB_ACCOUNT_NO=#rsv3:VARCHAR#
+		<![CDATA[ and a.DTL_SEND_STATUS <>'3']]>
+		group by cd_flag
+	</select>
+	
+	<select id="selectCountByCDFlag" resultMap="FtzInTxnDtlResult1"
+		parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtl">
+
+		select count(a.MSG_ID) as cdCount, a.CD_FLAG 
+		from FTZ_IN_TXN_DTL a
+		LEFT JOIN
+		FTZ_IN_MSG_CTL b ON a.MSG_ID=b.MSG_ID
+		where a.MSG_ID=b.MSG_ID
+		and
+		b.SUBMIT_DATE=#rsv1:VARCHAR#
+		and b.ACCOUNT_NO=#rsv2:VARCHAR#
+		and
+		b.SUB_ACCOUNT_NO=#rsv3:VARCHAR#
+		<![CDATA[ and a.DTL_SEND_STATUS <>'3']]>
+		group by cd_flag
+	</select>
 
 </sqlMap>

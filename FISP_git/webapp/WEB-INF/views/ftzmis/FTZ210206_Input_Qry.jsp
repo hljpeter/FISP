@@ -176,19 +176,7 @@ function queryFTZ210206() {
 						class=".input-large" /></td>
 			</tr>
 			
-			<tr>
-				<td class="label_td"><spring:message
-						code="ftz.label.MSG_STATUS" />：</td>
-				<td><form:select path="ftzInMsgCtlVO.msgStatus">
-						<option value=""></option>
-						<form:options items="${FTZ_MSG_STATUS_INPUT }" />
-					</form:select></td>
-				<td style="text-align: right;" colspan="2">
-					<button type="submit" class="btn btn-primary">
-						<spring:message code="ftz.label.SELECT_MSG" />
-					</button>
-				</td>
-			</tr>
+			
 			
 			
 			<tr>
@@ -203,6 +191,20 @@ function queryFTZ210206() {
 						code="ftz.label.MAKUSER" />：</td>
 				<td><form:input  path="ftzInMsgCtlVO.makUser" type="text"
 						class=".input-large" /></td>
+			</tr>
+			
+			<tr>
+				<td class="label_td"><spring:message
+						code="ftz.label.MSG_STATUS" />：</td>
+				<td><form:select path="ftzInMsgCtlVO.msgStatus">
+						<option value=""></option>
+						<form:options items="${FTZ_MSG_STATUS_INPUT }" />
+					</form:select></td>
+				<td style="text-align: right;" colspan="2">
+					<button type="submit" class="btn btn-primary">
+						<spring:message code="ftz.label.SELECT_MSG" />
+					</button>
+				</td>
 			</tr>
 	    </table>											
 	</form:form>

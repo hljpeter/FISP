@@ -36,6 +36,10 @@ public class FTZ210206ServiceImp extends FTZInCommonServiceImp {
 	/* (non-Javadoc)
 	 * @see com.synesoft.ftzmis.domain.service.FTZInCommonService#addMsgLogic(com.synesoft.ftzmis.domain.model.FtzInMsgCtl)
 	 */
+	public FTZ210206ServiceImp() {
+		super.funcId = CommonConst.FTZ_Add_210206;
+	}
+	
 	protected void addMsgLogic(FtzInMsgCtl ftzInMsgCtl) {
 		log.debug("FTZ210206ServiceImp.addMsgLogic() start ...");
 

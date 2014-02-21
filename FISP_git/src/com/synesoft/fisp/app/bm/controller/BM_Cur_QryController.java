@@ -1,8 +1,5 @@
 package com.synesoft.fisp.app.bm.controller;
 
-
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +11,17 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.terasoluna.fw.common.exception.BusinessException;
 import org.terasoluna.fw.common.message.ResultMessage;
 import org.terasoluna.fw.common.message.ResultMessages;
 
 import com.synesoft.fisp.app.bm.model.Bm_Cur_QryForm;
-import com.synesoft.fisp.app.bm.model.Bm_Data_QryForm;
+
 import com.synesoft.fisp.domain.model.SysCurrency;
-import com.synesoft.fisp.domain.model.SysDataDict;
+
+
+
 import com.synesoft.fisp.domain.service.bm.SysCurrencyService;
-import com.synesoft.fisp.domain.service.bm.SysDataDictService;
+
 
 
 /**
@@ -65,6 +63,19 @@ public class BM_Cur_QryController {
 		return "bm/BM_Cur_Qry";
 	}
 
+
+	@RequestMapping("InitCur")
+	public String init(Bm_Cur_QryForm form,
+			BindingResult result, Model model){
+		logger.info("detailSearch...");
+		SysCurrency queryCur = form.getSysCurrency();		
+		queryCur.setCurrCode(form.getCurrCode());
+		queryCur.setCurrLan(form.getCurrLan());	
+		SysCurrency currencyDel= sysCurrencyService.querySysCurrency(queryCur);
+		form.setSysCurrency(currencyDel);
+		return "bm/BM_Cur_Upd";
+	}
+	
 	
 	@Autowired
 	private SysCurrencyService sysCurrencyService;

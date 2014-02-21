@@ -18,11 +18,14 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +54,14 @@ import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.app.common.utils.encryp.SHAEncrypt;
 import com.synesoft.fisp.app.sm.model.PwdChgForm;
 import com.synesoft.fisp.domain.model.OrgInf;
+import com.synesoft.fisp.domain.model.SysControlDept;
+import com.synesoft.fisp.domain.model.SysLoginLog;
 import com.synesoft.fisp.domain.model.SysParam;
 import com.synesoft.fisp.domain.model.SysPasswordHistorys;
 import com.synesoft.fisp.domain.model.UserInf;
 import com.synesoft.fisp.domain.model.UserOrgInf;
+import com.synesoft.fisp.domain.repository.SysControlDeptRepository;
+import com.synesoft.fisp.domain.service.SysLoginLogService;
 import com.synesoft.fisp.domain.service.cm.CommonService;
 import com.synesoft.fisp.domain.service.sm.OrgInfMaintenanceService;
 import com.synesoft.fisp.domain.service.sm.SysPasswordHistorysService;
@@ -72,7 +79,9 @@ import com.synesoft.fisp.domain.service.sm.UserInfService;
 public class LoginController {
 
 	public Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	@Autowired
+	private SysLoginLogService sysLoginLogService;
 	@Autowired
 	private UserInfService userInfService;
 	
@@ -84,6 +93,9 @@ public class LoginController {
 	
 	@Autowired
 	private SysPasswordHistorysService sysPasswordHistorysService;
+	
+	@Resource
+	protected SysControlDeptRepository sysControlDeptRepos;
 
 	@ModelAttribute
 	public LoginForm setUpLoginForm() {
@@ -143,6 +155,14 @@ public class LoginController {
 		
 		// 去掉用户名的空格
 		userInfo.setUserid(userInfo.getUserid().trim()); 
+
+		// 设置用户登录/登出日志对象，具体插入见 L1
+		SysLoginLog sysLoginLog = new SysLoginLog();
+		sysLoginLog.setUserid(userInfo.getUserid());
+		sysLoginLog.setLoginorg(userInfo.getLoginorg());
+		sysLoginLog.setType(CommonConst.SYS_LOGIN_TYPE_LOGIN);
+		sysLoginLog.setResult(CommonConst.SYS_LOGIN_RESULT_FAILURE);
+		
 		
 		//校验密码错误(SHA1加密算法)
 		if (!SHAEncrypt.stringToSHA1(form.getPassword()).equals(userInfo.getPassword())) { 
@@ -150,6 +170,10 @@ public class LoginController {
 			if(faillogincnt == null || faillogincnt <= 0) {
 				faillogincnt = 0L;
 			}
+
+			// L1 - 设置失败原因，插入数据
+			sysLoginLog.setFailSeason(CommonConst.SYS_LOGIN_FAIL_SEASON_PASSWD_ERROR);
+			sysLoginLogService.insert(sysLoginLog);
 			
 			//达到最大次数,提示 用户名/密码输入错误
 			if (faillogincnt == UserConst.getPASSWORD_MAX_FAILURE_COUNT()) {
@@ -177,6 +201,11 @@ public class LoginController {
 		//判断用户状态(是否已锁定)
 		if(UserConst.USER_STATUS_LOCK.equals(userInfo.getUserstatus())) {
 			model.addAttribute("errmsg", ResultMessages.error().add(ResultMessage.fromCode("e.cm.1006")));
+
+			// L1 - 设置失败原因，插入数据
+			sysLoginLog.setFailSeason(CommonConst.SYS_LOGIN_FAIL_SEASON_USER_LOCKED);
+			sysLoginLogService.insert(sysLoginLog);
+			
 			return UrlMap.LOGIN_URL;
 		} 
 
@@ -456,6 +485,28 @@ public class LoginController {
 		ContextConst.setAttribute(CommonConst.MENU_SESSION, menu_all[0]);
 		ContextConst.setAttribute(CommonConst.LEFT_MENU_SESSION, menu_all[1]);
 		
+		// 将部门控件映射对象存入Session中
+		JSONObject jo = new JSONObject();
+		List<SysControlDept> controlDeptsForPage = sysControlDeptRepos.queryListForPage();
+		if(null != controlDeptsForPage){
+			for(SysControlDept dept : controlDeptsForPage){
+				SysControlDept query_SysControlDept = new SysControlDept();
+				query_SysControlDept.setControlDept(userInfo.getDepartment());
+				query_SysControlDept.setPageId(dept.getPageId());
+				List<SysControlDept> controlDepts_tmp = sysControlDeptRepos.queryListByPageAll(query_SysControlDept);
+				if(null != controlDepts_tmp){
+					String[] str_tmp = new String [controlDepts_tmp.size()];
+					for(int i =0;i<controlDepts_tmp.size();i++){
+						if(null != controlDepts_tmp.get(i)){
+							str_tmp[i]=controlDepts_tmp.get(i).getControlId();
+						}
+					}
+					jo.put(dept.getPageId(), str_tmp);
+				}
+			}
+		}
+		ContextConst.setAttribute("ControlDepartmentMap", jo);
+		
 		// 获取用户机构信息列表存入Session中
 		List<UserOrgInf> list = commonService.queryUserOrgList(userInfo);
 		ContextConst.setAttribute(CommonConst.USERORGLIST_SESSION, list);
@@ -467,6 +518,14 @@ public class LoginController {
 		}
 		//将session保存起来
 		session.setAttribute("SyneSessionBindingListener", new SyneSessionListener());
+		
+		SysLoginLog sysLoginLog = new SysLoginLog();
+		sysLoginLog.setUserid(userInfo.getUserid());
+		sysLoginLog.setLoginorg(current_loginorg);
+		sysLoginLog.setIp(ContextConst.getCurrentIP());
+		sysLoginLog.setResult(CommonConst.SYS_LOGIN_RESULT_SUCCESS);
+		sysLoginLog.setType(CommonConst.SYS_LOGIN_TYPE_LOGIN);
+		sysLoginLogService.insert(sysLoginLog);
 	}
 	
 	/**
@@ -479,6 +538,13 @@ public class LoginController {
 		//销毁session
 		UserInf userInfo = ContextConst.getCurrentUser();
 		if (userInfo != null) {
+			SysLoginLog sysLoginLog = new SysLoginLog();
+			sysLoginLog.setUserid(userInfo.getUserid());
+			sysLoginLog.setLoginorg(userInfo.getLoginorg());
+			sysLoginLog.setResult(CommonConst.SYS_LOGIN_RESULT_SUCCESS);
+			sysLoginLog.setType(CommonConst.SYS_LOGIN_TYPE_LOGOUT);
+			sysLoginLogService.insert(sysLoginLog);
+			
 			SyneSessionListener.sessionInvalidate(userInfo.getUserid().trim());
 		}
 		return UrlMap.LOGIN_URL;

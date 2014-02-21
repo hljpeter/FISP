@@ -4,8 +4,10 @@
 		var customize_flag1 = $("#customize_flag1").val();
 		if(customize_flag1 == '1'){
 			document.getElementById("customize_flag").checked = true;
+			$("#express").attr("disabled", "disabled");
 		}else{
 			document.getElementById("customize_flag").checked = false;
+			$("#express").removeAttr("disabled");
 		}
 		if (procType == '3') {
 			$("#srcTable").removeAttr("disabled");
@@ -18,7 +20,11 @@
 					code="dp.lable.Express" />');
 			$("#express").attr("disabled", "disabled");
 			if ('' != $("#srcTable").val()) {
-				$("#express").removeAttr("disabled");
+				if(customize_flag1 == '1'){
+					$("#express").attr("disabled", "disabled");
+				}else{
+					$("#express").removeAttr("disabled");
+				}
 				$("#customize_flag").removeAttr("disabled");
 			}
 			if($("#customize_flag1").val()=='1'){

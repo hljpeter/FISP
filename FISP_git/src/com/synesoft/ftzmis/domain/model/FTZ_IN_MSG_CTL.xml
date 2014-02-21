@@ -5,15 +5,8 @@
     
    <result column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
 		<result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
-		<result column="VER" property="ver" jdbcType="CHAR" />
-		<result column="SRC" property="src" jdbcType="CHAR" />
-		<result column="DES" property="des" jdbcType="CHAR" />
-		<result column="APP" property="app" jdbcType="VARCHAR" />
 		<result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
-		<result column="MSG_REF" property="msgRef" jdbcType="CHAR" />
 		<result column="WORK_DATE" property="workDate" jdbcType="VARCHAR" />
-		<result column="EDIT_FLAG" property="editFlag" jdbcType="CHAR" />
-		<result column="RESERVE" property="reserve" jdbcType="VARCHAR" />
 		<result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
 		<result column="CURRENCY" property="currency" jdbcType="CHAR" />
 		<result column="BALANCE" property="balance" jdbcType="DECIMAL" />
@@ -47,15 +40,8 @@
   </resultMap>
   <resultMap id="FtzInMsgCtlVOResult" class="com.synesoft.ftzmis.domain.model.vo.FtzInMsgCtlVO" >
     <result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
-		<result column="VER" property="ver" jdbcType="CHAR" />
-		<result column="SRC" property="src" jdbcType="CHAR" />
-		<result column="DES" property="des" jdbcType="CHAR" />
-		<result column="APP" property="app" jdbcType="VARCHAR" />
 		<result column="MSG_NO" property="msgNo" jdbcType="CHAR" />
-		<result column="MSG_REF" property="msgRef" jdbcType="CHAR" />
 		<result column="WORK_DATE" property="workDate" jdbcType="VARCHAR" />
-		<result column="EDIT_FLAG" property="editFlag" jdbcType="CHAR" />
-		<result column="RESERVE" property="reserve" jdbcType="VARCHAR" />
 		<result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
 		<result column="CURRENCY" property="currency" jdbcType="CHAR" />
 		<result column="BALANCE" property="balance" jdbcType="DECIMAL" />
@@ -86,6 +72,10 @@
 		<result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
 		<result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
 		<result column="RSV3" property="rsv3" jdbcType="VARCHAR" />
+		<result column="MSG_RETURN_STATUS" property="msgReturnStatus"
+			jdbcType="CHAR" />
+		<result column="BLANK_FLAG" property="blankFlag" jdbcType="CHAR" />
+		<result column="DELETE_FLAG" property="deleteFlag" jdbcType="CHAR" />
     <result column="TOTALNUM" property="totalNum" jdbcType="VARCHAR" />
     <result column="APRNUM" property="aprNum" jdbcType="VARCHAR" />
   </resultMap>
@@ -123,9 +113,20 @@
 	        	#msgNos[]#
 	        </iterate>
 			</isNotEmpty>
-			<isNotEmpty property="editFlag" prepend="AND">
-			FTZ_IN_MSG_CTL.EDIT_FLAG = #editFlag:CHAR#
+			<isNotEmpty property="branchIds" prepend="AND">
+			<iterate property="branchIds" open="BRANCH_ID IN(" close=")" conjunction=",">
+	        	#branchIds[]#
+	        </iterate>
 			</isNotEmpty>
+			<isNotEmpty property="department" prepend="AND">
+			FTZ_IN_MSG_CTL.DEPARTMENT = #department:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty property="makUserId" prepend="AND">
+			FTZ_IN_MSG_CTL.MAK_USER_ID = #makUserId:VARCHAR#
+			</isNotEmpty>
+<!--			<isNotEmpty property="editFlag" prepend="AND">-->
+<!--			FTZ_IN_MSG_CTL.EDIT_FLAG = #editFlag:CHAR#-->
+<!--			</isNotEmpty>-->
 			<isNotEmpty property="accountNo" prepend="AND">
 			FTZ_IN_MSG_CTL.ACCOUNT_NO = #accountNo:VARCHAR#
 			</isNotEmpty>
@@ -188,30 +189,40 @@
   
 	<insert id="insert" 
 			parameterClass="com.synesoft.ftzmis.domain.model.FtzInMsgCtl" >
-    	insert into FTZ_IN_MSG_CTL (MSG_ID, BRANCH_ID, VER, SRC, DES, APP,
-		MSG_NO, MSG_REF, WORK_DATE,
-		EDIT_FLAG, RESERVE, ACCOUNT_NO, CURRENCY, BALANCE, BALANCE_CODE, SUBMIT_DATE,
+    	insert into FTZ_IN_MSG_CTL
+		(MSG_ID, BRANCH_ID,
+		MSG_NO,  WORK_DATE,
+		 ACCOUNT_NO, CURRENCY, BALANCE, BALANCE_CODE,
+		SUBMIT_DATE,
 		TOTAL_COUNT,
-		ACC_ORG_CODE, ACCOUNT_NAME, ACC_TYPE, SUB_ACCOUNT_NO, DEPOSIT_RATE, CUSTOM_TYPE,
-		DOCUMENT_TYPE, DOCUMENT_NO, RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID,
+		ACC_ORG_CODE, ACCOUNT_NAME, ACC_TYPE,
+		SUB_ACCOUNT_NO, DEPOSIT_RATE, CUSTOM_TYPE,
+		DOCUMENT_TYPE, DOCUMENT_NO,
+		RESULT, ADD_WORD, MSG_STATUS, MAK_USER_ID,
 		MAK_DATETIME,
-		CHK_USER_ID, CHK_DATETIME, SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME,
+		CHK_USER_ID,
+		CHK_DATETIME, SND_USER_ID, SND_DATETIME, ACK_DATETIME, ERR_DATETIME,
 		RSV1, RSV2,
-		RSV3)
-		values (#msgId:VARCHAR#, #branchId:VARCHAR#, #ver:CHAR#, #src:CHAR#,
-		#des:CHAR#, #app:VARCHAR#,
-		#msgNo:CHAR#, #msgRef:CHAR#, #workDate:VARCHAR#, #editFlag:CHAR#,
-		#reserve:VARCHAR#,
-		#accountNo:VARCHAR#, #currency:CHAR#, #balance:DECIMAL#, #balanceCode:CHAR#,
-		#submitDate:CHAR#, #totalCount:DECIMAL#, #accOrgCode:VARCHAR#,
+		RSV3,MSG_RETURN_STATUS,BLANK_FLAG,DELETE_FLAG)
+		values
+		(#msgId:VARCHAR#, #branchId:VARCHAR#,
+		#msgNo:CHAR#,
+		#workDate:VARCHAR#, 
+		#accountNo:VARCHAR#, #currency:CHAR#, #balance:DECIMAL#,
+		#balanceCode:CHAR#,
+		#submitDate:CHAR#, #totalCount:DECIMAL#,
+		#accOrgCode:VARCHAR#,
 		#accountName:VARCHAR#,
-		#accType:CHAR#, #subAccountNo:VARCHAR#, #depositRate:DECIMAL#, #customType:CHAR#,
+		#accType:CHAR#,
+		#subAccountNo:VARCHAR#, #depositRate:DECIMAL#, #customType:CHAR#,
 		#documentType:CHAR#, #documentNo:VARCHAR#, #result:CHAR#,
 		#addWord:VARCHAR#, #msgStatus:CHAR#,
-		#makUserId:VARCHAR#, #makDatetime:VARCHAR#, #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#,
+		#makUserId:VARCHAR#,
+		#makDatetime:VARCHAR#, #chkUserId:VARCHAR#, #chkDatetime:VARCHAR#,
 		#sndUserId:VARCHAR#, #sndDatetime:VARCHAR#, #ackDatetime:VARCHAR#,
 		#errDatetime:VARCHAR#,
-		#rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#)
+		#rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#,
+		#msgReturnStatus:CHAR#, #blankFlag:CHAR#, #deleteFlag:CHAR#)
 	</insert>
 	
 
@@ -224,32 +235,11 @@
 			<isNotNull prepend="," property="branchId">
 				BRANCH_ID = #branchId:VARCHAR#
 			</isNotNull>
-			<isNotNull prepend="," property="ver">
-				VER = #ver:CHAR#
-			</isNotNull>
-			<isNotNull prepend="," property="src">
-				SRC = #src:CHAR#
-			</isNotNull>
-			<isNotNull prepend="," property="des">
-				DES = #des:CHAR#
-			</isNotNull>
-			<isNotNull prepend="," property="app">
-				APP = #app:VARCHAR#
-			</isNotNull>
 			<isNotNull prepend="," property="msgNo">
 				MSG_NO = #msgNo:CHAR#
 			</isNotNull>
-			<isNotNull prepend="," property="msgRef">
-				MSG_REF = #msgRef:CHAR#
-			</isNotNull>
 			<isNotNull prepend="," property="workDate">
 				WORK_DATE = #workDate:VARCHAR#
-			</isNotNull>
-			<isNotNull prepend="," property="editFlag">
-				EDIT_FLAG = #editFlag:CHAR#
-			</isNotNull>
-			<isNotNull prepend="," property="reserve">
-				RESERVE = #reserve:VARCHAR#
 			</isNotNull>
 			<isNotNull prepend="," property="accountNo">
 				ACCOUNT_NO = #accountNo:VARCHAR#
@@ -320,6 +310,15 @@
 			</isNotNull>
 			<isNotNull prepend="," property="errDatetime">
 				ERR_DATETIME = #errDatetime:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="msgReturnStatus">
+				MSG_RETURN_STATUS = #msgReturnStatus:CHAR#,
+			</isNotNull>
+			<isNotNull prepend="," property="blankFlag">
+				BLANK_FLAG = #blankFlag:CHAR#,
+			</isNotNull>
+			<isNotNull prepend="," property="deleteFlag">
+				DELETE_FLAG = #deleteFlag:CHAR#
 			</isNotNull>
 		</dynamic>
       	WHERE

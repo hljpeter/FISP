@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="MAIN" >
+	<typeAlias alias="MainParam" type="com.synesoft.fisp.domain.model.MainParam"/>
+	<resultMap id="MainParamResult" class="MainParam">
+	    <result column="TAB_NAME" property="tabName" jdbcType="VARCHAR" />
+	    <result column="CNT" property="cnt" jdbcType="NUMBER" />
+	</resultMap>
+  
+  	<!-- ==================== GENERAL: Select system function ==================== -->
+	<!-- select OrgInfo -->
+	<select id="selectOrgInfo"
+			resultMap="MainParamResult">
+		SELECT 
+			'OrgInfo' TAB_NAME,
+			COUNT(*) CNT
+		FROM
+			SYS_ORG_INF_TMP
+		WHERE
+			OPTSTATUS = '01'
+	</select>
+	<!-- select RoleInfo -->
+	<select id="selectRoleInfo"
+			resultMap="MainParamResult">
+		SELECT 
+			'RoleInfo' TAB_NAME,
+			COUNT(*) CNT
+		FROM
+			SYS_ROLE_INF_TMP
+		WHERE
+			OPTSTATUS = '01'
+	</select>
+	<!-- select UserInfo -->
+	<select id="selectUserInfo"
+			resultMap="MainParamResult">
+		SELECT 
+			'UserInfo' TAB_NAME,
+			COUNT(*) CNT
+		FROM
+			SYS_USER_INF_TMP
+		WHERE
+			OPTSTATUS = '01'
+	</select>
+  	<!-- ==================== GENERAL: Select system function ==================== -->
+  	
+  	<!-- ==================== GENERAL: Select business function ==================== -->
+	<resultMap id="MainParam3Result" class="MainParam">
+	    <result column="TAB_NAME" property="tabName" jdbcType="VARCHAR" />
+	    <result column="CNT" property="cnt" jdbcType="NUMBER" />
+	    <result column="FLAG" property="flag" jdbcType="VARCHAR" />
+	</resultMap>
+  	<!-- select FTZ -->
+	<select id="selectFTZ"
+			parameterClass="MainParam"
+			resultMap="MainParam3Result">
+		SELECT
+			TAB_NAME, SUM(CNT) CNT,	FLAG
+		FROM (
+			SELECT 
+				SUBSTR(MSG_NO, 0, 4) TAB_NAME,
+				COUNT(*) CNT, 
+				'$flag$' FLAG
+			FROM 
+				FTZ_IN_MSG_CTL 
+			WHERE 
+				MSG_RETURN_STATUS = '0' AND
+				BLANK_FLAG = '0'
+				<iterate property="msgStatusList" open=" AND MSG_STATUS IN (" close=")" conjunction=",">
+					#msgStatusList[]#
+				</iterate>
+				<iterate property="msgNoList" open=" AND MSG_NO IN (" close=")" conjunction=",">
+		        	#msgNoList[]#
+		        </iterate>
+				<iterate property="branchIdList" open=" AND BRANCH_ID IN (" close=")" conjunction=",">
+		        	#branchIdList[]#
+		        </iterate>
+			GROUP BY 
+				MSG_NO
+			UNION
+			SELECT 
+				SUBSTR(MSG_NO, 0, 4) TAB_NAME,
+				COUNT(*) CNT, 
+				'$flag$' FLAG
+			FROM 
+				FTZ_OFF_MSG_CTL 
+			WHERE 
+				MSG_RETURN_STATUS = '0' AND
+				BLANK_FLAG = '0'
+				<iterate property="msgStatusList" open=" AND MSG_STATUS IN (" close=")" conjunction=",">
+					#msgStatusList[]#
+				</iterate>
+				<iterate property="msgNoList" open=" AND MSG_NO IN (" close=")" conjunction=",">
+		        	#msgNoList[]#
+		        </iterate>
+				<iterate property="branchIdList" open=" AND BRANCH_ID IN (" close=")" conjunction=",">
+		        	#branchIdList[]#
+		        </iterate>
+			GROUP BY 
+				MSG_NO
+		) GROUP BY
+			TAB_NAME, FLAG
+	</select>
+  	<!-- ==================== GENERAL: Select business function ==================== -->
+  	
+  	
+  	<!-- ==================== IMORTANT ==================== -->
+	<resultMap id="MainParam2Result" class="MainParam">
+	    <result column="TAB_NAME" property="tabName" jdbcType="VARCHAR" />
+	    <result column="CNT" property="cnt" jdbcType="NUMBER" />
+	</resultMap>
+  	<select id="selectBatToMsg"
+			resultClass="java.lang.Integer">
+		SELECT 
+			SUM(CNT) 
+		FROM (
+			SELECT 
+				COUNT(*) CNT
+			FROM 
+				FTZ_IN_MSG_CTL 
+			WHERE 
+				MSG_STATUS = '03'
+			UNION
+			SELECT 
+				COUNT(*) CNT
+			FROM 
+				FTZ_OFF_MSG_CTL 
+			WHERE 
+				MSG_STATUS = '03'
+		)
+	</select>
+  	<select id="selectMsg" 
+			resultMap="MainParam2Result">
+		SELECT 
+			* 
+		FROM (
+			SELECT 
+				'MSG_SEND_FAIL' TAB_NAME,
+				COUNT(*) CNT
+			FROM 
+				FTZ_MSG_PROC
+			WHERE
+				MSG_STATUS = '12'
+			UNION
+			SELECT 
+				'MSG_SEND_REJECT' TAB_NAME,
+				COUNT(*) CNT
+			FROM 
+				FTZ_MSG_PROC
+			WHERE
+				MSG_STATUS = '16' OR
+				MSG_STATUS = '21'
+		) WHERE
+			<![CDATA[CNT <> 0]]>
+	</select>
+  	<select id="selectActMstr" 
+  			parameterClass="java.lang.String"
+			resultClass="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM
+			FTZ_ACT_MSTR
+		WHERE
+			SUBMIT_DATE = #value#
+	</select>
+  	<!-- ==================== IMORTANT ==================== -->
+  	
+</sqlMap>

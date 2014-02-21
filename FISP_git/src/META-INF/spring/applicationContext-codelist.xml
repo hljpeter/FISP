@@ -4229,6 +4229,63 @@
 		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
 	</bean>
 	
+	<!-- 登录日志 - 类型 -->
+	<bean id="SYS_LOGIN_LOG_TYPE"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="SYS_LOGIN_LOG_TYPE_EN" />
+				<entry key="zh_CN" value-ref="SYS_LOGIN_LOG_TYPE_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="SYS_LOGIN_LOG_TYPE_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='SYS_LOGIN_LOG_TYPE' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="SYS_LOGIN_LOG_TYPE_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='SYS_LOGIN_LOG_TYPE' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<!-- 登录日志 - 结果 -->
+	<bean id="SYS_LOGIN_LOG_RESULT"
+		class="org.terasoluna.fw.common.codelist.i18n.SimpleI18nCodeList">
+		<property name="rowsByCodeList">
+			<util:map>
+				<entry key="en_US" value-ref="SYS_LOGIN_LOG_RESULT_EN" />
+				<entry key="zh_CN" value-ref="SYS_LOGIN_LOG_RESULT_ZH" />
+			</util:map>
+		</property>
+	</bean>
+	<bean id="SYS_LOGIN_LOG_RESULT_ZH" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='SYS_LOGIN_LOG_RESULT' and META_LAN='zh_CN'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	<bean id="SYS_LOGIN_LOG_RESULT_EN" class="org.terasoluna.fw.common.codelist.JdbcCodeList"
+		lazy-init="true">
+		<property name="dataSource" ref="dataSource" />
+		<property name="querySql"
+			value="select META_VAL , META_NAME  from SYS_DATA_DICT where GROUP_CODE='SYS_LOGIN_LOG_RESULT' and META_LAN='en_US'" />
+		<property name="valueColumn" value="META_VAL" />
+		<property name="labelColumn" value="META_NAME" />
+		<property name="cacheMillis" value="#{3600 * 60 * 1000}"></property>
+	</bean>
+	
 </beans>
 
 

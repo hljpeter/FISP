@@ -119,6 +119,7 @@
 			}
 		});
 	}
+	
 
 	function accountFill() {
 		var accountNo = $("#accountNo").val();
@@ -218,6 +219,26 @@
 		var form = document.getElementById("form");
 		form.action = "${pageContext.request.contextPath}/FTZ210106/DtlInitReflash?page.page="+${page.number+1};
 		form.submit();
+	}
+	function BalanceValidation(){
+		var submitDate = $("#submitDate").val();//申报日期
+		var accountNo = $("#accountNo").val();//账号		
+		var subAccountNo = $("#subAccountNo").val();//主账号
+		
+		if(null == subAccountNo || ""== subAccountNo){
+			subAccountNo = accountNo;
+		}		
+		if (null == submitDate || "" == submitDate && null == accountNo 
+				|| "" == accountNo ) {
+			alert('申报日期及账号不能为空!');
+			return;
+		}  		
+		showDialog(
+				'${pageContext.request.contextPath}/FTZINCOM/BalanceCheck?check_AccountNo='
+						+ accountNo + "&check_SubAccountNo="
+						+ subAccountNo+ "&check_SubmitDate="
+						+ submitDate, '500', '1024');
+		
 	}
 </script>
 
@@ -332,9 +353,11 @@
 			</tr>
 			</c:if>
 			<tr>
-				<td style="text-align: center;" colspan="4">
-					<button type="button" class="btn btn-primary" onclick="DtlSubmit()"><spring:message code="ftz.label.SUBMIT_MSG" /></button>
-				</td>
+				<td style="text-align: center;" colspan="4"><input id="dtlSub"
+					type="button" class="btn btn-primary" onclick="DtlSubmit()"
+					value="<spring:message code="ftz.label.SUBMIT_MSG" />" />
+					<input id="balanceValidation" type="button" class="btn btn-primary" onclick="BalanceValidation()"
+					value="<spring:message code="ftz.label.balanceValidation" />" /></td>
 			</tr>
 		</table>
 	</form:form>
@@ -367,12 +390,12 @@
 				<c:forEach var="dto1" items="${page.content}" varStatus="i">
 					<tr>
 						<td class="vtip" style="text-align: center; width: 20px;">${(page.number*page.size)+(i.index+1)}</td>
-						<td class="vtip" style="text-align: center; width: 60px;"><t:codeValue items="${FTZ_CD_FLAG}" key="${dto1.cdFlag}" type="label" /></td>
-						<td class="vtip" style="text-align: center; width: 50px;">${dto1.tranDate}</td>
+						<td class="vtip" style="text-align: left; width: 60px;"><t:codeValue items="${FTZ_CD_FLAG}" key="${dto1.cdFlag}" type="label" /></td>
+						<td class="vtip" style="text-align: left; width: 50px;">${dto1.tranDate}</td>
 						<td class="vtip" style="text-align: right; width: 40px;"><t:moneyFormat	type="label" value="${dto1.amount}" /></td>
 						<td class="vtip" style="text-align: left; width: 50px;">${dto1.oppName}</td>
-						<td class="vtip" style="text-align: center; width: 30px;">${dto1.valueDate}</td>
-						<td class="vtip" style="text-align: center; width: 30px;">${dto1.expireDate}</td>
+						<td class="vtip" style="text-align: left; width: 30px;">${dto1.valueDate}</td>
+						<td class="vtip" style="text-align: left; width: 30px;">${dto1.expireDate}</td>
 						<td class="vtip" style="text-align: left; width: 50px;"><t:codeValue
 								items="${FTZ_MSG_STATUS}" key="${dto1.chkStatus}" type="label" /></td>
 						<td style="display: none;">${dto1.msgId}</td>

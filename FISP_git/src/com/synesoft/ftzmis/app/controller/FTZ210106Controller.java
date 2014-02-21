@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.terasoluna.fw.common.message.ResultMessage;
 import org.terasoluna.fw.common.message.ResultMessages;
 
+import com.synesoft.dataproc.service.ProcCommonService;
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.domain.model.UserInf;
@@ -432,11 +433,23 @@ public class FTZ210106Controller {
 			resultMessages.add(resultMessage);
 		}
 		//利率
-		if (null == update_FtzInTxnDtl.getInterestRate()
-				|| "".equals(update_FtzInTxnDtl.getInterestRate())) {
+		//if (null == update_FtzInTxnDtl.getInterestRate()
+		//		|| "".equals(update_FtzInTxnDtl.getInterestRate())) {
+		//	ResultMessage resultMessage = ResultMessage
+		//			.fromCode("e.ftzmis.210106.0002");
+		//	resultMessages.add(resultMessage);
+		//}
+		// 利率
+		if (null == update_FtzInTxnDtl.getInterestRate()) {
 			ResultMessage resultMessage = ResultMessage
-					.fromCode("e.ftzmis.210106.0002");
+					.fromCode("e.ftzmis.210101.0028");
 			resultMessages.add(resultMessage);
+		}else{
+			if (!Validator.CheckRate(update_FtzInTxnDtl.getInterestRate())) {
+				ResultMessage resultMessage = ResultMessage
+						.fromCode("e.ftzmis.210101.0041");
+				resultMessages.add(resultMessage);
+			}
 		}
 		//到息日
 		if (null == update_FtzInTxnDtl.getExpireDate()
@@ -872,16 +885,7 @@ public class FTZ210106Controller {
 		insert_FtzInMsgCtl.setMsgId(numberService.getSysIDSequence("", 8));
 		insert_FtzInMsgCtl.setSubmitDate(DateUtil
 				.getFormatDateRemoveSprit(insert_FtzInMsgCtl.getSubmitDate()));
-		
-		// 设置批量头信息
-		FtzMsgHead mh = FtzMsgHead.getMsgHead();
-		insert_FtzInMsgCtl.setVer(mh.getVER());
-		insert_FtzInMsgCtl.setSrc(mh.getSRC());
-		insert_FtzInMsgCtl.setDes(mh.getDES());
-		insert_FtzInMsgCtl.setApp(mh.getAPP());
-		insert_FtzInMsgCtl.setWorkDate(mh.getWorkDate());
-		insert_FtzInMsgCtl.setEditFlag(mh.getEditFlag());
-		insert_FtzInMsgCtl.setReserve(mh.getReserve());
+		insert_FtzInMsgCtl.setWorkDate(procCommonService.queryWorkDate());
 		
 		UserInf userInfo = ContextConst.getCurrentUser();
 		insert_FtzInMsgCtl.setMakUserId(userInfo.getUserid());
@@ -1273,7 +1277,7 @@ public class FTZ210106Controller {
 		}
 		
 		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
-		query_FtzInTxnDtl.setMsgId(issert_FtzInTxnDtl.getMsgId());
+		query_FtzInTxnDtl.setMsgId(issert_FtzInTxnDtl.getMsgId());//根据批量id，现在根据该批量头的账户以及申报日期去查找
 		List<FtzInTxnDtl> ftzInTxnDtls = ftz210106Serv
 				.queryFtzInTxnDtlList(query_FtzInTxnDtl);
 		if (null == ftzInTxnDtls || ftzInTxnDtls.size() == 0) {
@@ -1326,5 +1330,7 @@ public class FTZ210106Controller {
 	
 	@Resource
 	protected NumberService numberService;
+	@Resource
+	private ProcCommonService procCommonService;
 
 }

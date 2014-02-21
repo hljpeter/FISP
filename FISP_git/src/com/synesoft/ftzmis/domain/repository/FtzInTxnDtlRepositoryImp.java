@@ -17,7 +17,6 @@ import com.synesoft.fisp.domain.component.PageHandler;
 import com.synesoft.ftzmis.app.common.constants.SQLMap;
 import com.synesoft.ftzmis.app.common.constants.Table;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 
 @Repository
 public class FtzInTxnDtlRepositoryImp implements FtzInTxnDtlRepository {
@@ -120,6 +119,22 @@ public class FtzInTxnDtlRepositoryImp implements FtzInTxnDtlRepository {
 	public int updateAuth(FtzInTxnDtl ftzInTxnDtl) {
 		log.debug("FtzInTxnDtlRepositoryImp.update() start ...");
 		return updateDAO.execute(Table.FTZIN_TXN_DTL + "." + SQLMap.UPDATE_BY_CONDITION_SELECTIVE, ftzInTxnDtl);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.synesoft.ftzmis.domain.repository.FtzInTxnDtlRepository#queryAmountSumByCDFlag(com.synesoft.ftzmis.domain.model.FtzInTxnDtl)
+	 */
+	@Override
+	public List<FtzInTxnDtl> queryAmountSumByCDFlag(FtzInTxnDtl ftzInTxnDtl) {
+		return queryDAO.executeForObjectList(Table.FTZIN_TXN_DTL + "." + SQLMap.SELECT_SUM_BY_CDFLAG, ftzInTxnDtl);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.synesoft.ftzmis.domain.repository.FtzInTxnDtlRepository#queryDtlCountByCDFlag(com.synesoft.ftzmis.domain.model.FtzInTxnDtl)
+	 */
+	@Override
+	public List<FtzInTxnDtl> queryDtlCountByCDFlag(FtzInTxnDtl ftzInTxnDtl) {
+		return queryDAO.executeForObjectList(Table.FTZIN_TXN_DTL + "." + SQLMap.SELECT_COUNT_BY_CDFLAG, ftzInTxnDtl);
 	}
 }
 

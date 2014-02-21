@@ -385,6 +385,31 @@ function encrytorInf(obj) {
 	return encrytor;
 }
 
+function initControlAttr(pageId,obj){
+	var runtime = {
+		    start : function() {
+		        this.startTime = new Date();
+		    },
+		    end : function() {
+		        return (new Date() - this.startTime);
+		    }
+		};
+	runtime.start();
+	var input = JSON.parse(obj);
+	var inputString = input[pageId];
+	for ( var i = 0; i < inputString.length; i++) {
+		var input_tmp = $("#" + inputString[i])[0].type;
+		if('text'!=input_tmp){
+			$("#" + inputString[i]).prop("disabled", false);
+		}else{
+			
+			$("#" + inputString[i]).prop("readonly", false);
+		}
+		
+	}
+	alert(runtime.end());
+}
+
 String.prototype.replaceAll = function(s1, s2) {
 	return this.replace(new RegExp(s1, "gm"), s2);
 };

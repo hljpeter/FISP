@@ -12,4 +12,13 @@ public interface SysCurrencyService {
 
 	public Page<SysCurrency> querySysCurrencyPage(Pageable pageable,Bm_Cur_QryForm form);
 
+	public SysCurrency querySysCurrency(SysCurrency queryCur);  //修改查询初始化
+
+	public int updateCur(SysCurrency updateCur);  //修改
+
+	public int deleteCur(SysCurrency curDel);     //删除
+
+	public void addCur(SysCurrency addCur);       //新增
+
+
 }

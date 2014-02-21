@@ -65,6 +65,21 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 
 
 });
+var BalanceValidation = function() {
+		var submitDate = $("#submitDate").val();//申报日期
+		var accountNo = $("#accountNo").val();//账号		
+		var subAccountNo = $("#subAccountNo").val();//主账号
+		
+		if(null == subAccountNo || ""==subAccountNo){
+			subAccountNo = accountNo;
+		}				
+		showDialog(
+				'${pageContext.request.contextPath}/FTZINCOM/BalanceCheck?check_AccountNo='
+						+ accountNo + "&check_SubAccountNo="
+						+ subAccountNo+ "&check_SubmitDate="
+						+ submitDate, '500', '1024');
+		
+	}
 </script>
 
 <div id="id_showMsg" style="display: none">
@@ -279,6 +294,9 @@ if(msgStatus=='01'||msgStatus=='03'||msgStatus=='04')
 	<div class=" navbar-fixed-bottom text-right" id="footer" style="text-align:center; margin-bottom:0px; line-height:30px; background-color: #eee; opacity:0.9;">
 		<button id="dtl" name="btn" class="btn btn-primary"><spring:message code="ftz.label.DTL_DTL"/></button>
 		<button id="msgChk" name="btn" class="btn btn-primary"><spring:message code="ftz.label.AUTH_MSG"/></button>
+		<input id="balanceValidation" type="button" class="btn btn-primary"
+			onclick="BalanceValidation();"
+			value="<spring:message code="ftz.label.balanceValidation"/>">
 		<button id="cls" name="btnClose" class="btn btn-primary" onclick="javascript: window.close();"><spring:message code="ftz.label.CLOSE"/></button>
 	</div>
 </div>

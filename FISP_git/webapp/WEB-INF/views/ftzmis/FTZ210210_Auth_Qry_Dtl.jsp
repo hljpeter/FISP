@@ -58,6 +58,21 @@
 		form.action = "${pageContext.request.contextPath}/FTZ210210/QryAuthDtl?page.page="+${page.number+1};
 		form.submit();
 	}
+	var BalanceValidation = function() {
+		var submitDate = $("#submitDate").val();//申报日期
+		var accountNo = $("#accountNo").val();//账号		
+		var subAccountNo = $("#subAccountNo").val();//主账号
+		
+		if(null == subAccountNo || ""==subAccountNo){
+			subAccountNo = accountNo;
+		}				
+		showDialog(
+				'${pageContext.request.contextPath}/FTZINCOM/BalanceCheck?check_AccountNo='
+						+ accountNo + "&check_SubAccountNo="
+						+ subAccountNo+ "&check_SubmitDate="
+						+ submitDate, '500', '1024');
+		
+	}
 	function sbDtl() {
 		$("#selected_msgId").val($("#msgId").val());
 		var msgStatus = $("#msgStatus").val();
@@ -248,6 +263,9 @@
 		<input
 			id="sbdetail" type="button" class="btn btn-primary" onclick="sbDtl()"
 			value="<spring:message code="ftz.label.AUTH_MSG"/>"> 
+		<input id="balanceValidation" type="button" class="btn btn-primary"
+			onclick="BalanceValidation();"
+			value="<spring:message code="ftz.label.balanceValidation"/>">
 		<input
 			type="button" class="btn btn-primary"
 			onclick="javascript:window.close();"

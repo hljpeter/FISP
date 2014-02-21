@@ -6,6 +6,25 @@
 		form.action = "${pageContext.request.contextPath}/BM_Cur_Qry/Qry";
 		form.submit();
 	}	
+	function add(){
+		window.showModalDialog('${pageContext.request.contextPath}/BM_Cur_Upd/AddInit', window, 'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+	}
+	//modify button
+	function updataCur(currCode,currName,currLan) {	
+		window.showModalDialog('${pageContext.request.contextPath}/BM_Cur_Upd/Init?currCode='+currCode+'&currName='+currName+'&currLan='+currLan, window, 'dialogHeight:500px; dialogWidth: 1024px;edge: Raised; center: Yes; help: no; resizable: Yes; status: no;');
+		form.submit();
+	}
+	
+	//del button
+	function del(currCode,currName,currLan) {
+		form.action = "${pageContext.request.contextPath}/BM_Cur_Upd/Delete?currCode="+currCode+"&currName="+currName+"&currLan="+currLan;
+		var msg=$("#confirmMsg1").val()+$("#deleteBtn").val()+$("#confirmMsg2").val();
+		if (confirm(msg)){
+			form.submit();
+		}else{
+			return false;
+		}
+	}
 	
 </script>
 <!-- tips information -->
@@ -53,6 +72,7 @@
 				<td>				    
 	    			<div align="right">	    			
 	    				<button type="button" class="btn btn-primary" onclick="search()"><spring:message code="button.label.Search"/></button>
+	    				<button type="button" class="btn btn-primary" onclick="add()"><spring:message code="button.lable.Add"/></button>
 	    			</div>	    			
 	    		</td>
 			</tr>
@@ -65,9 +85,10 @@
       <thead>
         <tr>
         	<th class="tbl_page_th" width="20px">No.</th>        	
-          	<th class="tbl_page_th" width="100px"><spring:message code="index.label.bm.currCode"/></th>
-          	<th class="tbl_page_th" width="160px"><spring:message code="index.label.bm.CurrName"/></th>  
-          	<th class="tbl_page_th" width="100px"><spring:message code="index.label.bm.currLan"/></th>          
+          	<th class="tbl_page_th" width="80px"><spring:message code="index.label.bm.currCode"/></th>
+          	<th class="tbl_page_th" width="150px"><spring:message code="index.label.bm.CurrName"/></th>  
+          	<th class="tbl_page_th" width="120px"><spring:message code="index.label.bm.currLan"/></th>          
+       	    <th class="tbl_page_th" width="100px"><spring:message code="index.label.sm.Operation"/></th>
         </tr>
       </thead>
      </table>
@@ -80,11 +101,19 @@
           <tr>
           	<td class="tbl_page_td_left vtip" width="20px">${(page.number*page.size)+(i.index+1)}</td>
             
-            <td class="tbl_page_td_left vtip" width="100px"> ${sysCurrency.currCode} </td>
-            <td class="tbl_page_td_left vtip" width="160px">${sysCurrency.currName}</td>   
-            <td class="tbl_page_td_left vtip" width="100px">
+            <td class="tbl_page_td_left vtip" width="80px"> ${sysCurrency.currCode} </td>
+            <td class="tbl_page_td_left vtip" width="150px">${sysCurrency.currName}</td>   
+            <td class="tbl_page_td_left vtip" width="120px">
 				<t:codeValue items="${BM_DICT}" key="${sysCurrency.currLan}" type="label"/>
-			</td>         
+			</td>   
+				
+			<td class="tbl_page_td_left " align="center" width="100px">
+			<div align ="center" >
+			<input type="button" id="updBtn" class="btn btn-small" onclick="updataCur('${f:h(sysCurrency.currCode)}','${f:h(sysCurrency.currName)}','${f:h(sysCurrency.currLan)}')"value="<spring:message code="button.lable.Modify"/>">
+			<input type="button" id="deleteBtn" class="btn btn-small" onclick="del('${f:h(sysCurrency.currCode)}','${f:h(sysCurrency.currName)}','${f:h(sysCurrency.currLan)}')" value="<spring:message code="button.lable.Del"/>">      
+       	    </div>
+       	   </td>
+
           </tr>
         </c:forEach>
         </form:form>

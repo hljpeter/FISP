@@ -156,7 +156,7 @@
 				<td class="label_td"><spring:message code="ftz.label.BRANCH_ID" /><!-- 机构号 -->：</td>
 				<td><form:select path="query_branchId">
 						<form:option value=""></form:option>
-						<form:options items="${SM_0002}" />
+						<form:options items="${orgList }" itemLabel="orgname" itemValue="orgid"/>
 					</form:select></td>
 				<td class="label_td"><spring:message code="ftz.label.WORK_DATE" /><!-- 工作日期 -->：</td>
 				<td><form:input id="query_workDate_start"

@@ -4,13 +4,25 @@ public class FtzMsgProc {
 
 	private Long id;
 
-	private String msgId;
+	private String ver;
+
+	private String src;
+
+	private String des;
+
+	private String app;
 
 	private String msgNo;
 
+	private String msgId;
+
 	private String msgRef;
-	
+
 	private String workDate;
+
+	private String editFlag;
+
+	private String reserve;
 
 	private String msgDirection;
 
@@ -46,12 +58,36 @@ public class FtzMsgProc {
 		this.id = id;
 	}
 
-	public String getMsgId() {
-		return msgId;
+	public String getVer() {
+		return ver;
 	}
 
-	public void setMsgId(String msgId) {
-		this.msgId = msgId;
+	public void setVer(String ver) {
+		this.ver = ver;
+	}
+
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
+	public String getDes() {
+		return des;
+	}
+
+	public void setDes(String des) {
+		this.des = des;
+	}
+
+	public String getApp() {
+		return app;
+	}
+
+	public void setApp(String app) {
+		this.app = app;
 	}
 
 	public String getMsgNo() {
@@ -60,6 +96,14 @@ public class FtzMsgProc {
 
 	public void setMsgNo(String msgNo) {
 		this.msgNo = msgNo;
+	}
+
+	public String getMsgId() {
+		return msgId;
+	}
+
+	public void setMsgId(String msgId) {
+		this.msgId = msgId;
 	}
 
 	public String getMsgRef() {
@@ -76,6 +120,22 @@ public class FtzMsgProc {
 
 	public void setWorkDate(String workDate) {
 		this.workDate = workDate;
+	}
+
+	public String getEditFlag() {
+		return editFlag;
+	}
+
+	public void setEditFlag(String editFlag) {
+		this.editFlag = editFlag;
+	}
+
+	public String getReserve() {
+		return reserve;
+	}
+
+	public void setReserve(String reserve) {
+		this.reserve = reserve;
 	}
 
 	public String getMsgDirection() {

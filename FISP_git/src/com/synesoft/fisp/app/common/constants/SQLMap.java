@@ -50,6 +50,15 @@ public class SQLMap {
 	public static final String SELECT_LIST = "selectList";
 	// select counts
 	public static final String SELECT_COUNTS = "selectCounts";
+	
+	//select del
+	public static final String SELECT_QUERYDEL="selectQueryDel";
+	
+	public static final String UPDATE_CURRENCY ="updateCurrency";
+	
+	public static final String DELETE_CUR ="deleteCur";
+	
+	public static final String INSERT_CUR="insertCur";
 	// select map
 	public static final String SELECT_MAP = "selectMap";
 	// select list
@@ -151,4 +160,11 @@ public class SQLMap {
 	
 	/**查询角色不绑定机构的资源**/
 	public static final String SELECT_ROLE_NO_ORG ="selectByRoleNoOrg";
+	
+	public static final String SELECT_LIST_PAGE_ALL ="selectListByPageAll";
+	
+	public static final String SELECT_LIST_PAGE_CHECK ="selectListByPageCheck";
+	
+	public static final String SELECT_LIST_FOR_PAGE ="selectListForPage";
+	
 }

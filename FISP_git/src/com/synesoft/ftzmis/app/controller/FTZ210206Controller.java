@@ -1,6 +1,7 @@
 package com.synesoft.ftzmis.app.controller;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -108,7 +109,21 @@ public class FTZ210206Controller {
 		FtzInMsgCtlVO msgCtlVO = (FtzInMsgCtlVO)form.getFtzInMsgCtlVO();
 		if(null != msgCtlVO)
 		{
-			vo.setBranchId(msgCtlVO.getBranchId().trim());
+			if(StringUtil.isNotTrimEmpty(msgCtlVO.getBranchId().trim()))
+			{
+			    vo.setBranchId(msgCtlVO.getBranchId().trim());
+			}
+			else
+			{
+				List<String> branchIds=new ArrayList<String>() ;
+				for(int i=0;i<orgList.size();i++)
+				{
+					branchIds.add(orgList.get(i).getOrgid().trim());
+				}
+				vo.setBranchIds(branchIds.toArray(new String[0]));
+			}
+			vo.setDepartment(msgCtlVO.getDepartment());
+			vo.setMakUserId(msgCtlVO.getMakUser());
 			vo.setStartDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getStartDate())));
 			vo.setEndDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getEndDate())));
 			vo.setMsgNo(CommonConst.MSG_NO_210206);

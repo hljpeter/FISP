@@ -159,9 +159,9 @@
 						<td class="vtip" style="text-align: left; width: 40px;"><t:codeValue items="${FTZ_CD_FLAG}" key="${dto1.cdFlag}" type="label" /></td>
 						<td class="vtip" style="text-align: left; width: 40px;">${dto1.tranDate}</td>
 						<td class="vtip" style="text-align: right; width: 40px;"><t:moneyFormat	type="label" value="${dto1.amount}" /></td>
-						<td class="vtip" style="text-align: right; width: 50px;">${dto1.oppName}</td>
-						<td class="vtip" style="text-align: right; width: 30px;">${dto1.valueDate}</td>
-						<td class="vtip" style="text-align: right; width: 30px;">${dto1.expireDate}</td>
+						<td class="vtip" style="text-align: left; width: 50px;">${dto1.oppName}</td>
+						<td class="vtip" style="text-align: left; width: 30px;">${dto1.valueDate}</td>
+						<td class="vtip" style="text-align: left; width: 30px;">${dto1.expireDate}</td>
 						<td style="display: none;">${dto1.msgId}</td>
 						<td style="display: none;">${dto1.seqNo}</td>
 					</tr>

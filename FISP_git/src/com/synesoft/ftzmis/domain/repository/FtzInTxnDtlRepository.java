@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
-import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 
 public interface FtzInTxnDtlRepository {	
 
@@ -91,5 +90,9 @@ public interface FtzInTxnDtlRepository {
 	
 	//更新审核状态
 	public int updateAuth(FtzInTxnDtl ftzInTxnDtl) ;
+	
+	public List<FtzInTxnDtl> queryAmountSumByCDFlag(FtzInTxnDtl ftzInTxnDtl);
+	
+	public List<FtzInTxnDtl> queryDtlCountByCDFlag(FtzInTxnDtl ftzInTxnDtl);
 	
 }

@@ -60,8 +60,8 @@ public class SyneContextLoaderListener extends ContextLoaderListener {
 //		startBatMonitor();// 启动批量框架
 		
 		log.info("开启处理MQ信息队列");
-		FtzMsgProcTrd ftzSendMsg = new FtzMsgProcTrd();
-		new Thread(ftzSendMsg).start();
+//		FtzMsgProcTrd ftzSendMsg = new FtzMsgProcTrd();
+//		new Thread(ftzSendMsg).start();
 	}
 	
 	/**

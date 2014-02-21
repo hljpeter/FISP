@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ import com.synesoft.ftzmis.domain.repository.FTZ210101Repository;
 
 @Service
 public class FTZ210101ServiceImp implements FTZ210101Service {
-	
-	protected static String funcId ="FTZ_Add_210101";
+
+	protected static String funcId = "FTZ_Add_210101";
 
 	@Override
 	public FtzInMsgCtl queryFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
@@ -58,23 +59,65 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 	@Override
 	@Transactional
 	public int deleteFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
+
 		FtzInTxnDtl ftzInTxnDtl = new FtzInTxnDtl();
 		ftzInTxnDtl.setMsgId(ftzInMsgCtl.getMsgId());
-		ftz210101Repos.deleteFtzInTxnDtls(ftzInTxnDtl);
 
-		FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
-		query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
-		FtzInMsgCtl ftzMsgCtl_tmp = this.queryFtzInMsgCtl(query_FtzInMsgCtl);
-		BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE,ftzMsgCtl_tmp.toString(), "");
-		
-		int i = ftz210101Repos.deleteFtzInMsgCtl(ftzInMsgCtl);
-		return i;
+		FtzInMsgCtl result_FtzInMsgCtl = ftz210101Repos
+				.queryFtzInMsgCtl(ftzInMsgCtl);
+		if (null != result_FtzInMsgCtl
+				&& CommonConst.MSG_RETURN_STATUS_FAIL.equals(result_FtzInMsgCtl
+						.getMsgReturnStatus())) {
+			List<FtzInTxnDtl> ftzInTxnDtls = ftz210101Repos
+					.queryFtzInTxnDtlList(ftzInTxnDtl);
+			UserInf userInfo = ContextConst.getCurrentUser();
+			for (FtzInTxnDtl dtl : ftzInTxnDtls) {
+				FtzInTxnDtl update_FtzInTxnDtl = new FtzInTxnDtl();
+				BeanUtils.copyProperties(dtl, update_FtzInTxnDtl);
+				update_FtzInTxnDtl
+						.setDtlSendStatus(CommonConst.DTL_SEND_STATUS_DELETE);
+				update_FtzInTxnDtl
+						.setChkStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
+				update_FtzInTxnDtl.setMakUserId(userInfo.getUserid());
+				update_FtzInTxnDtl.setMakDatetime(DateUtil
+						.getNowInputDateTime());
+				ftz210101Repos.updateFtzInTxnDtlSelective(update_FtzInTxnDtl);
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY, dtl.toString(),
+						update_FtzInTxnDtl.toString());
+			}
+			FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
+			BeanUtils.copyProperties(ftzInMsgCtl, update_FtzInMsgCtl);
+			update_FtzInMsgCtl
+					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
+			update_FtzInMsgCtl
+					.setDeleteFlag(CommonConst.MSG_DELETE_FLAG_DELETE);
+			update_FtzInMsgCtl.setMakUserId(userInfo.getUserid());
+			update_FtzInMsgCtl.setMakDatetime(DateUtil.getNowInputDateTime());
+			int i = ftz210101Repos.updateFtzInMsgCtl(update_FtzInMsgCtl);
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,
+					ftzInMsgCtl.toString(), update_FtzInMsgCtl.toString());
+			return i;
+		} else {
+			ftz210101Repos.deleteFtzInTxnDtls(ftzInTxnDtl);
+
+			FtzInMsgCtl query_FtzInMsgCtl = new FtzInMsgCtl();
+			query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
+			FtzInMsgCtl ftzMsgCtl_tmp = this
+					.queryFtzInMsgCtl(query_FtzInMsgCtl);
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE,
+					ftzMsgCtl_tmp.toString(), "");
+
+			int i = ftz210101Repos.deleteFtzInMsgCtl(ftzInMsgCtl);
+			return i;
+		}
 	}
 
 	@Override
 	@Transactional
 	public int insertFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl) {
-		BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD,"", ftzInMsgCtl.toString());
+		ftzInMsgCtl.setDeleteFlag(CommonConst.MSG_DELETE_FLAG_NORMAL);
+		ftzInMsgCtl.setBlankFlag(CommonConst.MSG_BLANK_FLAG_NORMAL);
+		BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD, "", ftzInMsgCtl.toString());
 		return ftz210101Repos.insertFtzInMsgCtl(ftzInMsgCtl);
 	}
 
@@ -88,15 +131,20 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 			query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
 			FtzInMsgCtl ftzMsgCtl_tmp = this
 					.queryFtzInMsgCtl(query_FtzInMsgCtl);
-			if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInMsgCtl.getMsgStatus())){
-				BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
-			}else if(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInMsgCtl.getMsgStatus())){
-				BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
-			}else{
-				BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInMsgCtl
+					.getMsgStatus())) {
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,
+						ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			} else if (CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInMsgCtl
+					.getMsgStatus())) {
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,
+						ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			} else {
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,
+						ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
 			}
-			
-			i=ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
+
+			i = ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
 		} else {
 			for (FtzInTxnDtl ftzInTxnDtl : ftzInTxnDtls) {
 				this.updateFtzInTxnDtlSelective(ftzInTxnDtl);
@@ -105,19 +153,19 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 			query_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
 			FtzInMsgCtl ftzMsgCtl_tmp = this
 					.queryFtzInMsgCtl(query_FtzInMsgCtl);
-			if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInMsgCtl.getMsgStatus())){
-				BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
-			}else if(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInMsgCtl.getMsgStatus())){
-				BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
-			}else{
-				BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInMsgCtl
+					.getMsgStatus())) {
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,
+						ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			} else if (CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInMsgCtl
+					.getMsgStatus())) {
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,
+						ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
+			} else {
+				BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,
+						ftzMsgCtl_tmp.toString(), ftzInMsgCtl.toString());
 			}
-			i= ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
-		}
-		if (ftzInMsgCtl.getMsgStatus().equals(
-				CommonConst.FTZ_MSG_STATUS_AUTH_SUCC)) {
-			generateXml.submitMsg(ftzInMsgCtl.getMsgNo(),
-					ftzInMsgCtl.getMsgId());
+			i = ftz210101Repos.updateFtzInMsgCtl(ftzInMsgCtl);
 		}
 		return i;
 	}
@@ -136,13 +184,36 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 		update_FtzInMsgCtl.setTotalCount(totalCount);
 		this.updateFtzInMsgCtl(update_FtzInMsgCtl, null);
 
-		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
-		query_FtzInTxnDtl.setMsgId(ftzInTxnDtl.getMsgId());
-		query_FtzInTxnDtl.setSeqNo(ftzInTxnDtl.getSeqNo());
-		FtzInTxnDtl ftzInTxnDtl_tmp = this.queryFtzInTxnDtl(query_FtzInTxnDtl);
-		BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE,ftzInTxnDtl_tmp.toString(), "");
+		if (null != result_FtzInMsgCtl
+				&& CommonConst.MSG_RETURN_STATUS_FAIL.equals(result_FtzInMsgCtl
+						.getMsgReturnStatus())) {
 
-		return ftz210101Repos.deleteFtzInTxnDtl(ftzInTxnDtl);
+			UserInf userInfo = ContextConst.getCurrentUser();
+			FtzInTxnDtl update_FtzInTxnDtl = new FtzInTxnDtl();
+			BeanUtils.copyProperties(ftzInTxnDtl, update_FtzInTxnDtl);
+			update_FtzInTxnDtl
+					.setDtlSendStatus(CommonConst.DTL_SEND_STATUS_DELETE);
+			update_FtzInTxnDtl
+					.setChkStatus(CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED);
+			update_FtzInTxnDtl.setMakUserId(userInfo.getUserid());
+			update_FtzInTxnDtl.setMakDatetime(DateUtil.getNowInputDateTime());
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,
+					ftzInTxnDtl.toString(), update_FtzInTxnDtl.toString());
+			return ftz210101Repos
+					.updateFtzInTxnDtlSelective(update_FtzInTxnDtl);
+		} else {
+
+			FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
+			query_FtzInTxnDtl.setMsgId(ftzInTxnDtl.getMsgId());
+			query_FtzInTxnDtl.setSeqNo(ftzInTxnDtl.getSeqNo());
+			FtzInTxnDtl ftzInTxnDtl_tmp = this
+					.queryFtzInTxnDtl(query_FtzInTxnDtl);
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_DELETE,
+					ftzInTxnDtl_tmp.toString(), "");
+
+			return ftz210101Repos.deleteFtzInTxnDtl(ftzInTxnDtl);
+		}
+
 	}
 
 	/*
@@ -169,6 +240,7 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 		ftzInMsgCtl.setMsgId(ftzInTxnDtl.getMsgId());
 		FtzInMsgCtl result_FtzInMsgCtl = ftz210101Repos
 				.queryFtzInMsgCtl(ftzInMsgCtl);
+
 		FtzInMsgCtl update_FtzInMsgCtl = new FtzInMsgCtl();
 		update_FtzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
 		update_FtzInMsgCtl
@@ -177,10 +249,20 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 		update_FtzInMsgCtl.setMakUserId(userInfo.getUserid());
 		update_FtzInMsgCtl.setMakDatetime(DateUtil.getNowInputDateTime());
 		ftz210101Repos.updateFtzInMsgCtl(update_FtzInMsgCtl);
+		if (null != result_FtzInMsgCtl
+				&& CommonConst.MSG_RETURN_STATUS_FAIL.equals(result_FtzInMsgCtl
+						.getMsgReturnStatus())) {
+			ftzInTxnDtl.setDtlSendStatus(CommonConst.DTL_SEND_STATUS_ADD);
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD, "",
+					ftzInTxnDtl.toString());
+			return ftz210101Repos.insertFtzInTxnDtl(ftzInTxnDtl);
+		} else {
+			ftzInTxnDtl.setDtlSendStatus(CommonConst.DTL_SEND_STATUS_NORMAL);
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD, "",
+					ftzInTxnDtl.toString());
+			return ftz210101Repos.insertFtzInTxnDtl(ftzInTxnDtl);
+		}
 
-		BizLog(CommonConst.DATA_LOG_OPERTYPE_ADD,"",ftzInTxnDtl.toString());
-
-		return ftz210101Repos.insertFtzInTxnDtl(ftzInTxnDtl);
 	}
 
 	@Override
@@ -197,17 +279,33 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 					.setMsgStatus(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL);
 			this.updateFtzInMsgCtl(update_FtzInMsgCtl, null);
 		}
+		FtzInMsgCtl ftzInMsgCtl = new FtzInMsgCtl();
+		ftzInMsgCtl.setMsgId(ftzInTxnDtl.getMsgId());
+		FtzInMsgCtl result_FtzInMsgCtl = ftz210101Repos
+				.queryFtzInMsgCtl(ftzInMsgCtl);
+		if (null != result_FtzInMsgCtl
+				&& CommonConst.MSG_RETURN_STATUS_FAIL.equals(result_FtzInMsgCtl
+						.getMsgReturnStatus())) {
+			ftzInTxnDtl.setDtlSendStatus(CommonConst.DTL_SEND_STATUS_MODIFY);
+		}
+
 		FtzInTxnDtl query_FtzInTxnDtl = new FtzInTxnDtl();
 		query_FtzInTxnDtl.setMsgId(ftzInTxnDtl.getMsgId());
 		query_FtzInTxnDtl.setSeqNo(ftzInTxnDtl.getSeqNo());
 		FtzInTxnDtl ftzInTxnDtl_tmp = this.queryFtzInTxnDtl(query_FtzInTxnDtl);
-		if(CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl.getChkStatus())){
-			BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
-		}else if(CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInTxnDtl.getChkStatus())){
-			BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
-		}else{
-			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
+		if (CommonConst.FTZ_MSG_STATUS_AUTH_SUCC.equals(ftzInTxnDtl
+				.getChkStatus())) {
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_CHECK,
+					ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
+		} else if (CommonConst.FTZ_MSG_STATUS_AUTH_FAIL.equals(ftzInTxnDtl
+				.getChkStatus())) {
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_REJECT,
+					ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
+		} else {
+			BizLog(CommonConst.DATA_LOG_OPERTYPE_MODIFY,
+					ftzInTxnDtl_tmp.toString(), ftzInTxnDtl.toString());
 		}
+
 		return ftz210101Repos.updateFtzInTxnDtlSelective(ftzInTxnDtl);
 	}
 
@@ -230,17 +328,19 @@ public class FTZ210101ServiceImp implements FTZ210101Service {
 	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode) {
 		return ftz210101Repos.queryFtzBankCode(ftzBankCode);
 	}
-	
+
 	private void BizLog(String operType, String beforeData, String afterData) {
 		OrgInf orgInfo = ContextConst.getOrgInfByUser();
 		UserInf userInfo = ContextConst.getCurrentUser();
-		TlrLogPrint.tlrBizLogPrint(funcId, orgInfo.getOrgid(), userInfo.getUserid(), userInfo.getUsername(), operType, 
-				DateUtil.getNowInputDate(), DateUtil.getNowInputTime(), beforeData, afterData);
+		TlrLogPrint.tlrBizLogPrint(funcId, orgInfo.getOrgid(),
+				userInfo.getUserid(), userInfo.getUsername(), operType,
+				DateUtil.getNowInputDate(), DateUtil.getNowInputTime(),
+				beforeData, afterData);
 	}
 
 	@Resource
 	protected FTZ210101Repository ftz210101Repos;
-	
+
 	@Resource
 	protected FtzMsgProcService generateXml;
 }

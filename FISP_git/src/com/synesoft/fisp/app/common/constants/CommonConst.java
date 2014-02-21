@@ -162,4 +162,20 @@ public class CommonConst {
 	/** 否 */
 	public static final String NO = "0";
 	
+	/** 用户登录日志 - 结果(成功) */
+	public static final String SYS_LOGIN_RESULT_SUCCESS = "S";
+	/** 用户登录日志 - 结果(失败) */
+	public static final String SYS_LOGIN_RESULT_FAILURE = "F";
+	/** 用户登录日志 - 类型(登录) */
+	public static final String SYS_LOGIN_TYPE_LOGIN = "I";
+	/** 用户登录日志 - 类型(登出) */
+	public static final String SYS_LOGIN_TYPE_LOGOUT = "O";
+	/** 用户登录日志 - 类型(登录) */
+	public static final String SYS_LOGIN_DEFAULT_IP = "127.0.0.1";
+	/** 用户登录日志 - 类型(登出) */
+	public static final String SYS_LOGIN_DEFAULT_MACHINE_NAME = "MACHINE_NAME";
+	/** 用户登录日志 - 失败原因 */
+	public static final String SYS_LOGIN_FAIL_SEASON_PASSWD_ERROR = "User password is wrong!";
+	public static final String SYS_LOGIN_FAIL_SEASON_USER_LOCKED = "The user is locked!";
+	
 }

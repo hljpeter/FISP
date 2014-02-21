@@ -77,7 +77,6 @@ public class FTZ210308Controller {
 			vo.setStartDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getStartDate())));
 			vo.setEndDate(DateUtil.getFormatDateRemoveSprit(StringUtil.trim(msgCtlVO.getEndDate())));
 			vo.setMsgId(StringUtil.trim(msgCtlVO.getMsgId()));
-			vo.setEditFlag(CommonConst.FTZ_MSG_EDIT_FLAG_ADD);	// 录入查询中，只能查到报"新增"的报文
 			if (!StringUtil.isNotTrimEmpty(msgCtlVO.getMsgStatus())) {
 				vo.setMsgStatuss(new String[] {CommonConst.FTZ_MSG_STATUS_INPUTING, CommonConst.FTZ_MSG_STATUS_INPUT_COMPLETED, 
 						CommonConst.FTZ_MSG_STATUS_AUTH_FAIL, CommonConst.FTZ_MSG_STATUS_PBOC_RTN_FAIL });

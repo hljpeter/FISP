@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -86,6 +88,21 @@ public class ContextConst {
 	    }
 	    
 	    return menulist;
+    }
+
+	/**
+	 * 获取Left菜单信息
+	 * @return
+	 */
+	public static String[] getUserMenuList() {
+		Map<String, Object> map_authority = (Map<String, Object>) ContextConst.getAttribute(CommonConst.USERFUNC_SESSION);
+	    if(map_authority != null) {
+	    	Set<String> set = map_authority.keySet();
+	    	String[] menuArray = new String[set.size()];
+	    	menuArray = set.toArray(menuArray);
+	    	return menuArray;
+	    }
+	    return null;
     }
 
 	/**

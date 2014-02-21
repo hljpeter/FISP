@@ -66,7 +66,7 @@ public class Validator {
 	 * <p>&nbsp;&nbsp;FALSE - 校验不通过，否</p>
 	 */
 	public static Boolean CheckAmount(BigDecimal amount) {
-		Pattern pattern = Pattern.compile("^-?[0-9]{1,22}(.[0-9]{2})?$");
+		Pattern pattern = Pattern.compile("^-?[0-9]{1,22}(\\.[0-9]{1,2})?$");
 		Matcher matcher = pattern.matcher(amount.toString());
 		return matcher.find();
 	}
@@ -79,7 +79,7 @@ public class Validator {
 	 * <p>&nbsp;&nbsp;FALSE - 校验不通过，否</p>
 	 */
 	public static Boolean CheckRate(BigDecimal rate) {
-		Pattern pattern = Pattern.compile("^-?[0-9]{1,7}(.[0-9]{6})?$");
+		Pattern pattern = Pattern.compile("^-?[0-9]{1,7}(\\.[0-9]{1,6})?$");
 		Matcher matcher = pattern.matcher(rate.toString());
 		return matcher.find();
 	}
@@ -92,7 +92,7 @@ public class Validator {
 	 * <p>&nbsp;&nbsp;FALSE - 校验不通过，否</p>
 	 */
 	public static Boolean CheckInterestRate(BigDecimal rate) {
-		Pattern pattern = Pattern.compile("^-?[0-9]{1,2}(.[0-9]{6})?$");
+		Pattern pattern = Pattern.compile("^-?[0-9]{1,2}(\\.[0-9]{1,6})?$");
 		Matcher matcher = pattern.matcher(rate.toString());
 		return matcher.find();
 	}
@@ -116,4 +116,14 @@ public class Validator {
 			}
 		}
 	}
+
+//	public static void main(String[] args) {
+//		System.out.println(CheckInterestRate(new BigDecimal("111.1")));
+//		System.out.println(CheckInterestRate(new BigDecimal("111.")));
+//		System.out.println(CheckInterestRate(new BigDecimal("111")));
+//		System.out.println(CheckInterestRate(new BigDecimal("11.12")));
+//		System.out.println(CheckInterestRate(new BigDecimal("11.124567890")));
+//		System.out.println(CheckInterestRate(new BigDecimal("00000.12456")));
+//		System.out.println(CheckInterestRate(new BigDecimal("11.00")));
+//	}
 }

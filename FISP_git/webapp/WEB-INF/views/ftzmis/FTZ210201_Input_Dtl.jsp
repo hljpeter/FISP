@@ -212,6 +212,26 @@
 			queryFTZ210201();	
 		}
 	}
+	function BalanceValidation(){
+		var submitDate = $("#submitDate").val();//申报日期
+		var accountNo = $("#accountNo").val();//账号		
+		var subAccountNo = $("#subAccountNo").val();//主账号
+		
+		if(null == subAccountNo || ""== subAccountNo){
+			subAccountNo = accountNo;
+		}		
+		if (null == submitDate || "" == submitDate && null == accountNo 
+				|| "" == accountNo ) {
+			alert('申报日期及账号不能为空!');
+			return;
+		}  		
+		showDialog(
+				'${pageContext.request.contextPath}/FTZINCOM/BalanceCheck?check_AccountNo='
+						+ accountNo + "&check_SubAccountNo="
+						+ subAccountNo+ "&check_SubmitDate="
+						+ submitDate, '500', '1024');
+		
+	}
 	function queryFTZ210201() {
 		$("#selected_msgId").val($("#msgId").val());
 		$("#balance").val($("#balance").val().replaceAll(",", ""));
@@ -333,7 +353,9 @@
 				<tr>
 				<td style="text-align: center;" colspan="4">
 					<button type="button" class="btn btn-primary" onclick="DtlSubmit()"><spring:message code="ftz.label.SUBMIT_MSG" /></button>
-					
+					<input id="balanceValidation"
+					type="button" class="btn btn-primary" onclick="BalanceValidation()"
+					value="<spring:message code="ftz.label.balanceValidation" />" />
 				</td>
 			</tr>
 			</tr>

@@ -203,13 +203,13 @@ public class CommonConst {
 	/** 对方机构为境外机构时 */
 	public static final String VALID_COUNTRY_CODE_DEFAULT = "CHN";
 
-	public static final String FTZ_Add_210206 = "210206";
+	public static final String FTZ_Add_210206 = "FTZ_Add_210206";
 
-	public static final String FTZ_Add_210207 = "210207";
+	public static final String FTZ_Add_210207 = "FTZ_Add_210207";
 
-	public static final String FTZ_Add_210208 = "210208";
+	public static final String FTZ_Add_210208 = "FTZ_Add_210208";
 
-	public static final String FTZ_Add_210209 = "210209";
+	public static final String FTZ_Add_210209 = "FTZ_Add_210209";
 
 	public static final String FTZ_Add_210210 = "210210";
 
@@ -237,5 +237,57 @@ public class CommonConst {
 
 	/** 是否跳过审核 */
 	public static final Boolean TXN_SKIP_SUBMIT = true;
+	
+	/** 出入账标志-出账*/
+	public static final String CD_FLAG_EXPEND ="1";
+	
+	/** 出入账标志-入账*/
+	public static final String CD_FLAG_ENTER ="2";
+	
+	/** 出入账标志-出账冲正*/
+	public static final String CD_FLAG_EXPEND_FLUSHES ="3";
+	
+	/** 出入账标志-入账冲正*/
+	public static final String CD_FLAG_ENTER_FLUSHES ="4";
+	
+	/** 余额校验标志 - 通过*/
+	public static final String BALANCE_CHECK_STATUS_PASS ="1";
+	
+	/** 余额校验标志 - 失败*/
+	public static final String BALANCE_CHECK_STATUS_NOT_PASS ="2";
+	
+	/** 报文返回状态- 正常*/
+	public static final String MSG_RETURN_STATUS_NORMAL ="0";
+	
+	/** 报文返回状态 - 失败*/
+	public static final String MSG_RETURN_STATUS_FAIL ="1";
+	
+	/** 明细发送状态- 正常*/
+	public static final String DTL_SEND_STATUS_NORMAL ="0";
+	
+	/** 明细发送状态- 再发送新增*/
+	public static final String DTL_SEND_STATUS_ADD ="1";
+	
+	/** 明细发送状态- 再发送修改*/
+	public static final String DTL_SEND_STATUS_MODIFY ="2";
+	
+	/** 明细发送状态- 再发送删除*/
+	public static final String DTL_SEND_STATUS_DELETE ="3";
+	
+	/** 报文删除标志- 正常*/
+	public static final String MSG_DELETE_FLAG_NORMAL ="0";
+	
+	/** 报文删除标志 - 删除*/
+	public static final String MSG_DELETE_FLAG_DELETE ="1";
+	
+	/** 报文空报文标志- 正常*/
+	public static final String MSG_BLANK_FLAG_NORMAL ="0";
+	
+	/** 报文空报文标志 - 空报文*/
+	public static final String MSG_BLANK_FLAG_BLANK ="1";
 
+	public static final String MSG_PROC_DIRECT_SEND = "S";
+	public static final String MSG_PROC_DIRECT_RECEIVE = "R";
+
+	public static final String MSG_PROC_STATUS_WAITING_SEND = "10";
 }

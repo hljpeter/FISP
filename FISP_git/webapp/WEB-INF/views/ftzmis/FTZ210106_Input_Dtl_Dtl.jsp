@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(function() {
+		$('input').popover('hide');
 		var input_Dtl_flag = $("#input_Dtl_flag").val();
 		if ('add' == input_Dtl_flag) {
 			var seqNo = $("#seqNo").val();
@@ -116,7 +117,7 @@
 				<td class="label_td"><spring:message
 						code="ftz.label.ORG_TRAN_DATE" />：</td>
 				<td><form:input id="orgTranDate" path="ftzInTxnDtl.orgTranDate"
-						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" /></td>
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="input-large" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当出入账标志为出账业务冲正或入账业务冲正时，本栏位为强制项，且栏位值小于等于记账日期" /></td>
 			</tr>
 			<tr>
 				<td class="label_td"><font color="red">* </font> <spring:message
@@ -127,7 +128,7 @@
 						format="###,###,###,###.00" dot="true" maxlength="24"/></td>
 				<td class="label_td"><font color="red">* </font><spring:message code="ftz.label.OPP_NAMES" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName"
-						class=".input-large"/></td>
+						class=".input-large" data-placement="right" data-content="海外央行的名称"/></td>
 				
 			</tr>
 			<tr>
@@ -156,7 +157,7 @@
 				<td><t:moneyFormat type="text" id="interestRate"
 						name="ftzInTxnDtl.interestRate"
 						value="${FTZ210106Form.ftzInTxnDtl.interestRate}"
-						format="###,###,###,###.000000" dot="true" maxlength="9" /></td>
+						format="###.000000" dot="true" maxlength="15" /></td>
 				<td class="label_td"><font color="red">* </font> <spring:message
 						code="ftz.label.TRAN_TYPE" />：</td>
 				<td><form:select path="ftzInTxnDtl.tranType" id="tranType">

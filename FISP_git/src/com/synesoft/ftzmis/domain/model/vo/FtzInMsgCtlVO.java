@@ -29,14 +29,25 @@ public class FtzInMsgCtlVO extends FtzInMsgCtl {
     /** 原报文状态 */
     private String oldMsgStatus;
     
+    private String[]branchIds;
+    
+	public String[] getBranchIds() {
+		return branchIds;
+	}
 
-    public String getDepartment() {
+	public void setBranchIds(String[] branchIds) {
+		this.branchIds = branchIds;
+	}
+
+	public String getDepartment() {
 		return department;
 	}
 
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+	
+
 
 	public String getMakUser() {
 		return makUser;

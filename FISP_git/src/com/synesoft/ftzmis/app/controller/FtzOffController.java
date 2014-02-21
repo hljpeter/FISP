@@ -135,7 +135,7 @@ public class FtzOffController {
 		if (CommonConst.MSG_NO_210301.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210301/Qry/DtlMsg/Init?FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210302.equals(form.getSelected_msgNo())) {
-			return "redirect:/FTZ210302/QryDtl?selected_msgId="+ form.getSelected_msgId();
+			return "redirect:/FTZ210302/Qry/DtlMsg/Init?selected_msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210303.equals(form.getSelected_msgNo())) {
 			return "redirect:/FTZ210303/Qry/DtlMsg/Init?FtzOffMsgCtl.msgId="+ form.getSelected_msgId();
 		} else if (CommonConst.MSG_NO_210304.equals(form.getSelected_msgNo())) {

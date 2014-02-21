@@ -112,9 +112,27 @@ public class SQLMap {
 					
 	// select bank counts
 	public static final String SELECT_BANK_COUNTS = "selectBankCounts";
+	
+	public static final String SELECT_SUM_BY_CDFLAG = "selectSumByCDFlag";
+	
+	public static final String SELECT_COUNT_BY_CDFLAG = "selectCountByCDFlag";
+	
 	/** #########################Common Sqlmap Id######################### **/
 
 	public static final String SELECT_RESEND_COUNTS = "selectCountsResend";
 	
 	public static final String SELECT_RESEND_LIST = "selectListResend";
+	
+	/** 生成报文使用 */
+	public static final String GEN_SELECT_MSG_LIST = "selectMsgList";
+	public static final String GEN_SELECT_SUBMIT_DATE_LIST = "selectSubmitDateList";
+	public static final String GEN_SELECT_TXN_LIST = "selectTxnList";
+	public static final String GEN_SELECT_TXN = "selectTxn";
+	public static final String GEN_INSERT_MSG = "insertMsg";
+	public static final String GEN_INSERT_MAP = "insertMap";
+	public static final String GEN_SELECT_MSG = "selectMsg";
+	public static final String GEN_SELECT_MSG_PROC_RESULT = "selectMsgProcResult";
+	public static final String GEN_SELECT_MSG_ID = "selectMsgIdSeq";
+	public static final String GEN_BLANK_BATCH_PROC = "blankBatchProc";
+
 }

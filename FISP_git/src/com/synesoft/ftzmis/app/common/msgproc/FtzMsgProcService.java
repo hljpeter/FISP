@@ -40,9 +40,11 @@ import com.synesoft.fisp.domain.model.SysParam;
 import com.synesoft.ftzmis.app.common.msgproc.ibmMQ.MQConstant;
 import com.synesoft.ftzmis.app.common.msgproc.ibmMQ.MQMsgProc;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
+import com.synesoft.ftzmis.domain.model.FtzMsgBatch;
 import com.synesoft.ftzmis.domain.model.FtzMsgProc;
 import com.synesoft.ftzmis.domain.model.FtzOffMsgCtl;
 import com.synesoft.ftzmis.domain.repository.FtzInMsgCtlRepository;
+import com.synesoft.ftzmis.domain.repository.FtzMsgBatchRepository;
 import com.synesoft.ftzmis.domain.repository.FtzMsgProcRepository;
 import com.synesoft.ftzmis.domain.repository.FtzOffMsgCtlRepository;
 
@@ -60,6 +62,9 @@ public class FtzMsgProcService{
 	@Resource
 	private FtzOffMsgCtlRepository ftzOffMsgCtlRepository;
 	
+	@Resource
+	private FtzMsgBatchRepository ftzMsgBatchRepository;
+	
 	@Autowired
 	private DpExpCfgService dpExpCfgService;
 	
@@ -73,7 +78,7 @@ public class FtzMsgProcService{
 	private static final String endTag = "</CFX>";
 	
 	// 报文编号分类
-	private static enum MsgType {
+	public static enum MsgType {
 		FTZ_IN_MSG, // 表内报文(发送)
 		FTZ_OUT_MSG, // 表外报文(发送)
 		FTZ_ACT_SEND, // 账户信息报送
@@ -108,9 +113,9 @@ public class FtzMsgProcService{
 			put("210207", MsgType.FTZ_IN_MSG); // 存放中央银行特种存款
 			put("210208", MsgType.FTZ_IN_MSG); // 缴存中央银行财政性存款
 			put("210209", MsgType.FTZ_IN_MSG); // 同业往来（运用方）
-			put("210210", MsgType.FTZ_IN_MSG); // 系统内资金往来
+//			put("210210", MsgType.FTZ_IN_MSG); // 系统内资金往来
 			put("210211", MsgType.FTZ_IN_MSG); // 库存现金
-			put("210212", MsgType.FTZ_IN_MSG); // 外汇买卖
+//			put("210212", MsgType.FTZ_IN_MSG); // 外汇买卖
 			put("210401", MsgType.FTZ_IN_MSG); // 代理发债
 			put("210301", MsgType.FTZ_OUT_MSG); // 应付信用证（进口开证）
 			put("210302", MsgType.FTZ_OUT_MSG); // 应付保函/备用证（保函/备用证开立）
@@ -131,6 +136,10 @@ public class FtzMsgProcService{
 		}
 	};
 	
+	public static MsgType getMsgType(String msgNo) {
+		return mMsgType.get(msgNo);
+	}
+	
 	/**
 	 * 提交报文信息
 	 * @param msg_no 报文编号
@@ -139,9 +148,9 @@ public class FtzMsgProcService{
 	@Transactional
 	public void submitMsg(String msg_no, String msg_id) {
 		//将报文信息设置为待发送
-		setSendMsgAwait(msg_no, msg_id, false);
+//		setSendMsgAwait(msg_no, msg_id, false);
 		//写报文信息到文件
-		writeToXml(msg_no, msg_id);
+//		writeToXml(msg_no, msg_id);
 	}
 	
 	/**
@@ -151,28 +160,31 @@ public class FtzMsgProcService{
 	 * @param err_correct_flag 纠错标志(人行反馈错误,修改后重发 为True，否则是false)
 	 * @param errInfo 错误信息
 	 */
-	@Transactional
-	public void setSendMsgAwait(String msg_no, String msg_id, boolean err_correct_flag) {
-		FtzMsgProc ftzMsgProc = new FtzMsgProc();
-		
-		ftzMsgProc.setMsgId(msg_id); // 报文标识号
-		ftzMsgProc.setMsgNo(msg_no); // 报文编号
-		ftzMsgProc.setWorkDate(procCommonService.queryWorkDate()); // 工作日期
-		ftzMsgProc.setMsgDirection("S"); // S-发送,R-接收
-		// 10-待发送;11-发送成功;12-发送失败;13-接收应答成功;14-接收应答失败;15-接收应答超时;16-失败处理应答;21-待处理;22-处理成功;23-处理失败;
-		ftzMsgProc.setMsgStatus("10"); 
-		
-		log.info("将报文信息设置为10-待发送,工作日期:"+ftzMsgProc.getWorkDate()+",报文编号:"+msg_no+"报文标识号:"+msg_id+"是否纠错报文:"+err_correct_flag);
-		
-		ftzMsgProcRepository.insertFtzMsgProc(ftzMsgProc);
-	}
+//	@Transactional
+//	public void setSendMsgAwait(String msg_no, String msg_id, boolean err_correct_flag) {
+//		FtzMsgProc ftzMsgProc = new FtzMsgProc();
+//		
+//		ftzMsgProc.setMsgId(msg_id); // 报文标识号
+//		ftzMsgProc.setMsgNo(msg_no); // 报文编号
+//		ftzMsgProc.setWorkDate(procCommonService.queryWorkDate()); // 工作日期
+//		ftzMsgProc.setMsgDirection("S"); // S-发送,R-接收
+//		// 10-待发送;11-发送成功;12-发送失败;13-接收应答成功;14-接收应答失败;15-接收应答超时;16-失败处理应答;21-待处理;22-处理成功;23-处理失败;
+//		ftzMsgProc.setMsgStatus("10"); 
+//		
+//		log.info("将报文信息设置为10-待发送,工作日期:"+ftzMsgProc.getWorkDate()+",报文编号:"+msg_no+"报文标识号:"+msg_id+"是否纠错报文:"+err_correct_flag);
+//		
+//		ftzMsgProcRepository.insertFtzMsgProc(ftzMsgProc);
+//	}
 	
 	/**
 	 * 保存报文信息到xml文件
-	 * @param msg_no 报文编号
-	 * @param msg_id 报文标识号
+	 * @param ftzMsgProc 报文信息对象
 	 */
-	public void writeToXml(String msg_no, String msg_id) {
+	public boolean writeToXml(FtzMsgProc ftzMsgProc) {
+		
+		String msg_no = ftzMsgProc.getMsgNo();
+		String msg_id = ftzMsgProc.getMsgId();
+		
 		StringBuffer errInfo = new StringBuffer();
 		StringBuffer xml = new StringBuffer();
 		
@@ -180,7 +192,7 @@ public class FtzMsgProcService{
 		
 		Map<String, Object> msgParam = new HashMap<String, Object>();
 		msgParam.put("%MSG_NO%", msg_no);
-		msgParam.put("%MSG_ID%", msg_id);
+		msgParam.put("%FTZ_MSG_PROC_ID%", ftzMsgProc.getId());
 		
 		dpExpCfg.setFilePath(dpExpCfg.getFilePath().replace("%WORK_DATE%", procCommonService.queryWorkDate()));
 		dpExpCfg.setFileName(dpExpCfg.getFileName().replace("%MSG_NO%", msg_no).replace("%MSG_ID%", msg_id));
@@ -190,11 +202,11 @@ public class FtzMsgProcService{
 		
 		XMLUtil xmlUtil = new XMLUtil(errInfo, dpExpCfgService, procCommonService);
 		
-		FtzMsgProc ftzMsgProc = new FtzMsgProc();
-		ftzMsgProc.setMsgId(msg_id); // 报文标识号
-		ftzMsgProc.setMsgNo(msg_no); // 报文编号
-		ftzMsgProc.setWorkDate(procCommonService.queryWorkDate());
-		ftzMsgProc.setFileName(fullFileName);
+		FtzMsgProc uptFtzMsgProc = new FtzMsgProc();
+		uptFtzMsgProc.setMsgId(msg_id); // 报文标识号
+		uptFtzMsgProc.setMsgNo(msg_no); // 报文编号
+//		uptFtzMsgProc.setWorkDate(procCommonService.queryWorkDate());
+		uptFtzMsgProc.setFileName(fullFileName);
 		
 		if (xmlUtil.xmlHandle(dpExpCfg, xml, msgParam)){
 			try {
@@ -210,16 +222,45 @@ public class FtzMsgProcService{
 				log.info("写报文信息成功,报文编号:"+msg_no+",报文标识号:"+msg_id+",文件名:"+fullFileName);
 			} catch (Exception e) {
 				log.error("写报文信息到文件出错,报文编号:"+msg_no+",报文标识号:"+msg_id+",错误信息:"+errInfo.toString());
-				ftzMsgProc.setFailReason(getErrInfo("写报文信息到文件出错,报文编号:"+msg_no+",报文标识号:"+msg_id+",错误信息:"+errInfo.toString()));
+				uptFtzMsgProc.setFailReason(getErrInfo("写报文信息到文件出错,报文编号:"+msg_no+",报文标识号:"+msg_id+",错误信息:"+errInfo.toString()));
+				return false;
 			} 
 		} else {
 			//更新错误信息到
 			log.error("写报文信息到文件出错,报文编号:"+msg_no+",报文标识号:"+msg_id+",错误信息:"+xmlUtil.getSbf().toString());
-			ftzMsgProc.setFailReason(getErrInfo("写报文信息到文件出错,报文编号:"+msg_no+",报文标识号:"+msg_id+",错误信息:"+xmlUtil.getSbf().toString()));
+			uptFtzMsgProc.setFailReason(getErrInfo("写报文信息到文件出错,报文编号:"+msg_no+",报文标识号:"+msg_id+",错误信息:"+xmlUtil.getSbf().toString()));
+			return false;
 		}
 		
 		//更新信息到信息处理队列
-		ftzMsgProcRepository.updateFtzMsgProc(ftzMsgProc);
+		ftzMsgProcRepository.updateFtzMsgProc(uptFtzMsgProc);
+		
+		return true;
+	}
+	
+	/**
+	 * 根据报文流水号获取 批量头id数组
+	 * @param ftzMsgBatch
+	 * @return
+	 */
+	public String getMsgIdArr(String msg_proc_msgId) {
+		List<FtzMsgBatch> lFtzMsgBatch = ftzMsgBatchRepository.queryFtzMsgBatch(msg_proc_msgId);
+
+		StringBuffer sbMsgId = new StringBuffer();
+		if (lFtzMsgBatch != null && lFtzMsgBatch.size() > 0) {
+			sbMsgId.append("(");
+
+			for (int i = 0; i < lFtzMsgBatch.size(); i++) {
+				if (!"(".equals(sbMsgId.toString())) {
+					sbMsgId.append(",");
+				}
+				sbMsgId.append("'").append(lFtzMsgBatch.get(i).getMsgId())
+						.append("'");
+			}
+			sbMsgId.append(")");
+		}
+
+		return sbMsgId.toString();
 	}
 	
 	/**
@@ -236,7 +277,20 @@ public class FtzMsgProcService{
 				
 				//发送报文信息处理
 				if ("S".equals(ftzMsgProc.getMsgDirection())) {
-					log.info("开始处理发送报文,ID:"+ftzMsgProc.getId()+",工作日期:"+ftzMsgProc.getWorkDate()
+					
+					//写报文信息到本地文件
+					if ("".equals(ftzMsgProc.getFileName())){
+						log.info("开始写报文信息到本地文件,ID:"+ftzMsgProc.getId()+",工作日期:"+ftzMsgProc.getWorkDate()
+								+",报文编号:"+ftzMsgProc.getMsgNo()+",报文标识号:"+ftzMsgProc.getMsgId());
+						
+						if (writeToXml(ftzMsgProc)){
+							ftzMsgProc = ftzMsgProcRepository.queryFtzMsgProc(ftzMsgProc);
+						} else {
+							continue; 
+						}
+					}
+					
+					log.info("开始处理发送报文,ID:"+ftzMsgProc.getId()+",工作日期:"+ftzMsgProc.getWorkDate() 
 							+",报文编号:"+ftzMsgProc.getMsgNo()+",报文标识号:"+ftzMsgProc.getMsgId());
 					
 					String fail_reason = "";
@@ -270,7 +324,7 @@ public class FtzMsgProcService{
 						// 更新交易状态
 						if (MsgType.FTZ_IN_MSG.equals(mMsgType.get(ftzMsgProc.getMsgNo()))) { //表内报文(发送)
 							FtzInMsgCtl ftzInMsgCtl = new FtzInMsgCtl();
-							ftzInMsgCtl.setMsgId(ftzMsgProc.getMsgId());
+							ftzInMsgCtl.setMsgId(getMsgIdArr(ftzMsgProc.getMsgId()));
 							ftzInMsgCtl.setMsgStatus(msg_status);
 							ftzInMsgCtl.setSndDatetime(DateUtil.getNow(DateUtil.DATE_FORMAT_YYYYMMDDHHMMSS));
 							
@@ -278,11 +332,11 @@ public class FtzMsgProcService{
 						} else if (MsgType.FTZ_OUT_MSG.equals(mMsgType.get(ftzMsgProc.getMsgNo()))){ //表外报文(发送)
 							FtzOffMsgCtl ftzOffMsgCtl = new FtzOffMsgCtl();
 							
-							ftzOffMsgCtl.setMsgId(ftzMsgProc.getMsgId());
+							ftzOffMsgCtl.setMsgId(getMsgIdArr(ftzMsgProc.getMsgId()));
 							ftzOffMsgCtl.setMsgStatus(msg_status);
 							ftzOffMsgCtl.setSndDatetime(DateUtil.getNow(DateUtil.DATE_FORMAT_YYYYMMDDHHMMSS));
 							
-							ftzOffMsgCtlRepository.updateFtzOffMsgCtl(ftzOffMsgCtl);
+							ftzOffMsgCtlRepository.batchUpdateStatus(ftzOffMsgCtl);
 						} else if (MsgType.FTZ_ACT_SEND.equals(mMsgType.get(ftzMsgProc.getMsgNo()))) { //账户信息报送210501
 							//账户表暂时无发送状态信息
 						}
@@ -334,11 +388,10 @@ public class FtzMsgProcService{
 							log.error("无法识别的报文编号:"+ftzMsgProc.getMsgNo());
 						}
 						
-						
 						// 更新交易状态
 						if (MsgType.FTZ_IN_MSG.equals(mMsgType.get(ref_msg_no))) { // 表内报文应答
 							FtzInMsgCtl ftzInMsgCtl = new FtzInMsgCtl();
-							ftzInMsgCtl.setMsgId(ftzMsgProc.getMsgRef());
+							ftzInMsgCtl.setMsgId(getMsgIdArr(ftzMsgProc.getMsgRef()));
 							ftzInMsgCtl.setMsgStatus(msg_status);
 							if (!"".equals(ACK_DATETIME)){
 								ftzInMsgCtl.setAckDatetime(DateUtil.getNow(DateUtil.DATE_FORMAT_YYYYMMDDHHMMSS));
@@ -352,7 +405,7 @@ public class FtzMsgProcService{
 							ftzInMsgCtlRepository.updateFtzInMsgCtl(ftzInMsgCtl);
 						} else if (MsgType.FTZ_OUT_MSG.equals(mMsgType.get(ref_msg_no))){ // 表外报文应答
 							FtzOffMsgCtl ftzOffMsgCtl = new FtzOffMsgCtl();
-							ftzOffMsgCtl.setMsgId(ftzMsgProc.getMsgRef());
+							ftzOffMsgCtl.setMsgId(getMsgIdArr(ftzMsgProc.getMsgRef()));
 							ftzOffMsgCtl.setMsgStatus(msg_status);
 							ftzOffMsgCtl.setSndDatetime(DateUtil.getNow(DateUtil.DATE_FORMAT_YYYYMMDDHHMMSS));
 							if (!"".equals(ACK_DATETIME)){
@@ -364,7 +417,7 @@ public class FtzMsgProcService{
 							ftzOffMsgCtl.setResult(Result);
 							ftzOffMsgCtl.setAddWord(AddWord);
 							
-							ftzOffMsgCtlRepository.updateFtzOffMsgCtl(ftzOffMsgCtl);
+							ftzOffMsgCtlRepository.batchUpdateStatus(ftzOffMsgCtl);
 						} else if (MsgType.FTZ_ACT_SEND.equals(mMsgType.get(ref_msg_no))) { //账户信息报送210501
 							//账户表暂时无发送状态信息
 						}

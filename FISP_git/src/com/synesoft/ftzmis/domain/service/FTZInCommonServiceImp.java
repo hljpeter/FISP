@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.terasoluna.fw.common.exception.BusinessException;
 import org.terasoluna.fw.common.message.ResultMessage;
 import org.terasoluna.fw.common.message.ResultMessages;
 
+import com.synesoft.dataproc.service.ProcCommonService;
 import com.synesoft.fisp.app.common.constants.ContextConst;
 import com.synesoft.fisp.app.common.utils.StringUtil;
 import com.synesoft.fisp.app.common.utils.TlrLogPrint;
@@ -75,7 +78,7 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 				+ ", msgStatus=" + ftzInMsgCtlVO.getMsgStatus() 
 				+ ", msgNo=" + ftzInMsgCtlVO.getMsgNo() 
 				+ ", accountName=" + ftzInMsgCtlVO.getAccountName() 
-				+ ", editFlag=" + ftzInMsgCtlVO.getEditFlag() 
+			//	+ ", editFlag=" + ftzInMsgCtlVO.getEditFlag() 
 				+ ", pageNubmer=" + pageable.getPageNumber() + ", pagesize=" + pageable.getPageSize() + "]");
 
 		Page<FtzInMsgCtlVO> page = ftzInMsgCtlRepository.queryPage(pageable, ftzInMsgCtlVO);
@@ -170,14 +173,14 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 		ftzInMsgCtl.setMsgNo(msgNo);
 		
 		// 设置批量头信息
-		FtzMsgHead mh = FtzMsgHead.getMsgHead();
-		ftzInMsgCtl.setVer(mh.getVER());
-		ftzInMsgCtl.setSrc(mh.getSRC());
-		ftzInMsgCtl.setDes(mh.getDES());
-		ftzInMsgCtl.setApp(mh.getAPP());
-		ftzInMsgCtl.setWorkDate(mh.getWorkDate());
-		ftzInMsgCtl.setEditFlag(mh.getEditFlag());
-		ftzInMsgCtl.setReserve(mh.getReserve());
+	//	FtzMsgHead mh = FtzMsgHead.getMsgHead();
+	//	ftzInMsgCtl.setVer(mh.getVER());
+	//	ftzInMsgCtl.setSrc(mh.getSRC());
+	//	ftzInMsgCtl.setDes(mh.getDES());
+	//	ftzInMsgCtl.setApp(mh.getAPP());
+		ftzInMsgCtl.setWorkDate(procCommonService.queryWorkDate());
+	//	ftzInMsgCtl.setEditFlag(mh.getEditFlag());
+	//	ftzInMsgCtl.setReserve(mh.getReserve());
 		
 		int ret = ftzInMsgCtlRepository.insert(ftzInMsgCtl);
 		if (ret != 1) {
@@ -208,7 +211,7 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 		ftzInMsgCtl.setMsgId(ftzInMsgCtl.getMsgId());
 		ftzInMsgCtl.setMakDatetime(DateUtil.getFormatDateTimeRemoveSpritAndColon(ftzInMsgCtl.getMakDatetime()));
 		
-		ftzInMsgCtl.setEditFlag(editFlag);
+		//ftzInMsgCtl.setEditFlag(editFlag);
 		ftzInMsgCtl.setMakUserId(ContextConst.getCurrentUser().getUserid());
 		ftzInMsgCtl.setMsgStatus(CommonConst.FTZ_MSG_STATUS_INPUTING);
 		
@@ -663,6 +666,8 @@ public abstract class FTZInCommonServiceImp implements FTZInCommonService {
 	protected FtzInMsgCtlRepository ftzInMsgCtlRepository;
 	@Autowired
 	protected FtzInTxnDtlRepository ftzInTxnDtlRepository;
-
+	
+	@Resource
+	private ProcCommonService procCommonService;
 }
 

@@ -133,7 +133,7 @@
 						code="ftz.label.OPP_ACCOUNT" />：</td>
 				<td>
 					<form:input path="ftzInTxnDtl.oppAccount" type="text" class="input-large" maxlength="35"
-						onkeyup="numberFormat(this);" onbeforepaste="numberFormatCopy(this);" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当交易性质为外部经济活动引起时，本栏位为强制项"/>
+						onkeyup="numberStringFormat(this);" onbeforepaste="numberStringFormatCopy(this);" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="当交易性质为外部经济活动引起时，本栏位为强制项"/>
 				</td>
 				<td class="label_td"><spring:message code="ftz.label.OPP_NAME1" />：</td>
 				<td><form:input id="oppName" path="ftzInTxnDtl.oppName" maxlength="128"

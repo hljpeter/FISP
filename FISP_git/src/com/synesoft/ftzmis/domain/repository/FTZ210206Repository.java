@@ -6,12 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.synesoft.ftzmis.domain.model.FtzActMstr;
+import com.synesoft.ftzmis.domain.model.FtzBankCode;
 import com.synesoft.ftzmis.domain.model.FtzInMsgCtl;
 import com.synesoft.ftzmis.domain.model.FtzInTxnDtl;
 
 public interface FTZ210206Repository {
 	
-	public Page<FtzInMsgCtl> queryFtzInMsgCtlPage(Pageable pageable,FtzInMsgCtl ftzInMsgCtl);
+public Page<FtzInMsgCtl> queryFtzInMsgCtlPage(Pageable pageable,FtzInMsgCtl ftzInMsgCtl);
 	
 	public Page<FtzInMsgCtl> queryFtzInMsgCtlPageInput(Pageable pageable,FtzInMsgCtl ftzInMsgCtl);
 	
@@ -31,12 +32,14 @@ public interface FTZ210206Repository {
 	
 	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl);
 	
-	public FtzActMstr queryFtzActMstr(FtzActMstr ftzActMstr);
+	public List<FtzActMstr> queryFtzActMstrs(FtzActMstr ftzActMstr);
 	
 	public int deleteFtzInTxnDtl(FtzInTxnDtl ftzInTxnDtl);
 	
 	public int insertFtzInTxnDtl(FtzInTxnDtl ftzInTxnDtl);
 	
 	public int updateFtzInTxnDtlSelective(FtzInTxnDtl ftzInTxnDtl);
+	
+	public FtzBankCode queryFtzBankCode(FtzBankCode ftzBankCode);
 	
 }

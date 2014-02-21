@@ -52,6 +52,8 @@
 		<result column="CHK_USER_ID" property="chkUserId" jdbcType="VARCHAR" />
 		<result column="CHK_DATETIME" property="chkDatetime" jdbcType="VARCHAR" />
 		<result column="CHK_ADD_WORD" property="chkAddWord" jdbcType="VARCHAR" />
+		<result column="DTL_SEND_STATUS" property="dtlSendStatus"
+			jdbcType="CHAR" />
   </resultMap>
 	
 	<sql id="WHERE_CONDITION">
@@ -104,33 +106,52 @@
 	</select>
 	
 	<insert id="insert" parameterClass="com.synesoft.ftzmis.domain.model.FtzInTxnDtl" >
-			insert into FTZ_IN_TXN_DTL (MSG_ID, SEQ_NO, CD_FLAG, TRAN_DATE,
+		insert into FTZ_IN_TXN_DTL
+		(MSG_ID, SEQ_NO, CD_FLAG, TRAN_DATE,
 		ORG_TRAN_DATE, AMOUNT,
-		OPP_ACCOUNT, OPP_NAME, OPP_BANK_CODE, COUNTRY_CODE, DISITRICT_CODE, TRAN_TYPE,
+		OPP_ACCOUNT, OPP_NAME, OPP_BANK_CODE, COUNTRY_CODE, DISITRICT_CODE,
+		TRAN_TYPE,
 		TERM_LENGTH,
-		TERM_UNIT, VALUE_DATE, EXPIRE_DATE, INTEREST_RATE, ISSUE_AMOUNT, ASSETS_TYPE,
+		TERM_UNIT, VALUE_DATE, EXPIRE_DATE,
+		INTEREST_RATE, ISSUE_AMOUNT, ASSETS_TYPE,
 		ASSETS_VALUE,
-		EXCHANGE_TYPE, BUY_CURR, BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE,
+		EXCHANGE_TYPE,
+		BUY_CURR, BUY_AMT, BUY_RATE, SELL_CURR, SELL_AMT, SELL_RATE,
 		DOCUMENT_TYPE,
-		DOCUMENT_NO, LOAN_TYPE, OVERDUE, SECURITIES_TYPE, SECURITIES_CODE, OPP_CUS_TYPE,
+		DOCUMENT_NO, LOAN_TYPE, OVERDUE, SECURITIES_TYPE,
+		SECURITIES_CODE, OPP_CUS_TYPE,
 		CHK_STATUS,
-		RSV1, RSV2, RSV3, MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
-		CHK_DATETIME,CHK_ADD_WORD)
-		values (#msgId:VARCHAR#, #seqNo:VARCHAR#, #cdFlag:CHAR#, #tranDate:VARCHAR#,
-		#orgTranDate:VARCHAR#, #amount:DECIMAL#, #oppAccount:VARCHAR#,
+		RSV1, RSV2, RSV3,
+		MAK_USER_ID, MAK_DATETIME, CHK_USER_ID,
+		CHK_DATETIME,CHK_ADD_WORD,DTL_SEND_STATUS)
+		values (#msgId:VARCHAR#,
+		#seqNo:DECIMAL#, #cdFlag:CHAR#,
+		#tranDate:VARCHAR#,
+		#orgTranDate:VARCHAR#, #amount:DECIMAL#,
+		#oppAccount:VARCHAR#,
 		#oppName:VARCHAR#,
-		#oppBankCode:VARCHAR#, #countryCode:CHAR#, #disitrictCode:CHAR#, #tranType:CHAR#,
-		#termLength:DECIMAL#, #termUnit:CHAR#, #valueDate:VARCHAR#,
+		#oppBankCode:VARCHAR#,
+		#countryCode:CHAR#,
+		#disitrictCode:CHAR#, #tranType:CHAR#,
+		#termLength:DECIMAL#,
+		#termUnit:CHAR#, #valueDate:VARCHAR#,
 		#expireDate:VARCHAR#,
-		#interestRate:DECIMAL#, #issueAmount:DECIMAL#, #assetsType:CHAR#, #assetsValue:DECIMAL#,
-		#exchangeType:CHAR#, #buyCurr:CHAR#, #buyAmt:DECIMAL#,
+		#interestRate:DECIMAL#, #issueAmount:DECIMAL#,
+		#assetsType:CHAR#,
+		#assetsValue:DECIMAL#,
+		#exchangeType:CHAR#,
+		#buyCurr:CHAR#,
+		#buyAmt:DECIMAL#,
 		#buyRate:DECIMAL#, #sellCurr:CHAR#,
-		#sellAmt:DECIMAL#, #sellRate:DECIMAL#, #documentType:CHAR#, #documentNo:VARCHAR#,
-		#loanType:CHAR#, #overdue:CHAR#, #securitiesType:CHAR#,
+		#sellAmt:DECIMAL#, #sellRate:DECIMAL#, #documentType:CHAR#,
+		#documentNo:VARCHAR#,
+		#loanType:CHAR#, #overdue:CHAR#,
+		#securitiesType:CHAR#,
 		#securitiesCode:VARCHAR#,
-		#oppCusType:CHAR#, #chkStatus:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#,
+		#oppCusType:CHAR#,
+		#chkStatus:CHAR#, #rsv1:VARCHAR#, #rsv2:VARCHAR#, #rsv3:VARCHAR#,
 		#makUserId:VARCHAR#, #makDatetime:VARCHAR#, #chkUserId:VARCHAR#,
-		#chkDatetime:VARCHAR#, #chkAddWord:VARCHAR#)
+		#chkDatetime:VARCHAR#, #chkAddWord:VARCHAR#,#dtlSendStatus:CHAR#)
 	</insert>
   
 	<update id="updateByPrimaryKeySelective" 
@@ -245,6 +266,10 @@
 			</isNotNull>
 			<isNotNull prepend="," property="chkAddWord">
 				CHK_ADD_WORD = #chkAddWord:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="dtlSendStatus">
+				DTL_SEND_STATUS =
+				#dtlSendStatus:CHAR#
 			</isNotNull>
 		</dynamic>
 		WHERE 

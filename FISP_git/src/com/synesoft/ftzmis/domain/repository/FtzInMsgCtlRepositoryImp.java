@@ -94,7 +94,7 @@ public class FtzInMsgCtlRepositoryImp implements FtzInMsgCtlRepository {
 	//更新报文通讯和反馈状态,通讯功能使用
 	public int updateFtzInMsgCtl(FtzInMsgCtl ftzInMsgCtl){
 		log.debug("FtzInTxnDtlRepositoryImp.updateFtzInMsgCtl() start ...");
-		return updateDAO.execute(Table.FTZ_IN_MSG_CTL + "." + SQLMap.UPDATE_PRIMARY_KEY_SELECTIVE, ftzInMsgCtl);
+		return updateDAO.execute(Table.FTZ_IN_MSG_CTL + ".batchUpdateStatus", ftzInMsgCtl);
 	}
 	
 	

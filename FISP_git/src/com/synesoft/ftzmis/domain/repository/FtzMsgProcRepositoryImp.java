@@ -13,7 +13,7 @@ import com.synesoft.ftzmis.app.common.constants.SQLMap;
 import com.synesoft.ftzmis.app.common.constants.Table;
 import com.synesoft.ftzmis.domain.model.FtzMsgProc;
 
-@Repository
+@Repository("ftzMsgProcRepository")
 public class FtzMsgProcRepositoryImp implements FtzMsgProcRepository {
 
 	// 查询待处理消息队列
